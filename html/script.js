@@ -567,8 +567,24 @@ function ProcessModeConfigurationDataFishTank(channelConfig) {
 
     // for each option in the list
     channelConfig.modeTable.forEach(function (listEntry) {
-        // add in a new entry
-        $(jqSelector).append('<option id="mode_' + listEntry.id + '" name="' + listEntry.id + '">' + listEntry.name + '</option>');
+        if ("Cycle" !== listEntry.name) {
+            // add in a new entry
+            $(jqSelector).append('<option id="mode_' + listEntry.id + '" name="' + listEntry.id + '">' + listEntry.name + '</option>');
+
+            // console.log("CurrentRowId = " + CurrentRowId);
+            let NamePattern = '<td id="FtMode_Name_' + (listEntry.id) + '" class="col-sm-2">' + listEntry.name + '</td>';
+            let RedPattern = '<td><input type="number" id="FtMode_red_' + (listEntry.id) + '"step="1" min="0" max="255" value="' + listEntry.red + '" class="form-control is-valid col-sm-2"></td>';
+            let GreenPattern = '<td><input type="number" id="FtMode_green_' + (listEntry.id) + '"step="1" min="0" max="255" value="' + listEntry.green + '" class="form-control is-valid col-sm-2"></td>';
+            let BluePattern = '<td><input type="number" id="FtMode_blue_' + (listEntry.id) + '"step="1" min="0" max="255" value="' + listEntry.blue + '" class="form-control is-valid col-sm-2"></td>';
+
+            let rowPattern = '<tr>' + NamePattern + RedPattern + GreenPattern + BluePattern + '</tr>';
+
+            $('#FtModeConfigurationTable tr:last').after(rowPattern);
+
+            $('#FtMode_Name_' + listEntry.id).attr('style', $('#FtMode_Name_hr').attr('style'));
+            $('#FtMode_green_' + listEntry.id).attr('style', $('#FtMode_green_hr').attr('style'));
+            $('#FtMode_blue_' + listEntry.id).attr('style', $('#FtMode_blue_hr').attr('style'));
+        }
     });
 
     // set the current selector value
@@ -1074,6 +1090,14 @@ function ExtractFishTankConfigFromHtmlPage(ChannelConfig) {
 
     ChannelConfig.timeToColor.forEach(function (listEntry) {
         listEntry.mode = parseInt($("#ftmHour_" + listEntry.id).find(":selected")[0].getAttribute("name"), 10);
+    });
+
+    ChannelConfig.modeTable.forEach(function (listEntry) {
+        if ("Cycle" !== listEntry.name) {
+            listEntry.red = $("#FtMode_red_" + listEntry.id).val();
+            listEntry.green = $("#FtMode_green_" + listEntry.id).val();
+            listEntry.blue = $("#FtMode_blue_" + listEntry.id).val();
+        }
     });
 
 } // ExtractFishTankConfigFromHtmlPage

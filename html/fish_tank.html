@@ -1,40 +1,77 @@
 <fieldset id="fpp_remote">
     <legend class="esps-legend" id="Title">Fish Tank Configuration</legend>
     <div class="form-group">
-        Seconds To Target Color: <input type="number" name="Seconds_to_target" id="TimeToTarget" min="5" max="3000"
-            value="10" />
-        <br />
-        Operating Mode: <select name="ftm_mode" id="ftm_mode" selectedIndex=0></select>
-        <br />
-        <div>
-            Enable Clouds:<input type="checkbox" name="clouds_enabled" id="cloudsEnabled" checked="0" />
+        <label class="control-label col-sm-2" for="timeOffset">Time Offset (Hours):</label>
+        <div class="col-sm-1">
+            <input type="number" class="form-control is-valid" id="timeOffset" step="1" min="-23" max="23" value="0"
+                required title="Time Zone adjust to GMT">
         </div>
-        <br />
-        Min Seconds To Target Cloud Color:<input type="number" name="minCloudSecToTarget" id="minCloudSecToTarget"
-            min="5" max="3000" value="5" />
-        <br />
-        Max Seconds To Target Cloud Color:<input type="number" name="maxCloudSecToTarget" id="maxCloudSecToTarget"
-            min="10" max="3000" value="10" />
-        <br />
-        Min Seconds between Clouds: <input type="number" name="min_cloud_gap" id="minCloudGap" min="10" max="128000"
-            value="100" />
-        <br />
-        Max Seconds between Clouds: <input type="number" name="max_cloud_gap" id="maxCloudGap" min="10" max="128000"
-            value="200" />
-        <br />
-        Min Seconds Cloud is Present: <input type="number" name="min_cloud_len" id="minCloudLength" min="1" max="128000"
-            value="20" />
-        <br />
-        Max Seconds Cloud is Present: <input type="number" name="max_cloud_len" id="maxCloudLength" min="1" max="128000"
-            value="20" />
-        <br />
-        Min Cloud Density in %: <input type="number" name="min_cloud_density" id="minCloudDensity" min="1" max=" 100"
-            value="10" />
-        <br />
-        Max Cloud Density in %: <input type="number" name="max_cloud_density" id="maxCloudDensity" min="1" max=" 100"
-            value="50" />
+        <label class="control-label col-sm-2" for="TimeToTarget">Time To Target Color (Secs):</label>
+        <div class="col-sm-1">
+            <input type="number" class="form-control is-valid" id="TimeToTarget" step="1" min="5" max="3000" value="10">
+        </div>
+        <label class="control-label col-sm-2" for="ftm_mode">Operating Mode:</label>
+        <div class="col-sm-2">
+            <select class="form-control is-valid" id="ftm_mode" selectedIndex=0>
+        </div>
     </div>
-    <div>
+    <div class="form-group">
+        <div class="checkbox">
+            <label class="control-label col-sm-2" for="cloudsEnabled">
+                <input type="checkbox" id="cloudsEnabled"> Enable Clouds:</label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="minCloudSecToTarget">Min Time To Target Cloud Color
+            (Secs):</label>
+        <div class="col-sm-1">
+            <input type="number" class="form-control is-valid" id="minCloudSecToTarget" step="1" min="5" max="3000"
+                value="5">
+        </div>
+        <label class="control-label col-sm-2" for="maxCloudSecToTarget">Max Time To Target Cloud Color
+            (Secs):</label>
+        <div class="col-sm-1">
+            <input type="number" class="form-control is-valid" id="maxCloudSecToTarget" step="1" min="5" max="3000"
+                value="5">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="minCloudGap">Min Time Between Clouds (Secs):</label>
+        <div class="col-sm-1">
+            <input type="number" class="form-control is-valid" id="minCloudGap" step="1" min="5" max="3000" value="5">
+        </div>
+        <label class="control-label col-sm-2" for="maxCloudGap">Max Time Between Clouds (Secs):</label>
+        <div class="col-sm-1">
+            <input type="number" class="form-control is-valid" id="maxCloudGap" step="1" min="10" max="128000"
+                value="200">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="minCloudLength">Min Time Cloud is Present (Secs):</label>
+        <div class="col-sm-1">
+            <input type="number" class="form-control is-valid" id="minCloudLength" step="1" min="5" max="3000"
+                value="20">
+        </div>
+        <label class="control-label col-sm-2" for="maxCloudLength">Max Time Cloud is Present (Secs):</label>
+        <div class="col-sm-1">
+            <input type="number" class="form-control is-valid" id="maxCloudLength" step="1" min="10" max="128000"
+                value="20">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="minCloudDensity">Min Cloud Density (%):</label>
+        <div class="col-sm-1">
+            <input type="number" class="form-control is-valid" id="minCloudDensity" step="1" min="1" max="100"
+                value="10">
+        </div>
+        <label class="control-label col-sm-2" for="maxCloudDensity">Max Cloud Density (%):</label>
+        <div class="col-sm-1">
+            <input type="number" class="form-control is-valid" id="maxCloudDensity" step="1" min="1" max="100"
+                value="10">
+        </div>
+    </div>
+    </div>
+    <div class="form-group">
         00:00: <select name="ftmHour_0" id="ftmHour_0" selectedIndex=0></select>
         <br />
         01:00: <select name="ftmHour_1" id="ftmHour_1" selectedIndex=0></select>
@@ -84,5 +121,19 @@
         23:00: <select name="ftmHour_23" id="ftmHour_23" selectedIndex=0></select>
         <br />
     </div>
-
+    <div class="form-group">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th id="FtMode_Name_hr" class="col-sm-2">Mode Name</th>
+                    <th id="FtMode_red_hr" class="col-sm-2">Red</th>
+                    <th id="FtMode_green_hr" class="col-sm-2">Green</th>
+                    <th id="FtMode_blue_hr" class="col-sm-2">Blue</th>
+                </tr>
+            </thead>
+            <tbody id="FtModeConfigurationTable">
+                <tr></tr>
+            </tbody>
+        </table>
+    </div>
 </fieldset>
