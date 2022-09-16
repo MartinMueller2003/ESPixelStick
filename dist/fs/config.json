@@ -1,20 +1,28 @@
 {
-  "cfgver": 1,
-  "init": true,
-  "device": {
-    "id": "ESPixelStick"
-  },
-  "network": {
-    "ssid": "",
-    "passphrase": "",
-    "hostname": "",
-    "ip": "",
-    "netmask": "",
-    "gateway": "",
-    "dhcp": true,
-    "sta_timeout": 15,
-    "ap_fallback": false,
-    "ap_timeout": 120,
-    "ap_reboot": true
+  "system": {
+    "cfgver": 1.0,
+    "device": {
+      "id": "ESPixelStick",
+      "blanktime": 5.0,
+      "miso_pin": 19.0,
+      "mosi_pin": 23.0,
+      "clock_pin": 18.0,
+      "cs_pin": 4.0
+    },
+    "network": {
+      "hostname": "bar",
+      "wifi": {
+        "ssid": "Not Set",
+        "passphrase": "Not Set",
+        "ip": "0.0.0.0",
+        "netmask": "0.0.0.0",
+        "gateway": "0.0.0.0",
+        "dhcp": true,
+        "sta_timeout": 15.0,
+        "ap_fallback": false,
+        "ap_timeout": 120.0,
+        "ap_reboot": false
+      }
+    }
   }
 }
