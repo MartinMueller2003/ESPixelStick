@@ -567,9 +567,9 @@ function ProcessModeConfigurationDataFishTank(channelConfig) {
 
     // for each option in the list
     channelConfig.modeTable.forEach(function (listEntry) {
+        $(jqSelector).append('<option id="mode_' + listEntry.id + '" name="' + listEntry.id + '">' + listEntry.name + '</option>');
         if ("Cycle" !== listEntry.name) {
             // add in a new entry
-            $(jqSelector).append('<option id="mode_' + listEntry.id + '" name="' + listEntry.id + '">' + listEntry.name + '</option>');
 
             // console.log("CurrentRowId = " + CurrentRowId);
             let NamePattern = '<td id="FtMode_Name_' + (listEntry.id) + '" class="col-sm-2">' + listEntry.name + '</td>';
