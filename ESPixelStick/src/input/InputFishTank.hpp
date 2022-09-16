@@ -39,7 +39,10 @@ public:
 
 private:
 
-    bool HasBeenInitialized = false;
+    bool    HasBeenInitialized      = false;
+    bool    TimeClientInitialized   = false;
+    int32_t TimeOffset              = 0;
+    bool    ConfigHasChanged        = false;
 
     // strings used for config management
     #define FishTankMGR_JSON_ROOT           F ("FishTank")
@@ -77,15 +80,6 @@ private:
         MustBeLast
     } FishTankModes;
 
-    // return an adjusted value for the target color
-    double  UpdateColor (double changeValue, double targetValue, double currentValue);
-    void    SetTimedColor (void);
-    void    SetColors (FishTankModes NewColorSet);
-    double  SetUpColorStep (double targetValue, double currentValue);
-
-    // current mode the lights are running in
-    FishTankModes FishTankMode = FishTankModes::cycle;
-
     typedef struct s_ColorSet
     {
         double  red;
@@ -94,6 +88,16 @@ private:
         String  name;
         uint32_t id;
     } ColorSet;
+
+    // return an adjusted value for the target color
+    double  UpdateColor (double changeValue, double targetValue, double currentValue);
+    void    SetTimedColor (void);
+    void    SetColors (FishTankModes NewColorSet);
+    double  SetUpColorStep (double targetValue, double currentValue);
+    void    UpdateOutputBuffer(ColorSet & OutputColorSet);
+
+    // current mode the lights are running in
+    FishTankModes FishTankMode = FishTankModes::cycle;
 
     ColorSet CurrentColorSet;
     ColorSet TargetColorSet;
@@ -112,12 +116,12 @@ private:
     ColorSet ColorTargetTable[FishTankModes::MustBeLast] =  /* does not include cycle 'cycle' */
     {
         // this array must be in the same order as FishTankModes
-        {255.0, 255.0, 255.0, "Clean", FishTankModes::clean  },
-        {255.0, 255.0, 000.0, "Sunrise", FishTankModes::sunrise },
-        {200.0, 190.0, 190.0, "Daytime", FishTankModes::daytime },
-        {175.0, 175.0,  50.0, "Sunset", FishTankModes::sunset },
-        {000.0,  50.0, 255.0, "Night", FishTankModes::nightime  },
-        {000.0, 000.0, 000.0, "Cycle", FishTankModes::cycle  }
+        {255.0, 255.0, 255.0, "Clean",      FishTankModes::clean},
+        {255.0, 255.0, 000.0, "Sunrise",    FishTankModes::sunrise},
+        {200.0, 190.0, 190.0, "Daytime",    FishTankModes::daytime},
+        {175.0, 175.0,  50.0, "Sunset",     FishTankModes::sunset},
+        {000.0,  50.0, 255.0, "Night",      FishTankModes::nightime},
+        {000.0, 000.0, 000.0, "Cycle",      FishTankModes::cycle}
     };
 
     // translate an "hour" into a target color
@@ -130,20 +134,20 @@ private:
         FishTankModes::nightime,    // 04::00
         FishTankModes::nightime,    // 05::00
         FishTankModes::nightime,    // 06::00
-        FishTankModes::sunrise, // 07::00
-        FishTankModes::daytime, // 08::00
-        FishTankModes::daytime, // 09::00
-        FishTankModes::daytime, // 10::00
-        FishTankModes::daytime, // 11::00
-        FishTankModes::daytime, // 12::00
-        FishTankModes::daytime, // 13::00
-        FishTankModes::daytime, // 14::00
-        FishTankModes::daytime, // 15::00
-        FishTankModes::daytime, // 16::00
-        FishTankModes::daytime, // 17::00
-        FishTankModes::daytime, // 18::00
-        FishTankModes::daytime, // 19::00
-        FishTankModes::sunset,  // 20::00
+        FishTankModes::sunrise,     // 07::00
+        FishTankModes::daytime,     // 08::00
+        FishTankModes::daytime,     // 09::00
+        FishTankModes::daytime,     // 10::00
+        FishTankModes::daytime,     // 11::00
+        FishTankModes::daytime,     // 12::00
+        FishTankModes::daytime,     // 13::00
+        FishTankModes::daytime,     // 14::00
+        FishTankModes::daytime,     // 15::00
+        FishTankModes::daytime,     // 16::00
+        FishTankModes::daytime,     // 17::00
+        FishTankModes::daytime,     // 18::00
+        FishTankModes::daytime,     // 19::00
+        FishTankModes::sunset,      // 20::00
         FishTankModes::nightime,    // 21::00
         FishTankModes::nightime,    // 22::00
         FishTankModes::nightime,    // 23::00

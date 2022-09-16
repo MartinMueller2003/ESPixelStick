@@ -73,8 +73,6 @@ void c_InputFishTank::Begin ()
     }
     HasBeenInitialized = true;
 
-    timeClient.begin();
-
     CurrentColorSet.red     = 0.0;
     CurrentColorSet.green   = 0.0;
     CurrentColorSet.blue    = 0.0;
@@ -103,6 +101,7 @@ void c_InputFishTank::GetConfig (JsonObject& jsonConfig)
     jsonConfig[FTMAX_CLOUD_DENSITY]            = (uint)MaxCloudDensityPercent;
     jsonConfig[FTMIN_CLOUD_SECONDS_TO_TARGET]  = (uint)CloudMinSecondsToTarget;
     jsonConfig[FTMAX_CLOUD_SECONDS_TO_TARGET]  = (uint)CloudMaxSecondsToTarget;
+    jsonConfig[F("timeOffset")]                = TimeOffset;
 
     // JsonObject FishTankMgrModeOptions = jsonConfig.createNestedObject (FTMODE_TABLE);
     JsonArray FishTankMgrModeTable = jsonConfig.createNestedArray (FTMODE_TABLE);
@@ -135,9 +134,8 @@ void c_InputFishTank::GetStatus (JsonObject& jsonStatus)
 {
     // DEBUG_START;
 
-    JsonObject Status = jsonStatus.createNestedObject (F ("effects"));
-    Status[CN_currenteffect] = "Fishtank";
-    Status[CN_id] = InputChannelId;
+    JsonObject Status = jsonStatus.createNestedObject (F ("FishTank"));
+    Status[F("CurrentTime")] = timeClient.getFormattedTime();
 
     // DEBUG_END;
 
@@ -155,37 +153,58 @@ void c_InputFishTank::Process ()
     {
         if (!HasBeenInitialized)
         {
+            DEBUG_V();
             break;
         }
 
+        if(!TimeClientInitialized)
+        {
+            if(!WiFi.isConnected())
+            {
+                // DEBUG_V("WiFi is not up");
+                break;
+            }
+
+            timeClient.begin();
+            TimeClientInitialized = true;
+        }
+
+        timeClient.update();
+
         // DEBUG_V("are we fixed or cycleing?");
-        if (FishTankModes::cycle != FishTankMode)
+        if (FishTankModes::cycle == FishTankMode)
+        {
+            // can we move towards the target color.
+            if (millis() >= StepTimerMS)
+            {
+                // move towards the target color.
+                StepTimerMS += 20;
+                CurrentColorSet.red     = UpdateColor (DeltaColorSet.red,   TargetColorSet.red,   CurrentColorSet.red);
+                CurrentColorSet.green   = UpdateColor (DeltaColorSet.green, TargetColorSet.green, CurrentColorSet.green);
+                CurrentColorSet.blue    = UpdateColor (DeltaColorSet.blue,  TargetColorSet.blue,  CurrentColorSet.blue);
+            }
+        }
+        else
         {
             // DEBUG_V("fixed");
             // DEBUG_V(String("FishTankMode: ") + String(uint32_t(FishTankMode)));
             CurrentColorSet   = ColorTargetTable[FishTankMode];
             // DEBUG_V("");
-            TargetColorSet    = CurrentColorSet;
-            // DEBUG_V("");
-            break;
+            if(ConfigHasChanged)
+            {
+                DEBUG_V("Update Output");
+                TargetColorSet = CurrentColorSet;
+                UpdateOutputBuffer(TargetColorSet);
+                ConfigHasChanged = false;
+            }
         }
 
         // DEBUG_V("cycling");
         // DEBUG_V(String(": 0x") + String(uint32_t(pCurrentFsmState), HEX));
         // process the cloud functionality
-        timeClient.update();
 
         pCurrentFsmState->Poll (this);
 
-        // can we move towards the target color.
-        if (millis() >= StepTimerMS)
-        {
-            // move towards the target color.
-            StepTimerMS += 20;
-            CurrentColorSet.red     = UpdateColor (DeltaColorSet.red,   TargetColorSet.red,   CurrentColorSet.red);
-            CurrentColorSet.green   = UpdateColor (DeltaColorSet.green, TargetColorSet.green, CurrentColorSet.green);
-            CurrentColorSet.blue    = UpdateColor (DeltaColorSet.blue,  TargetColorSet.blue,  CurrentColorSet.blue);
-        }
         // DEBUG_V(String ("TargetColorSet.red    = ") + TargetColorSet.red);
         // DEBUG_V(String ("TargetColorSet.green  = ") + TargetColorSet.green);
         // DEBUG_V(String ("TargetColorSet.blue   = ") + TargetColorSet.blue);
@@ -219,81 +238,78 @@ bool c_InputFishTank::SetConfig (ArduinoJson::JsonObject& jsonConfig)
 {
     // DEBUG_START;
 
-    // serializeJsonPretty(jsonData, Serial);
+    // serializeJsonPretty(jsonConfig, Serial);
 
     SetBufferInfo (InputDataBufferSize);
 
-    do  // once
+    setFromJSON ( SecondsToTarget,          jsonConfig, FTSECONDS_TO_TARGET);
+    uint temp = uint(FishTankMode);
+    setFromJSON ( temp,                     jsonConfig, FTMODE);
+    FishTankMode = FishTankModes(temp);
+    setFromJSON ( EnableClouds,             jsonConfig, FTCLOUD_ENABLED);
+    setFromJSON ( MinInterCloudGap,         jsonConfig, FTMIN_CLOUD_GAP);
+    setFromJSON ( MaxInterCloudGap,         jsonConfig, FTMAX_CLOUD_GAP);
+    setFromJSON ( MinCloudDuration,         jsonConfig, FTMIN_CLOUD_LENGTH);
+    setFromJSON ( MaxCloudDuration,         jsonConfig, FTMAX_CLOUD_LENGTH);
+    setFromJSON ( MinCloudDensityPercent,   jsonConfig, FTMIN_CLOUD_DENSITY);
+    setFromJSON ( MaxCloudDensityPercent,   jsonConfig, FTMAX_CLOUD_DENSITY);
+    setFromJSON ( CloudMinSecondsToTarget,  jsonConfig, FTMIN_CLOUD_SECONDS_TO_TARGET);
+    setFromJSON ( CloudMaxSecondsToTarget,  jsonConfig, FTMAX_CLOUD_SECONDS_TO_TARGET);
+    setFromJSON ( TimeOffset,               jsonConfig, F("timeOffset"));
+
+    timeClient.setTimeOffset(TimeOffset);
+
+    // get the time to color table?
+    JsonArray JsonTimeToModeDataObject = jsonConfig[FTTIME_TO_COLOR];
+
+    // String pretty;
+    // JsonTimeToModeDataObject.prettyPrintTo (pretty);
+    // DEBUG_V("Start of Parsed json data");
+    // DEBUG_V(pretty.c_str ());
+    // DEBUG_V("End of Parsed json data");
+
+    for (auto currentTimeSlot : JsonTimeToModeDataObject)
     {
-        setFromJSON ( SecondsToTarget,          jsonConfig, FTSECONDS_TO_TARGET);
-        uint temp = uint(FishTankMode);
-        setFromJSON ( temp,                     jsonConfig, FTMODE);
-        FishTankMode = FishTankModes(temp);
-        setFromJSON ( EnableClouds,             jsonConfig, FTCLOUD_ENABLED);
-        setFromJSON ( MinInterCloudGap,         jsonConfig, FTMIN_CLOUD_GAP);
-        setFromJSON ( MaxInterCloudGap,         jsonConfig, FTMAX_CLOUD_GAP);
-        setFromJSON ( MinCloudDuration,         jsonConfig, FTMIN_CLOUD_LENGTH);
-        setFromJSON ( MaxCloudDuration,         jsonConfig, FTMAX_CLOUD_LENGTH);
-        setFromJSON ( MinCloudDensityPercent,   jsonConfig, FTMIN_CLOUD_DENSITY);
-        setFromJSON ( MaxCloudDensityPercent,   jsonConfig, FTMAX_CLOUD_DENSITY);
-        setFromJSON ( CloudMinSecondsToTarget,  jsonConfig, FTMIN_CLOUD_SECONDS_TO_TARGET);
-        setFromJSON ( CloudMaxSecondsToTarget,  jsonConfig, FTMAX_CLOUD_SECONDS_TO_TARGET);
+        uint32_t id = uint32_t(-1);
+        setFromJSON ( id,  currentTimeSlot, F("id"));
 
-        // get the time to color table?
-        JsonObject JsonTimeToModeDataObject = jsonConfig[FTTIME_TO_COLOR];
+        uint32_t TempMode = uint32_t(XlatTimeToTargetColor[id]);
+        setFromJSON ( TempMode,  currentTimeSlot, F("mode"));
+        XlatTimeToTargetColor[id] = FishTankModes(TempMode);
 
-        // String pretty;
-        // JsonTimeToModeDataObject.prettyPrintTo (pretty);
-        // DEBUG_V("Start of Parsed json data");
-        // DEBUG_V(pretty.c_str ());
-        // DEBUG_V("End of Parsed json data");
+    }   // end build list of colors
 
-        uint index = 0;
-        for (FishTankModes mode : XlatTimeToTargetColor)
-        {
-            // JsonTimeToModeDataObject[String(index)].prettyPrintTo (pretty);
-            // DEBUG_V("Start of Parsed json data");
-            // DEBUG_V(pretty.c_str ());
-            // DEBUG_V("End of Parsed json data");
+    JsonArray FishTankMgrColorData = jsonConfig[FTMODE_TABLE];
 
-            temp = FishTankModes::nightime;
-            setFromJSON (temp, JsonTimeToModeDataObject, String (index));
-            // DEBUG_V("index = " + index);
-            // DEBUG_V("temp = " + temp);
-            XlatTimeToTargetColor[index] = (FishTankModes)temp;
-            index++;
-        }   // end build list of colors
+    // FishTankMgrColorData.prettyPrintTo (pretty);
+    // DEBUG_V("Start of Parsed json data");
+    // DEBUG_V(pretty.c_str ());
+    // DEBUG_V("End of Parsed json data");
 
-        JsonObject FishTankMgrColorData = jsonConfig[FTMODE_TABLE];
+    for (auto CurrentColorEntry : FishTankMgrColorData)
+    {
+        uint32_t id = uint32_t(-1);
+        setFromJSON ( id,  CurrentColorEntry, F("id"));
 
-        // FishTankMgrColorData.prettyPrintTo (pretty);
-        // DEBUG_V("Start of Parsed json data");
-        // DEBUG_V(pretty.c_str ());
-        // DEBUG_V("End of Parsed json data");
+        ColorSet color = ColorTargetTable[id];
+        setFromJSON ( color.red,    CurrentColorEntry, FTRED);
+        setFromJSON ( color.green,  CurrentColorEntry, FTGREEN);
+        setFromJSON ( color.blue,   CurrentColorEntry, FTBLUE);
+        setFromJSON ( color.name,   CurrentColorEntry, FTMODE_NAME);
 
-        index = 0;
-        for (ColorSet color : ColorTargetTable)
-        {
-            JsonObject FishTankMgrColorDataObject = FishTankMgrColorData[String (index)];
+        // save the data
+        ColorTargetTable[id] = color;
 
-            setFromJSON ( color.red,    FishTankMgrColorDataObject, FTRED);
-            setFromJSON ( color.green,  FishTankMgrColorDataObject, FTGREEN);
-            setFromJSON ( color.blue,   FishTankMgrColorDataObject, FTBLUE);
-            setFromJSON ( color.name,   FishTankMgrColorDataObject, FTMODE_NAME);
+    }   // end build list of colors
 
-            // save the data
-            ColorTargetTable[index] = color;
+    // show that the config may have changed
+    fsftclouds_disabled_imp.Init (this);
 
-            index++;
-        }   // end build list of colors
+    randomSeed (analogRead (0));
 
-        // show that the config may have changed
-        fsftclouds_disabled_imp.Init (this);
+    ConfigHasChanged = true;
 
-        randomSeed (analogRead (0));
-    } while (false);
-
-    // DEBUG_END();
+    // DEBUG_END;
 
     return true;
 } // SetConfig
@@ -311,7 +327,7 @@ bool c_InputFishTank::SetConfig (ArduinoJson::JsonObject& jsonConfig)
   */
 double c_InputFishTank::UpdateColor (double changeValue, double targetValue, double currentValue)
 {
-    // DEBUG_START();
+    // DEBUG_START;
     // DEBUG_V(String ("targetValue  = ") + targetValue);
     // DEBUG_V(String ("currentValue = ") + currentValue);
     // DEBUG_V(String ("changeValue  = ") + changeValue);
@@ -353,10 +369,38 @@ double c_InputFishTank::UpdateColor (double changeValue, double targetValue, dou
         }
     }   // Not much else we can do
 
-    // DEBUG_END();
+    // DEBUG_END;
 
     return currentValue;
 }   // UpdateColor
+
+/*****************************************************************************/
+void c_InputFishTank::UpdateOutputBuffer(ColorSet & OutputColorSet)
+{
+    DEBUG_START;
+
+    uint32_t    ChannelsPerPixel = 3;
+    uint32_t    NumPixels = InputDataBufferSize / ChannelsPerPixel;
+    uint8_t     PixelBuffer[ChannelsPerPixel];
+
+    DEBUG_V(String("   ChannelsPerPixel: ") + String(ChannelsPerPixel));
+    DEBUG_V(String("InputDataBufferSize: ") + String(InputDataBufferSize));
+    DEBUG_V(String("          NumPixels: ") + String(NumPixels));
+
+    PixelBuffer[0] = OutputColorSet.red;
+    PixelBuffer[1] = OutputColorSet.green;
+    PixelBuffer[2] = OutputColorSet.blue;
+
+    for(uint32_t PixelId = 0; PixelId < NumPixels; ++PixelId)
+    {
+        uint32_t StartChannel = PixelId * ChannelsPerPixel;
+        DEBUG_V(String("            PixelId: ") + String(PixelId));
+        DEBUG_V(String("       StartChannel: ") + String(StartChannel));
+        OutputMgr.WriteChannelData(PixelId * ChannelsPerPixel, ChannelsPerPixel, PixelBuffer);
+    }
+
+    DEBUG_END;
+}
 
 /*****************************************************************************/
 /*
@@ -369,7 +413,7 @@ double c_InputFishTank::UpdateColor (double changeValue, double targetValue, dou
   */
 void c_InputFishTank::SetTimedColor (void)
 {
-    // DEBUG_START();
+    // DEBUG_START;
 
     // DateTime CurrentDateTime = g_RtcMgr.currentDateTime ();
     uint8_t hourNow = timeClient.getHours ();
@@ -400,21 +444,13 @@ void c_InputFishTank::SetTimedColor (void)
         // DEBUG_V(String ("DeltaColorSet.blue    = ") + DeltaColorSet.blue);
     }   // end time has changed
 
-    // DEBUG_END();
+    // DEBUG_END;
 }   // SetTimedColor
 
 /*****************************************************************************/
-/*
-  *	update the target color.
-  *
-  *	needs
-  *		nothing
-  *	returns
-  *		nothing
-  */
 void c_InputFishTank::SetColors (FishTankModes TargetColor)
 {
-    // DEBUG_START();
+    // DEBUG_START;
 
     // get the target color
     TargetColorSet = ColorTargetTable[TargetColor];
@@ -445,7 +481,7 @@ void c_InputFishTank::SetColors (FishTankModes TargetColor)
     // DEBUG_V(String ("DeltaColorSet.green           = ") + DeltaColorSet.green);
     // DEBUG_V(String ("DeltaColorSet.blue            = ") + DeltaColorSet.blue);
 
-    // DEBUG_END();
+    // DEBUG_END;
 }   // SetTimedColor
 
 /*****************************************************************************/
@@ -460,7 +496,7 @@ void c_InputFishTank::SetColors (FishTankModes TargetColor)
   */
 double c_InputFishTank::SetUpColorStep (double targetValue, double currentValue)
 {
-    // DEBUG_START();
+    // DEBUG_START;
 
     double response         = 0.0;
     uint32_t StepsToTarget  = SecondsToTarget * FTSTEPS_PER_SEC;
@@ -477,7 +513,7 @@ double c_InputFishTank::SetUpColorStep (double targetValue, double currentValue)
 
         response = diff / StepsToTarget;
     } while (false);
-    // DEBUG_END();
+    // DEBUG_END;
 
     return response;
 }   // SetUpColorStep
@@ -497,7 +533,7 @@ double c_InputFishTank::SetUpColorStep (double targetValue, double currentValue)
   */
 void fsftclouds_disabled::Init (c_InputFishTank * pParent)
 {
-    // DEBUG_START();
+    // DEBUG_START;
 
     // make sure the target gets updated
     pParent->currentHour = 24;
@@ -509,7 +545,7 @@ void fsftclouds_disabled::Init (c_InputFishTank * pParent)
     // set up the state machine
     pParent->pCurrentFsmState = & fsftclouds_disabled_imp;
 
-    // DEBUG_END();
+    // DEBUG_END;
 }   // fsftclouds_disabled::Init
 
 /*****************************************************************************/
@@ -525,7 +561,7 @@ void fsftclouds_disabled::Init (c_InputFishTank * pParent)
   */
 void fsftclouds_disabled::Poll (c_InputFishTank * pParent)
 {
-    // DEBUG_START();
+    // DEBUG_START;
 
     // update the color as needed
     pParent->SetTimedColor ();
@@ -537,7 +573,7 @@ void fsftclouds_disabled::Poll (c_InputFishTank * pParent)
         fsftwait_cloud_start_imp.Init (pParent);
     }   // end clouds have become enabled
 
-    // DEBUG_END();
+    // DEBUG_END;
 }   // fsftclouds_disabled::Init
 
 /*****************************************************************************/
@@ -553,7 +589,7 @@ void fsftclouds_disabled::Poll (c_InputFishTank * pParent)
   */
 void fsftwait_cloud_start::Init (c_InputFishTank * pParent)
 {
-    // DEBUG_START();
+    // DEBUG_START;
 
     // calculate how long to wait until the start of the next cloud
     fsfttimer = time_t (random (long(pParent->MinInterCloudGap), long(pParent->MaxInterCloudGap)));
@@ -563,7 +599,7 @@ void fsftwait_cloud_start::Init (c_InputFishTank * pParent)
     // set up the state machine
     pParent->pCurrentFsmState = & fsftwait_cloud_start_imp;
 
-    // DEBUG_END();
+    // DEBUG_END;
 }   // fsftclouds_disabled::Init
 
 /*****************************************************************************/
@@ -579,7 +615,7 @@ void fsftwait_cloud_start::Init (c_InputFishTank * pParent)
   */
 void fsftwait_cloud_start::Poll (c_InputFishTank * pParent)
 {
-    // DEBUG_START();
+    // DEBUG_START;
 
     // update the color as needed
     pParent->SetTimedColor ();
@@ -598,7 +634,7 @@ void fsftwait_cloud_start::Poll (c_InputFishTank * pParent)
         fsftwait_cloud_end_imp.Init (pParent);
     }   // End turn on a cloud
 
-    // DEBUG_END();
+    // DEBUG_END;
 }   // fsftwait_cloud_start::Poll
 
 /*****************************************************************************/
@@ -614,7 +650,7 @@ void fsftwait_cloud_start::Poll (c_InputFishTank * pParent)
   */
 void fsftwait_cloud_end::Init (c_InputFishTank * pParent)
 {
-    // DEBUG_START();
+    // DEBUG_START;
 
     // calculate how long to wait until the start of the end of the cloud
     fsfttimer = time_t (random (long(pParent->MinCloudDuration), long(pParent->MaxCloudDuration)));
@@ -637,7 +673,7 @@ void fsftwait_cloud_end::Init (c_InputFishTank * pParent)
     // set up the state machine
     pParent->pCurrentFsmState = & fsftwait_cloud_end_imp;
 
-    // DEBUG_END();
+    // DEBUG_END;
 }   // fsftwait_cloud_end::Init
 
 /*****************************************************************************/
@@ -653,7 +689,7 @@ void fsftwait_cloud_end::Init (c_InputFishTank * pParent)
   */
 void fsftwait_cloud_end::Poll (c_InputFishTank * pParent)
 {
-    // DEBUG_START();
+    // DEBUG_START;
 
     // update the color as needed
     time_t SavedSecondsToTarget = pParent->SecondsToTarget;
@@ -669,5 +705,5 @@ void fsftwait_cloud_end::Poll (c_InputFishTank * pParent)
         fsftclouds_disabled_imp.Init (pParent);
     }   // End turn off a cloud
 
-    // DEBUG_END();
+    // DEBUG_END;
 }   // fsftwait_cloud_end::Poll
