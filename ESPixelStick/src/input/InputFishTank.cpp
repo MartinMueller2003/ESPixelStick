@@ -17,6 +17,7 @@
 #include <WiFiUdp.h>
 #include "../utility/SaferStringConversion.hpp"
 #include "InputFishTank.hpp"
+#include "../network/NetworkMgr.hpp"
 
 //-----------------------------------------------------------------------------
 // Local Structure and Data Definitions
@@ -153,15 +154,15 @@ void c_InputFishTank::Process ()
     {
         if (!HasBeenInitialized)
         {
-            DEBUG_V();
+            // DEBUG_V("Not Initialized");
             break;
         }
 
         if(!TimeClientInitialized)
         {
-            if(!WiFi.isConnected())
+            if(!NetworkMgr.IsConnected())
             {
-                // DEBUG_V("WiFi is not up");
+                // DEBUG_V("Network is not up");
                 break;
             }
 
@@ -189,10 +190,10 @@ void c_InputFishTank::Process ()
             // DEBUG_V("fixed");
             // DEBUG_V(String("FishTankMode: ") + String(uint32_t(FishTankMode)));
             CurrentColorSet   = ColorTargetTable[FishTankMode];
-            // DEBUG_V("");
+            // DEBUG_V(String("ConfigHasChanged: ") + String(ConfigHasChanged));
             if(ConfigHasChanged)
             {
-                DEBUG_V("Update Output");
+                // DEBUG_V("Update Output");
                 TargetColorSet = CurrentColorSet;
                 UpdateOutputBuffer(TargetColorSet);
                 ConfigHasChanged = false;
@@ -377,29 +378,27 @@ double c_InputFishTank::UpdateColor (double changeValue, double targetValue, dou
 /*****************************************************************************/
 void c_InputFishTank::UpdateOutputBuffer(ColorSet & OutputColorSet)
 {
-    DEBUG_START;
+    // DEBUG_START;
 
     uint32_t    ChannelsPerPixel = 3;
     uint32_t    NumPixels = InputDataBufferSize / ChannelsPerPixel;
     uint8_t     PixelBuffer[ChannelsPerPixel];
 
-    DEBUG_V(String("   ChannelsPerPixel: ") + String(ChannelsPerPixel));
-    DEBUG_V(String("InputDataBufferSize: ") + String(InputDataBufferSize));
-    DEBUG_V(String("          NumPixels: ") + String(NumPixels));
+    // DEBUG_V(String("   ChannelsPerPixel: ") + String(ChannelsPerPixel));
+    // DEBUG_V(String("InputDataBufferSize: ") + String(InputDataBufferSize));
+    // DEBUG_V(String("          NumPixels: ") + String(NumPixels));
 
     PixelBuffer[0] = OutputColorSet.red;
     PixelBuffer[1] = OutputColorSet.green;
     PixelBuffer[2] = OutputColorSet.blue;
 
-    for(uint32_t PixelId = 0; PixelId < NumPixels; ++PixelId)
+    for(uint32_t pTargetAddress = 0; pTargetAddress < InputDataBufferSize; pTargetAddress += ChannelsPerPixel)
     {
-        uint32_t StartChannel = PixelId * ChannelsPerPixel;
-        DEBUG_V(String("            PixelId: ") + String(PixelId));
-        DEBUG_V(String("       StartChannel: ") + String(StartChannel));
-        OutputMgr.WriteChannelData(PixelId * ChannelsPerPixel, ChannelsPerPixel, PixelBuffer);
+        // DEBUG_V(String("     pTargetAddress: ") + String(pTargetAddress));
+        OutputMgr.WriteChannelData(pTargetAddress, ChannelsPerPixel, PixelBuffer);
     }
 
-    DEBUG_END;
+    // DEBUG_END;
 }
 
 /*****************************************************************************/
