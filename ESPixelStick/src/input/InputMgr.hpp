@@ -78,6 +78,7 @@ public:
         InputType_FPP,
 #endif // def SUPPORT_FPP
         InputType_Artnet,
+        InputType_Fish,
         InputType_Disabled,
         InputType_End,
         InputType_Start = InputType_E1_31,

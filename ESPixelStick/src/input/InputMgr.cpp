@@ -33,6 +33,7 @@
 #include "InputDDP.h"
 #include "InputFPPRemote.h"
 #include "InputArtnet.hpp"
+#include "InputFishtank.hpp"
 // needs to be last
 #include "InputMgr.hpp"
 
@@ -59,6 +60,7 @@ static const InputTypeXlateMap_t InputTypeXlateMap[c_InputMgr::e_InputType::Inpu
     {c_InputMgr::e_InputType::InputType_Effects,  "Effects",    c_InputMgr::e_InputChannelIds::InputSecondaryChannelId},
     {c_InputMgr::e_InputType::InputType_MQTT,     "MQTT",       c_InputMgr::e_InputChannelIds::InputSecondaryChannelId},
     {c_InputMgr::e_InputType::InputType_Alexa,    "Alexa",      c_InputMgr::e_InputChannelIds::InputSecondaryChannelId},
+    {c_InputMgr::e_InputType::InputType_Fish,     "Fish Tank",  c_InputMgr::e_InputChannelIds::InputSecondaryChannelId},
     {c_InputMgr::e_InputType::InputType_Disabled, "Disabled",   c_InputMgr::e_InputChannelIds::InputChannelId_ALL}
 };
 
@@ -497,6 +499,24 @@ void c_InputMgr::InstantiateNewInputChannel (e_InputChannelIds ChannelIndex, e_I
                         logcon (String (F ("Starting Alexa for channel '")) + ChannelIndex + "'.");
                     }
                     InputChannelDrivers[ChannelIndex].pInputChannelDriver = new c_InputAlexa (ChannelIndex, InputType_Alexa, InputDataBufferSize);
+                    // DEBUG_V ("");
+                }
+                else
+                {
+                    InputChannelDrivers[ChannelIndex].pInputChannelDriver = new c_InputDisabled (ChannelIndex, InputType_Disabled, InputDataBufferSize);
+                }
+                break;
+            }
+
+            case e_InputType::InputType_Fish:
+            {
+                if (InputTypeIsAllowedOnChannel (InputType_Fish, ChannelIndex))
+                {
+                    if (!IsBooting)
+                    {
+                        logcon (String (F ("Starting Fishtank for channel '")) + ChannelIndex + "'.");
+                    }
+                    InputChannelDrivers[ChannelIndex].pInputChannelDriver = new c_InputFishTank (ChannelIndex, InputType_Fish, InputDataBufferSize);
                     // DEBUG_V ("");
                 }
                 else
