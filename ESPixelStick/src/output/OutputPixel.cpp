@@ -704,6 +704,7 @@ void c_OutputPixel::WriteChannelData(uint32_t StartChannelId, uint32_t ChannelCo
         {
             // DEBUG_V(String("      CurrentGroupIndex: 0x") + String(CurrentGroupIndex, HEX));
             // DEBUG_V(String("    CalculatedChannelId: 0x") + String(CalculatedChannelId, HEX));
+            // DEBUG_V(String("   CurrentIntensityData: 0x") + String(CurrentIntensityData, HEX));
             pOutputBuffer[CalculatedChannelId] = CurrentIntensityData;
             CalculatedChannelId += NumIntensityBytesPerPixel;
         }
