@@ -117,9 +117,9 @@ private:
     {
         // this array must be in the same order as FishTankModes
         {255.0, 255.0, 255.0, "Clean",      FishTankModes::clean},
-        {255.0, 255.0, 000.0, "Sunrise",    FishTankModes::sunrise},
+        {255.0, 100.0, 000.0, "Sunrise",    FishTankModes::sunrise},
         {200.0, 190.0, 190.0, "Daytime",    FishTankModes::daytime},
-        {175.0, 175.0,  50.0, "Sunset",     FishTankModes::sunset},
+        {175.0, 100.0,  20.0, "Sunset",     FishTankModes::sunset},
         {000.0,  50.0, 255.0, "Night",      FishTankModes::nightime},
         {000.0, 000.0, 000.0, "Cycle",      FishTankModes::cycle}
     };
