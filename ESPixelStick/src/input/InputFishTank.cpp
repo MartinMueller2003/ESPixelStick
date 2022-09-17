@@ -421,11 +421,13 @@ void c_InputFishTank::SetTimedColor (void)
     }
 
     // has the hour changed? aka do we need a new target color?
-    if (hourNow != currentHour)
+    if (ConfigHasChanged || (hourNow != currentHour))
     {
         // DEBUG_V(String ("Timed Color Change, hourNow = ") + hourNow);
         // DEBUG_V(String("    hourNow: ") + String(hourNow))
         // DEBUG_V(String("currentHour: ") + String(currentHour))
+
+        ConfigHasChanged = false;
 
         // get the target color
         currentHour = hourNow;
