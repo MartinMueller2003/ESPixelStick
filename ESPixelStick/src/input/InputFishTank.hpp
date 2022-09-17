@@ -107,7 +107,7 @@ private:
     time_t SecondsToTarget = 5;
 
     // current hour
-    uint8_t currentHour = -1;
+    int currentHour = -1;
 
     // flag to trigger the pixel driver reconfig
     uint32_t StepTimerMS    = 0;

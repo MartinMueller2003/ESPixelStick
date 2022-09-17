@@ -175,6 +175,8 @@ void c_InputFishTank::Process ()
         // DEBUG_V("are we fixed or cycleing?");
         if (FishTankModes::cycle == FishTankMode)
         {
+            pCurrentFsmState->Poll (this);
+
             // can we move towards the target color.
             if (millis() >= StepTimerMS)
             {
@@ -183,6 +185,15 @@ void c_InputFishTank::Process ()
                 CurrentColorSet.red     = UpdateColor (DeltaColorSet.red,   TargetColorSet.red,   CurrentColorSet.red);
                 CurrentColorSet.green   = UpdateColor (DeltaColorSet.green, TargetColorSet.green, CurrentColorSet.green);
                 CurrentColorSet.blue    = UpdateColor (DeltaColorSet.blue,  TargetColorSet.blue,  CurrentColorSet.blue);
+                UpdateOutputBuffer(CurrentColorSet);
+
+                // DEBUG_V(String ("TargetColorSet.red    = ") + TargetColorSet.red);
+                // DEBUG_V(String ("TargetColorSet.green  = ") + TargetColorSet.green);
+                // DEBUG_V(String ("TargetColorSet.blue   = ") + TargetColorSet.blue);
+
+                // DEBUG_V(String ("CurrentColorSet.red   = ") + CurrentColorSet.red);
+                // DEBUG_V(String ("CurrentColorSet.green = ") + CurrentColorSet.green);
+                // DEBUG_V(String ("CurrentColorSet.blue  = ") + CurrentColorSet.blue);
             }
         }
         else
@@ -199,20 +210,6 @@ void c_InputFishTank::Process ()
                 ConfigHasChanged = false;
             }
         }
-
-        // DEBUG_V("cycling");
-        // DEBUG_V(String(": 0x") + String(uint32_t(pCurrentFsmState), HEX));
-        // process the cloud functionality
-
-        pCurrentFsmState->Poll (this);
-
-        // DEBUG_V(String ("TargetColorSet.red    = ") + TargetColorSet.red);
-        // DEBUG_V(String ("TargetColorSet.green  = ") + TargetColorSet.green);
-        // DEBUG_V(String ("TargetColorSet.blue   = ") + TargetColorSet.blue);
-
-        // DEBUG_V(String ("CurrentColorSet.red   = ") + CurrentColorSet.red);
-        // DEBUG_V(String ("CurrentColorSet.green = ") + CurrentColorSet.green);
-        // DEBUG_V(String ("CurrentColorSet.blue  = ") + CurrentColorSet.blue);
 
         InputMgr.RestartBlankTimer (GetInputChannelId ());
 
@@ -381,12 +378,10 @@ void c_InputFishTank::UpdateOutputBuffer(ColorSet & OutputColorSet)
     // DEBUG_START;
 
     uint32_t    ChannelsPerPixel = 3;
-    uint32_t    NumPixels = InputDataBufferSize / ChannelsPerPixel;
     uint8_t     PixelBuffer[ChannelsPerPixel];
 
     // DEBUG_V(String("   ChannelsPerPixel: ") + String(ChannelsPerPixel));
     // DEBUG_V(String("InputDataBufferSize: ") + String(InputDataBufferSize));
-    // DEBUG_V(String("          NumPixels: ") + String(NumPixels));
 
     PixelBuffer[0] = OutputColorSet.red;
     PixelBuffer[1] = OutputColorSet.green;
@@ -415,16 +410,22 @@ void c_InputFishTank::SetTimedColor (void)
     // DEBUG_START;
 
     // DateTime CurrentDateTime = g_RtcMgr.currentDateTime ();
-    uint8_t hourNow = timeClient.getHours ();
+
+    int hourNow = timeClient.getHours ();
+    // DEBUG_V(String("hourNow: ") + String(hourNow))
+
     if (23 < hourNow)
     {
         // DEBUG_V(String ("Correcting unexpected hour value, hourNow = ") + hourNow);
         hourNow = 0;
     }
+
     // has the hour changed? aka do we need a new target color?
     if (hourNow != currentHour)
     {
         // DEBUG_V(String ("Timed Color Change, hourNow = ") + hourNow);
+        // DEBUG_V(String("    hourNow: ") + String(hourNow))
+        // DEBUG_V(String("currentHour: ") + String(currentHour))
 
         // get the target color
         currentHour = hourNow;
@@ -481,7 +482,7 @@ void c_InputFishTank::SetColors (FishTankModes TargetColor)
     // DEBUG_V(String ("DeltaColorSet.blue            = ") + DeltaColorSet.blue);
 
     // DEBUG_END;
-}   // SetTimedColor
+}   // SetColors
 
 /*****************************************************************************/
 /*
