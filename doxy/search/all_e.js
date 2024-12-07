@@ -28,7 +28,7 @@ var searchData=
   ['onwifidisconnect_25',['onWiFiDisconnect',['../classc___wi_fi_driver.html#aa3c35bf335930335d1669d2d56342a44',1,'c_WiFiDriver']]],
   ['onwifistaconn_26',['onWiFiStaConn',['../classc___wi_fi_driver.html#afa8b176edf13fb6c2618a41e8a4cffae',1,'c_WiFiDriver']]],
   ['onwifistadisc_27',['onWiFiStaDisc',['../classc___wi_fi_driver.html#adfb62bf06250e5de3ac949e1fab5b17c',1,'c_WiFiDriver']]],
-  ['opensdfile_28',['OpenSdFile',['../classc___file_mgr.html#a5694f7231133fead0cc163f6b89f9a65',1,'c_FileMgr']]],
+  ['opensdfile_28',['OpenSdFile',['../classc___file_mgr.html#a36838ab195b3c1cec25847f3eec4e9a9',1,'c_FileMgr']]],
   ['operatingmode_29',['operatingmode',['../fseq_8h.html#ae80af39e1c30f8c715e09e88065cacb1',1,'operatingMode:&#160;fseq.h'],['../union_f_p_p_ping_packet.html#aa1ff3b951241da29137ccdd53109908d',1,'FPPPingPacket::operatingMode']]],
   ['operator_3d_30',['operator=',['../structc___input_effect_engine_1_1d_c_r_g_b.html#a3b8fd353a7a3937773114d2e51154da4',1,'c_InputEffectEngine::dCRGB']]],
   ['otype_5ft_31',['OTYPE_t',['../classc___output_common.html#a8ce2a0b959923837191429b23b088003',1,'c_OutputCommon']]],
