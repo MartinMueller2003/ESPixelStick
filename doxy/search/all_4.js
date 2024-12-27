@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['data_0',['data',['../struct_f_s_e_q_parsed_variable_data_header.html#a2d16f82208585ef46765a475dc4dae46',1,'FSEQParsedVariableDataHeader::Data'],['../class_e_f_update.html#a9054f60484e702da4458451c49916bfeae44f9e348e41cb272efa87387728571b',1,'EFUpdate::DATA'],['../struct_f_s_e_q_raw_variable_data_header.html#a2828b1dc2d48d5fc489e6892853d6fcc',1,'FSEQRawVariableDataHeader::data']]],
+  ['data_0',['data',['../class_e_f_update.html#a9054f60484e702da4458451c49916bfeae44f9e348e41cb272efa87387728571b',1,'EFUpdate::DATA'],['../struct_f_s_e_q_raw_variable_data_header.html#a2828b1dc2d48d5fc489e6892853d6fcc',1,'FSEQRawVariableDataHeader::data'],['../struct_f_s_e_q_parsed_variable_data_header.html#a2d16f82208585ef46765a475dc4dae46',1,'FSEQParsedVariableDataHeader::Data']]],
   ['data_5flen_1',['data_len',['../fseq_8h.html#ad1a572736a10ff6b282c5f43c4ea1ccf',1,'data_len:&#160;fseq.h'],['../union_f_p_p_multi_sync_packet.html#aa95d3301798dd22229653684e7b9464c',1,'FPPMultiSyncPacket::data_len'],['../union_f_p_p_ping_packet.html#a8632656e4d76c61fbd0447d5d894481c',1,'FPPPingPacket::data_len'],['../union_f_p_p_packet.html#ae572c31e61014a70dc6afff4af01ed23',1,'FPPPacket::data_len']]],
   ['databuffer_2',['DataBuffer',['../structc___file_mgr_1_1_file_list_entry__t.html#ab088423d58792a3fb57c80276f1ebc9d',1,'c_FileMgr::FileListEntry_t']]],
   ['databuffersize_3',['DATABUFFERSIZE',['../_file_mgr_8hpp.html#aa00f910116b7fca294ce753f2e98c8c0',1,'FileMgr.hpp']]],
