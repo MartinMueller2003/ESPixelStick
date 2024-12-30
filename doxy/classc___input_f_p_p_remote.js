@@ -25,6 +25,7 @@ var classc___input_f_p_p_remote =
     [ "TaskProcess", "classc___input_f_p_p_remote.html#a52a0259a23c09e3cde5501eafae94e8a", null ],
     [ "validateConfiguration", "classc___input_f_p_p_remote.html#a53758f81562b012890b568958891b58a", null ],
     [ "Disabled", "classc___input_f_p_p_remote.html#a2ab02a00152bdbadfa7c9df038911da6", null ],
+    [ "DisableTask", "classc___input_f_p_p_remote.html#a83ed5193d31d510ad6b6a6bea2426c31", null ],
     [ "FileBeingPlayed", "classc___input_f_p_p_remote.html#ae0661236c6c8f91e0f9162d941b9f2de", null ],
     [ "pInputFPPRemotePlayItem", "classc___input_f_p_p_remote.html#a408bb6bee77015240dce30c447684eb5", null ],
     [ "SendFppSync", "classc___input_f_p_p_remote.html#a5b0598cd573c49535959ed9eb66b0880", null ],

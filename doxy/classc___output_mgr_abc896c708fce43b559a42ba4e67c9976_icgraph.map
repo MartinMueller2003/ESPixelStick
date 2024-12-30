@@ -1,12 +1,11 @@
 <map id="c_OutputMgr::GetBufferSize" name="c_OutputMgr::GetBufferSize">
-<area shape="rect" id="Node000001" title="Get the size (in intensities) of the buffer into which the E1.31 handler will stuff data." alt="" coords="3480,36,3662,62"/>
-<area shape="rect" id="Node000002" href="$classc___file_mgr.html#aad3d5c934b264ab5e66c5616c43fa060" title=" " alt="" coords="3247,57,3432,97"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="3464,64,3432,68,3432,63,3464,59"/>
+<area shape="rect" id="Node000001" title="Get the size (in intensities) of the buffer into which the E1.31 handler will stuff data." alt="" coords="3480,35,3662,60"/>
+<area shape="rect" id="Node000002" href="$classc___file_mgr.html#aad3d5c934b264ab5e66c5616c43fa060" title=" " alt="" coords="3247,27,3432,68"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="3464,50,3432,50,3432,45,3464,45"/>
+<area shape="rect" id="Node000003" href="$classc___file_mgr.html#a7fc07abded89ba2dc2fb88aa6e230da8" title=" " alt="" coords="3015,35,3199,60"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="3231,50,3200,50,3200,45,3231,45"/>
 <area shape="rect" id="Node000004" href="$classc___f_p_p_discovery.html#a23c80db87a22d64ac4d4ea91c9ffccde" title=" " alt="" coords="2774,35,2967,60"/>
-<area shape="poly" id="edge50_Node000001_Node000004" title=" " alt="" coords="3464,48,3432,47,3180,47,2967,49,2967,43,3180,41,3432,42,3464,43"/>
-<area shape="rect" id="Node000003" href="$classc___file_mgr.html#a7fc07abded89ba2dc2fb88aa6e230da8" title=" " alt="" coords="3015,60,3199,86"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="3231,78,3200,77,3200,72,3231,72"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="2999,64,2967,61,2968,55,3000,59"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="2999,50,2968,50,2968,45,2999,45"/>
 <area shape="rect" id="Node000005" href="$classc___web_mgr.html#a2c6189891b0496dae7d89ea7cdb24aee" title=" " alt="" coords="2370,35,2476,60"/>
 <area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="2758,50,2477,50,2477,45,2758,45"/>
 <area shape="rect" id="Node000041" href="$classc___f_p_p_discovery.html#a13f8ae4f868abed68dbd07ec7b27930e" title=" " alt="" coords="2524,60,2726,86"/>

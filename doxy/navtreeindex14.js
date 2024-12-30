@@ -1,5 +1,7 @@
 var NAVTREEINDEX14 =
 {
+"struct_f_s_e_q_raw_range_entry.html#a08c70d57f202cba568f6891017d3a8b3":[0,0,35,1],
+"struct_f_s_e_q_raw_range_entry.html#a9e0eb8c246245f5bb3a83ae84ac4229e":[0,0,35,0],
 "struct_f_s_e_q_raw_variable_data_header.html":[0,0,36],
 "struct_f_s_e_q_raw_variable_data_header.html#a0d2f80c3a48338ceb3c105688225820a":[0,0,36,2],
 "struct_f_s_e_q_raw_variable_data_header.html#a2828b1dc2d48d5fc489e6892853d6fcc":[0,0,36,0],

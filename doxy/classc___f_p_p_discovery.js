@@ -41,6 +41,7 @@ var classc___f_p_p_discovery =
     [ "IsEnabled", "classc___f_p_p_discovery.html#a8f9fcde96d757bcdf3350dc662cdb2ec", null ],
     [ "MulticastAddress", "classc___f_p_p_discovery.html#a64af0f5f9ca083b423a462e65ce69620", null ],
     [ "MultiSyncStats", "classc___f_p_p_discovery.html#a87f0ed24997d38a9021a3d0d2f489f48", null ],
+    [ "StopInProgress", "classc___f_p_p_discovery.html#a22bb6cca72bcb497cf4fc7c11a0ba778", null ],
     [ "SystemDebugStats", "classc___f_p_p_discovery.html#a38be0cf367311632769fff3c0eeb2a41", null ],
     [ "udp", "classc___f_p_p_discovery.html#a39129a05c7f60b4e9e2a96fce7dc6465", null ],
     [ "UploadFileName", "classc___f_p_p_discovery.html#ad049dc0d0f6cfc9d3430be8d19f90932", null ]
