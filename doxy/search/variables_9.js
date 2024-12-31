@@ -26,6 +26,5 @@ var searchData=
   ['isethernetconnected_23',['IsEthernetConnected',['../classc___network_mgr.html#ae1a8444f74f55c16a6c8dbc06f0e0e36',1,'c_NetworkMgr']]],
   ['isinputchannelactive_24',['IsInputChannelActive',['../classc___input_common.html#a2b97140ab2ad6b79fa04a7603b078de0',1,'c_InputCommon']]],
   ['isopen_25',['IsOpen',['../structc___file_mgr_1_1_file_list_entry__t.html#ae54d6b4e0f171ff08d51b381c7bdd140',1,'c_FileMgr::FileListEntry_t']]],
-  ['isoutputpaused_26',['IsOutputPaused',['../classc___output_mgr.html#aef97045cc8e687bb6dfc6925f08cb46f',1,'c_OutputMgr']]],
-  ['iswificonnected_27',['IsWiFiConnected',['../classc___network_mgr.html#af41d0340052a1955ae543829dbd2ba88',1,'c_NetworkMgr']]]
+  ['iswificonnected_26',['IsWiFiConnected',['../classc___network_mgr.html#af41d0340052a1955ae543829dbd2ba88',1,'c_NetworkMgr']]]
 ];
