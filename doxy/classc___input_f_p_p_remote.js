@@ -18,6 +18,7 @@ var classc___input_f_p_p_remote =
     [ "save", "classc___input_f_p_p_remote.html#acba9db785e2b10c568283b0b9510f00b", null ],
     [ "SetBufferInfo", "classc___input_f_p_p_remote.html#ac20d33080cef27922cc6350fcf25d8b6", null ],
     [ "SetConfig", "classc___input_f_p_p_remote.html#a1ee15e1c30584550418fd15599f8de61", null ],
+    [ "SetOperationalState", "classc___input_f_p_p_remote.html#a2a56acde47495178be59070c79d037d5", null ],
     [ "StartPlaying", "classc___input_f_p_p_remote.html#a25cf9123173d9c89fe7e5f2f77f90f42", null ],
     [ "StartPlayingLocalFile", "classc___input_f_p_p_remote.html#ad3bc5af64fe8523ba3c2f35cffa62fa0", null ],
     [ "StartPlayingRemoteFile", "classc___input_f_p_p_remote.html#a8148ddeeaff99c8f343c66e7e3a08a5d", null ],

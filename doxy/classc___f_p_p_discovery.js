@@ -31,6 +31,7 @@ var classc___f_p_p_discovery =
     [ "sendPingPacket", "classc___f_p_p_discovery.html#aed2b9148b3ad82d03c7bab89cc2927e8", null ],
     [ "SetBlankOnStop", "classc___f_p_p_discovery.html#ad8875e6015a2c55a128e50e68b5010d6", null ],
     [ "SetInputFPPRemotePlayFile", "classc___f_p_p_discovery.html#a60745e73513bb09ee95b04360f7b9ed2", null ],
+    [ "SetOperationalState", "classc___f_p_p_discovery.html#af0c89e6c2aa9b31042c34087150dad6c", null ],
     [ "StartPlaying", "classc___f_p_p_discovery.html#a43c069118ce152afe8425d7db1b157a1", null ],
     [ "StopPlaying", "classc___f_p_p_discovery.html#a2e1b906ef676796f0b6e17ae1f591658", null ],
     [ "BlankOnStop", "classc___f_p_p_discovery.html#ae914fc22cddc9550a2f2b45d4a01958a", null ],

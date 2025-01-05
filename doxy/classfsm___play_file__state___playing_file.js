@@ -8,7 +8,5 @@ var classfsm___play_file__state___playing_file =
     [ "Poll", "classfsm___play_file__state___playing_file.html#a78f01a0f55770883e74f07e65769f8a2", null ],
     [ "Start", "classfsm___play_file__state___playing_file.html#afd10581b93a5c936d056cc0820d55bb7", null ],
     [ "Stop", "classfsm___play_file__state___playing_file.html#ac2ef6559ac28ad864927766c57b368d0", null ],
-    [ "Sync", "classfsm___play_file__state___playing_file.html#ad5c1089dbf8ef58689034e08947f8b4c", null ],
-    [ "TimerPoll", "classfsm___play_file__state___playing_file.html#a7c3203657c7115e7c12bc41344d7c997", null ],
-    [ "LastPlayedFrameId", "classfsm___play_file__state___playing_file.html#a5a80155513cc20483d964ed739b99d93", null ]
+    [ "Sync", "classfsm___play_file__state___playing_file.html#ad5c1089dbf8ef58689034e08947f8b4c", null ]
 ];

@@ -7,6 +7,5 @@ var classfsm___play_file__state___idle =
     [ "Poll", "classfsm___play_file__state___idle.html#af0326b39d0e8278959096655ba2ec278", null ],
     [ "Start", "classfsm___play_file__state___idle.html#ae4f238b51f02ae7efe147df340077fe8", null ],
     [ "Stop", "classfsm___play_file__state___idle.html#ad7968cbfdc24e4f32f3cfae1a843ce50", null ],
-    [ "Sync", "classfsm___play_file__state___idle.html#a1557a06a127faff40618570d26ab1afa", null ],
-    [ "TimerPoll", "classfsm___play_file__state___idle.html#a66834197a1307c25e885c0d92cf3bc46", null ]
+    [ "Sync", "classfsm___play_file__state___idle.html#a1557a06a127faff40618570d26ab1afa", null ]
 ];
