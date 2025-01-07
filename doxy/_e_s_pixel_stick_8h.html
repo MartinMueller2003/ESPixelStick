@@ -175,6 +175,8 @@ Macros</h2></td></tr>
 <tr class="separator:a43e1cad902b6477bec893cb6430bd6c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6397b2c899f7047ba4fec38d9506e042" id="r_a6397b2c899f7047ba4fec38d9506e042"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_e_s_pixel_stick_8h.html#a6397b2c899f7047ba4fec38d9506e042">STRING</a>(X)&#160;&#160;&#160;<a class="el" href="_e_s_pixel_stick_8h.html#a43e1cad902b6477bec893cb6430bd6c8">STRINGIFY</a>(X)</td></tr>
 <tr class="separator:a6397b2c899f7047ba4fec38d9506e042"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc87444a05705e18a81a8fdac2d51080" id="r_afc87444a05705e18a81a8fdac2d51080"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_e_s_pixel_stick_8h.html#afc87444a05705e18a81a8fdac2d51080">JsonWrite</a>(j,  n,  v)&#160;&#160;&#160;(j)[(char*)(n)] = (v)</td></tr>
+<tr class="separator:afc87444a05705e18a81a8fdac2d51080"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f7d358c60a640fdab4b7a753a6a1646" id="r_a5f7d358c60a640fdab4b7a753a6a1646"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_e_s_pixel_stick_8h.html#a5f7d358c60a640fdab4b7a753a6a1646">logcon</a>(msg)</td></tr>
 <tr class="separator:a5f7d358c60a640fdab4b7a753a6a1646"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac54e13f4dd04bbd4e13299fb7062a6b1" id="r_ac54e13f4dd04bbd4e13299fb7062a6b1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_e_s_pixel_stick_8h.html#ac54e13f4dd04bbd4e13299fb7062a6b1">LOAD_CONFIG_DELAY</a>&#160;&#160;&#160;4</td></tr>
@@ -298,6 +300,40 @@ Variables</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define CPU_ClockTimeNS&#160;&#160;&#160;((1.0 / float(F_CPU)) * float(<a class="el" href="_e_s_pixel_stick_8h.html#ab73f925aed9ed21d9f3da5037e690023">NanoSecondsInASecond</a>))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afc87444a05705e18a81a8fdac2d51080" name="afc87444a05705e18a81a8fdac2d51080"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc87444a05705e18a81a8fdac2d51080">&#9670;&#160;</a></span>JsonWrite</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define JsonWrite</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">j, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">n, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">v&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;(j)[(char*)(n)] = (v)</td>
         </tr>
       </table>
 </div><div class="memdoc">
