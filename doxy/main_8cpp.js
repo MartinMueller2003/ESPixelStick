@@ -12,7 +12,7 @@ var main_8cpp =
     [ "LoadConfig", "main_8cpp.html#a3e32a397e7564d7bbd024686c107ccf1", null ],
     [ "loop", "main_8cpp.html#afe461d27b9c48d5921c00d521181f12f", null ],
     [ "RebootInProgress", "main_8cpp.html#aee3a92a77acd81bd67090432b16e23a1", null ],
-    [ "RequestReboot", "main_8cpp.html#a07c188498d1aa5b7b068c7a0e09a75f4", null ],
+    [ "RequestReboot", "main_8cpp.html#a137b37e7877287da4965839e0d2db537", null ],
     [ "SaveConfig", "main_8cpp.html#aa67914e91e1b1ff65d68df7e673a5ca9", null ],
     [ "ScheduleLoadConfig", "main_8cpp.html#a23c1f5f645fafe9824320be65b1ae241", null ],
     [ "serializeCore", "main_8cpp.html#a03b64a11fdb210669823536c42932fd0", null ],

@@ -13,7 +13,7 @@ var searchData=
   ['registeralexacallback_10',['RegisterAlexaCallback',['../classc___web_mgr.html#aaad811dbabf3626c6ddb95f13f301f7f',1,'c_WebMgr']]],
   ['registeruartisrhandler_11',['RegisterUartIsrHandler',['../classc___output_uart.html#a1ff07f65e62b2df59536624f3fbdc00a',1,'c_OutputUart']]],
   ['reportnewframe_12',['reportnewframe',['../classc___output_common.html#ae4db3605be43e71dbd0b4f929b69aa85',1,'c_OutputCommon::ReportNewFrame()'],['../classc___output_uart.html#a535f40a45bc69ba9c67de5ed3da80467',1,'c_OutputUart::ReportNewFrame()']]],
-  ['requestreboot_13',['requestreboot',['../main_8cpp.html#a07c188498d1aa5b7b068c7a0e09a75f4',1,'RequestReboot(uint32_t LoopDelay):&#160;main.cpp'],['../_e_s_pixel_stick_8h.html#a07c188498d1aa5b7b068c7a0e09a75f4',1,'RequestReboot(uint32_t LoopDelay):&#160;main.cpp']]],
+  ['requestreboot_13',['requestreboot',['../main_8cpp.html#a137b37e7877287da4965839e0d2db537',1,'RequestReboot(uint32_t LoopDelay, bool SkipDisable):&#160;main.cpp'],['../_e_s_pixel_stick_8h.html#a35e389ad175defaf8ba12eb4daeda241',1,'RequestReboot(uint32_t LoopDelay, bool SkipDisable=false):&#160;main.cpp']]],
   ['reset_14',['reset',['../classc___wi_fi_driver.html#a73ac32c8db2b76fe03893dde2a2ad134',1,'c_WiFiDriver']]],
   ['resetsdcard_15',['ResetSdCard',['../classc___file_mgr.html#abf9680ad0d546bd42476f6460e387ba0',1,'c_FileMgr']]],
   ['restartblanktimer_16',['RestartBlankTimer',['../classc___input_mgr.html#ac50551f90f209dbaa2b476a20b524b71',1,'c_InputMgr']]],

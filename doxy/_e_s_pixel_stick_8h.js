@@ -28,7 +28,7 @@ var _e_s_pixel_stick_8h =
     [ "PrettyPrint", "_e_s_pixel_stick_8h.html#a9ff9121bc3b70ed36279c307fdcde0ca", null ],
     [ "PrettyPrint", "_e_s_pixel_stick_8h.html#a47bc5f5aa91e940e6cfc297466285595", null ],
     [ "RebootInProgress", "_e_s_pixel_stick_8h.html#aee3a92a77acd81bd67090432b16e23a1", null ],
-    [ "RequestReboot", "_e_s_pixel_stick_8h.html#a07c188498d1aa5b7b068c7a0e09a75f4", null ],
+    [ "RequestReboot", "_e_s_pixel_stick_8h.html#a35e389ad175defaf8ba12eb4daeda241", null ],
     [ "serializeCore", "_e_s_pixel_stick_8h.html#a64caf298db9b3dcc081633371db4a441", null ],
     [ "setFromJSON", "_e_s_pixel_stick_8h.html#a8295d2ec53bab395bfc5811cfd78ca4d", null ],
     [ "setFromJSON", "_e_s_pixel_stick_8h.html#a22f4176fd1b5a26a3d18c096681ad8e9", null ],
