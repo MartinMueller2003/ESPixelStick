@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['name_0',['name',['../struct_input_type_xlate_map__t.html#a93006abf40948208b0f3b9443e2b0dfd',1,'InputTypeXlateMap_t::name'],['../struct_output_type_xlate_map__t.html#ab057221cbf20eb7f3effc1a61aa8ac29',1,'OutputTypeXlateMap_t::name'],['../classc___external_input.html#a33f0e5609a4059c422f2b075ab21d16c',1,'c_ExternalInput::name'],['../structc___input_effect_engine_1_1_effect_descriptor__s.html#a844a2c9abe1e777b03c7ea73714e8d85',1,'c_InputEffectEngine::EffectDescriptor_s::name']]],
+  ['name_0',['name',['../struct_input_type_xlate_map__t.html#a93006abf40948208b0f3b9443e2b0dfd',1,'InputTypeXlateMap_t::name'],['../struct_output_type_xlate_map__t.html#ab057221cbf20eb7f3effc1a61aa8ac29',1,'OutputTypeXlateMap_t::name'],['../classc___external_input.html#a33f0e5609a4059c422f2b075ab21d16c',1,'c_ExternalInput::name'],['../structc___input_effect_engine_1_1_effect_descriptor__t.html#a9a8d67997524fb9abf29128795386d2e',1,'c_InputEffectEngine::EffectDescriptor_t::name']]],
   ['nanosecondsinamicrosecond_1',['NanoSecondsInAMicroSecond',['../_e_s_pixel_stick_8h.html#adc742cd4c34a5cf8027ad01f623d218e',1,'ESPixelStick.h']]],
   ['nanosecondsinamillisecond_2',['NanoSecondsInAMilliSecond',['../_e_s_pixel_stick_8h.html#a2bae0e6b7c8b96bd7e9c2a326e7d8333',1,'ESPixelStick.h']]],
   ['nanosecondsinasecond_3',['NanoSecondsInASecond',['../_e_s_pixel_stick_8h.html#ab73f925aed9ed21d9f3da5037e690023',1,'ESPixelStick.h']]],
@@ -25,7 +25,7 @@ var searchData=
   ['numintensitybytesperpixel_22',['NumIntensityBytesPerPixel',['../classc___output_pixel.html#af8785e24529c85a2d82918f4b9e3c895',1,'c_OutputPixel']]],
   ['numinterintensitybreakbits_23',['NumInterIntensityBreakBits',['../structc___output_uart_1_1_output_uart_config__t.html#a34574521c3842523ba81a0d8e01afea2',1,'c_OutputUart::OutputUartConfig_t']]],
   ['numinterintensitymabbits_24',['NumInterIntensityMABbits',['../structc___output_uart_1_1_output_uart_config__t.html#a18adbfab1fed6c979e4feea916edbe2d',1,'c_OutputUart::OutputUartConfig_t']]],
-  ['numpixelsingroup_25',['NumPixelsInGroup',['../structc___input_effect_engine_1_1_marquee_group.html#af34147ece352e0c559dedb1386663dd0',1,'c_InputEffectEngine::MarqueeGroup']]],
+  ['numpixelsingroup_25',['NumPixelsInGroup',['../structc___input_effect_engine_1_1_marquee_group__t.html#a2b4dfa210a2b28ba1bc0548624556286',1,'c_InputEffectEngine::MarqueeGroup_t']]],
   ['numsparseranges_26',['numsparseranges',['../struct_f_s_e_q_parsed_header.html#a048cd88b554c82a7e9070ac6263016a4',1,'FSEQParsedHeader::numSparseRanges'],['../struct_f_s_e_q_raw_header.html#aa6dace473482943c077b3079bdb53ec4',1,'FSEQRawHeader::numSparseRanges'],['../fseq_8h.html#a96e54e69946f348e1bff7e3e04203321',1,'numSparseRanges:&#160;fseq.h']]],
   ['numuartslotsperintensityvalue_27',['NumUartSlotsPerIntensityValue',['../classc___output_uart.html#a7c91bb1969dee4e2a52968088ec63b4c',1,'c_OutputUart']]]
 ];

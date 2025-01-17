@@ -8,7 +8,7 @@ var searchData=
   ['webmgr_2ehpp_5',['WebMgr.hpp',['../_web_mgr_8hpp.html',1,'']]],
   ['webserver_6',['webServer',['../_web_mgr_8cpp.html#af746297775839f25b039311b3bf9db74',1,'WebMgr.cpp']]],
   ['welcomestring_7',['WelcomeString',['../classc___file_mgr.html#a7a93f103051d82e6e210966cf29c5507',1,'c_FileMgr']]],
-  ['whitechannel_8',['whiteChannel',['../structc___input_effect_engine_1_1_m_q_t_t_configuration__s.html#a0c1d21d6a76d76d8b3d9d6366729a568',1,'c_InputEffectEngine::MQTTConfiguration_s']]],
+  ['whitechannel_8',['whiteChannel',['../structc___input_effect_engine_1_1_m_q_t_t_configuration__t.html#aec651b8a048bd64b142f9da61bb12a5f',1,'c_InputEffectEngine::MQTTConfiguration_t']]],
   ['wifidriver_9',['WiFiDriver',['../classc___network_mgr.html#aa10ed0ae6b19ee3c4859b41e57d5ec8f',1,'c_NetworkMgr']]],
   ['wifidriver_2ecpp_10',['WiFiDriver.cpp',['../_wi_fi_driver_8cpp.html',1,'']]],
   ['wifidriver_2ehpp_11',['WiFiDriver.hpp',['../_wi_fi_driver_8hpp.html',1,'']]],
@@ -18,5 +18,5 @@ var searchData=
   ['writefailed_15',['writeFailed',['../classc___f_p_p_discovery.html#aec4afca829e622d2e50fb9d1caa43ceb',1,'c_FPPDiscovery']]],
   ['writesdfile_16',['writesdfile',['../classc___file_mgr.html#a1207dc6e875e28c576891136c7819ffd',1,'c_FileMgr::WriteSdFile(const FileId &amp;FileHandle, byte *FileData, size_t NumBytesToWrite, size_t StartingPosition, bool LockStatus=false)'],['../classc___file_mgr.html#a06e0eb11f760f13842e46fe8f74108a5',1,'c_FileMgr::WriteSdFile(const FileId &amp;FileHandle, byte *FileData, size_t NumBytesToWrite, bool LockStatus=false)']]],
   ['writesdfilebuf_17',['WriteSdFileBuf',['../classc___file_mgr.html#a9b57a9753f646f66e1a961b4299aedc5',1,'c_FileMgr']]],
-  ['wstcode_18',['wsTCode',['../structc___input_effect_engine_1_1_effect_descriptor__s.html#aa54163ef3be0eb92618e82e15647dd12',1,'c_InputEffectEngine::EffectDescriptor_s']]]
+  ['wstcode_18',['wsTCode',['../structc___input_effect_engine_1_1_effect_descriptor__t.html#a5e60c74a49b701ac0f1b0d63f0370927',1,'c_InputEffectEngine::EffectDescriptor_t']]]
 ];

@@ -7,7 +7,7 @@ var searchData=
   ['blankonstop_4',['BlankOnStop',['../classc___f_p_p_discovery.html#ae914fc22cddc9550a2f2b45d4a01958a',1,'c_FPPDiscovery']]],
   ['blockdelayus_5',['BlockDelayUs',['../classc___output_pixel.html#a408993473c26291ecb94e5c86afadf10',1,'c_OutputPixel']]],
   ['blocksize_6',['BlockSize',['../classc___output_pixel.html#aef29226779bfa3f654170b97aa9682dc',1,'c_OutputPixel']]],
-  ['brightness_7',['brightness',['../structc___input_effect_engine_1_1_m_q_t_t_configuration__s.html#ae12eff036caa7e773cae99aeb7b2908f',1,'c_InputEffectEngine::MQTTConfiguration_s::brightness'],['../classc___output_pixel.html#ab5a378d1b7705f29a458e9d8e6366d1e',1,'c_OutputPixel::brightness']]],
+  ['brightness_7',['brightness',['../structc___input_effect_engine_1_1_m_q_t_t_configuration__t.html#a64c62821a612be02d41d64bc66f2bb38',1,'c_InputEffectEngine::MQTTConfiguration_t::brightness'],['../classc___output_pixel.html#ab5a378d1b7705f29a458e9d8e6366d1e',1,'c_OutputPixel::brightness']]],
   ['buffer_8',['buffer',['../structc___file_mgr_1_1_file_list_entry__t.html#a92292e1f9f9971dbb3a254dc51b8c02a',1,'c_FileMgr::FileListEntry_t']]],
   ['build_5fdate_9',['build_date',['../main_8cpp.html#a0e2463c67702bd0a35c61f2e684dc284',1,'BUILD_DATE:&#160;main.cpp'],['../_const_names_8hpp.html#a0e2463c67702bd0a35c61f2e684dc284',1,'BUILD_DATE:&#160;main.cpp']]],
   ['buildingnewconfig_10',['BuildingNewConfig',['../classc___output_mgr.html#a7b94e1a3bb3211dea24dbaf74caf6bcf',1,'c_OutputMgr']]],
