@@ -1,11 +1,13 @@
 <map id="c_FPPDiscovery::GetSysInfoJSON" name="c_FPPDiscovery::GetSysInfoJSON">
-<area shape="rect" id="Node000001" title=" " alt="" coords="3066,33,3291,59"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="3066,59,3291,84"/>
 <area shape="rect" id="Node000002" href="$classc___f_p_p_discovery.html#ad7458433d0f12998bff6aa34bcbfc501" title=" " alt="" coords="2799,33,3018,59"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="3050,49,3019,49,3019,44,3050,44"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="3050,62,3018,59,3019,54,3051,57"/>
 <area shape="rect" id="Node000003" href="$classc___f_p_p_discovery.html#a99fba021d3c16c82798bb98db9f36f5a" title=" " alt="" coords="2524,9,2751,35"/>
-<area shape="poly" id="edge49_Node000001_Node000003" title=" " alt="" coords="3092,33,3018,23,2879,18,2751,20,2751,14,2879,13,3018,18,3093,28"/>
+<area shape="poly" id="edge49_Node000001_Node000003" title=" " alt="" coords="3130,55,3077,37,3018,23,2949,16,2880,13,2751,15,2751,10,2880,7,2950,10,3018,18,3078,32,3132,50"/>
 <area shape="rect" id="Node000040" href="$classc___f_p_p_discovery.html#a2e06d4a3b80cd325dddc55621b47115e" title=" " alt="" coords="2538,59,2737,84"/>
-<area shape="poly" id="edge50_Node000001_Node000040" title=" " alt="" coords="3093,65,3018,74,2871,80,2737,78,2737,73,2871,75,3018,69,3092,60"/>
+<area shape="poly" id="edge50_Node000001_Node000040" title=" " alt="" coords="3051,74,2737,74,2737,69,3051,69"/>
+<area shape="rect" id="Node000041" href="$classc___input_d_d_p.html#a19376f166f9b9872e04a3b3e5f9dc148" title=" " alt="" coords="2809,134,3008,175"/>
+<area shape="poly" id="edge51_Node000001_Node000041" title=" " alt="" coords="3120,92,2978,136,2977,131,3118,87"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="2783,38,2751,35,2751,30,2784,32"/>
 <area shape="poly" id="edge47_Node000002_Node000040" title=" " alt="" coords="2783,61,2738,65,2737,60,2783,55"/>
 <area shape="rect" id="Node000004" href="$classc___web_mgr.html#a2c6189891b0496dae7d89ea7cdb24aee" title=" " alt="" coords="2370,35,2476,60"/>
@@ -89,4 +91,6 @@
 <area shape="poly" id="edge44_Node000038_Node000024" title=" " alt="" coords="235,504,55,488,55,483,235,499"/>
 <area shape="poly" id="edge46_Node000039_Node000020" title=" " alt="" coords="913,524,769,474,771,469,915,519"/>
 <area shape="poly" id="edge48_Node000040_Node000004" title=" " alt="" coords="2523,61,2476,56,2477,51,2523,56"/>
+<area shape="rect" id="Node000042" href="$classc___input_d_d_p.html#a3ce4a8b28f73e04be6ae752efe285238" title="Call from loop(), renders Input data." alt="" coords="2565,141,2710,167"/>
+<area shape="poly" id="edge52_Node000041_Node000042" title=" " alt="" coords="2793,157,2710,157,2710,152,2793,152"/>
 </map>
