@@ -11,6 +11,7 @@ var classc___file_mgr =
     [ "c_FileMgr", "classc___file_mgr.html#a2dea4335b59cd7b4d685c252aae8ccba", null ],
     [ "~c_FileMgr", "classc___file_mgr.html#a7996698d27e5bd8d874b519c09c82f0a", null ],
     [ "__attribute__", "classc___file_mgr.html#a461b0bc1d63b33272cbf342d96544355", null ],
+    [ "AbortSdFileUpload", "classc___file_mgr.html#ad2545a2e9a8e22194d4bf3e712528645", null ],
     [ "Begin", "classc___file_mgr.html#a2e86f9c538a117790a96317890d68a55", null ],
     [ "BuildFseqList", "classc___file_mgr.html#a92e64e1a9fa14e7c2361b42173fe371b", null ],
     [ "CloseSdFile", "classc___file_mgr.html#ae43240caa74e07c85bb523875729e0f1", null ],
