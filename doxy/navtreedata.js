@@ -56,18 +56,18 @@ var NAVTREEINDEX =
 "_const_names_8cpp.html",
 "_const_names_8hpp.html#a0bc65a4ed5c5699c2025b67db257b9d4",
 "_e_s_pixel_stick_8h.html#a35e389ad175defaf8ba12eb4daeda241",
-"_g_p_i_o___defs___e_s_p32___d1___m_i_n_i___e_t_h_8hpp.html#aeaea1905632a9d6e4909b54c29fb6d56",
-"_g_p_i_o___defs___e_s_p32___octa2go_8hpp.html#aebe2eeabee8a8434bc5edf81a88f90e4",
-"_g_p_i_o___defs___e_s_p32___q_u_i_n_l_e_d___u_n_o___a_e___plus_8hpp.html#aebe2eeabee8a8434bc5edf81a88f90e4",
-"_g_p_i_o___defs___e_s_p32___w_t32_e_t_h01_8hpp.html#addcbe236b0fb85814beced384e8d77f4",
-"_output_common_8hpp_source.html",
-"classc___external_input.html#aaef4c91e753fa7cd799024e656f68344",
-"classc___input_e131.html#a0efd4777954cf24cb0a8e46dc768d396",
-"classc___input_m_q_t_t.html#a5746d51fc9df08ab1191c23833908f5b",
-"classc___output_pixel.html#a611d4757b8af1e3d5dff19c093bbc260",
-"classfsm___play_effect__state.html#aa82f4becadc8f45328aae8ac1be529b9",
-"fseq_8h.html#a8842006928b763da7c334d250ee3d2fa",
-"struct_input_type_xlate_map__t.html"
+"_g_p_i_o___defs___e_s_p32___d1___m_i_n_i___e_t_h_8hpp.html#ae296313c7ea19d6e5f4c49d57187490e",
+"_g_p_i_o___defs___e_s_p32___octa2go_8hpp.html#ae63f54f838fd6667ac7a32965de7d1b4",
+"_g_p_i_o___defs___e_s_p32___q_u_i_n_l_e_d___u_n_o___a_e___plus_8hpp.html#ae296313c7ea19d6e5f4c49d57187490e",
+"_g_p_i_o___defs___e_s_p32___w_t32_e_t_h01_8hpp.html#ad1cdaf2881d19f91216c4a64f925d072",
+"_output_common_8cpp.html",
+"classc___external_input.html#aa2410eb0985ac40f9d54815771aec5c3",
+"classc___input_e131.html",
+"classc___input_m_q_t_t.html#a54511768dafc3f9b45fd17199f4a8ea1",
+"classc___output_pixel.html#a59dface20d963341684730e4817f9904",
+"classfsm___play_effect__state.html#a896a049a50ec0f05330687439826b213",
+"fseq_8h.html#a6c61b206b073a5abcb258a6b985626c3",
+"struct_f_s_e_q_raw_variable_data_header.html#a2828b1dc2d48d5fc489e6892853d6fcc"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

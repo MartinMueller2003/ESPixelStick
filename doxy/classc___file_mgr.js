@@ -1,8 +1,8 @@
 var classc___file_mgr =
 [
     [ "FileListEntry_t", "structc___file_mgr_1_1_file_list_entry__t.html", "structc___file_mgr_1_1_file_list_entry__t" ],
-    [ "DeserializationHandler", "classc___file_mgr.html#a9b232d96525ff716d8673ad50b8a62ee", null ],
-    [ "FileId", "classc___file_mgr.html#a7e9e88de5c3b00bea2dbecaeca333a83", null ],
+    [ "DeserializationHandler", "classc___file_mgr.html#a6e26c91b067547f4b8ec9bd3770ae9d7", null ],
+    [ "FileId", "classc___file_mgr.html#ad1e8a2ab1fb887e915321d40f1959df3", null ],
     [ "FileMode", "classc___file_mgr.html#a8d56eea107a803ee4a53b9223d9c3853", [
       [ "FileRead", "classc___file_mgr.html#a8d56eea107a803ee4a53b9223d9c3853a940cf0fa5d631b5b097f6a1a5e8a65b9", null ],
       [ "FileWrite", "classc___file_mgr.html#a8d56eea107a803ee4a53b9223d9c3853a312a4acbc21842211205394d221b830d", null ],
