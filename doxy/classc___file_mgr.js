@@ -46,6 +46,7 @@ var classc___file_mgr =
     [ "ReadSdFile", "classc___file_mgr.html#aa9a93d1617e9d46e35a92a8a5a9a19ca", null ],
     [ "ReadSdFile", "classc___file_mgr.html#ab4abd9b3bf5026c6bedbbe3d5f72f54b", null ],
     [ "ReadSdFile", "classc___file_mgr.html#a048fab6ed912c57a0f8868bca5d71737", null ],
+    [ "RenameSdFile", "classc___file_mgr.html#a93997e392e1f8e7a7e77eea0ee4079ec", null ],
     [ "ResetSdCard", "classc___file_mgr.html#abf9680ad0d546bd42476f6460e387ba0", null ],
     [ "SaveFlashFile", "classc___file_mgr.html#ac9037dee1fa0683939b45f103442e237", null ],
     [ "SaveFlashFile", "classc___file_mgr.html#aff37690a9e5ab9311170fdf20ba1f6ec", null ],

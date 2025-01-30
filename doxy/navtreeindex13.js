@@ -1,5 +1,6 @@
 var NAVTREEINDEX13 =
 {
+"fseq_8h.html#a67006d5d0768f897b216abbf48e1f12d":[1,0,0,4,1,18],
 "fseq_8h.html#a6c61b206b073a5abcb258a6b985626c3":[1,0,0,4,1,21],
 "fseq_8h.html#a76086d820532f46155fdc9023c854d03":[1,0,0,4,1,48],
 "fseq_8h.html#a8842006928b763da7c334d250ee3d2fa":[1,0,0,4,1,31],
@@ -248,6 +249,5 @@ var NAVTREEINDEX13 =
 "struct_f_s_e_q_raw_range_entry.html":[0,0,35],
 "struct_f_s_e_q_raw_range_entry.html#a08c70d57f202cba568f6891017d3a8b3":[0,0,35,1],
 "struct_f_s_e_q_raw_range_entry.html#a9e0eb8c246245f5bb3a83ae84ac4229e":[0,0,35,0],
-"struct_f_s_e_q_raw_variable_data_header.html":[0,0,36],
-"struct_f_s_e_q_raw_variable_data_header.html#a0d2f80c3a48338ceb3c105688225820a":[0,0,36,2]
+"struct_f_s_e_q_raw_variable_data_header.html":[0,0,36]
 };
