@@ -56,18 +56,18 @@ var NAVTREEINDEX =
 "_const_names_8cpp.html",
 "_const_names_8hpp.html#a0bc65a4ed5c5699c2025b67db257b9d4",
 "_e_s_pixel_stick_8h.html#a35e389ad175defaf8ba12eb4daeda241",
-"_g_p_i_o___defs___e_s_p32___d1___m_i_n_i___e_t_h_8hpp.html#ae296313c7ea19d6e5f4c49d57187490e",
-"_g_p_i_o___defs___e_s_p32___octa2go_8hpp.html#ae63f54f838fd6667ac7a32965de7d1b4",
-"_g_p_i_o___defs___e_s_p32___q_u_i_n_l_e_d___u_n_o___a_e___plus_8hpp.html#ae296313c7ea19d6e5f4c49d57187490e",
-"_g_p_i_o___defs___e_s_p32___w_t32_e_t_h01_8hpp.html#ad1cdaf2881d19f91216c4a64f925d072",
-"_output_common_8cpp.html",
-"classc___external_input.html#aa2410eb0985ac40f9d54815771aec5c3",
-"classc___input_disabled.html#ad685690f75a35a618d1aa98b628e6af9",
-"classc___input_m_q_t_t.html#a47969701bda3653feea63fc0628d4071",
-"classc___output_pixel.html#a54a6e75333ee8c5bc7b9cdba5f3d3c16",
-"classfsm___play_effect__state.html#a52ce5902219df30420f82e5d736d8546",
-"fseq_8h.html#a67006d5d0768f897b216abbf48e1f12d",
-"struct_f_s_e_q_raw_variable_data_header.html#a0d2f80c3a48338ceb3c105688225820a"
+"_g_p_i_o___defs___e_s_p32___d1___m_i_n_i___e_t_h_8hpp.html#ad99563c913b8da40ad1a5a305bf3ed3d",
+"_g_p_i_o___defs___e_s_p32___octa2go_8hpp.html#ad99563c913b8da40ad1a5a305bf3ed3d",
+"_g_p_i_o___defs___e_s_p32___q_u_i_n_l_e_d___u_n_o___a_e___plus_8hpp.html#ad828b40b5ce0c37516acd57858300a64",
+"_g_p_i_o___defs___e_s_p32___w_t32_e_t_h01_8hpp.html#acc122895244f0017684c45d0360b4d54",
+"_output_a_p_a102_spi_8hpp.html",
+"classc___external_input.html#a8e068df25b1139f8b0657bb31ab8a2b3",
+"classc___input_disabled.html#a9c0ada21315e4c3c23240a441917b799",
+"classc___input_m_q_t_t.html#a45f3b817bdfce5db4df35d25414fb4b3",
+"classc___output_pixel.html#a4a7f12a23b4f2ce0eb5cfeccd8bcb3e2",
+"classfsm___play_effect__state.html#a45cdefcd258a18c0394a672f6f51611e",
+"fseq_8h.html#a61f3ec214a6fa2bb351949c606ed87b9",
+"struct_f_s_e_q_raw_range_entry.html#a9e0eb8c246245f5bb3a83ae84ac4229e"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

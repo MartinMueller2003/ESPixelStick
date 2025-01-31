@@ -244,7 +244,7 @@ var searchData=
   ['configsaveneeded_241',['ConfigSaveNeeded',['../main_8cpp.html#ae44595345afc966d1f3de593d4c9b0f8',1,'ConfigSaveNeeded:&#160;main.cpp'],['../_e_s_pixel_stick_8h.html#ae44595345afc966d1f3de593d4c9b0f8',1,'ConfigSaveNeeded:&#160;main.cpp']]],
   ['consolerxgpio_242',['ConsoleRxGpio',['../classc___output_mgr.html#a1eba5f048cc784124d29208565a71511',1,'c_OutputMgr']]],
   ['consoletxgpio_243',['ConsoleTxGpio',['../classc___output_mgr.html#ac9701b8ceebd130258b2bc0a4a53d02d',1,'c_OutputMgr']]],
-  ['consoleuartisactive_244',['ConsoleUartIsActive',['../classc___output_mgr.html#a021718f10f6d648d70a22d3e0a5f72fc',1,'c_OutputMgr']]],
+  ['consoleuartisactive_244',['ConsoleUartIsActive',['../main_8cpp.html#af3e03d06d3843c9ce26dc935016d8797',1,'ConsoleUartIsActive:&#160;main.cpp'],['../_e_s_pixel_stick_8h.html#af3e03d06d3843c9ce26dc935016d8797',1,'ConsoleUartIsActive:&#160;main.cpp']]],
   ['continuous_245',['Continuous',['../class_fast_timer.html#af7b9d5dce2428a8da704ffd33feb3656',1,'FastTimer']]],
   ['cs_5fpin_246',['cs_pin',['../classc___file_mgr.html#a3c32d0dc12f0379a1b656a18ef06d0d0',1,'c_FileMgr']]],
   ['currentcolor_247',['CurrentColor',['../structc___input_effect_engine_1_1_transition__t.html#adb2f2f4884f432ad5e3b2aa362f69812',1,'c_InputEffectEngine::Transition_t']]],

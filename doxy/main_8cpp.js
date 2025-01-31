@@ -25,6 +25,7 @@ var main_8cpp =
     [ "ConfigFileName", "main_8cpp.html#af10a8dbb4e9867627fe5b7443940e5b0", null ],
     [ "ConfigLoadNeeded", "main_8cpp.html#acdf4ed1900624d89fafc8866ad45d29f", null ],
     [ "ConfigSaveNeeded", "main_8cpp.html#ae44595345afc966d1f3de593d4c9b0f8", null ],
+    [ "ConsoleUartIsActive", "main_8cpp.html#af3e03d06d3843c9ce26dc935016d8797", null ],
     [ "CurrentConfigVersion", "main_8cpp.html#a7a9dbece103fe34ae437a90c4e517782", null ],
     [ "DiscardedRxData", "main_8cpp.html#a70e2f5df671c5b18e60a1bbcf2c9586f", null ],
     [ "IsBooting", "main_8cpp.html#ab73fab3bfc2da224ec67cc789fe7616a", null ],
