@@ -126,6 +126,7 @@ var _const_names_8hpp =
     [ "CN_NeedAutoConfig", "_const_names_8hpp.html#ae5a580d681a403ef562b79452bdfb0a9", null ],
     [ "CN_netmask", "_const_names_8hpp.html#ab3c0a15c280539db3639375167781498", null ],
     [ "CN_network", "_const_names_8hpp.html#a75fd31c772e342d427cafcb0fca4f89b", null ],
+    [ "CN_No_LocalFileToPlay", "_const_names_8hpp.html#a1f2c2236d87f354c101e1523a93fecdc", null ],
     [ "CN_num_chan", "_const_names_8hpp.html#a2304db5409c777d7fc63dd9a145deba0", null ],
     [ "CN_num_packets", "_const_names_8hpp.html#a80424dcf9bcfc64be5371d7c8d90b5ad", null ],
     [ "CN_off", "_const_names_8hpp.html#ab4c47341b5685b61efc1f35bc87c8845", null ],
