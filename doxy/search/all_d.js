@@ -14,7 +14,7 @@ var searchData=
   ['nextpixeltosend_11',['NextPixelToSend',['../classc___output_pixel.html#a30e002d7c9680cad7d1de26088820f9f',1,'c_OutputPixel']]],
   ['nextpoll_12',['NextPoll',['../classc___wi_fi_driver.html#a079d8297ba7a37b94f47eb3ef76f46e2',1,'c_WiFiDriver']]],
   ['no_5fconfig_5fneeded_13',['NO_CONFIG_NEEDED',['../main_8cpp.html#a45b6758583c33d0a16c97e1389e8f155',1,'NO_CONFIG_NEEDED:&#160;main.cpp'],['../_input_mgr_8hpp.html#a45b6758583c33d0a16c97e1389e8f155',1,'NO_CONFIG_NEEDED:&#160;InputMgr.hpp'],['../_output_mgr_8hpp.html#a45b6758583c33d0a16c97e1389e8f155',1,'NO_CONFIG_NEEDED:&#160;OutputMgr.hpp']]],
-  ['no_5flocalfiletoplay_14',['No_LocalFileToPlay',['../_input_f_p_p_remote_8h.html#a2be098d5f7991f7854f1b3f49dcf8845',1,'InputFPPRemote.h']]],
+  ['no_5flocalfiletoplay_14',['No_LocalFileToPlay',['../_f_p_p_discovery_8h.html#a2be098d5f7991f7854f1b3f49dcf8845',1,'FPPDiscovery.h']]],
   ['notranslation_15',['NoTranslation',['../classc___output_uart.html#afa50de8c9fc4b848160d18576694c4b8a84e7bc8789d38d9f54c35bf95f4555a4',1,'c_OutputUart']]],
   ['notrebootingvalue_16',['NotRebootingValue',['../main_8cpp.html#a46e452f7ab425f93a94b6dc1d2d43998',1,'main.cpp']]],
   ['null_5frecord_17',['NULL_RECORD',['../class_e_f_update.html#a66c9263ed88f557250172870c2b1cb81a0b39509f6c0ebaaf67a2eaf8710b3901',1,'EFUpdate']]],

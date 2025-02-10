@@ -1,5 +1,8 @@
 var NAVTREEINDEX6 =
 {
+"_g_p_i_o___defs___e_s_p32___w_t32_e_t_h01_8hpp.html#aaf891b2fa73c266aa119bed242c5ea30":[1,0,0,3,30,27],
+"_g_p_i_o___defs___e_s_p32___w_t32_e_t_h01_8hpp.html#ab9bf37808f8fcd1cf5c562380d2f45eb":[1,0,0,3,30,16],
+"_g_p_i_o___defs___e_s_p32___w_t32_e_t_h01_8hpp.html#aca6c98b14a61849654e93ee35fd1d1ab":[1,0,0,3,30,25],
 "_g_p_i_o___defs___e_s_p32___w_t32_e_t_h01_8hpp.html#acc122895244f0017684c45d0360b4d54":[1,0,0,3,30,15],
 "_g_p_i_o___defs___e_s_p32___w_t32_e_t_h01_8hpp.html#acd6e6f0240598bf75d38ce85c4b91d92":[1,0,0,3,30,30],
 "_g_p_i_o___defs___e_s_p32___w_t32_e_t_h01_8hpp.html#ad1cdaf2881d19f91216c4a64f925d072":[1,0,0,3,30,31],
@@ -188,8 +191,6 @@ var NAVTREEINDEX6 =
 "_input_effect_engine_8hpp_source.html":[1,0,0,0,7],
 "_input_f_p_p_remote_8cpp.html":[1,0,1,0,8],
 "_input_f_p_p_remote_8h.html":[1,0,0,0,8],
-"_input_f_p_p_remote_8h.html#a2be098d5f7991f7854f1b3f49dcf8845":[1,0,0,0,8,2],
-"_input_f_p_p_remote_8h.html#a9fdf705148490a3a0f81cb57f5afcd0d":[1,0,0,0,8,1],
 "_input_f_p_p_remote_8h_source.html":[1,0,0,0,8],
 "_input_f_p_p_remote_play_effect_8cpp.html":[1,0,1,0,9],
 "_input_f_p_p_remote_play_effect_8hpp.html":[1,0,0,0,9],
@@ -248,6 +249,5 @@ var NAVTREEINDEX6 =
 "_network_mgr_8hpp_source.html":[1,0,0,1,1],
 "_output_a_p_a102_8cpp.html":[1,0,1,2,0],
 "_output_a_p_a102_8hpp.html":[1,0,0,2,0],
-"_output_a_p_a102_8hpp_source.html":[1,0,0,2,0],
-"_output_a_p_a102_spi_8cpp.html":[1,0,1,2,1]
+"_output_a_p_a102_8hpp_source.html":[1,0,0,2,0]
 };
