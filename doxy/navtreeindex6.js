@@ -207,9 +207,11 @@ var NAVTREEINDEX6 =
 "_input_f_p_p_remote_play_file_fsm_8hpp.html":[1,0,0,0,12],
 "_input_f_p_p_remote_play_file_fsm_8hpp_source.html":[1,0,0,0,12],
 "_input_f_p_p_remote_play_item_8cpp.html":[1,0,1,0,13],
+"_input_f_p_p_remote_play_item_8cpp.html#ab7d012e564702fc5999164f90bb09c7a":[1,0,1,0,13,0],
 "_input_f_p_p_remote_play_item_8hpp.html":[1,0,0,0,13],
 "_input_f_p_p_remote_play_item_8hpp.html#a792ecf6f382374c810c4326b05207592":[1,0,0,0,13,3],
 "_input_f_p_p_remote_play_item_8hpp.html#a90d9c9f8f8b34535844a84acea29249c":[1,0,0,0,13,2],
+"_input_f_p_p_remote_play_item_8hpp.html#ab7d012e564702fc5999164f90bb09c7a":[1,0,0,0,13,4],
 "_input_f_p_p_remote_play_item_8hpp_source.html":[1,0,0,0,13],
 "_input_f_p_p_remote_play_list_8cpp.html":[1,0,1,0,14],
 "_input_f_p_p_remote_play_list_8hpp.html":[1,0,0,0,14],
@@ -247,7 +249,5 @@ var NAVTREEINDEX6 =
 "_network_mgr_8hpp.html":[1,0,0,1,1],
 "_network_mgr_8hpp.html#ad18ce9b5a1a1ac10067f83eceab50a33":[1,0,0,1,1,1],
 "_network_mgr_8hpp_source.html":[1,0,0,1,1],
-"_output_a_p_a102_8cpp.html":[1,0,1,2,0],
-"_output_a_p_a102_8hpp.html":[1,0,0,2,0],
-"_output_a_p_a102_8hpp_source.html":[1,0,0,2,0]
+"_output_a_p_a102_8cpp.html":[1,0,1,2,0]
 };
