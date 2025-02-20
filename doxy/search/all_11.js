@@ -51,7 +51,7 @@ var searchData=
   ['setfromjson_48',['setFromJSON',['../_e_s_pixel_stick_8h.html#a8295d2ec53bab395bfc5811cfd78ca4d',1,'setFromJSON(T &amp;OutValue, JsonObject &amp;Json, N Name):&#160;ESPixelStick.h'],['../_e_s_pixel_stick_8h.html#a22f4176fd1b5a26a3d18c096681ad8e9',1,'setFromJSON(T &amp;OutValue, JsonVariant &amp;Json, N Name):&#160;ESPixelStick.h']]],
   ['setfsmstate_49',['SetFsmState',['../classc___wi_fi_driver.html#acd243ad52f01b89e5450efb1681584b9',1,'c_WiFiDriver']]],
   ['sethostname_50',['SetHostname',['../classc___wi_fi_driver.html#ad3d3065d874d5ff8e97a60f08d9eebb5',1,'c_WiFiDriver']]],
-  ['setinputfppremoteplayfile_51',['SetInputFPPRemotePlayFile',['../classc___f_p_p_discovery.html#a60745e73513bb09ee95b04360f7b9ed2',1,'c_FPPDiscovery']]],
+  ['setinputfppremoteplayfile_51',['SetInputFPPRemotePlayFile',['../classc___f_p_p_discovery.html#aa0d7b1de91a88bb19eff26752fdf072b',1,'c_FPPDiscovery']]],
   ['setintensity2uart_52',['SetIntensity2Uart',['../classc___output_uart.html#a75a821962da2b1f16406a637410930bd',1,'c_OutputUart']]],
   ['setintensitybittimeinus_53',['SetIntensityBitTimeInUS',['../classc___output_pixel.html#a7281e0eb2d9420ba682548e9038d61cb',1,'c_OutputPixel']]],
   ['setintensitydatawidth_54',['SetIntensityDataWidth',['../classc___output_pixel.html#a9a496f93b28b97e6b3016adbf19986ad',1,'c_OutputPixel::SetIntensityDataWidth()'],['../classc___output_uart.html#a63aaee5dbe4be06c385ba945cd3cca67',1,'c_OutputUart::SetIntensityDataWidth()']]],

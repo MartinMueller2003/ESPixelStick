@@ -1,5 +1,5 @@
-<map id="c_InputFPPRemotePlayFile::Sync" name="c_InputFPPRemotePlayFile::Sync">
-<area shape="rect" id="Node000001" title=" " alt="" coords="2878,661,3059,702"/>
+<map id="c_InputFPPRemote::FppSyncRemoteFilePlay" name="c_InputFPPRemote::FppSyncRemoteFilePlay">
+<area shape="rect" id="Node000001" title=" " alt="" coords="2878,661,3070,702"/>
 <area shape="rect" id="Node000002" href="$classc___f_p_p_discovery.html#a3065915ef4f69f24c24d99c79315f63c" title=" " alt="" coords="2628,661,2830,702"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="2862,684,2830,684,2830,679,2862,679"/>
 <area shape="rect" id="Node000003" href="$classc___f_p_p_discovery.html#a00a83e4625292c575a55f5dc503821d6" title=" " alt="" coords="2354,661,2580,702"/>
