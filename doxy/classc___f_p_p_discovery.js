@@ -34,7 +34,7 @@ var classc___f_p_p_discovery =
     [ "SetInputFPPRemotePlayFile", "classc___f_p_p_discovery.html#aa0d7b1de91a88bb19eff26752fdf072b", null ],
     [ "SetOperationalState", "classc___f_p_p_discovery.html#af0c89e6c2aa9b31042c34087150dad6c", null ],
     [ "StartPlaying", "classc___f_p_p_discovery.html#a43c069118ce152afe8425d7db1b157a1", null ],
-    [ "StopPlaying", "classc___f_p_p_discovery.html#a2e1b906ef676796f0b6e17ae1f591658", null ],
+    [ "StopPlaying", "classc___f_p_p_discovery.html#afe5417d09724c27eb2e1ca5ea09906af", null ],
     [ "BlankOnStop", "classc___f_p_p_discovery.html#ae914fc22cddc9550a2f2b45d4a01958a", null ],
     [ "ConfiguredFileToPlay", "classc___f_p_p_discovery.html#ab9ab294a6f822fc80168d8acc49a8809", null ],
     [ "FppRemoteIp", "classc___f_p_p_discovery.html#a1194ce246f35cffcbb1b9329aa1dbe2e", null ],

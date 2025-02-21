@@ -1,5 +1,6 @@
 var NAVTREEINDEX14 =
 {
+"struct_f_s_e_q_parsed_variable_data_header.html#a2d16f82208585ef46765a475dc4dae46":[0,0,33,0],
 "struct_f_s_e_q_parsed_variable_data_header.html#a77dea759b851cf892276d5b368bbcc46":[0,0,33,2],
 "struct_f_s_e_q_parsed_variable_data_header.html#a8b7ea5c3d737121d2b60550a5c9f1ad8":[0,0,33,1],
 "struct_f_s_e_q_raw_header.html":[0,0,34],
@@ -248,6 +249,5 @@ var NAVTREEINDEX14 =
 "union_f_p_p_ping_packet.html#af10a737217673cb1f0c0a6c8e8d6ec7b":[0,0,30,7],
 "union_f_p_p_ping_packet.html#af4ab4ff61dcc097635eed9e1fd83d3fd":[0,0,30,14],
 "union_f_p_p_ping_packet.html#af528cdcd81c1249b3653c13750345b40":[0,0,30,5],
-"unionc___output_pixel_1_1_color_offsets__s.html":[0,0,21,0],
-"unionc___output_pixel_1_1_color_offsets__s.html#a735419bf5c0cb1bb255b07756b1befe3":[0,0,21,0,2]
+"unionc___output_pixel_1_1_color_offsets__s.html":[0,0,21,0]
 };
