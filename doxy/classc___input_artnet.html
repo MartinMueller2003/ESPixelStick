@@ -212,7 +212,7 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:a28e260b0cbe6e558951c0c52ae983b89" id="r_a28e260b0cbe6e558951c0c52ae983b89"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a28e260b0cbe6e558951c0c52ae983b89">LastUniverse</a> = 1</td></tr>
 <tr class="memdesc:a28e260b0cbe6e558951c0c52ae983b89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Last Universe to listen for.  <br /></td></tr>
 <tr class="separator:a28e260b0cbe6e558951c0c52ae983b89"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a55224bac86616c4537ede70e7c26dcd9" id="r_a55224bac86616c4537ede70e7c26dcd9"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a55224bac86616c4537ede70e7c26dcd9">ChannelsPerUniverse</a> = 512</td></tr>
+<tr class="memitem:a55224bac86616c4537ede70e7c26dcd9" id="r_a55224bac86616c4537ede70e7c26dcd9"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a55224bac86616c4537ede70e7c26dcd9">ChannelsPerUniverse</a> = <a class="el" href="#a350ebf05f66c8365d822aca55b4c98bb">UNIVERSE_MAX</a></td></tr>
 <tr class="memdesc:a55224bac86616c4537ede70e7c26dcd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Universe boundary limit.  <br /></td></tr>
 <tr class="separator:a55224bac86616c4537ede70e7c26dcd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeb79cb3074f0ff8a85398cf1c421b855" id="r_aeb79cb3074f0ff8a85398cf1c421b855"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeb79cb3074f0ff8a85398cf1c421b855">FirstUniverseChannelOffset</a> = 1</td></tr>
@@ -238,7 +238,7 @@ Static Private Attributes</h2></td></tr>
 <tr class="separator:a350ebf05f66c8365d822aca55b4c98bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec6fed0483a851a020a7734ee952f271" id="r_aec6fed0483a851a020a7734ee952f271"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aec6fed0483a851a020a7734ee952f271">ConfigFileName</a> []</td></tr>
 <tr class="separator:aec6fed0483a851a020a7734ee952f271"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0393b43f98fed59e7d080c113ca460e6" id="r_a0393b43f98fed59e7d080c113ca460e6"><td class="memItemLeft" align="right" valign="top">static const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0393b43f98fed59e7d080c113ca460e6">MAX_NUM_UNIVERSES</a> = 10</td></tr>
+<tr class="memitem:a0393b43f98fed59e7d080c113ca460e6" id="r_a0393b43f98fed59e7d080c113ca460e6"><td class="memItemLeft" align="right" valign="top">static const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0393b43f98fed59e7d080c113ca460e6">MAX_NUM_UNIVERSES</a> = (<a class="el" href="_output_mgr_8hpp.html#a2950110c970b04d476d45273635a5d85">OM_MAX_NUM_CHANNELS</a> / <a class="el" href="#a350ebf05f66c8365d822aca55b4c98bb">UNIVERSE_MAX</a>) + 1</td></tr>
 <tr class="separator:a0393b43f98fed59e7d080c113ca460e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
@@ -1041,7 +1041,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint16_t c_InputArtnet::ChannelsPerUniverse = 512</td>
+          <td class="memname">uint16_t c_InputArtnet::ChannelsPerUniverse = <a class="el" href="#a350ebf05f66c8365d822aca55b4c98bb">UNIVERSE_MAX</a></td>
         </tr>
       </table>
   </td>
@@ -1157,7 +1157,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const uint8_t c_InputArtnet::MAX_NUM_UNIVERSES = 10</td>
+          <td class="memname">const uint8_t c_InputArtnet::MAX_NUM_UNIVERSES = (<a class="el" href="_output_mgr_8hpp.html#a2950110c970b04d476d45273635a5d85">OM_MAX_NUM_CHANNELS</a> / <a class="el" href="#a350ebf05f66c8365d822aca55b4c98bb">UNIVERSE_MAX</a>) + 1</td>
         </tr>
       </table>
   </td>

@@ -1,6 +1,5 @@
 var NAVTREEINDEX6 =
 {
-"_g_p_i_o___defs___e_s_p32___w_t32_e_t_h01_8hpp.html#ad99563c913b8da40ad1a5a305bf3ed3d":[1,0,0,3,30,28],
 "_g_p_i_o___defs___e_s_p32___w_t32_e_t_h01_8hpp.html#addcbe236b0fb85814beced384e8d77f4":[1,0,0,3,30,7],
 "_g_p_i_o___defs___e_s_p32___w_t32_e_t_h01_8hpp.html#ae296313c7ea19d6e5f4c49d57187490e":[1,0,0,3,30,36],
 "_g_p_i_o___defs___e_s_p32___w_t32_e_t_h01_8hpp.html#ae63f54f838fd6667ac7a32965de7d1b4":[1,0,0,3,30,18],
@@ -249,5 +248,6 @@ var NAVTREEINDEX6 =
 "_output_a_p_a102_spi_8cpp.html":[1,0,1,2,1],
 "_output_a_p_a102_spi_8hpp.html":[1,0,0,2,1],
 "_output_a_p_a102_spi_8hpp_source.html":[1,0,0,2,1],
-"_output_common_8cpp.html":[1,0,1,2,2]
+"_output_common_8cpp.html":[1,0,1,2,2],
+"_output_common_8hpp.html":[1,0,0,2,2]
 };
