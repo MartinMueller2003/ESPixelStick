@@ -1,5 +1,6 @@
 var NAVTREEINDEX12 =
 {
+"classc___wi_fi_driver.html#a517047c02da845b67b772155c43f9b2f":[0,0,24,32],
 "classc___wi_fi_driver.html#a53740734d7bafcede27e36f52b927444":[0,0,24,62],
 "classc___wi_fi_driver.html#a54c0af1d47e7897cd0d76ee5007ee27c":[0,0,24,67],
 "classc___wi_fi_driver.html#a5717e4658564a346cf2a22c822653855":[0,0,24,64],
@@ -248,6 +249,5 @@ var NAVTREEINDEX12 =
 "classfsm___wi_fi__state___connecting_as_a_p.html#a48bc936460962e4d9e163a67d7f4a49c":[0,0,61,3],
 "classfsm___wi_fi__state___connecting_as_a_p.html#a571007e402f788ded7f8ef6de8074782":[0,0,61,0],
 "classfsm___wi_fi__state___connecting_as_a_p.html#a6a82919396e1ac3d973603c1795065d7":[0,0,61,5],
-"classfsm___wi_fi__state___connecting_as_a_p.html#a6eecaf61b103ff1dd17185f7f5576c16":[0,0,61,2],
-"classfsm___wi_fi__state___connecting_as_a_p.html#a7ef8d7da8114f886dcad4e1b4c95af3b":[0,0,61,4]
+"classfsm___wi_fi__state___connecting_as_a_p.html#a6eecaf61b103ff1dd17185f7f5576c16":[0,0,61,2]
 };

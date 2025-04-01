@@ -1,5 +1,6 @@
 var NAVTREEINDEX15 =
 {
+"structc___output_uart_1_1_output_uart_config__t.html#ada0fad8237c433eac9164c942c1046b7":[0,0,22,1,3],
 "structc___output_uart_1_1_output_uart_config__t.html#af90ce0359a40f30527f261ffba99c2e4":[0,0,22,1,1],
 "structconfig__t.html":[0,0,25],
 "structconfig__t.html#a573671465221bcdcfca043d3698a5100":[0,0,25,1],
