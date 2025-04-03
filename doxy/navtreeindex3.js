@@ -248,6 +248,6 @@ var NAVTREEINDEX3 =
 "_g_p_i_o___defs___e_s_p32___octa2go_8hpp.html#a1683e2f1e1a3fb629bd7c17dfd8d1e58":[1,0,0,3,15,16],
 "_g_p_i_o___defs___e_s_p32___octa2go_8hpp.html#a31c0e7df4948a6a1233547ea876a44f9":[1,0,0,3,15,10],
 "_g_p_i_o___defs___e_s_p32___octa2go_8hpp.html#a3e89ca4ee0a6efe86f854e9f51d8c8e7":[1,0,0,3,15,1],
-"_g_p_i_o___defs___e_s_p32___octa2go_8hpp.html#a4372cae3244b7798703bf70bef4dc2a9":[1,0,0,3,15,26],
-"_g_p_i_o___defs___e_s_p32___octa2go_8hpp.html#a4519f799b3e11a08d0b7377dac008a4e":[1,0,0,3,15,22]
+"_g_p_i_o___defs___e_s_p32___octa2go_8hpp.html#a4372cae3244b7798703bf70bef4dc2a9":[1,0,0,3,15,23],
+"_g_p_i_o___defs___e_s_p32___octa2go_8hpp.html#a4519f799b3e11a08d0b7377dac008a4e":[1,0,0,3,15,20]
 };

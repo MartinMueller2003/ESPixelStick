@@ -1,10 +1,5 @@
 var NAVTREEINDEX6 =
 {
-"_g_p_i_o___defs___e_s_p32___tetra2go_8hpp.html#a48a8ebc9d00cc27b9997acc5c358b70e":[1,0,0,3,28,29],
-"_g_p_i_o___defs___e_s_p32___tetra2go_8hpp.html#a50758db888f1119b61ed89d80fd38499":[1,0,0,3,28,4],
-"_g_p_i_o___defs___e_s_p32___tetra2go_8hpp.html#a6935dea675e388d8e9c6fe125d36c4e6":[1,0,0,3,28,21],
-"_g_p_i_o___defs___e_s_p32___tetra2go_8hpp.html#a79e0ab0467f37ea3d6293e6f27997473":[1,0,0,3,28,26],
-"_g_p_i_o___defs___e_s_p32___tetra2go_8hpp.html#a7b3ca01a31109575d4bd2bf82e692d0b":[1,0,0,3,28,11],
 "_g_p_i_o___defs___e_s_p32___tetra2go_8hpp.html#a87e454c1f4806d5434e00260a82c6b61":[1,0,0,3,28,23],
 "_g_p_i_o___defs___e_s_p32___tetra2go_8hpp.html#a8d39e18b6d5858fcfac86983ef8b7f81":[1,0,0,3,28,24],
 "_g_p_i_o___defs___e_s_p32___tetra2go_8hpp.html#a94ed4c39bcc39b66ec234c9d38ac2119":[1,0,0,3,28,7],
@@ -249,5 +244,10 @@ var NAVTREEINDEX6 =
 "_input_f_p_p_remote_play_effect_fsm_8hpp_source.html":[1,0,0,0,10],
 "_input_f_p_p_remote_play_file_8cpp.html":[1,0,1,0,11],
 "_input_f_p_p_remote_play_file_8hpp.html":[1,0,0,0,11],
-"_input_f_p_p_remote_play_file_8hpp.html#a9ce0196b79688b4722fd374e0d54bb6c":[1,0,0,0,11,2]
+"_input_f_p_p_remote_play_file_8hpp.html#a9ce0196b79688b4722fd374e0d54bb6c":[1,0,0,0,11,2],
+"_input_f_p_p_remote_play_file_8hpp.html#ae47639c73fc39c184c97d253e216d2bc":[1,0,0,0,11,3],
+"_input_f_p_p_remote_play_file_8hpp_source.html":[1,0,0,0,11],
+"_input_f_p_p_remote_play_file_fsm_8cpp.html":[1,0,1,0,12],
+"_input_f_p_p_remote_play_file_fsm_8hpp.html":[1,0,0,0,12],
+"_input_f_p_p_remote_play_file_fsm_8hpp_source.html":[1,0,0,0,12]
 };
