@@ -1,6 +1,5 @@
 var NAVTREEINDEX6 =
 {
-"_g_p_i_o___defs___e_s_p32___tetra2go_8hpp.html#a4519f799b3e11a08d0b7377dac008a4e":[1,0,0,3,28,18],
 "_g_p_i_o___defs___e_s_p32___tetra2go_8hpp.html#a48a8ebc9d00cc27b9997acc5c358b70e":[1,0,0,3,28,29],
 "_g_p_i_o___defs___e_s_p32___tetra2go_8hpp.html#a50758db888f1119b61ed89d80fd38499":[1,0,0,3,28,4],
 "_g_p_i_o___defs___e_s_p32___tetra2go_8hpp.html#a6935dea675e388d8e9c6fe125d36c4e6":[1,0,0,3,28,21],
@@ -249,5 +248,6 @@ var NAVTREEINDEX6 =
 "_input_f_p_p_remote_play_effect_fsm_8hpp.html":[1,0,0,0,10],
 "_input_f_p_p_remote_play_effect_fsm_8hpp_source.html":[1,0,0,0,10],
 "_input_f_p_p_remote_play_file_8cpp.html":[1,0,1,0,11],
-"_input_f_p_p_remote_play_file_8hpp.html":[1,0,0,0,11]
+"_input_f_p_p_remote_play_file_8hpp.html":[1,0,0,0,11],
+"_input_f_p_p_remote_play_file_8hpp.html#a9ce0196b79688b4722fd374e0d54bb6c":[1,0,0,0,11,2]
 };
