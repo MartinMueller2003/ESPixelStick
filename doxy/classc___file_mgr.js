@@ -60,6 +60,7 @@ var classc___file_mgr =
     [ "SetSdSpeed", "classc___file_mgr.html#a0de9d08e1f9782c5fabddbfd410e36dc", null ],
     [ "SetSpiIoPins", "classc___file_mgr.html#a8dc1049ad4f1d3cba694bd51eda0a8e9", null ],
     [ "UnLockSd", "classc___file_mgr.html#a7a43a2cccd3db13e5a6678a2cc087096", null ],
+    [ "UpdateFtp", "classc___file_mgr.html#ad973709189a6ae71111cf897307c7cf0", null ],
     [ "WriteSdFile", "classc___file_mgr.html#ab054596c2a512d47606b4f074e3d4064", null ],
     [ "WriteSdFile", "classc___file_mgr.html#a4de33d72c3525339b0908b8f1746c7e2", null ],
     [ "WriteSdFileBuf", "classc___file_mgr.html#a8cad2e7ba6f55bc6789ea0ea1d5f572c", null ],
