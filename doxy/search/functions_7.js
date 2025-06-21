@@ -58,5 +58,6 @@ var searchData=
   ['getsysinfojson_55',['GetSysInfoJSON',['../classc___f_p_p_discovery.html#a594a784472b1bef8549f84f54647b0ae',1,'c_FPPDiscovery']]],
   ['gettimeremaining_56',['GetTimeRemaining',['../class_fast_timer.html#affbcc3e442511a075d4cb8c44bb76bd3',1,'FastTimer']]],
   ['gettriggerchannel_57',['GetTriggerChannel',['../classc___external_input.html#a94779c4dde6f732a7b231a168e812a7e',1,'c_ExternalInput']]],
-  ['getuartfifolength_58',['getUartFifoLength',['../classc___output_uart.html#a5f878ee97020eff00731932b6befa7b6',1,'c_OutputUart']]]
+  ['getuartfifolength_58',['getUartFifoLength',['../classc___output_uart.html#a5f878ee97020eff00731932b6befa7b6',1,'c_OutputUart']]],
+  ['give_59',['Give',['../classc___f_p_p_semaphore.html#a04d1a3bae8b2d90a9c98f71d4363edd1',1,'c_FPPSemaphore']]]
 ];

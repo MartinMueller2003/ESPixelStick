@@ -72,5 +72,6 @@ var searchData=
   ['primarydns_69',['primaryDns',['../classc___wi_fi_driver.html#a84dce4da7ef6bf0afd546a8b693340cd',1,'c_WiFiDriver']]],
   ['processfppdjson_70',['ProcessFPPDJson',['../structc___f_p_p_discovery_1_1_system_debug_stats__t.html#a3d3beb9535d5b4347382fdf6c51505a0',1,'c_FPPDiscovery::SystemDebugStats_t']]],
   ['processfppjson_71',['ProcessFPPJson',['../structc___f_p_p_discovery_1_1_system_debug_stats__t.html#aab364eaa7edfa41ee14d6fec89eb56f6',1,'c_FPPDiscovery::SystemDebugStats_t']]],
-  ['pwifidriver_72',['pWiFiDriver',['../classfsm___wi_fi__state.html#a97a2adc75a27ce7c9feefa0d2e85a5dd',1,'fsm_WiFi_state']]]
+  ['processingwebrequest_72',['ProcessingWebRequest',['../classc___f_p_p_semaphore.html#a90d800330cdcb2b922923999eb17e651',1,'c_FPPSemaphore']]],
+  ['pwifidriver_73',['pWiFiDriver',['../classfsm___wi_fi__state.html#a97a2adc75a27ce7c9feefa0d2e85a5dd',1,'fsm_WiFi_state']]]
 ];
