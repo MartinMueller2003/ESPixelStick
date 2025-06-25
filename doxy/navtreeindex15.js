@@ -1,5 +1,6 @@
 var NAVTREEINDEX15 =
 {
+"structc___input_f_p_p_remote_play_item_1_1_file_control__t.html#afab732064f1162ed86a513660420385e":[0,0,14,0,8],
 "structc___input_f_p_p_remote_play_item_1_1_file_control__t.html#afabd2e7a215bb39f0358bbd67fd71887":[0,0,14,0,2],
 "structc___input_mgr_1_1_driver_info__t.html":[0,0,16,0],
 "structc___input_mgr_1_1_driver_info__t.html#a1f45a367b0aa71fbebe813c0121e75f0":[0,0,16,0,0],
@@ -42,7 +43,7 @@ var NAVTREEINDEX15 =
 "structc___output_uart_1_1_output_uart_config__t.html#ada0fad8237c433eac9164c942c1046b7":[0,0,23,1,3],
 "structc___output_uart_1_1_output_uart_config__t.html#af90ce0359a40f30527f261ffba99c2e4":[0,0,23,1,1],
 "structconfig__t.html":[0,0,26],
-"structconfig__t.html#a573671465221bcdcfca043d3698a5100":[0,0,26,1],
+"structconfig__t.html#a09b9aed7d52669cce32457724edba92e":[0,0,26,1],
 "structconfig__t.html#a8ff7e985237d2cd31931d5bac36f2379":[0,0,26,0],
 "structfsm___play_file__state___playing_file_1_1_sparse_range.html":[0,0,49,0],
 "structfsm___play_file__state___playing_file_1_1_sparse_range.html#a3105ed5aae158ff097e7a6566f51750d":[0,0,49,0,0],
