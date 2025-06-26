@@ -1,5 +1,8 @@
 var NAVTREEINDEX14 =
 {
+"globals_p.html":[1,1,0,15],
+"globals_r.html":[1,1,0,16],
+"globals_s.html":[1,1,0,17],
 "globals_t.html":[1,1,0,18],
 "globals_u.html":[1,1,0,19],
 "globals_v.html":[1,1,0,20],
@@ -246,8 +249,5 @@ var NAVTREEINDEX14 =
 "structc___input_f_p_p_remote_play_item_1_1_file_control__t.html#a422b4656227663485924aee7bb36c056":[0,0,14,0,10],
 "structc___input_f_p_p_remote_play_item_1_1_file_control__t.html#a4ad53f8a4bf2ef70476ac1d4ff6e649b":[0,0,14,0,6],
 "structc___input_f_p_p_remote_play_item_1_1_file_control__t.html#a7635820108a17543eca827c742032ed4":[0,0,14,0,5],
-"structc___input_f_p_p_remote_play_item_1_1_file_control__t.html#a96936f1f8881c0f9c55e67a2cc56b5df":[0,0,14,0,9],
-"structc___input_f_p_p_remote_play_item_1_1_file_control__t.html#ab69602500eec500400055f558872159e":[0,0,14,0,4],
-"structc___input_f_p_p_remote_play_item_1_1_file_control__t.html#aea4b01009d214debae7f4446ce207928":[0,0,14,0,3],
-"structc___input_f_p_p_remote_play_item_1_1_file_control__t.html#af00fce7294575f3321f4a2e6956c49cb":[0,0,14,0,7]
+"structc___input_f_p_p_remote_play_item_1_1_file_control__t.html#a96936f1f8881c0f9c55e67a2cc56b5df":[0,0,14,0,9]
 };
