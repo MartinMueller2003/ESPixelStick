@@ -96,9 +96,10 @@ var searchData=
   ['disconnectreasons_93',['DisconnectReasons',['../_input_m_q_t_t_8cpp.html#a0d8fd104c9a1cd15b25dc3dd48ea8789',1,'InputMQTT.cpp']]],
   ['driverid_94',['DriverId',['../structc___input_mgr_1_1_driver_info__t.html#a1f45a367b0aa71fbebe813c0121e75f0',1,'c_InputMgr::DriverInfo_t::DriverId'],['../structc___output_mgr_1_1_driver_info__t.html#a9f7bbaf840742d13214239af59021175',1,'c_OutputMgr::DriverInfo_t::DriverId']]],
   ['driverinfo_5ft_95',['DriverInfo_t',['../structc___input_mgr_1_1_driver_info__t.html',1,'c_InputMgr::DriverInfo_t'],['../structc___output_mgr_1_1_driver_info__t.html',1,'c_OutputMgr::DriverInfo_t']]],
-  ['driverissendingintensitydata_96',['DriverIsSendingIntensityData',['../classc___output_common.html#a6b5a27c4548473466e0832698401a489',1,'c_OutputCommon']]],
-  ['dsdevice_97',['dsDevice',['../main_8cpp.html#ae3fa381b4975543d1b331c6aa0d4526a',1,'dsDevice(JsonObject &amp;json):&#160;main.cpp'],['../_e_s_pixel_stick_8h.html#ae3fa381b4975543d1b331c6aa0d4526a',1,'dsDevice(JsonObject &amp;json):&#160;main.cpp']]],
-  ['dsnetwork_98',['dsNetwork',['../_e_s_pixel_stick_8h.html#a0b66f59517303936e5ecb82ddf4c8780',1,'ESPixelStick.h']]],
-  ['durationms_99',['DurationMS',['../class_fast_timer.html#a2d26dbf18a49e2e148c2bf55222e9d95',1,'FastTimer']]],
-  ['durationtimer_100',['durationtimer',['../structc___input_effect_engine_1_1_flash_info__t.html#aa63e048acc200fc2950a8bc99e879ce6',1,'c_InputEffectEngine::FlashInfo_t']]]
+  ['driverinuse_96',['DriverInUse',['../structc___input_mgr_1_1_driver_info__t.html#a14765d7fa7e8464a52291058a491f45a',1,'c_InputMgr::DriverInfo_t']]],
+  ['driverissendingintensitydata_97',['DriverIsSendingIntensityData',['../classc___output_common.html#a6b5a27c4548473466e0832698401a489',1,'c_OutputCommon']]],
+  ['dsdevice_98',['dsDevice',['../main_8cpp.html#ae3fa381b4975543d1b331c6aa0d4526a',1,'dsDevice(JsonObject &amp;json):&#160;main.cpp'],['../_e_s_pixel_stick_8h.html#ae3fa381b4975543d1b331c6aa0d4526a',1,'dsDevice(JsonObject &amp;json):&#160;main.cpp']]],
+  ['dsnetwork_99',['dsNetwork',['../_e_s_pixel_stick_8h.html#a0b66f59517303936e5ecb82ddf4c8780',1,'ESPixelStick.h']]],
+  ['durationms_100',['DurationMS',['../class_fast_timer.html#a2d26dbf18a49e2e148c2bf55222e9d95',1,'FastTimer']]],
+  ['durationtimer_101',['durationtimer',['../structc___input_effect_engine_1_1_flash_info__t.html#aa63e048acc200fc2950a8bc99e879ce6',1,'c_InputEffectEngine::FlashInfo_t']]]
 ];

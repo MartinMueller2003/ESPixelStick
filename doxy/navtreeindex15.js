@@ -1,13 +1,16 @@
 var NAVTREEINDEX15 =
 {
+"structc___input_f_p_p_remote_play_item_1_1_file_control__t.html#a7635820108a17543eca827c742032ed4":[0,0,14,0,5],
+"structc___input_f_p_p_remote_play_item_1_1_file_control__t.html#a96936f1f8881c0f9c55e67a2cc56b5df":[0,0,14,0,9],
 "structc___input_f_p_p_remote_play_item_1_1_file_control__t.html#ab69602500eec500400055f558872159e":[0,0,14,0,4],
 "structc___input_f_p_p_remote_play_item_1_1_file_control__t.html#aea4b01009d214debae7f4446ce207928":[0,0,14,0,3],
 "structc___input_f_p_p_remote_play_item_1_1_file_control__t.html#af00fce7294575f3321f4a2e6956c49cb":[0,0,14,0,7],
 "structc___input_f_p_p_remote_play_item_1_1_file_control__t.html#afab732064f1162ed86a513660420385e":[0,0,14,0,8],
 "structc___input_f_p_p_remote_play_item_1_1_file_control__t.html#afabd2e7a215bb39f0358bbd67fd71887":[0,0,14,0,2],
 "structc___input_mgr_1_1_driver_info__t.html":[0,0,16,0],
+"structc___input_mgr_1_1_driver_info__t.html#a14765d7fa7e8464a52291058a491f45a":[0,0,16,0,1],
 "structc___input_mgr_1_1_driver_info__t.html#a1f45a367b0aa71fbebe813c0121e75f0":[0,0,16,0,0],
-"structc___input_mgr_1_1_driver_info__t.html#a78483bca479c805191d9f365dfc0552b":[0,0,16,0,1],
+"structc___input_mgr_1_1_driver_info__t.html#ace830ab5862d1107ed42d1c934caa1a4":[0,0,16,0,2],
 "structc___output_mgr_1_1_driver_info__t.html":[0,0,21,0],
 "structc___output_mgr_1_1_driver_info__t.html#a1334e1a75b8b247913bf56348f0c4b85":[0,0,21,0,1],
 "structc___output_mgr_1_1_driver_info__t.html#a251187961b59f4c13b9ddc4b98e066e6":[0,0,21,0,9],
