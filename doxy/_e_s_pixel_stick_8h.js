@@ -35,12 +35,14 @@ var _e_s_pixel_stick_8h =
     [ "setFromJSON", "_e_s_pixel_stick_8h.html#a54d9d7e904dadb105de4776407cfcf13", null ],
     [ "setFromJSON", "_e_s_pixel_stick_8h.html#a8295d2ec53bab395bfc5811cfd78ca4d", null ],
     [ "setFromJSON", "_e_s_pixel_stick_8h.html#a22f4176fd1b5a26a3d18c096681ad8e9", null ],
+    [ "BUILD_DATE", "_e_s_pixel_stick_8h.html#a3fac6e46e0d543efc36e5a0963f9d77d", null ],
     [ "config", "_e_s_pixel_stick_8h.html#a25ce4b69d296fc9a3324b494542c2420", null ],
-    [ "ConfigFileName", "_e_s_pixel_stick_8h.html#af10a8dbb4e9867627fe5b7443940e5b0", null ],
+    [ "ConfigFileName", "_e_s_pixel_stick_8h.html#ab989886b618ff5cf1439f510b71f69b6", null ],
     [ "ConfigSaveNeeded", "_e_s_pixel_stick_8h.html#ae44595345afc966d1f3de593d4c9b0f8", null ],
     [ "ConsoleUartIsActive", "_e_s_pixel_stick_8h.html#af3e03d06d3843c9ce26dc935016d8797", null ],
     [ "CurrentConfigVersion", "_e_s_pixel_stick_8h.html#a7a9dbece103fe34ae437a90c4e517782", null ],
     [ "DiscardedRxData", "_e_s_pixel_stick_8h.html#a70e2f5df671c5b18e60a1bbcf2c9586f", null ],
     [ "IsBooting", "_e_s_pixel_stick_8h.html#ab73fab3bfc2da224ec67cc789fe7616a", null ],
-    [ "ResetWiFi", "_e_s_pixel_stick_8h.html#a71cd754e8f1472f27fc5b805dfcb4251", null ]
+    [ "ResetWiFi", "_e_s_pixel_stick_8h.html#a71cd754e8f1472f27fc5b805dfcb4251", null ],
+    [ "VERSION", "_e_s_pixel_stick_8h.html#a5945ff0bfd72c6a97898e27db309b7e5", null ]
 ];
