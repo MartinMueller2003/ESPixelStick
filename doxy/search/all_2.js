@@ -18,7 +18,7 @@ var searchData=
   ['bufferisavailable_15',['BufferIsAvailable',['../classc___input_d_d_p.html#a2b843993182f3c31a98d3b0300fa6d53ac34c83c60be5b54785dd9e57a2c8a231',1,'c_InputDDP']]],
   ['bufferisbeingprocessed_16',['BufferIsBeingProcessed',['../classc___input_d_d_p.html#a2b843993182f3c31a98d3b0300fa6d53a1228841766f57725e2f5457368d7aa6a',1,'c_InputDDP']]],
   ['bufferisfilled_17',['BufferIsFilled',['../classc___input_d_d_p.html#a2b843993182f3c31a98d3b0300fa6d53a5bc4ac602ab2a4bbe7df55f694d9f05d',1,'c_InputDDP']]],
-  ['build_5fdate_18',['BUILD_DATE',['../main_8cpp.html#a3fac6e46e0d543efc36e5a0963f9d77d',1,'BUILD_DATE:&#160;main.cpp'],['../_e_s_pixel_stick_8h.html#a3fac6e46e0d543efc36e5a0963f9d77d',1,'BUILD_DATE:&#160;main.cpp']]],
+  ['build_5fdate_18',['BUILD_DATE',['../main_8cpp.html#a953359402ad5684053036bed8c9d0fbb',1,'BUILD_DATE:&#160;main.cpp'],['../_e_s_pixel_stick_8h.html#a953359402ad5684053036bed8c9d0fbb',1,'BUILD_DATE:&#160;main.cpp']]],
   ['builddefaultfseqlist_19',['BuildDefaultFseqList',['../classc___file_mgr.html#a1baff36dda7c5f8949cdac8945e4ee93',1,'c_FileMgr']]],
   ['buildfseqlist_20',['BuildFseqList',['../classc___file_mgr.html#a8b9e4f29a70fd6c831f07349a9c32ab0',1,'c_FileMgr']]],
   ['buildfseqresponse_21',['BuildFseqResponse',['../classc___f_p_p_discovery.html#aebf914d165d32003ef1c96b38ba2be51',1,'c_FPPDiscovery']]],
