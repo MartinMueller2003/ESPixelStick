@@ -21,19 +21,16 @@ var main_8cpp =
     [ "setup", "main_8cpp.html#a4fc01d736fe50cf5b977f755b675f11d", null ],
     [ "TestHeap", "main_8cpp.html#a425a5b292b56daa3d1454e1a8db59933", null ],
     [ "validateConfig", "main_8cpp.html#aa83bf610d4f986357e0ea1274d087680", null ],
-    [ "BUILD_DATE", "main_8cpp.html#a953359402ad5684053036bed8c9d0fbb", null ],
     [ "config", "main_8cpp.html#a25ce4b69d296fc9a3324b494542c2420", null ],
-    [ "ConfigFileName", "main_8cpp.html#a4baf2d5f9890607f020c30e3960a4fd6", null ],
     [ "ConfigLoadNeeded", "main_8cpp.html#acdf4ed1900624d89fafc8866ad45d29f", null ],
     [ "ConfigSaveNeeded", "main_8cpp.html#ae44595345afc966d1f3de593d4c9b0f8", null ],
     [ "ConsoleUartIsActive", "main_8cpp.html#af3e03d06d3843c9ce26dc935016d8797", null ],
-    [ "CurrentConfigVersion", "main_8cpp.html#a7a9dbece103fe34ae437a90c4e517782", null ],
+    [ "ConstConfig", "main_8cpp.html#ac8e18d39f07a990eff94aba637891fdd", null ],
     [ "DiscardedRxData", "main_8cpp.html#a70e2f5df671c5b18e60a1bbcf2c9586f", null ],
     [ "GlobalRebootReason", "main_8cpp.html#a7818ecfe960d8847c06bcab42ca97474", null ],
     [ "IsBooting", "main_8cpp.html#ab73fab3bfc2da224ec67cc789fe7616a", null ],
     [ "lastUpdate", "main_8cpp.html#a86a3ab105f11d2513678f38ea4e5ac1e", null ],
     [ "NotRebootingValue", "main_8cpp.html#a46e452f7ab425f93a94b6dc1d2d43998", null ],
     [ "RebootCount", "main_8cpp.html#a7876ec0ea2b6d345c51ff1afd96a5086", null ],
-    [ "ResetWiFi", "main_8cpp.html#a71cd754e8f1472f27fc5b805dfcb4251", null ],
-    [ "VERSION", "main_8cpp.html#a4fc6b3191f12c558fa2b775c61e4afca", null ]
+    [ "ResetWiFi", "main_8cpp.html#a71cd754e8f1472f27fc5b805dfcb4251", null ]
 ];

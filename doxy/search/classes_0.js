@@ -28,6 +28,7 @@ var searchData=
   ['c_5fwifidriver_25',['c_WiFiDriver',['../classc___wi_fi_driver.html',1,'']]],
   ['coloroffsets_5fs_26',['ColorOffsets_s',['../unionc___output_pixel_1_1_color_offsets__s.html',1,'c_OutputPixel']]],
   ['config_5ft_27',['config_t',['../structconfig__t.html',1,'']]],
-  ['convertintensitytouartdatastreamentry_5ft_28',['ConvertIntensityToUartDataStreamEntry_t',['../structc___output_uart_1_1_convert_intensity_to_uart_data_stream_entry__t.html',1,'c_OutputUart']]],
-  ['crgb_29',['CRGB',['../structc___input_effect_engine_1_1_c_r_g_b.html',1,'c_InputEffectEngine']]]
+  ['constconfig_5ft_28',['ConstConfig_t',['../struct_const_config__t.html',1,'']]],
+  ['convertintensitytouartdatastreamentry_5ft_29',['ConvertIntensityToUartDataStreamEntry_t',['../structc___output_uart_1_1_convert_intensity_to_uart_data_stream_entry__t.html',1,'c_OutputUart']]],
+  ['crgb_30',['CRGB',['../structc___input_effect_engine_1_1_c_r_g_b.html',1,'c_InputEffectEngine']]]
 ];

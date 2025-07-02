@@ -1,10 +1,9 @@
 var searchData=
 [
-  ['w_0',['w',['../structc___output_pixel_1_1_color_offsets__s_1_1offsets.html#a5fbdb092b2ac96c4db63c1fd350142f0',1,'c_OutputPixel::ColorOffsets_s::offsets']]],
-  ['webmgr_1',['WebMgr',['../_web_mgr_8cpp.html#aff0c9421511c7f4c149e388c0b5e14f2',1,'WebMgr:&#160;WebMgr.cpp'],['../_web_mgr_8hpp.html#aff0c9421511c7f4c149e388c0b5e14f2',1,'WebMgr:&#160;WebMgr.cpp']]],
-  ['welcomestring_2',['WelcomeString',['../classc___file_mgr.html#a936ea9cdbe993f9fcdd7bbc58fb184ae',1,'c_FileMgr']]],
-  ['whitechannel_3',['whiteChannel',['../structc___input_effect_engine_1_1_m_q_t_t_configuration__t.html#aec651b8a048bd64b142f9da61bb12a5f',1,'c_InputEffectEngine::MQTTConfiguration_t']]],
-  ['wifidriver_4',['WiFiDriver',['../classc___network_mgr.html#aa10ed0ae6b19ee3c4859b41e57d5ec8f',1,'c_NetworkMgr']]],
-  ['writefailed_5',['writeFailed',['../classc___f_p_p_discovery.html#aec4afca829e622d2e50fb9d1caa43ceb',1,'c_FPPDiscovery']]],
-  ['wstcode_6',['wsTCode',['../structc___input_effect_engine_1_1_effect_descriptor__t.html#a5e60c74a49b701ac0f1b0d63f0370927',1,'c_InputEffectEngine::EffectDescriptor_t']]]
+  ['v_0',['v',['../structc___input_effect_engine_1_1d_c_h_s_v.html#a5675fbfefcee1336abc54018b5b2d0b5',1,'c_InputEffectEngine::dCHSV']]],
+  ['variablehdroffset_1',['VariableHdrOffset',['../struct_f_s_e_q_raw_header.html#a268a1f1f72a3d4f879f6172c0b2dce3a',1,'FSEQRawHeader::VariableHdrOffset'],['../struct_f_s_e_q_parsed_header.html#afce9397ffca8868f3d37252f8821d0da',1,'FSEQParsedHeader::VariableHdrOffset'],['../fseq_8h.html#ac209efd348acabfc97f1818ea5422375',1,'VariableHdrOffset:&#160;fseq.h']]],
+  ['version_2',['Version',['../struct_const_config__t.html#ac5136aaf9b0ea1835e9f97c4fe6284d2',1,'ConstConfig_t']]],
+  ['version_3',['version',['../union_e_f_update_1_1efuheader__t.html#abed119f4f6cb165f4e5ab61db0b68846',1,'EFUpdate::efuheader_t::version'],['../union_f_p_p_ping_packet.html#a2b65b51c161ff914be53327681d53e09',1,'FPPPingPacket::version'],['../_e_f_update_8h.html#ab6d7b6f8c2ceaba7acda80aaf05f4899',1,'version:&#160;EFUpdate.h'],['../fseq_8h.html#a76086d820532f46155fdc9023c854d03',1,'version:&#160;fseq.h']]],
+  ['versionmajor_4',['versionMajor',['../union_f_p_p_ping_packet.html#af4ab4ff61dcc097635eed9e1fd83d3fd',1,'FPPPingPacket::versionMajor'],['../fseq_8h.html#a423b441a1e758bb9edfb067034c4d2e3',1,'versionMajor:&#160;fseq.h']]],
+  ['versionminor_5',['versionMinor',['../union_f_p_p_ping_packet.html#a3b039606211879b765032706b0ba2911',1,'FPPPingPacket::versionMinor'],['../fseq_8h.html#a37cf2a7c4c7f3c9e71376f17362cc2da',1,'versionMinor:&#160;fseq.h']]]
 ];

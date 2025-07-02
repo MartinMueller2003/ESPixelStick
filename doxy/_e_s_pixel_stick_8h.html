@@ -145,6 +145,8 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structconfig__t.html">config_t</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Core configuration structure.  <a href="structconfig__t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_const_config__t.html">ConstConfig_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
@@ -230,14 +232,8 @@ Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a4fc6b3191f12c558fa2b775c61e4afca" id="r_a4fc6b3191f12c558fa2b775c61e4afca"><td class="memItemLeft" align="right" valign="top">const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4fc6b3191f12c558fa2b775c61e4afca">VERSION</a> []</td></tr>
-<tr class="separator:a4fc6b3191f12c558fa2b775c61e4afca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a953359402ad5684053036bed8c9d0fbb" id="r_a953359402ad5684053036bed8c9d0fbb"><td class="memItemLeft" align="right" valign="top">const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a953359402ad5684053036bed8c9d0fbb">BUILD_DATE</a> []</td></tr>
-<tr class="separator:a953359402ad5684053036bed8c9d0fbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4baf2d5f9890607f020c30e3960a4fd6" id="r_a4baf2d5f9890607f020c30e3960a4fd6"><td class="memItemLeft" align="right" valign="top">const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4baf2d5f9890607f020c30e3960a4fd6">ConfigFileName</a> []</td></tr>
-<tr class="separator:a4baf2d5f9890607f020c30e3960a4fd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7a9dbece103fe34ae437a90c4e517782" id="r_a7a9dbece103fe34ae437a90c4e517782"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7a9dbece103fe34ae437a90c4e517782">CurrentConfigVersion</a></td></tr>
-<tr class="separator:a7a9dbece103fe34ae437a90c4e517782"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8e18d39f07a990eff94aba637891fdd" id="r_ac8e18d39f07a990eff94aba637891fdd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_const_config__t.html">ConstConfig_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac8e18d39f07a990eff94aba637891fdd">ConstConfig</a></td></tr>
+<tr class="separator:ac8e18d39f07a990eff94aba637891fdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab73fab3bfc2da224ec67cc789fe7616a" id="r_ab73fab3bfc2da224ec67cc789fe7616a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab73fab3bfc2da224ec67cc789fe7616a">IsBooting</a></td></tr>
 <tr class="separator:ab73fab3bfc2da224ec67cc789fe7616a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a71cd754e8f1472f27fc5b805dfcb4251" id="r_a71cd754e8f1472f27fc5b805dfcb4251"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a71cd754e8f1472f27fc5b805dfcb4251">ResetWiFi</a></td></tr>
@@ -403,7 +399,7 @@ Variables</h2></td></tr>
 <div class="line">    <span class="keyword">extern</span> <span class="keywordtype">void</span> <a class="code hl_function" href="main_8cpp.html#a1af7f3c5a2d6b297590babbefc5c6fe8">_logcon</a> (String &amp; DriverName, String Message); \</div>
 <div class="line">    _logcon (DN, msg); \</div>
 <div class="line">}</div>
-<div class="ttc" id="amain_8cpp_html_a1af7f3c5a2d6b297590babbefc5c6fe8"><div class="ttname"><a href="main_8cpp.html#a1af7f3c5a2d6b297590babbefc5c6fe8">_logcon</a></div><div class="ttdeci">void _logcon(String &amp;DriverName, String Message)</div><div class="ttdef"><b>Definition</b> main.cpp:614</div></div>
+<div class="ttc" id="amain_8cpp_html_a1af7f3c5a2d6b297590babbefc5c6fe8"><div class="ttname"><a href="main_8cpp.html#a1af7f3c5a2d6b297590babbefc5c6fe8">_logcon</a></div><div class="ttdeci">void _logcon(String &amp;DriverName, String Message)</div><div class="ttdef"><b>Definition</b> main.cpp:619</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1903,28 +1899,6 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
-<a id="a953359402ad5684053036bed8c9d0fbb" name="a953359402ad5684053036bed8c9d0fbb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a953359402ad5684053036bed8c9d0fbb">&#9670;&#160;</a></span>BUILD_DATE</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const char BUILD_DATE[]</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a25ce4b69d296fc9a3324b494542c2420" name="a25ce4b69d296fc9a3324b494542c2420"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a25ce4b69d296fc9a3324b494542c2420">&#9670;&#160;</a></span>config</h2>
 
@@ -1936,28 +1910,6 @@ Here is the call graph for this function:</div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structconfig__t.html">config_t</a> config</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a4baf2d5f9890607f020c30e3960a4fd6" name="a4baf2d5f9890607f020c30e3960a4fd6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4baf2d5f9890607f020c30e3960a4fd6">&#9670;&#160;</a></span>ConfigFileName</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const char ConfigFileName[]</td>
         </tr>
       </table>
   </td>
@@ -2013,8 +1965,8 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="a7a9dbece103fe34ae437a90c4e517782" name="a7a9dbece103fe34ae437a90c4e517782"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7a9dbece103fe34ae437a90c4e517782">&#9670;&#160;</a></span>CurrentConfigVersion</h2>
+<a id="ac8e18d39f07a990eff94aba637891fdd" name="ac8e18d39f07a990eff94aba637891fdd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8e18d39f07a990eff94aba637891fdd">&#9670;&#160;</a></span>ConstConfig</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2023,7 +1975,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const uint8_t CurrentConfigVersion</td>
+          <td class="memname"><a class="el" href="struct_const_config__t.html">ConstConfig_t</a> ConstConfig</td>
         </tr>
       </table>
   </td>
@@ -2090,28 +2042,6 @@ Here is the call graph for this function:</div>
       <table class="memname">
         <tr>
           <td class="memname">bool ResetWiFi</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a4fc6b3191f12c558fa2b775c61e4afca" name="a4fc6b3191f12c558fa2b775c61e4afca"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4fc6b3191f12c558fa2b775c61e4afca">&#9670;&#160;</a></span>VERSION</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const char VERSION[]</td>
         </tr>
       </table>
   </td>
