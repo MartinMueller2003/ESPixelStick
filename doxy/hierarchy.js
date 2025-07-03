@@ -31,7 +31,6 @@ var hierarchy =
     [ "c_WiFiDriver", "classc___wi_fi_driver.html", null ],
     [ "c_OutputPixel::ColorOffsets_s", "unionc___output_pixel_1_1_color_offsets__s.html", null ],
     [ "config_t", "structconfig__t.html", null ],
-    [ "ConstConfig_t", "struct_const_config__t.html", null ],
     [ "c_OutputUart::ConvertIntensityToUartDataStreamEntry_t", "structc___output_uart_1_1_convert_intensity_to_uart_data_stream_entry__t.html", null ],
     [ "c_InputEffectEngine::CRGB", "structc___input_effect_engine_1_1_c_r_g_b.html", null ],
     [ "c_InputEffectEngine::dCHSV", "structc___input_effect_engine_1_1d_c_h_s_v.html", null ],

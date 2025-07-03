@@ -1,7 +1,6 @@
 var _e_s_pixel_stick_8h =
 [
     [ "config_t", "structconfig__t.html", "structconfig__t" ],
-    [ "ConstConfig_t", "struct_const_config__t.html", "struct_const_config__t" ],
     [ "AP_TIMEOUT", "_e_s_pixel_stick_8h.html#a451cb6ba5f124792512fb24f05299229", null ],
     [ "ARDUINOJSON_DEFAULT_NESTING_LIMIT", "_e_s_pixel_stick_8h.html#adb3f9ff6eeacc0a7093b59f9d38a55fc", null ],
     [ "ARDUINOJSON_USE_LONG_LONG", "_e_s_pixel_stick_8h.html#ad04364871efb11788ea94d5f5417072c", null ],
@@ -20,6 +19,7 @@ var _e_s_pixel_stick_8h =
     [ "REBOOT_DELAY", "_e_s_pixel_stick_8h.html#a379de1a2f9b4453dbc110c28ecb25834", null ],
     [ "STRING", "_e_s_pixel_stick_8h.html#a6397b2c899f7047ba4fec38d9506e042", null ],
     [ "STRINGIFY", "_e_s_pixel_stick_8h.html#a43e1cad902b6477bec893cb6430bd6c8", null ],
+    [ "__attribute__", "_e_s_pixel_stick_8h.html#a38c4f32904d571425ea367bd433b2e95", null ],
     [ "DelayReboot", "_e_s_pixel_stick_8h.html#a2d941111e6837719d2ab46924313aca1", null ],
     [ "deserializeCore", "_e_s_pixel_stick_8h.html#a067b67c856af5452506085e83cdb2b01", null ],
     [ "deserializeCoreHandler", "_e_s_pixel_stick_8h.html#a23e7afe154bda4f1d2e44818ed09843e", null ],

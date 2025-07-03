@@ -145,8 +145,6 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structconfig__t.html">config_t</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Core configuration structure.  <a href="structconfig__t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_const_config__t.html">ConstConfig_t</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
@@ -210,6 +208,8 @@ Functions</h2></td></tr>
 <tr class="separator:ae3fa381b4975543d1b331c6aa0d4526a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b66f59517303936e5ecb82ddf4c8780" id="r_a0b66f59517303936e5ecb82ddf4c8780"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0b66f59517303936e5ecb82ddf4c8780">dsNetwork</a> (JsonObject &amp;json)</td></tr>
 <tr class="separator:a0b66f59517303936e5ecb82ddf4c8780"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38c4f32904d571425ea367bd433b2e95" id="r_a38c4f32904d571425ea367bd433b2e95"><td class="memItemLeft" align="right" valign="top">struct&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a38c4f32904d571425ea367bd433b2e95">__attribute__</a> ((packed)) ConstConfig_t</td></tr>
+<tr class="separator:a38c4f32904d571425ea367bd433b2e95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace03924f16faf7e0c24590ede39ae2f2" id="r_ace03924f16faf7e0c24590ede39ae2f2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ace03924f16faf7e0c24590ede39ae2f2">FeedWDT</a> ()</td></tr>
 <tr class="separator:ace03924f16faf7e0c24590ede39ae2f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47bc5f5aa91e940e6cfc297466285595" id="r_a47bc5f5aa91e940e6cfc297466285595"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a47bc5f5aa91e940e6cfc297466285595">PrettyPrint</a> (JsonObject &amp;jsonStuff, String Name)</td></tr>
@@ -232,7 +232,7 @@ Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:ac8e18d39f07a990eff94aba637891fdd" id="r_ac8e18d39f07a990eff94aba637891fdd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_const_config__t.html">ConstConfig_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac8e18d39f07a990eff94aba637891fdd">ConstConfig</a></td></tr>
+<tr class="memitem:ac8e18d39f07a990eff94aba637891fdd" id="r_ac8e18d39f07a990eff94aba637891fdd"><td class="memItemLeft" align="right" valign="top">ConstConfig_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac8e18d39f07a990eff94aba637891fdd">ConstConfig</a></td></tr>
 <tr class="separator:ac8e18d39f07a990eff94aba637891fdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab73fab3bfc2da224ec67cc789fe7616a" id="r_ab73fab3bfc2da224ec67cc789fe7616a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab73fab3bfc2da224ec67cc789fe7616a">IsBooting</a></td></tr>
 <tr class="separator:ab73fab3bfc2da224ec67cc789fe7616a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -541,6 +541,23 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a38c4f32904d571425ea367bd433b2e95" name="a38c4f32904d571425ea367bd433b2e95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38c4f32904d571425ea367bd433b2e95">&#9670;&#160;</a></span>__attribute__()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct __attribute__ </td>
+          <td>(</td>
+          <td class="paramtype">(packed)</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a2d941111e6837719d2ab46924313aca1" name="a2d941111e6837719d2ab46924313aca1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2d941111e6837719d2ab46924313aca1">&#9670;&#160;</a></span>DelayReboot()</h2>
 
@@ -1975,7 +1992,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_const_config__t.html">ConstConfig_t</a> ConstConfig</td>
+          <td class="memname">ConstConfig_t ConstConfig</td>
         </tr>
       </table>
   </td>

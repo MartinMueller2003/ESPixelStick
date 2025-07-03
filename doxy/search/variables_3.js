@@ -241,7 +241,7 @@ var searchData=
   ['coloroffsets_238',['ColorOffsets',['../classc___output_pixel.html#a2c2d6f2f2c326f9496c174b4e341de29',1,'c_OutputPixel']]],
   ['compressiontype_239',['compressionType',['../struct_f_s_e_q_raw_header.html#a1e171269ed0ac6080689c4e5e7ae381c',1,'FSEQRawHeader::compressionType'],['../struct_f_s_e_q_parsed_header.html#ae4860b4ffd1611821fa48ae112fb692b',1,'FSEQParsedHeader::compressionType'],['../fseq_8h.html#a67006d5d0768f897b216abbf48e1f12d',1,'compressionType:&#160;fseq.h']]],
   ['config_240',['config',['../main_8cpp.html#a25ce4b69d296fc9a3324b494542c2420',1,'config:&#160;main.cpp'],['../_e_s_pixel_stick_8h.html#a25ce4b69d296fc9a3324b494542c2420',1,'config:&#160;main.cpp']]],
-  ['configfilename_241',['ConfigFileName',['../struct_const_config__t.html#a249278cf3134d40a6e6e0ca6c178df17',1,'ConstConfig_t::ConfigFileName'],['../classc___input_artnet.html#aec6fed0483a851a020a7734ee952f271',1,'c_InputArtnet::ConfigFileName'],['../classc___input_e131.html#a2e1497abda0077f3f214bccf82e5bbf8',1,'c_InputE131::ConfigFileName'],['../classc___input_mgr.html#a03416a2785bf7a2cdcd464eaf55a3ff4',1,'c_InputMgr::ConfigFileName'],['../classc___output_mgr.html#ae4c32186cb120fd92fc9075cfc9bfa13',1,'c_OutputMgr::ConfigFileName']]],
+  ['configfilename_241',['ConfigFileName',['../classc___input_artnet.html#aec6fed0483a851a020a7734ee952f271',1,'c_InputArtnet::ConfigFileName'],['../classc___input_e131.html#a2e1497abda0077f3f214bccf82e5bbf8',1,'c_InputE131::ConfigFileName'],['../classc___input_mgr.html#a03416a2785bf7a2cdcd464eaf55a3ff4',1,'c_InputMgr::ConfigFileName'],['../classc___output_mgr.html#ae4c32186cb120fd92fc9075cfc9bfa13',1,'c_OutputMgr::ConfigFileName']]],
   ['configinprogress_242',['ConfigInProgress',['../classc___output_mgr.html#a87df91d9a1e5e74cf58c070a355d3d05',1,'c_OutputMgr']]],
   ['configinprogress_243',['configInProgress',['../classc___input_mgr.html#adf546839c7f7aa002620aa0b5780e186',1,'c_InputMgr']]],
   ['configloadneeded_244',['ConfigLoadNeeded',['../classc___input_mgr.html#a1243cec64982dbae6c3676db03bbfb5e',1,'c_InputMgr::ConfigLoadNeeded'],['../classc___output_mgr.html#a81a032051fb4a0f82c385701e0eb09f8',1,'c_OutputMgr::ConfigLoadNeeded'],['../main_8cpp.html#acdf4ed1900624d89fafc8866ad45d29f',1,'ConfigLoadNeeded:&#160;main.cpp']]],
@@ -254,8 +254,7 @@ var searchData=
   ['continuous_251',['Continuous',['../class_fast_timer.html#af7b9d5dce2428a8da704ffd33feb3656',1,'FastTimer']]],
   ['cs_5fpin_252',['cs_pin',['../classc___file_mgr.html#a3c32d0dc12f0379a1b656a18ef06d0d0',1,'c_FileMgr']]],
   ['currentcolor_253',['CurrentColor',['../structc___input_effect_engine_1_1_transition__t.html#adb2f2f4884f432ad5e3b2aa362f69812',1,'c_InputEffectEngine::Transition_t']]],
-  ['currentconfigversion_254',['CurrentConfigVersion',['../struct_const_config__t.html#ab5aecc185f674a622b532cd237ef9167',1,'ConstConfig_t']]],
-  ['currentfsmstate_255',['CurrentFsmState',['../classc___external_input.html#a8e068df25b1139f8b0657bb31ab8a2b3',1,'c_ExternalInput']]],
-  ['currentipaddress_256',['CurrentIpAddress',['../classc___wi_fi_driver.html#af766cd61d13fd71a2320fb692d1d8b58',1,'c_WiFiDriver']]],
-  ['currentsubnetmask_257',['CurrentSubnetMask',['../classc___wi_fi_driver.html#ae4cf22c670f69220aaf9e6b55857d15d',1,'c_WiFiDriver']]]
+  ['currentfsmstate_254',['CurrentFsmState',['../classc___external_input.html#a8e068df25b1139f8b0657bb31ab8a2b3',1,'c_ExternalInput']]],
+  ['currentipaddress_255',['CurrentIpAddress',['../classc___wi_fi_driver.html#af766cd61d13fd71a2320fb692d1d8b58',1,'c_WiFiDriver']]],
+  ['currentsubnetmask_256',['CurrentSubnetMask',['../classc___wi_fi_driver.html#ae4cf22c670f69220aaf9e6b55857d15d',1,'c_WiFiDriver']]]
 ];
