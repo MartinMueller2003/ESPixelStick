@@ -1,7 +1,7 @@
 var searchData=
 [
   ['b_0',['b',['../structc___input_effect_engine_1_1d_c_r_g_b.html#aec30cee338695610c77e0caba77bac50',1,'c_InputEffectEngine::dCRGB::b'],['../structc___input_effect_engine_1_1_c_r_g_b.html#accb5e79d6172e8bf696c0b7cf55c31f4',1,'c_InputEffectEngine::CRGB::b'],['../structc___output_pixel_1_1_color_offsets__s_1_1offsets.html#a263432d4ee04f16660e1649346be7be9',1,'c_OutputPixel::ColorOffsets_s::offsets::b']]],
-  ['backgroundfilename_1',['BackgroundFileName',['../classc___input_f_p_p_remote_play_item.html#a4b6f30efc50df3148d07bb679b7efc8a',1,'c_InputFPPRemotePlayItem']]],
+  ['backgroundfilename_1',['BackgroundFileName',['../classc___input_f_p_p_remote_play_item.html#a8b712ee75ae3d2f67748d878a20b3405',1,'c_InputFPPRemotePlayItem']]],
   ['backported_2eh_2',['backported.h',['../backported_8h.html',1,'']]],
   ['basegetstatus_3',['BaseGetStatus',['../classc___output_common.html#a8f58ca24d1d37983afab81c9eebf6a85',1,'c_OutputCommon']]],
   ['baudrate_4',['Baudrate',['../structc___output_uart_1_1_output_uart_config__t.html#a497849967351d98973b69041d88cba64',1,'c_OutputUart::OutputUartConfig_t']]],
