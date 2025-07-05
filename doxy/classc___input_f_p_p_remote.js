@@ -1,5 +1,6 @@
 var classc___input_f_p_p_remote =
 [
+    [ "PlayerInfo_t", "structc___input_f_p_p_remote_1_1_player_info__t.html", "structc___input_f_p_p_remote_1_1_player_info__t" ],
     [ "c_InputFPPRemote", "classc___input_f_p_p_remote.html#aa21e7e5554a485a8483050a403dab519", null ],
     [ "~c_InputFPPRemote", "classc___input_f_p_p_remote.html#a53f59cf53b918b6ac45432aee251f808", null ],
     [ "AllowedToPlayRemoteFile", "classc___input_f_p_p_remote.html#a49952f48c45c1d31ffb14a18a030a853", null ],
@@ -36,6 +37,7 @@ var classc___input_f_p_p_remote =
     [ "FilePlayCount", "classc___input_f_p_p_remote.html#a75c9d55b344cdace8541985539450771", null ],
     [ "FppSyncOverride", "classc___input_f_p_p_remote.html#a1026fa25a114a817ca6a47a3df45d047", null ],
     [ "pInputFPPRemotePlayItem", "classc___input_f_p_p_remote.html#a408bb6bee77015240dce30c447684eb5", null ],
+    [ "PlayerInfo", "classc___input_f_p_p_remote.html#ad0ff0485d3361b4a32631109d1c696d3", null ],
     [ "SendFppSync", "classc___input_f_p_p_remote.html#a5b0598cd573c49535959ed9eb66b0880", null ],
     [ "StatusType", "classc___input_f_p_p_remote.html#a0f3f8cea62b2f99668f3f78890b8927b", null ],
     [ "Stopping", "classc___input_f_p_p_remote.html#a51a3c74d18d957f2d3778717f6097022", null ],
