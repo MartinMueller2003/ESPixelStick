@@ -18,6 +18,7 @@ var classc___input_artnet =
     [ "SetConfig", "classc___input_artnet.html#aa8ef414340a74ff9ba8caaf222e33b9b", null ],
     [ "SetUpArtnet", "classc___input_artnet.html#a64e5300f0fc57fc4a667255119cbd510", null ],
     [ "validateConfiguration", "classc___input_artnet.html#ac6bd00a3f820560363715444d2c51acc", null ],
+    [ "_Artnet", "classc___input_artnet.html#a4a7c0ba01c6f9dfb8837b0bcf606b353", null ],
     [ "channel_count", "classc___input_artnet.html#a8a0cdaf294b61764f398c09bc910b068", null ],
     [ "ChannelsPerUniverse", "classc___input_artnet.html#a55224bac86616c4537ede70e7c26dcd9", null ],
     [ "ConfigFileName", "classc___input_artnet.html#aec6fed0483a851a020a7734ee952f271", null ],

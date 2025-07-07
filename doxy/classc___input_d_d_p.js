@@ -29,5 +29,6 @@ var classc___input_d_d_p =
     [ "PacketBuffer", "classc___input_d_d_p.html#a0782b3c00d3bfa31f58df27e4ca10471", null ],
     [ "stats", "classc___input_d_d_p.html#ab88372ab42a81a611c9839fb8bf96108", null ],
     [ "suspend", "classc___input_d_d_p.html#a63979669ad5644134bdbe4b3f50f2b55", null ],
+    [ "Udp", "classc___input_d_d_p.html#a7a00b7bf14e5269b77d553448e5cc65e", null ],
     [ "udp", "classc___input_d_d_p.html#a85d2cabaeb47b1f662c1a35ee27a94bc", null ]
 ];
