@@ -33,7 +33,7 @@ var _e_s_pixel_stick_8h =
     [ "RequestReboot", "_e_s_pixel_stick_8h.html#aaffdda62d966b7a1777fec7ce955a22e", null ],
     [ "ResetGpio", "_e_s_pixel_stick_8h.html#a97937ae3377e427d21b29966a14e964a", null ],
     [ "serializeCore", "_e_s_pixel_stick_8h.html#a64caf298db9b3dcc081633371db4a441", null ],
-    [ "setFromJSON", "_e_s_pixel_stick_8h.html#a54d9d7e904dadb105de4776407cfcf13", null ],
+    [ "setFromJSON", "_e_s_pixel_stick_8h.html#a8fe2a1df9e408fa0e9f613be55c0956d", null ],
     [ "setFromJSON", "_e_s_pixel_stick_8h.html#a8295d2ec53bab395bfc5811cfd78ca4d", null ],
     [ "setFromJSON", "_e_s_pixel_stick_8h.html#a22f4176fd1b5a26a3d18c096681ad8e9", null ],
     [ "config", "_e_s_pixel_stick_8h.html#a25ce4b69d296fc9a3324b494542c2420", null ],
