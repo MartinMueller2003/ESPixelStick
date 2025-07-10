@@ -57,18 +57,18 @@ var NAVTREEINDEX =
 "_const_names_8hpp.html#a0a93c30ec2a6fafe061f9abefaf5025b",
 "_e_s_pixel_stick_8h.html#a067b67c856af5452506085e83cdb2b01",
 "_g_p_i_o___defs___e_s_p32___d1___m_i_n_i___e_t_h_8hpp.html#aac8484c1f4cc7cb788c03e1c3c1faade",
-"_g_p_i_o___defs___e_s_p32___octa2go_8hpp.html#a1683e2f1e1a3fb629bd7c17dfd8d1e58",
-"_g_p_i_o___defs___e_s_p32___q_u_i_n_l_e_d___u_n_o_8hpp_source.html",
-"_g_p_i_o___defs___e_s_p32___tetra2go_8hpp.html#a48a8ebc9d00cc27b9997acc5c358b70e",
-"_input_f_p_p_remote_play_file_8hpp.html",
-"backported_8h_source.html",
-"classc___input_artnet.html#a84c073defa359fe12b3d177b1c667eef",
-"classc___input_f_p_p_remote_play_file.html#a68edbb2d52a03e900860bc61203bae06",
-"classc___output_common.html#ac7853ec4ed8c3a173cfd3110b0838585",
-"classc___wi_fi_driver.html#a11cbfc5b295d14c77c3a33ebf11d6338",
-"classfsm___wi_fi__state___connected_to_a_p.html#a00bfcb4d08df3ab2cb72fed9f615a4d7",
-"globals_vars_t.html",
-"structc___output_pixel_1_1_color_offsets__s_1_1offsets.html"
+"_g_p_i_o___defs___e_s_p32___m_h___e_t___l_i_v_e___mini_kit_8hpp.html#a14f66e174569445ed297c0d2948c56c3",
+"_g_p_i_o___defs___e_s_p32___q_u_i_n_l_e_d___q_u_a_d___e_t_h_8hpp.html#ad1cdaf2881d19f91216c4a64f925d072",
+"_g_p_i_o___defs___e_s_p32___t_w_i_l_i_g_h_t_l_o_r_d___e_t_h_8hpp.html#a4519f799b3e11a08d0b7377dac008a4e",
+"_input_d_d_p_8h.html#abba4e66dd408809819f6c486964d605c",
+"_unzip_files_8cpp.html",
+"classc___input_alexa.html#a00ff050d19b35c8ce8b8d383d346ec6a",
+"classc___input_f_p_p_remote.html#ac20d33080cef27922cc6350fcf25d8b6",
+"classc___network_mgr.html#aed8669649b1aad20da87b3c4bb176926",
+"classc___web_mgr.html#a02d3fef6b783f26270959e68c8a3c787",
+"classfsm___play_list__state___playing_file.html#a1d2db02507e7474ec6bf8c395e387b0f",
+"globals_defs_r.html",
+"structc___input_f_p_p_remote_1_1_player_info__t.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
