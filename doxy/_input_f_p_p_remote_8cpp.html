@@ -246,10 +246,17 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">{ \</div>
-<div class="line">    static_assert(<span class="keyword">sizeof</span>(PlayerInfo.Player) &gt;= <span class="keyword">sizeof</span>(ClassType)); \</div>
-<div class="line">    new(PlayerInfo.Player) ClassType(ChannelID); \</div>
-<div class="line">    PlayerInfo.InUse = true; \</div>
-<div class="line">    pInputFPPRemotePlayItem = (<a class="code hl_class" href="classc___input_f_p_p_remote_play_item.html">c_InputFPPRemotePlayItem</a>*) (&amp;PlayerInfo.Player[0]); \</div>
+<div class="line">    if(!PlayerInfo.InUse) \</div>
+<div class="line">    { \</div>
+<div class="line">        static_assert(<span class="keyword">sizeof</span>(PlayerInfo.Player) &gt;= <span class="keyword">sizeof</span>(ClassType)); \</div>
+<div class="line">        new(PlayerInfo.Player) ClassType(ChannelID); \</div>
+<div class="line">        PlayerInfo.InUse = true; \</div>
+<div class="line">        pInputFPPRemotePlayItem = (<a class="code hl_class" href="classc___input_f_p_p_remote_play_item.html">c_InputFPPRemotePlayItem</a>*)(&amp;PlayerInfo.Player[0]); \</div>
+<div class="line">    } \</div>
+<div class="line">    else \</div>
+<div class="line">    { \</div>
+<div class="line">        logcon(<span class="stringliteral">&quot;ERROR: Trying to start the player when it is already running&quot;</span>); \</div>
+<div class="line">    } \</div>
 <div class="line">}</div>
 <div class="ttc" id="aclassc___input_f_p_p_remote_play_item_html"><div class="ttname"><a href="classc___input_f_p_p_remote_play_item.html">c_InputFPPRemotePlayItem</a></div><div class="ttdef"><b>Definition</b> InputFPPRemotePlayItem.hpp:26</div></div>
 </div><!-- fragment -->
@@ -270,10 +277,17 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">{ \</div>
-<div class="line">    pInputFPPRemotePlayItem = <span class="keyword">nullptr</span>; \</div>
-<div class="line">    PlayerInfo.InUse = <span class="keyword">false</span>; \</div>
-<div class="line">    pInputFPPRemotePlayItem-&gt;~c_InputFPPRemotePlayItem(); \</div>
-<div class="line">    memset(PlayerInfo.Player, 0x0, <span class="keyword">sizeof</span>(PlayerInfo.Player)); \</div>
+<div class="line">    if(PlayerInfo.InUse) \</div>
+<div class="line">    { \</div>
+<div class="line">        pInputFPPRemotePlayItem = <span class="keyword">nullptr</span>; \</div>
+<div class="line">        PlayerInfo.InUse = <span class="keyword">false</span>; \</div>
+<div class="line">        ((<a class="code hl_class" href="classc___input_f_p_p_remote_play_item.html">c_InputFPPRemotePlayItem</a>*)(&amp;PlayerInfo.Player[0]))-&gt;~c_InputFPPRemotePlayItem(); \</div>
+<div class="line">        memset(PlayerInfo.Player, 0x0, <span class="keyword">sizeof</span>(PlayerInfo.Player)); \</div>
+<div class="line">    } \</div>
+<div class="line">    <span class="keywordflow">else</span> \</div>
+<div class="line">    { \</div>
+<div class="line">        logcon(F(<span class="stringliteral">&quot;ERROR: Trying to stop player when no player is running&quot;</span>)); \</div>
+<div class="line">    } \</div>
 <div class="line">}</div>
 </div><!-- fragment -->
 </div>
