@@ -200,9 +200,9 @@ Private Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:ae53831a0c135a8a1d2a58af3eaa60028" id="r_ae53831a0c135a8a1d2a58af3eaa60028"><td class="memItemLeft" align="right" valign="top">ESPAsyncE131 *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae53831a0c135a8a1d2a58af3eaa60028">e131</a> = nullptr</td></tr>
-<tr class="memdesc:ae53831a0c135a8a1d2a58af3eaa60028"><td class="mdescLeft">&#160;</td><td class="mdescRight">ESPAsyncE131.  <br /></td></tr>
-<tr class="separator:ae53831a0c135a8a1d2a58af3eaa60028"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78e6201a132377c6e26ef39314c52ad6" id="r_a78e6201a132377c6e26ef39314c52ad6"><td class="memItemLeft" align="right" valign="top">ESPAsyncE131&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a78e6201a132377c6e26ef39314c52ad6">e131</a></td></tr>
+<tr class="memdesc:a78e6201a132377c6e26ef39314c52ad6"><td class="mdescLeft">&#160;</td><td class="mdescRight">ESPAsyncE131.  <br /></td></tr>
+<tr class="separator:a78e6201a132377c6e26ef39314c52ad6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3fbb82c35c018fc002d2322ba7f7be9f" id="r_a3fbb82c35c018fc002d2322ba7f7be9f"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3fbb82c35c018fc002d2322ba7f7be9f">startUniverse</a> = 1</td></tr>
 <tr class="memdesc:a3fbb82c35c018fc002d2322ba7f7be9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">JSON configuration parameters.  <br /></td></tr>
 <tr class="separator:a3fbb82c35c018fc002d2322ba7f7be9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -224,8 +224,6 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a80b20934b5e5ac22dd3a019cf51a4267"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af6a61e337351f87db42592d96bb1a295" id="r_af6a61e337351f87db42592d96bb1a295"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structc___input_e131_1_1_universe__t.html">Universe_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af6a61e337351f87db42592d96bb1a295">UniverseArray</a> [<a class="el" href="#ac0aae26f37068d38277b8badf236480a">MAX_NUM_UNIVERSES</a>]</td></tr>
 <tr class="separator:af6a61e337351f87db42592d96bb1a295"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d44f5282aed1ba9d8b0c5ab6493f628" id="r_a0d44f5282aed1ba9d8b0c5ab6493f628"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0d44f5282aed1ba9d8b0c5ab6493f628">_ESPAsyncE131</a> [sizeof(ESPAsyncE131)]</td></tr>
-<tr class="separator:a0d44f5282aed1ba9d8b0c5ab6493f628"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-static-attribs" name="pri-static-attribs"></a>
 Static Private Attributes</h2></td></tr>
@@ -347,8 +345,10 @@ Here is the call graph for this function:</div>
 <area shape="poly" title=" " alt="" coords="617,67,703,57,703,62,617,72"/>
 <area shape="rect" href="classc___input_mgr.html#a8a195063dcc63c1fd8de7c14ab3bf0a2" title=" " alt="" coords="722,84,900,125"/>
 <area shape="poly" title=" " alt="" coords="617,79,707,90,706,95,617,85"/>
-<area shape="rect" href="classc___input_e131.html#a8e56c6414777712a050c2f79cd378beb" title=" " alt="" coords="453,120,670,146"/>
-<area shape="poly" title=" " alt="" coords="405,130,438,130,438,136,405,136"/>
+<area shape="rect" href="main_8cpp.html#ace03924f16faf7e0c24590ede39ae2f2" title=" " alt="" coords="522,116,601,142"/>
+<area shape="poly" title=" " alt="" coords="405,129,506,127,506,132,405,134"/>
+<area shape="rect" href="classc___input_e131.html#a8e56c6414777712a050c2f79cd378beb" title=" " alt="" coords="453,165,670,191"/>
+<area shape="poly" title=" " alt="" coords="376,144,468,160,467,165,375,149"/>
 </map>
 </div>
 <div class="dynheader">
@@ -600,6 +600,8 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 
 <p>Call from <a class="el" href="main_8cpp.html#afe461d27b9c48d5921c00d521181f12f" title="Main Loop.">loop()</a>, renders Input data. </p>
+<p>// DEBUG_START;</p>
+<p>// DEBUG_END;</p>
 
 <p>Implements <a class="el" href="classc___input_common.html#a6164edb288d34ceca86cbc8917ca1dae">c_InputCommon</a>.</p>
 
@@ -670,8 +672,8 @@ Here is the call graph for this function:</div>
 <area shape="rect" title=" " alt="" coords="5,145,181,171"/>
 <area shape="rect" href="classc___input_e131.html#ab842aa2de00cbf0d80c10b288213cea3" title="set up the operating environment based on the current config (or defaults)" alt="" coords="229,92,361,118"/>
 <area shape="poly" title=" " alt="" coords="144,142,228,120,229,125,145,147"/>
-<area shape="rect" href="classc___input_e131.html#a8e56c6414777712a050c2f79cd378beb" title=" " alt="" coords="676,145,894,171"/>
-<area shape="poly" title=" " alt="" coords="181,156,661,156,661,161,181,161"/>
+<area shape="rect" href="classc___input_e131.html#a8e56c6414777712a050c2f79cd378beb" title=" " alt="" coords="676,169,894,195"/>
+<area shape="poly" title=" " alt="" coords="181,159,661,175,661,181,181,164"/>
 <area shape="rect" href="classc___network_mgr.html#adb2bfe0b52822c8b9936696d9d03031d" title=" " alt="" coords="426,5,611,31"/>
 <area shape="poly" title=" " alt="" coords="315,89,357,65,408,41,432,33,434,38,410,46,360,70,318,94"/>
 <area shape="rect" href="classc___input_e131.html#a6098950d3be2934c5ae667a42cf9ccf1" title=" " alt="" coords="429,55,608,96"/>
@@ -684,7 +686,9 @@ Here is the call graph for this function:</div>
 <area shape="poly" title=" " alt="" coords="840,67,926,57,927,62,841,72"/>
 <area shape="rect" href="classc___input_mgr.html#a8a195063dcc63c1fd8de7c14ab3bf0a2" title=" " alt="" coords="945,84,1124,125"/>
 <area shape="poly" title=" " alt="" coords="841,79,930,90,929,95,840,85"/>
-<area shape="poly" title=" " alt="" coords="629,141,661,144,661,149,629,146"/>
+<area shape="rect" href="main_8cpp.html#ace03924f16faf7e0c24590ede39ae2f2" title=" " alt="" coords="745,120,825,146"/>
+<area shape="poly" title=" " alt="" coords="629,130,729,130,729,136,629,136"/>
+<area shape="poly" title=" " alt="" coords="593,144,697,163,696,169,592,149"/>
 </map>
 </div>
 
@@ -753,23 +757,25 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classc___input_e131_ae77e361a9e510852cd0b7d0cf6721ec6_cgraph.png" border="0" usemap="#aclassc___input_e131_ae77e361a9e510852cd0b7d0cf6721ec6_cgraph" alt=""/></div>
 <map name="aclassc___input_e131_ae77e361a9e510852cd0b7d0cf6721ec6_cgraph" id="aclassc___input_e131_ae77e361a9e510852cd0b7d0cf6721ec6_cgraph">
-<area shape="rect" title="Set a new config in the driver." alt="" coords="5,95,161,120"/>
+<area shape="rect" title="Set a new config in the driver." alt="" coords="5,92,161,118"/>
 <area shape="rect" href="classc___input_e131.html#ab0144cfa0af7372b295f443b49265e50" title="Get the current config used by the driver." alt="" coords="240,16,396,42"/>
-<area shape="poly" title=" " alt="" coords="109,92,155,71,208,50,232,43,233,48,210,55,157,76,112,97"/>
+<area shape="poly" title=" " alt="" coords="111,89,208,50,232,43,234,48,210,55,113,94"/>
 <area shape="rect" href="main_8cpp.html#a23252221d60de2259fe00859f716c72e" title=" " alt="" coords="263,65,374,91"/>
-<area shape="poly" title=" " alt="" coords="161,95,247,84,248,90,161,100"/>
-<area shape="rect" href="_e_s_pixel_stick_8h.html#a8295d2ec53bab395bfc5811cfd78ca4d" title=" " alt="" coords="266,119,371,144"/>
-<area shape="poly" title=" " alt="" coords="161,113,251,122,250,127,161,118"/>
-<area shape="rect" href="classc___input_e131.html#a15895b3f2f8627744022fe5466278491" title=" " alt="" coords="209,168,428,194"/>
-<area shape="poly" title=" " alt="" coords="115,118,209,154,235,161,233,166,208,159,113,123"/>
+<area shape="poly" title=" " alt="" coords="161,93,247,83,248,89,161,99"/>
+<area shape="rect" href="_e_s_pixel_stick_8h.html#a8295d2ec53bab395bfc5811cfd78ca4d" title=" " alt="" coords="266,116,371,142"/>
+<area shape="poly" title=" " alt="" coords="161,110,251,119,250,125,161,115"/>
+<area shape="rect" href="classc___input_e131.html#a15895b3f2f8627744022fe5466278491" title=" " alt="" coords="209,169,428,195"/>
+<area shape="poly" title=" " alt="" coords="116,116,210,152,245,162,244,167,208,157,114,121"/>
 <area shape="rect" href="classc___output_mgr.html#aa5fa47aab179e25649aa61acd159586d" title=" " alt="" coords="492,5,677,31"/>
 <area shape="poly" title=" " alt="" coords="373,64,427,52,510,33,512,38,429,57,374,69"/>
 <area shape="rect" href="classc___input_mgr.html#a8a195063dcc63c1fd8de7c14ab3bf0a2" title=" " alt="" coords="496,55,674,96"/>
 <area shape="poly" title=" " alt="" coords="374,75,480,74,480,79,374,80"/>
 <area shape="rect" href="_web_mgr_8cpp.html#a47bc5f5aa91e940e6cfc297466285595" title=" " alt="" coords="544,120,626,146"/>
-<area shape="poly" title=" " alt="" coords="371,129,528,130,528,135,371,134"/>
-<area shape="rect" href="classc___input_e131.html#a8e56c6414777712a050c2f79cd378beb" title=" " alt="" coords="476,169,693,195"/>
-<area shape="poly" title=" " alt="" coords="428,179,461,179,461,184,428,184"/>
+<area shape="poly" title=" " alt="" coords="371,127,528,129,528,135,371,132"/>
+<area shape="rect" href="main_8cpp.html#ace03924f16faf7e0c24590ede39ae2f2" title=" " alt="" coords="545,169,624,195"/>
+<area shape="poly" title=" " alt="" coords="428,180,529,180,529,185,428,185"/>
+<area shape="rect" href="classc___input_e131.html#a8e56c6414777712a050c2f79cd378beb" title=" " alt="" coords="476,219,693,244"/>
+<area shape="poly" title=" " alt="" coords="392,193,497,213,496,218,391,198"/>
 </map>
 </div>
 
@@ -802,9 +808,11 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classc___input_e131_a15895b3f2f8627744022fe5466278491_cgraph.png" border="0" usemap="#aclassc___input_e131_a15895b3f2f8627744022fe5466278491_cgraph" alt=""/></div>
 <map name="aclassc___input_e131_a15895b3f2f8627744022fe5466278491_cgraph" id="aclassc___input_e131_a15895b3f2f8627744022fe5466278491_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,225,31"/>
-<area shape="rect" href="classc___input_e131.html#a8e56c6414777712a050c2f79cd378beb" title=" " alt="" coords="273,5,490,31"/>
-<area shape="poly" title=" " alt="" coords="225,16,257,16,257,21,225,21"/>
+<area shape="rect" title=" " alt="" coords="5,31,225,56"/>
+<area shape="rect" href="main_8cpp.html#ace03924f16faf7e0c24590ede39ae2f2" title=" " alt="" coords="342,5,421,31"/>
+<area shape="poly" title=" " alt="" coords="225,30,326,21,326,26,225,36"/>
+<area shape="rect" href="classc___input_e131.html#a8e56c6414777712a050c2f79cd378beb" title=" " alt="" coords="273,55,490,80"/>
+<area shape="poly" title=" " alt="" coords="225,51,257,54,257,59,225,56"/>
 </map>
 </div>
 <div class="dynheader">
@@ -825,28 +833,6 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a0d44f5282aed1ba9d8b0c5ab6493f628" name="a0d44f5282aed1ba9d8b0c5ab6493f628"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0d44f5282aed1ba9d8b0c5ab6493f628">&#9670;&#160;</a></span>_ESPAsyncE131</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">char c_InputE131::_ESPAsyncE131[sizeof(ESPAsyncE131)]</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a80b20934b5e5ac22dd3a019cf51a4267" name="a80b20934b5e5ac22dd3a019cf51a4267"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a80b20934b5e5ac22dd3a019cf51a4267">&#9670;&#160;</a></span>channel_count</h2>
 
@@ -918,8 +904,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="ae53831a0c135a8a1d2a58af3eaa60028" name="ae53831a0c135a8a1d2a58af3eaa60028"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae53831a0c135a8a1d2a58af3eaa60028">&#9670;&#160;</a></span>e131</h2>
+<a id="a78e6201a132377c6e26ef39314c52ad6" name="a78e6201a132377c6e26ef39314c52ad6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78e6201a132377c6e26ef39314c52ad6">&#9670;&#160;</a></span>e131</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -928,7 +914,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">ESPAsyncE131* c_InputE131::e131 = nullptr</td>
+          <td class="memname">ESPAsyncE131 c_InputE131::e131</td>
         </tr>
       </table>
   </td>
