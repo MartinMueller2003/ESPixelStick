@@ -1,5 +1,6 @@
 var NAVTREEINDEX9 =
 {
+"classc___input_alexa.html":[0,0,4],
 "classc___input_alexa.html#a00ff050d19b35c8ce8b8d383d346ec6a":[0,0,4,9],
 "classc___input_alexa.html#a0801055d6d18e87835a6e91a0483497c":[0,0,4,14],
 "classc___input_alexa.html#a1a34eea3a44550df8af5af379f07a105":[0,0,4,6],
@@ -248,6 +249,5 @@ var NAVTREEINDEX9 =
 "classc___input_f_p_p_remote.html#a8148ddeeaff99c8f343c66e7e3a08a5d":[0,0,11,29],
 "classc___input_f_p_p_remote.html#a8cb165076ce28fc5bc3f16f5cc9ea5f4":[0,0,11,11],
 "classc___input_f_p_p_remote.html#aa21e7e5554a485a8483050a403dab519":[0,0,11,1],
-"classc___input_f_p_p_remote.html#abe329db482622289087e14d0a9b40e24":[0,0,11,12],
-"classc___input_f_p_p_remote.html#ac20d33080cef27922cc6350fcf25d8b6":[0,0,11,24]
+"classc___input_f_p_p_remote.html#abe329db482622289087e14d0a9b40e24":[0,0,11,12]
 };
