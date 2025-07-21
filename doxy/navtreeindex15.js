@@ -1,5 +1,6 @@
 var NAVTREEINDEX15 =
 {
+"structc___input_effect_engine_1_1d_c_r_g_b.html#aec30cee338695610c77e0caba77bac50":[0,0,10,2,1],
 "structc___input_f_p_p_remote_1_1_player_info__t.html":[0,0,11,0],
 "structc___input_f_p_p_remote_1_1_player_info__t.html#a1d2a41492d8c852f0e749f433109a786":[0,0,11,0,2],
 "structc___input_f_p_p_remote_1_1_player_info__t.html#a39cd0b2818e19a2f89dfad7d1b9da3fe":[0,0,11,0,1],

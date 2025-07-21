@@ -1,5 +1,6 @@
 var NAVTREEINDEX8 =
 {
+"_sensor_d_s18_b20_8h_source.html":[1,0,0,4,2],
 "_unzip_files_8cpp.html":[1,0,1,9],
 "_unzip_files_8hpp.html":[1,0,0,13],
 "_unzip_files_8hpp_source.html":[1,0,0,13],
@@ -248,6 +249,5 @@ var NAVTREEINDEX8 =
 "classc___file_mgr.html#aee657c03ad56d87d9cb39970d4de4951":[0,0,1,42],
 "classc___file_mgr.html#af54dcecfe3bc5ab961bcde0826c206a4":[0,0,1,18],
 "classc___file_mgr.html#af671a65c5556bf8a1f3da52191c0f218":[0,0,1,72],
-"classc___file_mgr.html#afd39c494beddbc229522e53fb4ce56d4":[0,0,1,20],
-"classc___file_mgr.html#aff37690a9e5ab9311170fdf20ba1f6ec":[0,0,1,46]
+"classc___file_mgr.html#afd39c494beddbc229522e53fb4ce56d4":[0,0,1,20]
 };
