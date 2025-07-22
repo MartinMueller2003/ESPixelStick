@@ -43,6 +43,7 @@ var classc___f_p_p_discovery =
     [ "hasBeenInitialized", "classc___f_p_p_discovery.html#abc8835b358dc4240476af10277257416", null ],
     [ "inFileUpload", "classc___f_p_p_discovery.html#a079b6ba44ce7468a175a74a8c30fed6f", null ],
     [ "InputFPPRemote", "classc___f_p_p_discovery.html#a4e15f5703ca6699347db84b4e33d380a", null ],
+    [ "ipBcast", "classc___f_p_p_discovery.html#af1c41bd502e6a8bed521a01cfa655795", null ],
     [ "IsEnabled", "classc___f_p_p_discovery.html#a8f9fcde96d757bcdf3350dc662cdb2ec", null ],
     [ "MulticastAddress", "classc___f_p_p_discovery.html#a64af0f5f9ca083b423a462e65ce69620", null ],
     [ "MultiSyncStats", "classc___f_p_p_discovery.html#a87f0ed24997d38a9021a3d0d2f489f48", null ],
