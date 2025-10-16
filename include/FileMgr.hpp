@@ -105,7 +105,13 @@ public:
     void     NetworkStateChanged (bool NewState);
     void     FindFirstZipFile (String &FileName);
     int      FileListFindSdFileHandle (FileId HandleToFind);
+    // True when a compressed content file (.xlz/.zip) is present on SD
+    bool HasPendingCompressedContent() const { return FoundZipFile; }
 
+    // Optional: a human-friendly reason for the UI
+    const __FlashStringHelper* GetRebootReason() const {
+        return F("Compressed content pending (.xlz present)");
+    }
 #define SD_BLOCK_SIZE 512
 
 #if defined ARDUINO_ARCH_ESP8266

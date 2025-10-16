@@ -1,47 +1,184 @@
-;~~PlatformIO local user configuration
-;  Copy this file to platformio_user.ini and edit for your local config
-;
-;~~ Serial Port Configuration
-;  'monitor_port' and 'upload_port' need to be defined.
-;   For ESPixelStick, these ports will be the same.
-;
-;   The [env] section is top level and will be used for all devices
-;   and environments. If you have only one device, you can define
-;   the port here, or do nothing at all and PlatformIO will attempt
-;   to auto-detect it.
-;
-;   If you have multiple devices, you can define global [esp8266]
-;   or [esp32] specific ports.  If you want to target a specific
-;   build environment, you can do that as well. A list of all
-;   [env:] targets is defined in platformio.ini.
-;
-;~~ Optional configuration
-;   Configurations defined here will override platformio.ini
-;   https://docs.platformio.org/page/projectconf.html
-;
-;   [esp8266] and [esp32] sections are inherited into [env:] targets:
-;   https://docs.platformio.org/en/latest/projectconf/section_env.html
-;
+[platformio]
+src_dir = ./src
+data_dir = ./data
+include_dir = ./include
+build_cache_dir = ./.pio/.buildcache
+packages_dir = ./.pio/packages
+cache_dir = ./.pio/cache
+platforms_dir = ./.pio/platforms
+default_envs = esp32_jmt_eth ;, esp32_jmt, esp32_matrix
 
-;[platformio]
-;default_envs = espsv3
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+; Baseline build environment                                         ;
+; https://docs.platformio.org/en/latest/projectconf/section_env.html ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+[env]
 
-;[env]
+framework = arduino
+monitor_speed = 115200
+upload_speed = 921600
+lib_compat_mode = strict
+; build_type = debug
+lib_deps =
+    adafruit/Adafruit PWM Servo Driver Library @ ^2.4.0
+    bblanchon/ArduinoJson @ ^7.4.0
+    djgrrr/Int64String @ ^1.1.1
+    forkineye/ESPAsyncE131 @ ^1.0.5
+    https://github.com/greiman/SdFat
+    https://github.com/mathieucarbou/ESPAsyncWebServer @ ^3.6.0
+;    https://github.com/ESP32Async/ESPAsyncWebServer @ ^3.7.7
+    ottowinter/AsyncMqttClient-esphome ;@ ^0.8.6
+    https://github.com/paulstoffregen/Time @ ^1.6.1
+    https://github.com/MartinMueller2003/Artnet
+    https://github.com/MartinMueller2003/Espalexa
+    https://github.com/MartinMueller2003/SimpleFTPServer
+    https://github.com/bitbank2/unzipLIB
+    olikraus/U8g2@^2.36.8
+extra_scripts =
+    .scripts/download_fs.py
+    pre:.scripts/pio-version.py
+    post:.scripts/CopyTargets.py
+build_flags =
+    -D ENABLE_DEDICATED_SPI=1 ; instruct SdFat to take ownership of the spi device
+    -D SDFAT_FILE_TYPE=3 ; SdFat full support
+    -D USE_LONG_FILE_NAMES=1 ; SdFat
+    -D MAINTAIN_FREE_CLUSTER_COUNT=1 ; SdFat
+    -D CHECK_FLASH_PROGRAMMING=0 ; SdFat
+    -D INCLUDE_SDIOS=1 ; SdFat
+;    -D USE_DBG_MACROS=2 ; SdFat
+;    -D SUPPORT_FTP
+;    -D FTP_SERVER_DEBUG
+;    -D FTP_ADDITIONAL_DEBUG
+;    -D MAKECRCH=1 ; force the unzip to make the CRC table dynamically
+;    -D DYNAMIC_CRC_TABLE=1 ; unzip uses this
+;    -D DEBUG_FSEQ
+    -D NOBYFOUR=1 ; reduced unzip table size
+    -D DISABLE_FS_H_WARNING=1
+    -mtext-section-literals
+    -Wl,-Map=firmware.map
+    -Wl,--cref
+;    -fstack-protector-all
+lib_ignore =
+	ESP Async WebServer	; force the use of the esphome version
+	AsyncTCP			; force the use of the esphome version
+	LittleFS_esp32		; force the use of the ESP32 built into the core version
+
+
+[esp32]
+platform = espressif32 @ ^6.11.0
+board_build.filesystem = littlefs
+board_build.partitions = ESP32_partitions.csv
+monitor_filters = esp32_exception_decoder, colorize
+; monitor_filters = esp32_exception_decoder, time
+build_flags =
+    ${env.build_flags}
+    -D ARDUINO_LOOP_STACK_SIZE=12288
+    -D DEFAULT_FTP_SERVER_NETWORK_TYPE_ESP32=6
+    -D DEFAULT_STORAGE_TYPE_ESP32=2
+    -D SUPPORT_UNZIP=1
+    -D CONFIG_DISABLE_HAL_LOCKS=1
+    -D CONFIG_RMT_ISR_IRAM_SAFE=yes
+
+build_unflags =
+    ${env.build_unflags}
+    -D BOARD_HAS_PSRAM
+    -mfix-esp32-psram-cache-issue
+    -mfix-esp32-psram-cache-strategy=memw
+    -D SUPPORT_FTP
+
+lib_deps =
+    ${env.lib_deps}
+    https://github.com/ESP32Async/AsyncTCP @ ^3.4.2
+    mathieucarbou/OneWire @ ^2.3.9
+    https://github.com/matmunk/DS18B20
+extra_scripts = ${env.extra_scripts}
+    .scripts/replace_fs.py
+    post_efu.py
+[esp32_cust]
+extends = esp32
+build_type = release
+board_build.partitions = ESP32_partitions.csv
+build_flags =
+    ${esp32.build_flags}
+    -D FLASH_EXTRA_IMAGES
+    -D ESPS_VERSION="4.xXx"
+ ;   -DCORE_DEBUG_LEVEL=5
+
+
+
+[env:esp32_jmt]
+extends = esp32_cust
+board = jmt
+board_build.flash_mode = dio
+board_build.f_flash = 80000000L
+board_build.partitions = ESP32_partitions.csv
+build_flags =
+    ${esp32_cust.build_flags}
+    -D BOARD_NAME=\"JMT_CONTROLLER\"
+    -D BOARD_ESP32_JMT
+    -D SUPPORT_OLED
+
+[env:esp32_jmt_eth]
+extends = esp32_cust
+board = jmt
+board_build.flash_mode = dio
+board_build.f_flash = 80000000L
+board_build.partitions = ESP32_partitions.csv
+build_flags =
+    ${esp32_cust.build_flags}
+    -D BOARD_NAME=\"JMT_CONTROLLER\"
+    -D BOARD_ESP32_JMT_ETH
+    -I ./.pio/packages/framework-arduinoespressif32/libraries/Ethernet/src
+    -D SUPPORT_OLED
+    -D ESP_SCL_PIN=33
+    -D ESP_SDA_PIN=32
+
+
+
+[env:esp32_matrix]
+extends = esp32_cust
+board = jmtmatrix
+build_flags =
+    ${esp32_cust.build_flags}
+    -D BOARD_NAME=\"JMT_MATRIX\"
+    -D BOARD_ESP32_JMTMATRIX
+
+
+[env:esp32_dbg]
+extends = esp32_cust
+board = jmt
+board_build.flash_mode = dio
+board_build.f_flash = 80000000L
+board_build.partitions = ESP32_partitions.csv
+build_flags =
+    ${esp32_cust.build_flags}
+    -D BOARD_NAME=\"JMT_CONTROLLER\"
+    -D BOARD_ESP32_JMT
+    -D SUPPORT_OLED
+debug_tool = custom
+monitor_speed = 115200
+debug_init_cmds =
+    target remote localhost:3333
+    monitor reset halt
+    flushregs
+
+
+; big boi (pixel Rick)
+;[env:esp32_bigboi_debug]
+;extends = esp32_cust
+;board = bigboi
 ;build_type = debug
-;monitor_port = COM3
-;upload_port = COM3
 ;build_flags =
-;    -D SECRETS_SSID="DEFAULT_SSID_NOT_SET"
-;    -D SECRETS_PASS="DEFAULT_PASSPHRASE_NOT_SET"
+;    ${esp32_cust.build_flags}
+;    -D BOARD_NAME=\"esp32_BigBoi\"
+;    -D BOARD_ESP32_WROVER
+;debug_tool = custom
+;monitor_speed = 115200
+;debug_init_cmds =
+;  target remote localhost:3333
+;  monitor reset halt
+;  flushregs
 
-;[esp8266]
-;monitor_port = COM4
-;upload_port = COM4
 
-;[esp32]
-;monitor_port = COM5
-;upload_port = COM5
-
-;[env:espsv3]
-;monitor_port = COM6
-;upload_port = COM6
+[alias:post_efu]
+targets = buildprog, buildfs
