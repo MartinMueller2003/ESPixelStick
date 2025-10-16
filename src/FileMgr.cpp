@@ -183,9 +183,17 @@ void c_FileMgr::Begin ()
             listDir (LittleFS, String ("/"), 3);
         }
 
-        SetSpiIoPins ();
+        SetSpiIoPins();  // builds FSEQ list and (now correctly) sets FoundZipFile
 
-        if(FoundZipFile)
+        // >>> OPTIONAL: if not set yet, scan quickly for a compressed file
+        if (!FoundZipFile)
+        {
+            String firstZip;
+            FindFirstZipFile(firstZip);
+            FoundZipFile = !firstZip.isEmpty();
+        }
+
+        if (FoundZipFile)
         {
             FeedWDT();
         #ifdef SUPPORT_UNZIP

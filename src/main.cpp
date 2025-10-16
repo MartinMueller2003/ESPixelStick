@@ -23,7 +23,9 @@
 #include "ESPixelStick.h"
 #include "EFUpdate.h"
 #include <Int64String.h>
-
+#ifdef SUPPORT_OLED
+#include "service/DisplayOLED.h"
+#endif
 // Input modules
 #include "input/InputMgr.hpp"
 
@@ -42,12 +44,7 @@
 // Services
 #include "service/FPPDiscovery.h"
 #include <TimeLib.h>
-#ifdef SUPPORT_SENSOR_DS18B20
-#include "service/SensorDS18B20.h"
-#endif // def SUPPORT_SENSOR_DS18B20
-#ifdef SUPPORT_OLED
-#include "service/DisplayOLED.h"
-#endif
+
 #ifdef ARDUINO_ARCH_ESP8266
 #include <Hash.h>
 extern "C"

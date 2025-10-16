@@ -1,39 +1,31 @@
 [platformio]
+default_envs = esp32_jmt
 src_dir = ./src
 data_dir = ./data
-include_dir = ./include
 build_cache_dir = ./.pio/.buildcache
 packages_dir = ./.pio/packages
 cache_dir = ./.pio/cache
-platforms_dir = ./.pio/platforms
-default_envs = esp32_jmt_eth ;, esp32_jmt, esp32_matrix
-
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-; Baseline build environment                                         ;
-; https://docs.platformio.org/en/latest/projectconf/section_env.html ;
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 [env]
-
 framework = arduino
 monitor_speed = 115200
 upload_speed = 921600
 lib_compat_mode = strict
+board_build.filesystem = littlefs
 ; build_type = debug
 lib_deps =
     adafruit/Adafruit PWM Servo Driver Library @ ^2.4.0
-    bblanchon/ArduinoJson @ ^7.4.0
+    bblanchon/ArduinoJson @ ^7.3.0
     djgrrr/Int64String @ ^1.1.1
-    forkineye/ESPAsyncE131 @ ^1.0.5
-    https://github.com/greiman/SdFat
-    https://github.com/mathieucarbou/ESPAsyncWebServer @ ^3.6.0
-;    https://github.com/ESP32Async/ESPAsyncWebServer @ ^3.7.7
-    ottowinter/AsyncMqttClient-esphome ;@ ^0.8.6
+    https://github.com/MartinMueller2003/ESPAsyncE131
+    https://github.com/greiman/SdFat @ ^2.3.0
+    https://github.com/MartinMueller2003/ESPAsyncTCP
+    https://github.com/MartinMueller2003/ESPAsyncWebServer
+    https://github.com/marvinroger/async-mqtt-client @ ^0.9.0
     https://github.com/paulstoffregen/Time @ ^1.6.1
     https://github.com/MartinMueller2003/Artnet
     https://github.com/MartinMueller2003/Espalexa
     https://github.com/MartinMueller2003/SimpleFTPServer
-    https://github.com/bitbank2/unzipLIB
-    olikraus/U8g2@^2.36.8
+    https://github.com/olikraus/U8g2_Arduino
 extra_scripts =
     .scripts/download_fs.py
     pre:.scripts/pio-version.py
@@ -46,29 +38,39 @@ build_flags =
     -D CHECK_FLASH_PROGRAMMING=0 ; SdFat
     -D INCLUDE_SDIOS=1 ; SdFat
 ;    -D USE_DBG_MACROS=2 ; SdFat
-;    -D SUPPORT_FTP
+    -D SUPPORT_FTP
 ;    -D FTP_SERVER_DEBUG
 ;    -D FTP_ADDITIONAL_DEBUG
-;    -D MAKECRCH=1 ; force the unzip to make the CRC table dynamically
-;    -D DYNAMIC_CRC_TABLE=1 ; unzip uses this
 ;    -D DEBUG_FSEQ
-    -D NOBYFOUR=1 ; reduced unzip table size
+;    -D USE_SERIAL_DEBUG_COUNTERS=1
+;    -D USE_UART_DEBUG_COUNTERS=1
+;    -D USE_PIXEL_DEBUG_COUNTERS=1
+;    -D DEBUG_FILE_HANDLES=1
+;    -D DEBUG_ESP_PORT=Serial
+;    -D DEBUG_ESP_OOM
+;    -D DEBUG_ESP_ASYNC_TCP=1
     -D DISABLE_FS_H_WARNING=1
+    -I ./ESPixelStick/src
+    -I ./include
+    -I ./include/network
     -mtext-section-literals
     -Wl,-Map=firmware.map
     -Wl,--cref
 ;    -fstack-protector-all
 lib_ignore =
-	ESP Async WebServer	; force the use of the esphome version
-	AsyncTCP			; force the use of the esphome version
+	ESP Async WebServer
+	; AsyncTCP
 	LittleFS_esp32		; force the use of the ESP32 built into the core version
 
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+; ESP8266 defaults for 4MB flash                                     ;
+; https://docs.platformio.org/en/latest/platforms/espressif8266.html ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 [esp32]
 platform = espressif32 @ ^6.11.0
-board_build.filesystem = littlefs
 board_build.partitions = ESP32_partitions.csv
-monitor_filters = esp32_exception_decoder, colorize
+; monitor_filters = esp32_exception_decoder
 ; monitor_filters = esp32_exception_decoder, time
 build_flags =
     ${env.build_flags}
@@ -76,28 +78,30 @@ build_flags =
     -D DEFAULT_FTP_SERVER_NETWORK_TYPE_ESP32=6
     -D DEFAULT_STORAGE_TYPE_ESP32=2
     -D SUPPORT_UNZIP=1
+;    -D MAKECRCH=1 ; force the unzip to make the CRC table dynamically
+;    -D DYNAMIC_CRC_TABLE=1 ; unzip uses this
+    -D NOBYFOUR=1 ; reduced unzip table size
     -D CONFIG_DISABLE_HAL_LOCKS=1
     -D CONFIG_RMT_ISR_IRAM_SAFE=yes
-
+;    -D USE_RMT_DEBUG_COUNTERS=1
+;    -D DEBUG_RMT_XLAT_ISSUES=1
 build_unflags =
     ${env.build_unflags}
     -D BOARD_HAS_PSRAM
     -mfix-esp32-psram-cache-issue
     -mfix-esp32-psram-cache-strategy=memw
-    -D SUPPORT_FTP
 
 lib_deps =
     ${env.lib_deps}
-    https://github.com/ESP32Async/AsyncTCP @ ^3.4.2
     mathieucarbou/OneWire @ ^2.3.9
     https://github.com/matmunk/DS18B20
+    https://github.com/bitbank2/unzipLIB
 extra_scripts = ${env.extra_scripts}
     .scripts/replace_fs.py
     post_efu.py
 [esp32_cust]
 extends = esp32
 build_type = release
-board_build.partitions = ESP32_partitions.csv
 build_flags =
     ${esp32.build_flags}
     -D FLASH_EXTRA_IMAGES
@@ -109,8 +113,9 @@ build_flags =
 [env:esp32_jmt]
 extends = esp32_cust
 board = jmt
-board_build.flash_mode = dio
-board_build.f_flash = 80000000L
+upload_port = COM96
+;board_build.flash_mode = dio
+;board_build.f_flash = 80000000L
 board_build.partitions = ESP32_partitions.csv
 build_flags =
     ${esp32_cust.build_flags}
@@ -129,10 +134,6 @@ build_flags =
     -D BOARD_NAME=\"JMT_CONTROLLER\"
     -D BOARD_ESP32_JMT_ETH
     -I ./.pio/packages/framework-arduinoespressif32/libraries/Ethernet/src
-    -D SUPPORT_OLED
-    -D ESP_SCL_PIN=33
-    -D ESP_SDA_PIN=32
-
 
 
 [env:esp32_matrix]
@@ -142,6 +143,8 @@ build_flags =
     ${esp32_cust.build_flags}
     -D BOARD_NAME=\"JMT_MATRIX\"
     -D BOARD_ESP32_JMTMATRIX
+
+
 
 
 [env:esp32_dbg]
@@ -162,22 +165,6 @@ debug_init_cmds =
     monitor reset halt
     flushregs
 
-
-; big boi (pixel Rick)
-;[env:esp32_bigboi_debug]
-;extends = esp32_cust
-;board = bigboi
-;build_type = debug
-;build_flags =
-;    ${esp32_cust.build_flags}
-;    -D BOARD_NAME=\"esp32_BigBoi\"
-;    -D BOARD_ESP32_WROVER
-;debug_tool = custom
-;monitor_speed = 115200
-;debug_init_cmds =
-;  target remote localhost:3333
-;  monitor reset halt
-;  flushregs
 
 
 [alias:post_efu]
