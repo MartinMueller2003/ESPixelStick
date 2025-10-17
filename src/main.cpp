@@ -614,6 +614,9 @@ bool RebootInProgress()
 
 void RequestReboot(String & Reason, uint32_t LoopDelay, bool SkipDisable /* = false */)
 {
+                #ifdef SUPPORT_OLED
+                OLED.ShowRebootScreen();
+                #endif 
     GlobalRebootReason = Reason;
     RebootCount = LoopDelay;
     if(!SkipDisable)

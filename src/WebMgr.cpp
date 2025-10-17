@@ -32,9 +32,9 @@
 #include <FS.h>
 #include <LittleFS.h>
 
-#ifdef SUPPORT_SENSOR_DS18B20
-#include "service/SensorDS18B20.h"
-#endif // def SUPPORT_SENSOR_DS18B20
+#ifdef SUPPORT_OLED
+#include "service/DisplayOLED.cpp"
+#endif 
 
 // #define ESPALEXA_DEBUG
 #define ESPALEXA_MAXDEVICES 2
@@ -701,31 +701,7 @@ void c_WebMgr::onAlexaMessage (EspalexaDevice* dev)
 
 } // onAlexaMessage
 
-#ifdef SUPPORT_DEVICE_OPTION_LIST
-//-----------------------------------------------------------------------------
-void c_WebMgr::GetDeviceOptions ()
-{
-    // DEBUG_START;
-    // set up a framework to get the option data
-    WebJsonDoc->clear ();
 
-    // DEBUG_V ("");
-    JsonObject WebOptions = (*WebJsonDoc)[F ("options")].to<JsonObject>();
-    JsonObject JsonDeviceOptions = WebOptions[CN_device].to<JsonObject> ();
-    // DEBUG_V("");
-
-    // PrettyPrint (WebOptions);
-
-    // PrettyPrint (WebOptions);
-
-    // now make it something we can transmit
-    uint32_t msgOffset = strlen (WebSocketFrameCollectionBuffer);
-    serializeJson(WebOptions, &pWebSocketFrameCollectionBuffer[msgOffset], (WebSocketFrameCollectionBufferSize - msgOffset));
-
-    // DEBUG_END;
-
-} // GetDeviceOptions
-#endif // def SUPPORT_DEVICE_OPTION_LIST
 
 //-----------------------------------------------------------------------------
 void c_WebMgr::CreateAdminInfoFile ()
@@ -881,6 +857,9 @@ void c_WebMgr::FirmwareUpload (AsyncWebServerRequest* request,
 {
     // DEBUG_START;
 
+#ifdef SUPPORT_OLED
+ OLED.ShowToast("UPGRADE", "FIRMWARE");
+#endif 
     do // once
     {
         // DEBUG_V (String (" file: '") + filename + "'");
@@ -941,6 +920,9 @@ void c_WebMgr::FirmwareUpload (AsyncWebServerRequest* request,
         {
             // logcon (String(CN_stars) + F (" UPDATE ERROR: ") + String (efupdate.getError ()));
             // DEBUG_V ("efupdate.hasError");
+            #ifdef SUPPORT_OLED
+                OLED.ShowToast("ERROR", "FIRMWARE");
+                #endif 
             String ErrorMsg;
             WebMgr.efupdate.getError (ErrorMsg);
             request->send (500, CN_applicationSLASHjson, String(F("{\"status\":\"Update Error: ")) + ErrorMsg + F("\"}"));
@@ -953,6 +935,9 @@ void c_WebMgr::FirmwareUpload (AsyncWebServerRequest* request,
             request->send (200, CN_applicationSLASHjson, F("{\"status\":\"Update Finished\""));
             String Reason = (F ("EFU Upload Finished. Rebooting"));
             efupdate.end ();
+                        #ifdef SUPPORT_OLED
+                OLED.ShowToast("DOWNLOAD COMPLETE", "FIRMWARE");
+                #endif 
             RequestReboot(Reason, 100000);
         }
 
