@@ -59,16 +59,16 @@ var NAVTREEINDEX =
 "_g_p_i_o___defs___e_s_p32___d1___m_i_n_i___e_t_h_8hpp.html#aa8f8d73c965f04acf2513dea0b5443c5",
 "_g_p_i_o___defs___e_s_p32___m_h___e_t___l_i_v_e___mini_kit_8hpp.html",
 "_g_p_i_o___defs___e_s_p32___q_u_i_n_l_e_d___q_u_a_d___e_t_h_8hpp.html#acd6e6f0240598bf75d38ce85c4b91d92",
-"_g_p_i_o___defs___e_s_p32___t_t_g_o___t8_8hpp.html",
-"_g_p_i_o___defs___e_s_p8266___e_s_p01_s_8hpp.html#aaf891b2fa73c266aa119bed242c5ea30",
-"_output_spi_8hpp.html",
-"classc___file_mgr.html#a2cee9bd729f2622f518889c3794f544f",
-"classc___input_effect_engine.html#a64802e5baf334d240801715f00cefa66",
-"classc___input_m_q_t_t.html#afbc74dd0e4627273ed59cab493a58567",
-"classc___output_pixel.html#aaf521708c257e1ddf3f535c94373cf96",
-"classfsm___play_file__state.html#ad47cfa459bad0d65ea8345f4fcbeeb9a",
-"functions_d.html",
-"structc___f_p_p_discovery_1_1_system_debug_stats__t.html"
+"_g_p_i_o___defs___e_s_p32___solo2go_8hpp.html",
+"_g_p_i_o___defs___e_s_p32__kr__lights__msm_8hpp.html#a87e454c1f4806d5434e00260a82c6b61",
+"_output_mgr_8hpp.html",
+"classc___f_p_p_discovery.html#ad55f04ef98a7f5a291b6b190702cbe8b",
+"classc___input_e131.html#af6a61e337351f87db42592d96bb1a295",
+"classc___input_m_q_t_t.html#a61e1937ab6f2ed9541d09b60c38ea769",
+"classc___output_pixel.html#a42cd8ee2d21d82bdb1f6af08cf66c652",
+"classfsm___play_effect__state.html#a8e4c1d8fa33a9ebad5482e881e61730a",
+"fseq_8h.html#a6c61b206b073a5abcb258a6b985626c3",
+"struct_f_s_e_q_raw_variable_data_header.html#a0d2f80c3a48338ceb3c105688225820a"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
