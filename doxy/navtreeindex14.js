@@ -1,5 +1,7 @@
 var NAVTREEINDEX14 =
 {
+"fseq_8h.html#a61f3ec214a6fa2bb351949c606ed87b9":[1,0,0,4,1,40],
+"fseq_8h.html#a67006d5d0768f897b216abbf48e1f12d":[1,0,0,4,1,18],
 "fseq_8h.html#a6c61b206b073a5abcb258a6b985626c3":[1,0,0,4,1,21],
 "fseq_8h.html#a76086d820532f46155fdc9023c854d03":[1,0,0,4,1,48],
 "fseq_8h.html#a8842006928b763da7c334d250ee3d2fa":[1,0,0,4,1,31],
@@ -247,7 +249,5 @@ var NAVTREEINDEX14 =
 "struct_f_s_e_q_raw_header.html#ae14d93d12fe8c8526442cac8a8900b25":[0,0,35,8],
 "struct_f_s_e_q_raw_header.html#ae5f1d41435dfabed964793e54baa9ad6":[0,0,35,12],
 "struct_f_s_e_q_raw_range_entry.html":[0,0,36],
-"struct_f_s_e_q_raw_range_entry.html#a08c70d57f202cba568f6891017d3a8b3":[0,0,36,1],
-"struct_f_s_e_q_raw_range_entry.html#a9e0eb8c246245f5bb3a83ae84ac4229e":[0,0,36,0],
-"struct_f_s_e_q_raw_variable_data_header.html":[0,0,37]
+"struct_f_s_e_q_raw_range_entry.html#a08c70d57f202cba568f6891017d3a8b3":[0,0,36,1]
 };
