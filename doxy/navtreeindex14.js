@@ -1,6 +1,5 @@
 var NAVTREEINDEX14 =
 {
-"classfsm___wi_fi__state___connection_failed.html#afb559c4805f1987528619a5c7feb1bdb":[0,0,66,6],
 "classfsm___wi_fi__state___disabled.html":[0,0,67],
 "classfsm___wi_fi__state___disabled.html#a1bf24cd8fa8811780d782ae2be77fccc":[0,0,67,6],
 "classfsm___wi_fi__state___disabled.html#a2b4509de67db3ec771944cb173ac6105":[0,0,67,4],
@@ -249,5 +248,6 @@ var NAVTREEINDEX14 =
 "main_8cpp.html#af3e03d06d3843c9ce26dc935016d8797":[1,0,1,8,24],
 "main_8cpp.html#afe461d27b9c48d5921c00d521181f12f":[1,0,1,8,11],
 "memdebug_8h.html":[1,0,0,12],
-"memdebug_8h.html#a051ff826f5504fb82d756ce789eacc10":[1,0,0,12,1]
+"memdebug_8h.html#a051ff826f5504fb82d756ce789eacc10":[1,0,0,12,1],
+"memdebug_8h.html#a14d990269e60f38772eecaf63d3090d5":[1,0,0,12,2]
 };
