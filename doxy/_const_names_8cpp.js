@@ -78,6 +78,7 @@ var _const_names_8cpp =
     [ "CN_file", "_const_names_8cpp.html#a4d09906ee8dde22f5282c0992c9f1618", null ],
     [ "CN_filename", "_const_names_8cpp.html#a7b037f724ef7e05089e04dcb613ca069", null ],
     [ "CN_files", "_const_names_8cpp.html#a5f175aa16046f697b7a6abd99f519af7", null ],
+    [ "CN_FireGod", "_const_names_8cpp.html#a61f89e2e8e110fa4dad635012330b2d7", null ],
     [ "CN_FPPoverride", "_const_names_8cpp.html#a3ec2c678e86b846eefd5589569cbc79e", null ],
     [ "CN_Frequency", "_const_names_8cpp.html#a85c67ac3ba2acabbbdf446d44b469d24", null ],
     [ "CN_fseqfilelist", "_const_names_8cpp.html#a7c288156caff740701cc52eeb43d7d30", null ],
