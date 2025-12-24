@@ -193,28 +193,23 @@ $(function(){initNavTree('_output_common_8hpp_source.html',''); initResizable(tr
 <div class="foldopen" id="foldopen00087" data-start="{" data-end="}">
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="classc___output_common.html#a571adc45a6ceab09aaad36802507cc69">   87</a></span>    <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classc___output_common.html#a571adc45a6ceab09aaad36802507cc69">canRefresh</a> ()</div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    {</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        <span class="keywordtype">bool</span> response = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        uint32_t Now = micros ();</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        uint32_t FrameTimeDeltaInMicroSec = Now - <a class="code hl_variable" href="classc___output_common.html#a02be67c48c6c853eb05b725bfa0948bd">FrameStartTimeInMicroSec</a>; <span class="comment">// how many us since the frame started</span></div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        <span class="comment">// did the counter wrap?</span></div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        <span class="keywordflow">if</span>(Now &lt; <a class="code hl_variable" href="classc___output_common.html#a02be67c48c6c853eb05b725bfa0948bd">FrameStartTimeInMicroSec</a>)</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        {</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>            FrameTimeDeltaInMicroSec = Now + (0 - <a class="code hl_variable" href="classc___output_common.html#a02be67c48c6c853eb05b725bfa0948bd">FrameStartTimeInMicroSec</a>);</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        }</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        <span class="keywordflow">if</span>(FrameTimeDeltaInMicroSec &gt; <a class="code hl_variable" href="classc___output_common.html#a731419d5df71e722a8be136e618b39f2">FrameDurationInMicroSec</a>)</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        {</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>            response = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        }</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        <span class="keywordflow">return</span> response;</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    }</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        uint32_t Now = micros ();</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        uint32_t FrameTimeDeltaInMicroSec = Now - <a class="code hl_variable" href="classc___output_common.html#a02be67c48c6c853eb05b725bfa0948bd">FrameStartTimeInMicroSec</a>; <span class="comment">// how many us since the frame started</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        <span class="comment">// did the counter wrap?</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        <span class="keywordflow">if</span>(Now &lt; <a class="code hl_variable" href="classc___output_common.html#a02be67c48c6c853eb05b725bfa0948bd">FrameStartTimeInMicroSec</a>)</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        {</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>            FrameTimeDeltaInMicroSec = Now + (0 - <a class="code hl_variable" href="classc___output_common.html#a02be67c48c6c853eb05b725bfa0948bd">FrameStartTimeInMicroSec</a>);</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        }</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        <span class="keywordflow">return</span> (FrameTimeDeltaInMicroSec &gt; <a class="code hl_variable" href="classc___output_common.html#a731419d5df71e722a8be136e618b39f2">FrameDurationInMicroSec</a>);</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    }</div>
 </div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno"><a class="line" href="classc___output_common.html#a02be67c48c6c853eb05b725bfa0948bd">  107</a></span>    uint32_t    <a class="code hl_variable" href="classc___output_common.html#a02be67c48c6c853eb05b725bfa0948bd">FrameStartTimeInMicroSec</a>   = 0;</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>}; <span class="comment">// c_OutputCommon</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno"><a class="line" href="classc___output_common.html#a02be67c48c6c853eb05b725bfa0948bd">  102</a></span>    uint32_t    <a class="code hl_variable" href="classc___output_common.html#a02be67c48c6c853eb05b725bfa0948bd">FrameStartTimeInMicroSec</a>   = 0;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>}; <span class="comment">// c_OutputCommon</span></div>
 </div>
 </div>
 </div>
@@ -222,7 +217,7 @@ $(function(){initNavTree('_output_common_8hpp_source.html',''); initResizable(tr
 <div class="ttc" id="a_e_s_pixel_stick_8h_html"><div class="ttname"><a href="_e_s_pixel_stick_8h.html">ESPixelStick.h</a></div></div>
 <div class="ttc" id="a_output_mgr_8hpp_html"><div class="ttname"><a href="_output_mgr_8hpp.html">OutputMgr.hpp</a></div></div>
 <div class="ttc" id="aclassc___output_common_html"><div class="ttname"><a href="classc___output_common.html">c_OutputCommon</a></div><div class="ttdef"><b>Definition</b> OutputCommon.hpp:31</div></div>
-<div class="ttc" id="aclassc___output_common_html_a02be67c48c6c853eb05b725bfa0948bd"><div class="ttname"><a href="classc___output_common.html#a02be67c48c6c853eb05b725bfa0948bd">c_OutputCommon::FrameStartTimeInMicroSec</a></div><div class="ttdeci">uint32_t FrameStartTimeInMicroSec</div><div class="ttdef"><b>Definition</b> OutputCommon.hpp:107</div></div>
+<div class="ttc" id="aclassc___output_common_html_a02be67c48c6c853eb05b725bfa0948bd"><div class="ttname"><a href="classc___output_common.html#a02be67c48c6c853eb05b725bfa0948bd">c_OutputCommon::FrameStartTimeInMicroSec</a></div><div class="ttdeci">uint32_t FrameStartTimeInMicroSec</div><div class="ttdef"><b>Definition</b> OutputCommon.hpp:102</div></div>
 <div class="ttc" id="aclassc___output_common_html_a0f7824654fc0d632df425a3cfb2eb1bf"><div class="ttname"><a href="classc___output_common.html#a0f7824654fc0d632df425a3cfb2eb1bf">c_OutputCommon::SetOutputBufferAddress</a></div><div class="ttdeci">void SetOutputBufferAddress(uint8_t *pNewOutputBuffer)</div><div class="ttdef"><b>Definition</b> OutputCommon.hpp:58</div></div>
 <div class="ttc" id="aclassc___output_common_html_a18e0118f2a588c46e467556bab72010f"><div class="ttname"><a href="classc___output_common.html#a18e0118f2a588c46e467556bab72010f">c_OutputCommon::~c_OutputCommon</a></div><div class="ttdeci">virtual ~c_OutputCommon()</div><div class="ttdef"><b>Definition</b> OutputCommon.cpp:50</div></div>
 <div class="ttc" id="aclassc___output_common_html_a195abd2bcb14f630abd61bdd0d33f046"><div class="ttname"><a href="classc___output_common.html#a195abd2bcb14f630abd61bdd0d33f046">c_OutputCommon::GetOutputChannelId</a></div><div class="ttdeci">OID_t GetOutputChannelId()</div><div class="ttdoc">return the output channel number</div><div class="ttdef"><b>Definition</b> OutputCommon.hpp:51</div></div>

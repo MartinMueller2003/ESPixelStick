@@ -100,7 +100,7 @@ var searchData=
   ['startingtimems_97',['StartingTimeMS',['../structc___input_f_p_p_remote_play_item_1_1_file_control__t.html#a96936f1f8881c0f9c55e67a2cc56b5df',1,'c_InputFPPRemotePlayItem::FileControl_t']]],
   ['startnewdataframe_98',['StartNewDataFrame',['../classc___output_uart.html#ac75a7fa5ee8100cb3780633a6732352a',1,'c_OutputUart']]],
   ['startnewframe_99',['StartNewFrame',['../classc___output_pixel.html#a65dc26d4fe491978858f65fc21b549f1',1,'c_OutputPixel::StartNewFrame()'],['../classc___output_uart.html#ad201cf8c69ead52acf4a885f90a91a3b',1,'c_OutputUart::StartNewFrame()']]],
-  ['startplaying_100',['StartPlaying',['../classc___input_f_p_p_remote.html#a8f7fe7b1eaf90277f65c05987aec8aac',1,'c_InputFPPRemote::StartPlaying()'],['../classc___f_p_p_discovery.html#a43c069118ce152afe8425d7db1b157a1',1,'c_FPPDiscovery::StartPlaying()']]],
+  ['startplaying_100',['StartPlaying',['../classc___input_f_p_p_remote.html#a0acc6c7f70b0ba521cf42bd8efef7141',1,'c_InputFPPRemote::StartPlaying()'],['../classc___f_p_p_discovery.html#a43c069118ce152afe8425d7db1b157a1',1,'c_FPPDiscovery::StartPlaying()']]],
   ['startplayinglocalfile_101',['StartPlayingLocalFile',['../classc___input_f_p_p_remote.html#ad3bc5af64fe8523ba3c2f35cffa62fa0',1,'c_InputFPPRemote']]],
   ['startplayingremotefile_102',['StartPlayingRemoteFile',['../classc___input_f_p_p_remote.html#af0f520243d6264f4c60313a1150f0800',1,'c_InputFPPRemote']]],
   ['startsdcard_103',['StartSdCard',['../classc___file_mgr.html#a0986fc423ff9a5f4f5e8c48c0752c3d2',1,'c_FileMgr']]],
