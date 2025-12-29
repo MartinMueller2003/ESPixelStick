@@ -53,7 +53,7 @@ var searchData=
   ['elapsed_5fplay_5ftimer_5finterval_5fms_50',['ELAPSED_PLAY_TIMER_INTERVAL_MS',['../_input_f_p_p_remote_play_file_8hpp.html#a9ce0196b79688b4722fd374e0d54bb6c',1,'InputFPPRemotePlayFile.hpp']]],
   ['elapsedplaytimems_51',['ElapsedPlayTimeMS',['../structc___input_f_p_p_remote_play_item_1_1_file_control__t.html#afabd2e7a215bb39f0358bbd67fd71887',1,'c_InputFPPRemotePlayItem::FileControl_t']]],
   ['enable_52',['Enable',['../structc___input_effect_engine_1_1_flash_info__t.html#ad0dac95dfe7d15c9a766f8d0fffe82e6',1,'c_InputEffectEngine::FlashInfo_t::Enable'],['../classc___wi_fi_driver.html#a282b20cd06da439d8fcf1890b2e75361',1,'c_WiFiDriver::Enable()'],['../classc___f_p_p_discovery.html#af8b8c645e4a23ec95ab938891b4953f1',1,'c_FPPDiscovery::Enable()']]],
-  ['enable_5fdedicated_5fspi_53',['ENABLE_DEDICATED_SPI',['../_g_p_i_o___defs___e_s_p32___s_8hpp.html#a3ceb23f14263a17c56eac40e484cbbbb',1,'GPIO_Defs_ESP32_S.hpp']]],
+  ['enable_5fdedicated_5fspi_53',['ENABLE_DEDICATED_SPI',['../_g_p_i_o___defs___e_s_p32_s3___devkit_c_8hpp.html#a3ceb23f14263a17c56eac40e484cbbbb',1,'GPIO_Defs_ESP32S3_DevkitC.hpp']]],
   ['enabled_54',['Enabled',['../classc___external_input.html#a829a67d0af2b787d02568d2bf9e816ae',1,'c_ExternalInput']]],
   ['enableuartinterrupts_55',['EnableUartInterrupts',['../classc___output_uart.html#aae993e4f02690abebc32d024b15521c8',1,'c_OutputUart']]],
   ['end_56',['end',['../class_e_f_update.html#afb0f0f8cb2e8f129c08ca11d42ed578f',1,'EFUpdate']]],
