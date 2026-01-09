@@ -66,10 +66,10 @@ var NAVTREEINDEX =
 "classc___input_artnet.html#aea8088f99572c09cecd383e4b1f33115",
 "classc___input_f_p_p_remote_play_file.html#a840cfe33a9ba494d5962d9f59d0a55ee",
 "classc___output_common.html#ac021e275ea90fcfbdc659918d2b78c03",
-"classc___wi_fi_driver.html",
-"classfsm___wi_fi__state___boot.html#a8063e8f2dff740f938a920e287b68709",
-"globals_vars_l.html",
-"structc___input_mgr_1_1_driver_info__t.html#a1f45a367b0aa71fbebe813c0121e75f0"
+"classc___web_mgr.html#af729e648a154b8a0228c6fe90dba70ab",
+"classfsm___wi_fi__state___boot.html#a2fb76784655583f1b5373e69810bc67c",
+"globals_vars_i.html",
+"structc___input_mgr_1_1_driver_info__t.html#a14765d7fa7e8464a52291058a491f45a"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
