@@ -264,6 +264,10 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-types" name="pri-types"></a>
 Private Types</h2></td></tr>
+<tr class="memitem:a53529eb713a399effb4d52e08270352e" id="r_a53529eb713a399effb4d52e08270352e"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a53529eb713a399effb4d52e08270352e">EffectChannelMode_t</a> { <a class="el" href="#a53529eb713a399effb4d52e08270352ea08fa64feea96348b803ea69f931b30a7">ChannelMode</a>
+, <a class="el" href="#a53529eb713a399effb4d52e08270352ea0173278fa931b23c49dceae57b72b6a1">PixelMode</a>
+ }</td></tr>
+<tr class="separator:a53529eb713a399effb4d52e08270352e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a12b43d4049b18c978b7f22df2da2efaa" id="r_a12b43d4049b18c978b7f22df2da2efaa"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a12b43d4049b18c978b7f22df2da2efaa">timeType</a> = decltype(millis())</td></tr>
 <tr class="separator:a12b43d4049b18c978b7f22df2da2efaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -340,6 +344,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a00565b280e17e0ba56d2f1667b1f2c0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac65e7f765bfe855b23ca9388f257fecb" id="r_ac65e7f765bfe855b23ca9388f257fecb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac65e7f765bfe855b23ca9388f257fecb">Disabled</a> = false</td></tr>
 <tr class="separator:ac65e7f765bfe855b23ca9388f257fecb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afac4d3235c168fdfd8306ed3bf95e7af" id="r_afac4d3235c168fdfd8306ed3bf95e7af"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a53529eb713a399effb4d52e08270352e">EffectChannelMode_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afac4d3235c168fdfd8306ed3bf95e7af">EffectChannelMode</a> = <a class="el" href="#a53529eb713a399effb4d52e08270352ea0173278fa931b23c49dceae57b72b6a1">EffectChannelMode_t::PixelMode</a></td></tr>
+<tr class="separator:afac4d3235c168fdfd8306ed3bf95e7af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeac381967f9b9f4621137235870e2d8d" id="r_aeac381967f9b9f4621137235870e2d8d"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeac381967f9b9f4621137235870e2d8d">effectMarqueePixelAdvanceCount</a> = 1</td></tr>
 <tr class="separator:aeac381967f9b9f4621137235870e2d8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a31d0c042491ccd5d8783b4587f048cf2" id="r_a31d0c042491ccd5d8783b4587f048cf2"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a31d0c042491ccd5d8783b4587f048cf2">effectMarqueePixelLocation</a> = 0</td></tr>
@@ -354,6 +360,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a2ce41cfe7b3c283a60786f2875abcc32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9bff0915864cb6a4e0d957e0cad27c0e" id="r_a9bff0915864cb6a4e0d957e0cad27c0e"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9bff0915864cb6a4e0d957e0cad27c0e">PixelOffset</a> = 0</td></tr>
 <tr class="separator:a9bff0915864cb6a4e0d957e0cad27c0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fb52b02b3b4a849194202c2210065ea" id="r_a1fb52b02b3b4a849194202c2210065ea"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1fb52b02b3b4a849194202c2210065ea">ChannelCount</a> = 0</td></tr>
+<tr class="separator:a1fb52b02b3b4a849194202c2210065ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e1d7ac3f9782458a82aca5fce6e4ba5" id="r_a0e1d7ac3f9782458a82aca5fce6e4ba5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_fast_timer.html">FastTimer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0e1d7ac3f9782458a82aca5fce6e4ba5">EffectDelayTimer</a></td></tr>
 <tr class="separator:a0e1d7ac3f9782458a82aca5fce6e4ba5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab9e6427393356e025356dd307dff4098" id="r_ab9e6427393356e025356dd307dff4098"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structc___input_effect_engine_1_1_effect_descriptor__t.html">EffectDescriptor_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab9e6427393356e025356dd307dff4098">ActiveEffect</a> = nullptr</td></tr>
@@ -413,6 +421,33 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="a53529eb713a399effb4d52e08270352e" name="a53529eb713a399effb4d52e08270352e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53529eb713a399effb4d52e08270352e">&#9670;&#160;</a></span>EffectChannelMode_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="#a53529eb713a399effb4d52e08270352e">c_InputEffectEngine::EffectChannelMode_t</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a53529eb713a399effb4d52e08270352ea08fa64feea96348b803ea69f931b30a7" name="a53529eb713a399effb4d52e08270352ea08fa64feea96348b803ea69f931b30a7"></a>ChannelMode&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a53529eb713a399effb4d52e08270352ea0173278fa931b23c49dceae57b72b6a1" name="a53529eb713a399effb4d52e08270352ea0173278fa931b23c49dceae57b72b6a1"></a>PixelMode&#160;</td><td class="fielddoc"></td></tr>
+</table>
 
 </div>
 </div>
@@ -2801,6 +2836,28 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
+<a id="a1fb52b02b3b4a849194202c2210065ea" name="a1fb52b02b3b4a849194202c2210065ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1fb52b02b3b4a849194202c2210065ea">&#9670;&#160;</a></span>ChannelCount</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t c_InputEffectEngine::ChannelCount = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a2ce41cfe7b3c283a60786f2875abcc32" name="a2ce41cfe7b3c283a60786f2875abcc32"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2ce41cfe7b3c283a60786f2875abcc32">&#9670;&#160;</a></span>ChannelsPerPixel</h2>
 
@@ -2878,6 +2935,28 @@ Here is the caller graph for this function:</div>
       <table class="memname">
         <tr>
           <td class="memname">float c_InputEffectEngine::EffectBrightness = 1.0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afac4d3235c168fdfd8306ed3bf95e7af" name="afac4d3235c168fdfd8306ed3bf95e7af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afac4d3235c168fdfd8306ed3bf95e7af">&#9670;&#160;</a></span>EffectChannelMode</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a53529eb713a399effb4d52e08270352e">EffectChannelMode_t</a> c_InputEffectEngine::EffectChannelMode = <a class="el" href="#a53529eb713a399effb4d52e08270352ea0173278fa931b23c49dceae57b72b6a1">EffectChannelMode_t::PixelMode</a></td>
         </tr>
       </table>
   </td>

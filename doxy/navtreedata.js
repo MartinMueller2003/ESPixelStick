@@ -57,21 +57,21 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_ap_credentials_8cpp.html",
-"_const_names_8cpp.html#afb61829b5f9bd4dba287f5878d9185e9",
-"_const_names_8hpp.html#af9dd0d23dd8a32bb2b2f29f3cc394b24",
-"_g_p_i_o___defs___e_s_p32___d1___m_i_n_i___e_t_h_8hpp.html#ad77542025da3a991160dd0707104d9af",
-"_g_p_i_o___defs___e_s_p32___m_h___e_t___l_i_v_e___mini_kit_8hpp.html#ad71d400bf3d1b998be16ce4c822a22ec",
-"_g_p_i_o___defs___e_s_p32___q_u_i_n_l_e_d___q_u_a_d___p5_8hpp.html#ad71d400bf3d1b998be16ce4c822a22ec",
-"_g_p_i_o___defs___e_s_p32___tetra2go_8hpp.html#a8b387d3500431742534560dca1024387",
-"_input_f_p_p_remote_8cpp.html",
-"_web_mgr_8cpp.html#aff0c9421511c7f4c149e388c0b5e14f2",
-"classc___file_mgr.html#af671a65c5556bf8a1f3da52191c0f218",
-"classc___input_f_p_p_remote.html#a6ed3176da06e02c7d08fdad2aaf709fd",
-"classc___network_mgr.html#a21de268df9b77ee26f74ae4712537c21",
-"classc___output_uart.html#adcb12b5d0afb398d9ab8a0b9239c1ca2",
-"classfsm___play_list__state___paused.html#a7d3ecde4fcf7fc4b4fced77139e8f051",
-"globals_defs.html",
-"structc___input_effect_engine_1_1_flash_info__t.html#a64e5175c2e32bb31a3335c35b906ac77"
+"_const_names_8cpp.html#af677cd8c5e5971dd98fceae73000e74d",
+"_const_names_8hpp.html#ae3afd847590d80f125e2dc675786c35d",
+"_g_p_i_o___defs___e_s_p32___d1___m_i_n_i___e_t_h_8hpp.html#a319d1c078a4ace47775ecd6615a796a7",
+"_g_p_i_o___defs___e_s_p32___m5_stack___atom_8hpp.html#aea53898829210ed1fbac67d4aa855a6e",
+"_g_p_i_o___defs___e_s_p32___q_u_i_n_l_e_d___q_u_a_d___e_t_h___p5_8hpp.html#aeed05cdd33507563bb8551bc006bc0f1",
+"_g_p_i_o___defs___e_s_p32___t_w_i_l_i_g_h_t_l_o_r_d___e_t_h_8hpp.html#adaf0753131bfc7ffd9f67c5061606ed1",
+"_input_d_d_p_8h.html#aea80a7c46e66f756c8f0c03775a7b747",
+"_safer_string_conversion_8hpp.html#abaa5f3baa5ae9ae6df677674285ab8da",
+"classc___file_mgr.html#aab11aa92f9253ec95ec5b2dc7be1c55e",
+"classc___input_effect_engine.html#afaf6b474467520e248c2e79d3bdc8146",
+"classc___input_mgr.html#ab7a89ecb21bf23364999dedc7e474fc5ac02c03efd74ae5f6fe72e72aa48b9adf",
+"classc___output_uart.html#aa3a0f9697d6b37c7eef0f17923eac717",
+"classfsm___play_list__state.html#a300141836518233b8730e740ccf6c0b0",
+"functions_vars_f.html",
+"structc___input_e131_1_1_universe__t.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
