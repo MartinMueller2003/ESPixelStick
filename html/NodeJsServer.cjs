@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const espsIp = "http://192.168.10.216/";
+const espsIp = "http://192.168.10.235/";
 
 app.listen(9000, () => {
     console.log("Application started and Listening on port 9000");
@@ -12,6 +12,7 @@ app.get("/", (req, res) => {
     res.sendFile(__dirname + "/index.html");
 });
 
+app.get("/V1",           (req, res) => {res.redirect(espsIp + "V1")});
 app.get("/XP",           (req, res) => {res.redirect(espsIp + "XP")});
 app.post("/XP",          (req, res) => {res.redirect(espsIp + "XP")});
 app.post("/X6",          (req, res) => {res.redirect(espsIp + "X6")});
