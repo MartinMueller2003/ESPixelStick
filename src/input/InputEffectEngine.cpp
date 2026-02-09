@@ -149,7 +149,7 @@ void c_InputEffectEngine::GetConfig (JsonObject& jsonConfig)
     JsonWrite(jsonConfig, CN_EffectBrightness,   uint32_t(EffectBrightness * 100.0));
     JsonWrite(jsonConfig, CN_EffectWhiteChannel, EffectWhiteChannel);
     JsonWrite(jsonConfig, CN_EffectColor,        HexColor);
-    JsonWrite(jsonConfig, CN_EffectChannelMode,  EffectChannelMode);
+    JsonWrite(jsonConfig, CN_EffectChannelMode,  String(EffectChannelMode));
     JsonWrite(jsonConfig, CN_pixel_count,        effectMarqueePixelAdvanceCount);
 
     JsonWrite(jsonConfig, CN_FlashEnable,   FlashInfo.Enable);
@@ -525,7 +525,10 @@ bool c_InputEffectEngine::SetConfig (ArduinoJson::JsonObject& jsonConfig)
     setFromJSON (EffectWhiteChannel, jsonConfig, CN_EffectWhiteChannel);
     setFromJSON (effectName,         jsonConfig, CN_currenteffect);
     setFromJSON (effectColor,        jsonConfig, CN_EffectColor);
-    setFromJSON (EffectChannelMode,  jsonConfig, CN_EffectChannelMode);
+
+    String temp;
+    setFromJSON (temp,  jsonConfig, CN_EffectChannelMode);
+    EffectChannelMode = static_cast<EffectChannelMode_t>(temp.toInt());
 
     // DEBUG_V (String ("effectColor: '") + effectColor + "'");
     setFromJSON (effectMarqueePixelAdvanceCount, jsonConfig, CN_pixel_count);
