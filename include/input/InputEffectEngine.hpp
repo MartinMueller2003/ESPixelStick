@@ -26,7 +26,7 @@ class c_InputEffectEngine : public c_InputCommon
 public:
     c_InputEffectEngine (c_InputMgr::e_InputChannelIds NewInputChannelId,
                          c_InputMgr::e_InputType       NewChannelType,
-                         uint32_t                        BufferSize);
+                         uint32_t                      BufferSize);
     virtual ~c_InputEffectEngine ();
 
     c_InputEffectEngine ();
@@ -146,7 +146,12 @@ private:
     CRGB EffectColor               = { 183, 0, 255 }; /* Externally controlled effect color */
     bool StayDark                  = false;
     bool Disabled                  = false;
-
+    enum EffectChannelMode_t
+    {
+        ChannelMode,
+        PixelMode
+    };
+    EffectChannelMode_t EffectChannelMode = EffectChannelMode_t::PixelMode;
     uint32_t effectMarqueePixelAdvanceCount = 1;
     uint32_t effectMarqueePixelLocation = 0;
 
@@ -155,6 +160,7 @@ private:
     uint32_t   MirroredPixelCount    = 0;            /* Number of RGB leds (not channels) */
     uint8_t    ChannelsPerPixel      = 3;
     uint32_t   PixelOffset           = 0;
+    uint32_t   ChannelCount          = 0;
     FastTimer  EffectDelayTimer;
 
     void setPixel(uint16_t idx,  CRGB color);
