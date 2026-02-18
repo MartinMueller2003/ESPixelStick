@@ -19,7 +19,7 @@
 */
 
 // Output Manager
-// MAX 8 Serial port on ESP32
+// MAX 4 Serial port on ESP32S3
 const OM_OutputPortDefinition_t OM_OutputPortDefinitions[] =
 {
     {OM_PortId_t(0), OM_PortType_t::OM_SERIAL, {gpio_num_t::GPIO_NUM_2}},
@@ -30,9 +30,7 @@ const OM_OutputPortDefinition_t OM_OutputPortDefinitions[] =
     {OM_PortId_t(2), OM_PortType_t::OM_RELAY,  {gpio_num_t::GPIO_NUM_41}},
     {OM_PortId_t(3), OM_PortType_t::OM_SERIAL, {gpio_num_t::GPIO_NUM_40}},
     {OM_PortId_t(3), OM_PortType_t::OM_RELAY,  {gpio_num_t::GPIO_NUM_40}},
-    {OM_PortId_t(4), OM_PortType_t::OM_SERIAL, {gpio_num_t::GPIO_NUM_16}},
-    {OM_PortId_t(4), OM_PortType_t::OM_RELAY,  {gpio_num_t::GPIO_NUM_16}},
-    {OM_PortId_t(5), OM_PortType_t::OM_I2C,    {gpio_num_t::GPIO_NUM_17, gpio_num_t::GPIO_NUM_16}},
+    {OM_PortId_t(4), OM_PortType_t::OM_I2C,    {gpio_num_t::GPIO_NUM_17, gpio_num_t::GPIO_NUM_18}},
 };
 
 // File Manager
