@@ -19,7 +19,7 @@
 */
 
 // Output Manager
-// MAX 8 Serial port on ESP32
+// MAX 4 Serial port on ESP32S3
 const OM_OutputPortDefinition_t OM_OutputPortDefinitions[] =
 {
     {OM_PortId_t(0), OM_PortType_t::OM_SERIAL, {gpio_num_t::GPIO_NUM_1}},
