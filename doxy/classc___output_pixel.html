@@ -179,10 +179,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a65dc26d4fe491978858f65fc21b549f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa36aa9a958416f5b47fc4eba522955ad" id="r_aa36aa9a958416f5b47fc4eba522955ad"><td class="memItemLeft" align="right" valign="top">bool IRAM_ATTR&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa36aa9a958416f5b47fc4eba522955ad">ISR_MoreDataToSend</a> ()</td></tr>
 <tr class="separator:aa36aa9a958416f5b47fc4eba522955ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae8fd5f89d3ae702cad92fbbba84375cb" id="r_ae8fd5f89d3ae702cad92fbbba84375cb"><td class="memItemLeft" align="right" valign="top">virtual bool IRAM_ATTR&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae8fd5f89d3ae702cad92fbbba84375cb">ISR_GetNextIntensityToSend</a> (uint32_t &amp;DataToSend)</td></tr>
+<tr class="memitem:ae8fd5f89d3ae702cad92fbbba84375cb" id="r_ae8fd5f89d3ae702cad92fbbba84375cb"><td class="memItemLeft" align="right" valign="top">bool IRAM_ATTR&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae8fd5f89d3ae702cad92fbbba84375cb">ISR_GetNextIntensityToSend</a> (uint32_t &amp;DataToSend)</td></tr>
 <tr class="separator:ae8fd5f89d3ae702cad92fbbba84375cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae59e870c50616d638c5adcf6c1764c83" id="r_ae59e870c50616d638c5adcf6c1764c83"><td class="memItemLeft" align="right" valign="top">virtual bool IRAM_ATTR&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae59e870c50616d638c5adcf6c1764c83">ISR_GetNextBitToSend</a> (uint32_t &amp;DataToSend)</td></tr>
-<tr class="separator:ae59e870c50616d638c5adcf6c1764c83"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a29981b330185e79f12baabab7bc143da" id="r_a29981b330185e79f12baabab7bc143da"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a29981b330185e79f12baabab7bc143da">SetPixelCount</a> (uint32_t value)</td></tr>
 <tr class="separator:a29981b330185e79f12baabab7bc143da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad7b81967a455be24b9f3dc50d2587b04" id="r_ad7b81967a455be24b9f3dc50d2587b04"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad7b81967a455be24b9f3dc50d2587b04">GetPixelCount</a> ()</td></tr>
@@ -1005,39 +1003,11 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="ae59e870c50616d638c5adcf6c1764c83" name="ae59e870c50616d638c5adcf6c1764c83"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae59e870c50616d638c5adcf6c1764c83">&#9670;&#160;</a></span>ISR_GetNextBitToSend()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual bool IRAM_ATTR c_OutputPixel::ISR_GetNextBitToSend </td>
-          <td>(</td>
-          <td class="paramtype">uint32_t &amp;</td>          <td class="paramname"><span class="paramname"><em>DataToSend</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="ae8fd5f89d3ae702cad92fbbba84375cb" name="ae8fd5f89d3ae702cad92fbbba84375cb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae8fd5f89d3ae702cad92fbbba84375cb">&#9670;&#160;</a></span>ISR_GetNextIntensityToSend()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool IRAM_ATTR c_OutputPixel::ISR_GetNextIntensityToSend </td>
@@ -1046,11 +1016,6 @@ Here is the call graph for this function:</div>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 <div class="dynheader">
 Here is the call graph for this function:</div>

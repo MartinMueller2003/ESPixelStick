@@ -14,7 +14,6 @@ var classc___output_pixel =
     [ "GetNumOutputBufferChannelsServiced", "classc___output_pixel.html#a5bdcf6ff737f7b309112afc3e3bdd8ef", null ],
     [ "GetPixelCount", "classc___output_pixel.html#ad7b81967a455be24b9f3dc50d2587b04", null ],
     [ "GetStatus", "classc___output_pixel.html#a3e6c5c9cfb8d88e830a5640e7d40b648", null ],
-    [ "ISR_GetNextBitToSend", "classc___output_pixel.html#ae59e870c50616d638c5adcf6c1764c83", null ],
     [ "ISR_GetNextIntensityToSend", "classc___output_pixel.html#ae8fd5f89d3ae702cad92fbbba84375cb", null ],
     [ "ISR_MoreDataToSend", "classc___output_pixel.html#aa36aa9a958416f5b47fc4eba522955ad", null ],
     [ "PixelAppendNulls", "classc___output_pixel.html#a611d4757b8af1e3d5dff19c093bbc260", null ],

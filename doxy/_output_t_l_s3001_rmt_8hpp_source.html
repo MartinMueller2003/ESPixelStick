@@ -146,7 +146,7 @@ $(function(){initNavTree('_output_t_l_s3001_rmt_8hpp_source.html',''); initResiz
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordtype">void</span>    GetStatus (ArduinoJson::JsonObject&amp; jsonStatus);</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keywordtype">void</span>    SetOutputBufferSize (uint32_t NumChannelsAvailable);</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordtype">void</span>    PauseOutput(<span class="keywordtype">bool</span> State);</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> IRAM_ATTR ISR_GetNextBitToSend (uint32_t &amp;DataToSend);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordtype">bool</span> IRAM_ATTR ISR_GetNextBitToSend (uint32_t &amp;DataToSend);</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="keyword">private</span>:</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keywordtype">void</span>    SetBitTimes ();</div>
@@ -158,7 +158,7 @@ $(function(){initNavTree('_output_t_l_s3001_rmt_8hpp_source.html',''); initResiz
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keyword">friend</span> <span class="keyword">class </span>fsm_RMT_state_SendData;</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keyword">friend</span> <span class="keyword">class </span>fsm_RMT_state_SendDataIdle;</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keyword">friend</span> <span class="keyword">class </span>fsm_RMT_state;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    fsm_RMT_state * pCurrentFsmState = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    OutputTLS3001RmtFsmStates_t CurrentFsmState = OutputTLS3001RmtFsmStates_t::TLS3001DataIdle;</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    fsm_RMT_state_SendSync      fsm_RMT_state_SendSync_imp;</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    fsm_RMT_state_SendReset     fsm_RMT_state_SendReset_imp;</div>
