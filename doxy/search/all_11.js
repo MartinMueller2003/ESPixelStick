@@ -49,7 +49,7 @@ var searchData=
   ['seteffect_46',['setEffect',['../classc___input_effect_engine.html#a80cd28e720963e39357b96dc2e516291',1,'c_InputEffectEngine']]],
   ['setethernetisconnected_47',['SetEthernetIsConnected',['../classc___network_mgr.html#aa9d587432312a58a8d98b5b0a75796fb',1,'c_NetworkMgr']]],
   ['setframeappendinformation_48',['SetFrameAppendInformation',['../classc___output_pixel.html#adc34e80e736af0a0e50fc8de46db1ec4',1,'c_OutputPixel']]],
-  ['setframedurration_49',['SetFrameDurration',['../classc___output_pixel.html#a4a7f12a23b4f2ce0eb5cfeccd8bcb3e2',1,'c_OutputPixel']]],
+  ['setframedurration_49',['SetFrameDurration',['../classc___output_pixel.html#a248ecfbaae3d9aaa1c6375755bea16f0',1,'c_OutputPixel']]],
   ['setframeprependinformation_50',['SetFramePrependInformation',['../classc___output_pixel.html#ad712765c16ee9368774d3160a6df59a5',1,'c_OutputPixel']]],
   ['setfromjson_51',['setFromJSON',['../_e_s_pixel_stick_8h.html#a8295d2ec53bab395bfc5811cfd78ca4d',1,'setFromJSON(T &amp;OutValue, JsonObject &amp;Json, N Name):&#160;ESPixelStick.h'],['../_e_s_pixel_stick_8h.html#a8fe2a1df9e408fa0e9f613be55c0956d',1,'setFromJSON(char(&amp;OutValue)[S], JsonObject &amp;Json, N Name):&#160;ESPixelStick.h'],['../_e_s_pixel_stick_8h.html#a22f4176fd1b5a26a3d18c096681ad8e9',1,'setFromJSON(T &amp;OutValue, JsonVariant &amp;Json, N Name):&#160;ESPixelStick.h']]],
   ['setfsmstate_52',['SetFsmState',['../classc___wi_fi_driver.html#acd243ad52f01b89e5450efb1681584b9',1,'c_WiFiDriver']]],

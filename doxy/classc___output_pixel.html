@@ -175,7 +175,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a7281e0eb2d9420ba682548e9038d61cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9a496f93b28b97e6b3016adbf19986ad" id="r_a9a496f93b28b97e6b3016adbf19986ad"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9a496f93b28b97e6b3016adbf19986ad">SetIntensityDataWidth</a> (uint32_t value)</td></tr>
 <tr class="separator:a9a496f93b28b97e6b3016adbf19986ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a65dc26d4fe491978858f65fc21b549f1" id="r_a65dc26d4fe491978858f65fc21b549f1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a65dc26d4fe491978858f65fc21b549f1">StartNewFrame</a> ()</td></tr>
+<tr class="memitem:a65dc26d4fe491978858f65fc21b549f1" id="r_a65dc26d4fe491978858f65fc21b549f1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a65dc26d4fe491978858f65fc21b549f1">StartNewFrame</a> ()</td></tr>
 <tr class="separator:a65dc26d4fe491978858f65fc21b549f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa36aa9a958416f5b47fc4eba522955ad" id="r_aa36aa9a958416f5b47fc4eba522955ad"><td class="memItemLeft" align="right" valign="top">bool IRAM_ATTR&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa36aa9a958416f5b47fc4eba522955ad">ISR_MoreDataToSend</a> ()</td></tr>
 <tr class="separator:aa36aa9a958416f5b47fc4eba522955ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -239,8 +239,8 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:adc34e80e736af0a0e50fc8de46db1ec4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a06ab1ebc8065127d149e41bf902f8945" id="r_a06ab1ebc8065127d149e41bf902f8945"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a06ab1ebc8065127d149e41bf902f8945">SetPixelPrependInformation</a> (const uint8_t *data, uint32_t len)</td></tr>
 <tr class="separator:a06ab1ebc8065127d149e41bf902f8945"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4a7f12a23b4f2ce0eb5cfeccd8bcb3e2" id="r_a4a7f12a23b4f2ce0eb5cfeccd8bcb3e2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4a7f12a23b4f2ce0eb5cfeccd8bcb3e2">SetFrameDurration</a> (float <a class="el" href="#ae5cff5b491f941dd4c2167e3a6de7b30">IntensityBitTimeInUs</a>, uint16_t <a class="el" href="#aef29226779bfa3f654170b97aa9682dc">BlockSize</a>=1, float <a class="el" href="#a408993473c26291ecb94e5c86afadf10">BlockDelayUs</a>=0.0)</td></tr>
-<tr class="separator:a4a7f12a23b4f2ce0eb5cfeccd8bcb3e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a248ecfbaae3d9aaa1c6375755bea16f0" id="r_a248ecfbaae3d9aaa1c6375755bea16f0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a248ecfbaae3d9aaa1c6375755bea16f0">SetFrameDurration</a> (float <a class="el" href="#ae5cff5b491f941dd4c2167e3a6de7b30">IntensityBitTimeInUs</a>, uint16_t <a class="el" href="#aef29226779bfa3f654170b97aa9682dc">BlockSize</a>=1, float <a class="el" href="#a408993473c26291ecb94e5c86afadf10">BlockDelayUs</a>=0.0, uint OutBitsPerDataBit=8)</td></tr>
+<tr class="separator:a248ecfbaae3d9aaa1c6375755bea16f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_classc___output_common"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_methods_classc___output_common')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classc___output_common.html">c_OutputCommon</a></td></tr>
 <tr class="memitem:ae4db3605be43e71dbd0b4f929b69aa85 inherit pro_methods_classc___output_common" id="r_ae4db3605be43e71dbd0b4f929b69aa85"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc___output_common.html#ae4db3605be43e71dbd0b4f929b69aa85">ReportNewFrame</a> ()</td></tr>
 <tr class="separator:ae4db3605be43e71dbd0b4f929b69aa85 inherit pro_methods_classc___output_common"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -342,7 +342,7 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a3582e2b16ffd11010d345dba2a837a6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1cc23a7f958a5649859b0c48664082ea" id="r_a1cc23a7f958a5649859b0c48664082ea"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1cc23a7f958a5649859b0c48664082ea">PixelGroupSize</a> = 1</td></tr>
 <tr class="separator:a1cc23a7f958a5649859b0c48664082ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a418b4e77ff5676ea7971c34cd43eb945" id="r_a418b4e77ff5676ea7971c34cd43eb945"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a418b4e77ff5676ea7971c34cd43eb945">PixelGroups</a> = 1</td></tr>
+<tr class="memitem:a418b4e77ff5676ea7971c34cd43eb945" id="r_a418b4e77ff5676ea7971c34cd43eb945"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a418b4e77ff5676ea7971c34cd43eb945">PixelGroups</a> = 100</td></tr>
 <tr class="separator:a418b4e77ff5676ea7971c34cd43eb945"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae5cff5b491f941dd4c2167e3a6de7b30" id="r_ae5cff5b491f941dd4c2167e3a6de7b30"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae5cff5b491f941dd4c2167e3a6de7b30">IntensityBitTimeInUs</a> = 0.0</td></tr>
 <tr class="separator:ae5cff5b491f941dd4c2167e3a6de7b30"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1494,7 +1494,7 @@ Here is the call graph for this function:</div>
 <area shape="poly" title=" " alt="" coords="109,153,158,125,217,97,257,83,259,88,219,102,160,130,112,158"/>
 <area shape="rect" href="_e_s_pixel_stick_8h.html#a8295d2ec53bab395bfc5811cfd78ca4d" title=" " alt="" coords="525,80,630,106"/>
 <area shape="poly" title=" " alt="" coords="153,153,217,141,509,99,510,104,218,146,154,158"/>
-<area shape="rect" href="classc___output_pixel.html#a4a7f12a23b4f2ce0eb5cfeccd8bcb3e2" title=" " alt="" coords="218,156,435,182"/>
+<area shape="rect" href="classc___output_pixel.html#a248ecfbaae3d9aaa1c6375755bea16f0" title=" " alt="" coords="218,156,435,182"/>
 <area shape="poly" title=" " alt="" coords="170,166,202,166,202,172,170,172"/>
 <area shape="rect" href="classc___output_pixel.html#a9ba93bde21a6a41d53ad4b5773ad331b" title="Update color order." alt="" coords="238,206,415,246"/>
 <area shape="poly" title=" " alt="" coords="145,180,225,199,223,204,144,185"/>
@@ -1543,8 +1543,8 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="a4a7f12a23b4f2ce0eb5cfeccd8bcb3e2" name="a4a7f12a23b4f2ce0eb5cfeccd8bcb3e2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4a7f12a23b4f2ce0eb5cfeccd8bcb3e2">&#9670;&#160;</a></span>SetFrameDurration()</h2>
+<a id="a248ecfbaae3d9aaa1c6375755bea16f0" name="a248ecfbaae3d9aaa1c6375755bea16f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a248ecfbaae3d9aaa1c6375755bea16f0">&#9670;&#160;</a></span>SetFrameDurration()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1565,7 +1565,12 @@ Here is the call graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>BlockDelayUs</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0.0</span>&#160;)</td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>BlockDelayUs</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0.0</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>OutBitsPerDataBit</em></span><span class="paramdefsep"> = </span><span class="paramdefval">8</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -1577,8 +1582,8 @@ Here is the call graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classc___output_pixel_a4a7f12a23b4f2ce0eb5cfeccd8bcb3e2_icgraph.png" border="0" usemap="#aclassc___output_pixel_a4a7f12a23b4f2ce0eb5cfeccd8bcb3e2_icgraph" alt=""/></div>
-<map name="aclassc___output_pixel_a4a7f12a23b4f2ce0eb5cfeccd8bcb3e2_icgraph" id="aclassc___output_pixel_a4a7f12a23b4f2ce0eb5cfeccd8bcb3e2_icgraph">
+<div class="center"><img src="classc___output_pixel_a248ecfbaae3d9aaa1c6375755bea16f0_icgraph.png" border="0" usemap="#aclassc___output_pixel_a248ecfbaae3d9aaa1c6375755bea16f0_icgraph" alt=""/></div>
+<map name="aclassc___output_pixel_a248ecfbaae3d9aaa1c6375755bea16f0_icgraph" id="aclassc___output_pixel_a248ecfbaae3d9aaa1c6375755bea16f0_icgraph">
 <area shape="rect" title=" " alt="" coords="221,35,438,60"/>
 <area shape="rect" href="classc___output_pixel.html#aba69c60f370711f72ed8d1166e2bec41" title="Set a new config in the driver." alt="" coords="7,5,171,31"/>
 <area shape="poly" title=" " alt="" coords="205,35,171,31,172,26,206,30"/>
@@ -1715,7 +1720,7 @@ Here is the call graph for this function:</div>
 <div class="center"><img src="classc___output_pixel_a2f8f0b725a9ed1c759ea94838708a839_cgraph.png" border="0" usemap="#aclassc___output_pixel_a2f8f0b725a9ed1c759ea94838708a839_cgraph" alt=""/></div>
 <map name="aclassc___output_pixel_a2f8f0b725a9ed1c759ea94838708a839_cgraph" id="aclassc___output_pixel_a2f8f0b725a9ed1c759ea94838708a839_cgraph">
 <area shape="rect" title=" " alt="" coords="5,27,173,68"/>
-<area shape="rect" href="classc___output_pixel.html#a4a7f12a23b4f2ce0eb5cfeccd8bcb3e2" title=" " alt="" coords="221,5,438,31"/>
+<area shape="rect" href="classc___output_pixel.html#a248ecfbaae3d9aaa1c6375755bea16f0" title=" " alt="" coords="221,5,438,31"/>
 <area shape="poly" title=" " alt="" coords="172,35,205,31,206,36,173,40"/>
 <area shape="rect" href="classc___output_common.html#af88d72fe2b0c58ae732eebb84e581a8e" title=" " alt="" coords="234,55,425,96"/>
 <area shape="poly" title=" " alt="" coords="173,55,218,60,218,65,172,60"/>
@@ -1862,6 +1867,9 @@ Here is the caller graph for this function:</div>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void c_OutputPixel::StartNewFrame </td>
@@ -1870,6 +1878,11 @@ Here is the caller graph for this function:</div>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <div class="dynheader">
 Here is the call graph for this function:</div>
@@ -2689,7 +2702,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t c_OutputPixel::PixelGroups = 1</td>
+          <td class="memname">uint32_t c_OutputPixel::PixelGroups = 100</td>
         </tr>
       </table>
   </td>

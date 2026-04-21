@@ -1,5 +1,7 @@
 var NAVTREEINDEX14 =
 {
+"functions_func.html":[0,3,1,0],
+"functions_func_a.html":[0,3,1,1],
 "functions_func_b.html":[0,3,1,2],
 "functions_func_c.html":[0,3,1,3],
 "functions_func_d.html":[0,3,1,4],
@@ -247,7 +249,5 @@ var NAVTREEINDEX14 =
 "structc___f_p_p_discovery_1_1_multi_sync_stats__t.html#a44d3b94a1a7f9ad2a54476bc02a4613f":[0,0,3,0,12],
 "structc___f_p_p_discovery_1_1_multi_sync_stats__t.html#a47d6044d50d4b71fb5d01562b7bf250d":[0,0,3,0,9],
 "structc___f_p_p_discovery_1_1_multi_sync_stats__t.html#a4f3ef599acd2ec1b5b6e2f41714d145e":[0,0,3,0,5],
-"structc___f_p_p_discovery_1_1_multi_sync_stats__t.html#a5099eae93bfa2969a18c785bbf87b465":[0,0,3,0,16],
-"structc___f_p_p_discovery_1_1_multi_sync_stats__t.html#a5f6cf4523471f9a2fb7ee811cfaa1bd1":[0,0,3,0,0],
-"structc___f_p_p_discovery_1_1_multi_sync_stats__t.html#a67275e5e496b6a0f1c7b2d1ab954eb0b":[0,0,3,0,7]
+"structc___f_p_p_discovery_1_1_multi_sync_stats__t.html#a5099eae93bfa2969a18c785bbf87b465":[0,0,3,0,16]
 };

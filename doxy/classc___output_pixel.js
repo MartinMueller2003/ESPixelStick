@@ -23,7 +23,7 @@ var classc___output_pixel =
     [ "ReadChannelData", "classc___output_pixel.html#a839093278c6d78c5a78fff1e6febd217", null ],
     [ "SetConfig", "classc___output_pixel.html#aba69c60f370711f72ed8d1166e2bec41", null ],
     [ "SetFrameAppendInformation", "classc___output_pixel.html#adc34e80e736af0a0e50fc8de46db1ec4", null ],
-    [ "SetFrameDurration", "classc___output_pixel.html#a4a7f12a23b4f2ce0eb5cfeccd8bcb3e2", null ],
+    [ "SetFrameDurration", "classc___output_pixel.html#a248ecfbaae3d9aaa1c6375755bea16f0", null ],
     [ "SetFramePrependInformation", "classc___output_pixel.html#ad712765c16ee9368774d3160a6df59a5", null ],
     [ "SetIntensityBitTimeInUS", "classc___output_pixel.html#a7281e0eb2d9420ba682548e9038d61cb", null ],
     [ "SetIntensityDataWidth", "classc___output_pixel.html#a9a496f93b28b97e6b3016adbf19986ad", null ],
