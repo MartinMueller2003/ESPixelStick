@@ -53,10 +53,6 @@
 
 #include "input/InputMgr.hpp"
 
-#ifndef DEFAULT_RELAY_GPIO
-    #define DEFAULT_RELAY_GPIO      gpio_num_t::GPIO_NUM_1
-#endif // ndef DEFAULT_RELAY_GPIO
-
 #ifdef ARDUINO_ARCH_ESP32
     #define CLASS_TYPE_NAME(n)      n ## Rmt
 #else
