@@ -490,7 +490,12 @@ void c_EthernetDriver::StartEth ()
 // if (!eth_connected)
 // esp_eth_disable();
     logcon(String("ETH IP Before Start: ") + ETH.localIP().toString());
+    #if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
+    if(false == ETH.begin(phy_type, phy_addr, mdc_pin, mdio_pin, power_pin, clk_mode))
+    #else
     if (false == ETH.begin (phy_addr, power_pin /*gpio_num_t(-1)*/, mdc_pin, mdio_pin, phy_type, clk_mode))
+    #endif // ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
+
     {
         fsm_Eth_state_DeviceInitFailed_imp.Init ();
     }

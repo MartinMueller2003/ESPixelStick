@@ -61,9 +61,8 @@ public:
     virtual void         WriteChannelData (uint32_t StartChannelId, uint32_t ChannelCount, byte *pSourceData);
     virtual void         ReadChannelData (uint32_t StartChannelId, uint32_t ChannelCount, byte *pTargetData);
     virtual bool         ValidateGpio (gpio_num_t ConsoleTxGpio, gpio_num_t ConsoleRxGpio);
-    virtual bool         DriverIsSendingIntensityData() {return false;}
     virtual uint32_t     GetFrameTimeMs() {return 1 + (ActualFrameDurationMicroSec / 1000); }
-    bool                 IsPaused() {return Paused;}
+            bool         IsPaused() {return Paused;}
     virtual void         ClearStatistics (void);
 
 protected:
@@ -94,10 +93,6 @@ protected:
         return (FrameTimeDeltaInMicroSec > FrameDurationInMicroSec);
     }
 
-    #ifdef USE_RMT_DEBUG_COUNTERS
-    protected: uint32_t FrameStartTimeInMicroSec = 0;
-    #else
     private:   uint32_t FrameStartTimeInMicroSec = 0;
-    #endif // def USE_RMT_DEBUG_COUNTERS
-
+    public:    uint32_t GetFrameStartTimeInMicroSec() {return FrameStartTimeInMicroSec;}
 }; // c_OutputCommon

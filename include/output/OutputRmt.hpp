@@ -20,7 +20,6 @@
 
 #include "ESPixelStick.h"
 #ifdef ARDUINO_ARCH_ESP32
-#include <hal/rmt_ll.h>
 #include "OutputPixel.hpp"
 #include "OutputSerial.hpp"
 
@@ -37,6 +36,7 @@
     } rmt_idle_level_t;
 #else
     #include <driver/rmt.h>
+    #include <hal/rmt_ll.h>
 #endif // ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
 
 class c_OutputRmt
@@ -44,12 +44,14 @@ class c_OutputRmt
 public:
     struct OutputRmtConfig_t
     {
-        uint32_t            RmtChannelId           = uint32_t(-1);
-        gpio_num_t          DataPin                = gpio_num_t(-1);
-        rmt_idle_level_t    idle_level             = rmt_idle_level_t::RMT_IDLE_LEVEL_LOW;
-        void                *arg                   = nullptr;
-        bool                (*ISR_GetNextIntensityBit)   (void*arg, rmt_item32_t&data) = nullptr;
+        uint32_t            RmtChannelId                = uint32_t(-1);
+        gpio_num_t          DataPin                     = gpio_num_t(-1);
+        rmt_idle_level_t    idle_level                  = rmt_idle_level_t::RMT_IDLE_LEVEL_LOW;
+        void                *arg                        = nullptr;
+        bool                (*ISR_GetNextIntensityBit)  (void*arg, rmt_item32_t&data) = nullptr;
         void                (*StartNewDataFrame)        (void*arg) = nullptr;
+        void                *BufferStart                = nullptr;
+        size_t              NumBytesInFrame             = 0;
     };
 
     struct isrTxFlags_t
@@ -61,43 +63,53 @@ public:
 
 private:
 #ifdef CONFIG_IDF_TARGET_ESP32S3
-#define MAX_NUM_RMT_CHANNELS 4
+#   define MAX_NUM_RMT_CHANNELS 4
 #else
-#define MAX_NUM_RMT_CHANNELS     8
+#   define MAX_NUM_RMT_CHANNELS 8
 #endif // def CONFIG_IDF_TARGET_ESP32S3
 
-#define RMT_INT_BIT         uint32_t(1 << uint32_t (OutputRmtConfig.RmtChannelId))
-#define InterrupsAreEnabled (0 != (RMT.int_ena.val & RMT_INT_BIT))
-
 #if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
-    #define _NUM_RMT_SLOTS 48
+    #define _NUM_RMT_SLOTS 64
+    rmt_channel_handle_t rmt_channel_handle;
+    rmt_encoder_handle_t rmt_encoder_handle;
+    rmt_transmit_config_t tx_config =
+    {
+        .loop_count = 0, // no transfer loop
+        .flags =
+        {
+            .eot_level = OutputRmtConfig.idle_level,    /*!< Set the output level for the "End Of Transmission" */
+            .queue_nonblocking = true                   /*!< If set, when the transaction queue is full, driver will not block the thread but return directly */
+        }
+    };
 #else
+    #define RMT_INT_BIT         uint32_t(1 << uint32_t (OutputRmtConfig.RmtChannelId))
+    #define InterrupsAreEnabled (0 != (RMT.int_ena.val & RMT_INT_BIT))
+
     #define _NUM_RMT_SLOTS (sizeof(RMTMEM.chan[0].data32) / sizeof(RMTMEM.chan[0].data32[0]))
+
 #endif // ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
 
 
-    const uint32_t      NUM_RMT_SLOTS = _NUM_RMT_SLOTS;
+    const uint32_t      NUM_RMT_SLOTS               = _NUM_RMT_SLOTS;
     OutputRmtConfig_t   OutputRmtConfig;
-    bool                OutputIsPaused   = false;
-    uint32_t            NumRmtSlotOverruns              = 0;
-    const uint32_t      MaxNumRmtSlotsPerInterrupt      = (_NUM_RMT_SLOTS/2);
+    bool                OutputIsPaused              = false;
+    uint32_t            NumRmtSlotOverruns          = 0;
+    const uint32_t      MaxNumRmtSlotsPerInterrupt  = (_NUM_RMT_SLOTS/2);
 
-    #define             NumSendBufferSlots 64
+    #define             NumSendBufferSlots _NUM_RMT_SLOTS
     rmt_item32_t        SendBuffer[NumSendBufferSlots];
     uint32_t            RmtBufferWriteIndex         = 0;
     uint32_t            SendBufferWriteIndex        = 0;
     uint32_t            SendBufferReadIndex         = 0;
     uint32_t            NumUsedEntriesInSendBuffer  = 0;
 
-    uint32_t            TxIntensityDataStartingMask = 0x80;
-
-    inline void IRAM_ATTR ISR_TransferIntensityDataToRMT (uint32_t NumEntriesToTransfer);
-    inline void IRAM_ATTR ISR_CreateIntensityData ();
-    inline void IRAM_ATTR ISR_WriteToBuffer(uint32_t value);
-    inline bool IRAM_ATTR ISR_MoreDataToSend();
-//    inline bool IRAM_ATTR ISR_GetNextIntensityToSend(uint32_t &DataToSend);
-    inline void StartNewDataFrame();
-    inline void ISR_ResetRmtBlockPointers();
+    void ISR_TransferIntensityDataToRMT (uint32_t NumEntriesToTransfer);
+    size_t ISR_TransferIntensityDataToRMT (rmt_item32_t *symbols, uint32_t MaxNumEntriesToTransfer);
+    void ISR_CreateIntensityData ();
+    void ISR_WriteToBuffer(uint32_t value);
+    bool ISR_MoreDataToSend();
+    void StartNewDataFrame();
+    void ISR_ResetRmtBlockPointers();
 
 #ifndef HasBeenInitialized
     bool HasBeenInitialized = false;
@@ -117,32 +129,21 @@ public:
     void GetDriverName      (String &value)  { value = CN_RMT; }
     void SetBitDuration     (double BitLenNs, rmt_item32_t & OutputBit, uint32_t & OutputNumBits);
 
-#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
-#define RMT_TX_BITS RMT_LL_EVENT_TX_THRES(OutputRmtConfig.RmtChannelId) | \
-                    RMT_LL_EVENT_TX_DONE(OutputRmtConfig.RmtChannelId)  | \
-                    RMT_LL_EVENT_TX_ERROR(OutputRmtConfig.RmtChannelId)
-#endif // ndef rmt_ll_clear_tx_thres_interrupt
-
 __attribute__((always_inline))
 inline void IRAM_ATTR DisableRmtInterrupts()
 {
-#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
-    rmt_ll_enable_interrupt(&RMT, RMT_TX_BITS, false);
-#else
+#if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0, 0)
     rmt_ll_enable_tx_thres_interrupt(&RMT, OutputRmtConfig.RmtChannelId, false);
     rmt_ll_enable_tx_end_interrupt(&RMT, OutputRmtConfig.RmtChannelId, false);
     rmt_ll_enable_tx_err_interrupt(&RMT, OutputRmtConfig.RmtChannelId, false);
-#endif //  ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
-
     ClearRmtInterrupts();
+#endif //  ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
 }
 
 __attribute__((always_inline))
 inline void IRAM_ATTR EnableRmtInterrupts()
 {
-#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
-    rmt_ll_enable_interrupt(&RMT, RMT_TX_BITS, true);
-#else
+#if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0, 0)
     rmt_ll_enable_tx_thres_interrupt(&RMT, OutputRmtConfig.RmtChannelId, true);
     rmt_ll_enable_tx_end_interrupt(&RMT, OutputRmtConfig.RmtChannelId, true);
     rmt_ll_enable_tx_err_interrupt(&RMT, OutputRmtConfig.RmtChannelId, true);
@@ -152,27 +153,27 @@ inline void IRAM_ATTR EnableRmtInterrupts()
 __attribute__((always_inline))
 inline void IRAM_ATTR ClearRmtInterrupts()
 {
-#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
-    rmt_ll_clear_interrupt_status(&RMT, RMT_TX_BITS);
-#else
+#if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0, 0)
     rmt_ll_clear_tx_thres_interrupt(&RMT, OutputRmtConfig.RmtChannelId);
     rmt_ll_clear_tx_end_interrupt(&RMT, OutputRmtConfig.RmtChannelId);
     rmt_ll_clear_tx_err_interrupt(&RMT, OutputRmtConfig.RmtChannelId);
 #endif // ndef rmt_ll_clear_tx_thres_interrupt
 }
 
-    bool DriverIsSendingIntensityData() {return 0 != InterrupsAreEnabled;}
+#define RMT_ClockRate           80000000.0
+#define RMT_Clock_Divisor       2.0
+#define RMT_TICK_RESOLUTION_HZ  (RMT_ClockRate / RMT_Clock_Divisor)
+#define RMT_TickLengthNS        uint32_t((1.0 / RMT_TICK_RESOLUTION_HZ) * float(NanoSecondsInASecond))
 
-#define RMT_ClockRate       80000000.0
-#define RMT_Clock_Divisor   2.0
-#define RMT_TickLengthNS    float ( (1/ (RMT_ClockRate/RMT_Clock_Divisor)) * float(NanoSecondsInASecond))
+    bool ThereIsMoreDataToSend = false;
 
-    bool ThereIsDataToSend = false;
-
-    void IRAM_ATTR ISR_Handler (isrTxFlags_t isrFlags);
+    void ISR_Handler (isrTxFlags_t isrFlags);
+    size_t ISR_Handler (const void *data, size_t data_size,
+                        size_t symbols_written, size_t symbols_free,
+                        rmt_item32_t *symbols, bool *done);
     c_OutputCommon * pParent = nullptr;
 
-// #define USE_RMT_DEBUG_COUNTERS
+#define USE_RMT_DEBUG_COUNTERS
 #ifdef USE_RMT_DEBUG_COUNTERS
 // #define IncludeBufferData
    // debug counters
@@ -194,6 +195,7 @@ inline void IRAM_ATTR ClearRmtInterrupts()
    uint32_t IncompleteFrame = 0;
    uint32_t RmtEntriesTransfered = 0;
    uint32_t RmtXmtFills = 0;
+   uint32_t ISRpaused = 0;
    uint32_t RmtWhiteDetected = 0;
    uint32_t FailedToSendAllData = 0;
 

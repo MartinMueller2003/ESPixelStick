@@ -694,10 +694,23 @@ void _logcon (String & DriverName, String Message)
     }
 } // logcon
 
+#ifdef ARDUINO_ARCH_ESP32
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
+#include <rtc_wdt.h>
+#endif // ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
+#endif // def ARDUINO_ARCH_ESP32
+
 void FeedWDT ()
 {
 #ifdef ARDUINO_ARCH_ESP32
-    esp_task_wdt_reset ();
+    #if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
+        // esp_task_wdt_reset ();
+        rtc_wdt_protect_off();
+        rtc_wdt_disable();
+        esp_task_wdt_deinit();
+    #else
+        esp_task_wdt_reset ();
+    #endif //  ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
 #else
     ESP.wdtFeed ();
 #endif // def ARDUINO_ARCH_ESP32

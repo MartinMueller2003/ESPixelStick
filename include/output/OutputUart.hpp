@@ -107,8 +107,8 @@ public:
     void PauseOutput             (bool State);
     void StartNewFrame           ();
 
-    void IRAM_ATTR ISR_UART_Handler();
-    void IRAM_ATTR ISR_Handler_SendIntensityData();
+    void ISR_UART_Handler();
+    void ISR_Handler_SendIntensityData();
 
 private:
     void StartUart                      ();
@@ -138,15 +138,15 @@ private:
     SemaphoreHandle_t  WaitFrameDone;
 #endif // defined(ARDUINO_ARCH_ESP32)
 
-    void     IRAM_ATTR      ISR_StartNewDataFrame();
-    void                    CalculateEnableUartInterruptFlags();
-    inline uint32_t IRAM_ATTR   ISR_getUartFifoLength();
-    inline bool     IRAM_ATTR   ISR_MoreDataToSend();
-    inline bool     IRAM_ATTR   ISR_GetNextIntensityToSend(uint32_t &DataToSend);
-    inline void     IRAM_ATTR   ISR_enqueueUartData(uint8_t value);
-    inline void     IRAM_ATTR   EnableUartInterrupts();
-    inline void     IRAM_ATTR   ISR_ClearUartInterrupts();
-    inline void     IRAM_ATTR   ISR_DisableUartInterrupts();
+    void     ISR_StartNewDataFrame();
+    void     CalculateEnableUartInterruptFlags();
+    uint32_t ISR_getUartFifoLength();
+    bool     ISR_MoreDataToSend();
+    bool     ISR_GetNextIntensityToSend(uint32_t &DataToSend);
+    void     ISR_enqueueUartData(uint8_t value);
+    void     EnableUartInterrupts();
+    void     ISR_ClearUartInterrupts();
+    void     ISR_DisableUartInterrupts();
 
 // #define USE_UART_DEBUG_COUNTERS
 #ifdef USE_UART_DEBUG_COUNTERS

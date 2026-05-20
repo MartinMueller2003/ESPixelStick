@@ -42,7 +42,6 @@ public:
     bool    RmtPoll ();
     void    GetStatus (ArduinoJson::JsonObject& jsonStatus);
     void    SetOutputBufferSize (uint32_t NumChannelsAvailable);
-    bool    DriverIsSendingIntensityData() {return (Rmt.DriverIsSendingIntensityData() || false == canRefresh());}
     void    PauseOutput(bool State);
     bool    ISR_GetNextBitToSend (rmt_item32_t &DataToSend);
     void    StartNewDataFrame();

@@ -56,8 +56,6 @@ extern "C"
 #   define UART_INV_MASK (0x3f << 19)
 #endif // ndef UART_INV_MASK
 
-// forward declaration for the isr handler
-static void IRAM_ATTR uart_intr_handler (void* param);
 #ifdef ARDUINO_ARCH_ESP8266
 static c_OutputUart **pOutputTimerArray = nullptr;
 #endif // def ARDUINO_ARCH_ESP8266
@@ -549,7 +547,7 @@ void c_OutputUart::InitializeUart()
 #endif
 
 //----------------------------------------------------------------------------
-bool inline IRAM_ATTR c_OutputUart::ISR_MoreDataToSend()
+bool IRAM_ATTR c_OutputUart::ISR_MoreDataToSend()
 {
     if (nullptr != OutputUartConfig.pPixelDataSource)
     {
