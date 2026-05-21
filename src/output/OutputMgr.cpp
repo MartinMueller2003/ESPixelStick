@@ -1545,21 +1545,24 @@ void c_OutputMgr::RelayUpdate (uint8_t RelayId, String & NewValue, String & Resp
 
     do // once
     {
-        // DEBUG_V(String("e_OutputType::OutputType_Relay: ") + String(e_OutputType::OutputType_Relay));
         Response = F("Relay Output Not configured");
-#ifdef SUPPORT_OutputProtocol_Relay
-        for (uint8_t index = 0; index < NumOutputPorts; ++index)
+        #ifdef SUPPORT_OutputProtocol_Relay
+        // adjust for zero based numbering
+        --RelayId;
+        if(RelayId > NumOutputPorts)
         {
-            DriverInfo_t & CurrentOutput = pOutputChannelDrivers[index];
-            // DEBUG_V(String("DriverId: ") + String(CurrentOutput.DriverId));
-            // DEBUG_V(String("PortType: ") + String(((c_OutputCommon&)(CurrentOutput.OutputDriver)).GetOutputType()));
-            if(e_OutputProtocolType::OutputProtocol_Relay == ((c_OutputCommon&)(CurrentOutput.OutputDriver)).GetOutputType())
-            {
-                ((c_OutputRelay*)(CurrentOutput.OutputDriver))->RelayUpdate(RelayId, NewValue, Response);
-                break;
-            }
+            logcon (MN_22 + String (F("Invalid port number")));
+            Response = F("Invalid Port number. Use 1-8");
+            break;
         }
-#endif // def SUPPORT_OutputProtocol_Relay
+
+        DriverInfo_t & CurrentOutput = pOutputChannelDrivers[RelayId];
+        if(e_OutputProtocolType::OutputProtocol_Relay == ((c_OutputCommon&)(CurrentOutput.OutputDriver)).GetOutputType())
+        {
+            ((c_OutputRelay*)(CurrentOutput.OutputDriver))->RelayUpdate(NewValue, Response);
+            break;
+        }
+        #endif // def SUPPORT_OutputProtocol_Relay
 
     } while(false);
 
