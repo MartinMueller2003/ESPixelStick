@@ -373,6 +373,7 @@ void c_OutputPixel::SetFrameDurration (float _IntensityBitTimeInUs, uint16_t Blo
 //----------------------------------------------------------------------------
 void IRAM_ATTR c_OutputPixel::ISR_SetStartingSendPixelState()
 {
+    // DEBUG_START;
     if(PixelPrependDataSize)
     {
         FrameStateFuncPtr = &c_OutputPixel::ISR_PixelSendPrependIntensity;
@@ -392,7 +393,7 @@ void IRAM_ATTR c_OutputPixel::ISR_SetStartingSendPixelState()
         FrameStateFuncPtr = &c_OutputPixel::ISR_PixelSendIntensity;
 #endif // def SUPPORT_OutputProtocol_GECE
     }
-
+    // DEBUG_END;
 } // SetStartingSendPixelState
 
 //----------------------------------------------------------------------------
