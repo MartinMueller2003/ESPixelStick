@@ -55,8 +55,8 @@ private:
 #define TM1814_PIXEL_RMT_TICKS_BIT_1_LOW     uint16_t ( (TM1814_PIXEL_NS_BIT_1_LOW  / RMT_TickLengthNS) + 1.0)
 #define TM1814_PIXEL_RMT_TICKS_IDLE          uint16_t ( (TM1814_PIXEL_NS_IDLE       / RMT_TickLengthNS) + 1.0)
 
-    rmt_item32_t    ZeroBit = {TM1814_PIXEL_RMT_TICKS_BIT_0_LOW, 0, TM1814_PIXEL_RMT_TICKS_BIT_0_HIGH, 1};
-    rmt_item32_t    OneBit  = {TM1814_PIXEL_RMT_TICKS_BIT_1_LOW, 0, TM1814_PIXEL_RMT_TICKS_BIT_1_HIGH, 1};
+    rmt_item32_t    ZeroBit;
+    rmt_item32_t    OneBit;
     rmt_item32_t    IfgBit;
     uint32_t        IfgBitCount;
     uint32_t        IfgBitCurrentCount;
