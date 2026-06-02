@@ -192,17 +192,17 @@ bool c_OutputWS2811Rmt::RmtPoll ()
 void c_OutputWS2811Rmt::StartNewDataFrame()
 {
     // DEBUG_START;
+
+    StartNewFrame();
+
     // DEBUG_V(String("frame started on ") + String(OutputPortDefinition.gpios.data));
     INC_WS2811_RMT_DEBUG_COUNTERS(FrameStarts);
     IfgBitCurrentCount = IfgBitCount;
 
     // set up for the next data byte
-    c_OutputPixel::ISR_GetNextIntensityToSend(DataPattern);
     INC_WS2811_RMT_DEBUG_COUNTERS(DataBytes);
+    c_OutputPixel::ISR_GetNextIntensityToSend(DataPattern);
     DataPatternMask = 0x80;
-    DataPattern = 0xff;
-
-    StartNewFrame();
 
     // DEBUG_END;
 } // StartNewDataFrame
