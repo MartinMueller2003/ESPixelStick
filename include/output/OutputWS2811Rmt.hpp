@@ -59,8 +59,8 @@ private:
 #define WS2811_PIXEL_RMT_TICKS_BIT_1_LOW     uint16_t ( (WS2811_PIXEL_NS_BIT_1_LOW  / RMT_TickLengthNS) + 1.0)
 #define WS2811_PIXEL_RMT_TICKS_IDLE          uint16_t ( (WS2811_PIXEL_IDLE_TIME_NS  / RMT_TickLengthNS) + 1.0)
 
-    rmt_item32_t    ZeroBit = {WS2811_PIXEL_RMT_TICKS_BIT_0_HIGH, 0, WS2811_PIXEL_RMT_TICKS_BIT_0_LOW, 1};
-    rmt_item32_t    OneBit  = {WS2811_PIXEL_RMT_TICKS_BIT_1_HIGH, 0, WS2811_PIXEL_RMT_TICKS_BIT_1_LOW, 1};
+    rmt_item32_t    ZeroBit;
+    rmt_item32_t    OneBit;
     rmt_item32_t    IfgBit;
     uint32_t        IfgBitCount;
     uint32_t        IfgBitCurrentCount;
@@ -75,10 +75,10 @@ private:
         uint32_t GetNextBit = 0;
         uint32_t FrameStarts = 0;
         uint32_t FrameEnds = 0;
-        uint32_t BreakBits = 0;
-        uint32_t MabBits = 0;
         uint32_t StartBits = 0;
+        uint32_t IfgBits = 0;
         uint32_t DataBits = 0;
+        uint32_t DataBytes = 0;
         uint32_t StopBits = 0;
         uint32_t Underrun = 0;
     } RmtDebugCounters;
