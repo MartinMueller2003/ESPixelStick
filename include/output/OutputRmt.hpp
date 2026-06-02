@@ -106,7 +106,7 @@ private:
     void ISR_TransferIntensityDataToRMT (uint32_t NumEntriesToTransfer);
     size_t ISR_TransferIntensityDataToRMT (rmt_item32_t *symbols, uint32_t MaxNumEntriesToTransfer);
     void ISR_CreateIntensityData ();
-    void ISR_WriteToBuffer(uint32_t value);
+    void ISR_WriteToBuffer(rmt_item32_t value);
     bool ISR_MoreDataToSend();
     void StartNewDataFrame();
     void ISR_ResetRmtBlockPointers();
@@ -132,40 +132,38 @@ public:
 __attribute__((always_inline))
 inline void IRAM_ATTR DisableRmtInterrupts()
 {
-#if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0, 0)
+    #if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0, 0)
     rmt_ll_enable_tx_thres_interrupt(&RMT, OutputRmtConfig.RmtChannelId, false);
     rmt_ll_enable_tx_end_interrupt(&RMT, OutputRmtConfig.RmtChannelId, false);
     rmt_ll_enable_tx_err_interrupt(&RMT, OutputRmtConfig.RmtChannelId, false);
     ClearRmtInterrupts();
-#endif //  ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
+    #endif //  ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
 }
 
 __attribute__((always_inline))
 inline void IRAM_ATTR EnableRmtInterrupts()
 {
-#if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0, 0)
+    #if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0, 0)
     rmt_ll_enable_tx_thres_interrupt(&RMT, OutputRmtConfig.RmtChannelId, true);
     rmt_ll_enable_tx_end_interrupt(&RMT, OutputRmtConfig.RmtChannelId, true);
     rmt_ll_enable_tx_err_interrupt(&RMT, OutputRmtConfig.RmtChannelId, true);
-#endif // ndef rmt_ll_clear_tx_thres_interrupt
+    #endif // ndef rmt_ll_clear_tx_thres_interrupt
 }
 
 __attribute__((always_inline))
 inline void IRAM_ATTR ClearRmtInterrupts()
 {
-#if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0, 0)
+    #if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0, 0)
     rmt_ll_clear_tx_thres_interrupt(&RMT, OutputRmtConfig.RmtChannelId);
     rmt_ll_clear_tx_end_interrupt(&RMT, OutputRmtConfig.RmtChannelId);
     rmt_ll_clear_tx_err_interrupt(&RMT, OutputRmtConfig.RmtChannelId);
-#endif // ndef rmt_ll_clear_tx_thres_interrupt
+    #endif // ndef rmt_ll_clear_tx_thres_interrupt
 }
 
 #define RMT_ClockRate           80000000.0
 #define RMT_Clock_Divisor       2.0
 #define RMT_TICK_RESOLUTION_HZ  (RMT_ClockRate / RMT_Clock_Divisor)
 #define RMT_TickLengthNS        uint32_t((1.0 / RMT_TICK_RESOLUTION_HZ) * float(NanoSecondsInASecond))
-
-    bool ThereIsMoreDataToSend = false;
 
     void ISR_Handler (isrTxFlags_t isrFlags);
     size_t ISR_Handler (const void *data, size_t data_size,
@@ -198,6 +196,8 @@ inline void IRAM_ATTR ClearRmtInterrupts()
    uint32_t ISRpaused = 0;
    uint32_t RmtWhiteDetected = 0;
    uint32_t FailedToSendAllData = 0;
+   uint32_t WriteToBuffer = 0;
+   uint32_t WriteToRmt = 0;
 
 #define RMT_DEBUG_COUNTER(p) p
 
