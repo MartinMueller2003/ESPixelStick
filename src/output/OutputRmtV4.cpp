@@ -1,8 +1,8 @@
 /*
-* OutputRmt.cpp - driver code for ESPixelStick RMT Channel
+* OutputRmtV4.cpp - driver code for ESPixelStick RMT Channel
 *
 * Project: ESPixelStick - An ESP8266 / ESP32 and E1.31 based pixel driver
-* Copyright (c) 2015, 2026 Shelby Merrick
+* Copyright (c) 2026, 2026 Shelby Merrick
 * http://www.forkineye.com
 *
 *  This program is provided free for you to use in any way that you wish,
@@ -17,14 +17,11 @@
 *
 */
 #include "ESPixelStick.h"
-#ifdef ARDUINO_ARCH_ESP32
-#include "output/OutputRmt.hpp"
+#if defined(ARDUINO_ARCH_ESP32)
+#if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0, 0)
 
-#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
-    #include <driver/rmt_tx.h>
-#else
-    #include <driver/rmt.h>
-#endif // ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
+#include "output/OutputRmt.hpp"
+#include <driver/rmt.h>
 
 // forward declaration for the isr handler
 static void IRAM_ATTR   rmt_intr_handler (void* param);
@@ -288,6 +285,8 @@ void c_OutputRmt::GetStatus (ArduinoJson::JsonObject& jsonStatus)
     debugStatus["RxIsr"]                        = RxIsr;
     debugStatus["SendBlockIsrCounter"]          = SendBlockIsrCounter;
     debugStatus["UnknownISRcounter"]            = UnknownISRcounter;
+    debugStatus["WriteToBuffer"]                = WriteToBuffer;
+    debugStatus["WriteToRmt"]                   = WriteToRmt;
 
 #ifdef IncludeBufferData
     {
@@ -353,13 +352,17 @@ void IRAM_ATTR c_OutputRmt::ISR_CreateIntensityData ()
 
     uint32_t NumAvailableBufferSlotsToFill = NumSendBufferSlots - NumUsedEntriesInSendBuffer;
     // Serial.print(String(NumAvailableBufferSlotsToFill));
-    while(ThereIsDataToSend && NumAvailableBufferSlotsToFill)
+    rmt_item32_t Data;
+    while(NumAvailableBufferSlotsToFill)
     {
         // Serial.print('K');
+        if(!OutputRmtConfig.ISR_GetNextIntensityBit(OutputRmtConfig.arg, Data))
+        {
+            // no more data to send
+            break;
+        }
+        ISR_WriteToBuffer(Data);
         --NumAvailableBufferSlotsToFill;
-        rmt_item32_t Data;
-        ThereIsDataToSend = OutputRmtConfig.ISR_GetNextIntensityBit(OutputRmtConfig.arg, Data);
-        ISR_WriteToBuffer(Data.val);
     };
 
     ///DEBUG_END;
@@ -414,7 +417,7 @@ void IRAM_ATTR c_OutputRmt::ISR_Handler (isrTxFlags_t isrTxFlags)
             // LOG_PORT.println(String("NumUsedEntriesInSendBuffer3: ") + String(NumUsedEntriesInSendBuffer));
 
             // is there any data left to enqueue?
-            if (!ThereIsDataToSend && 0 == NumUsedEntriesInSendBuffer)
+            if (0 == NumUsedEntriesInSendBuffer)
             {
                 RMT_DEBUG_COUNTER(++RanOutOfData);
                 DisableRmtInterrupts();
@@ -442,17 +445,10 @@ void IRAM_ATTR c_OutputRmt::ISR_Handler (isrTxFlags_t isrTxFlags)
 //----------------------------------------------------------------------------
 inline void IRAM_ATTR c_OutputRmt::ISR_ResetRmtBlockPointers()
 {
-#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
-    rmt_enable(&RMT, OutputRmtConfig.RmtChannelId);
-    rmt_ll_rx_set_mem_owner(&RMT, OutputRmtConfig.RmtChannelId, rmt_ll_mem_owner_t::RMT_LL_MEM_OWNER_SW);
-    rmt_ll_tx_reset_pointer(&RMT, OutputRmtConfig.RmtChannelId);
-    rmt_ll_enable_mem_access(&RMT, RMT_DATA_MODE_MEM);
-#else
     rmt_ll_tx_stop(&RMT, OutputRmtConfig.RmtChannelId);
     rmt_ll_rx_set_mem_owner(&RMT, OutputRmtConfig.RmtChannelId,RMT_MEM_OWNER_TX);
     rmt_ll_tx_reset_pointer(&RMT, OutputRmtConfig.RmtChannelId);
     rmt_ll_enable_mem_access(&RMT, RMT_DATA_MODE_MEM);
-#endif // ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
 
     memset((void*)&RMTMEM.chan[OutputRmtConfig.RmtChannelId].data32[0], 0x0, sizeof(RMTMEM.chan[0].data32));
 
@@ -465,26 +461,35 @@ inline void IRAM_ATTR c_OutputRmt::ISR_ResetRmtBlockPointers()
 //----------------------------------------------------------------------------
 inline void c_OutputRmt::StartNewDataFrame()
 {
+    // DEBUG_START;
     OutputRmtConfig.StartNewDataFrame(OutputRmtConfig.arg);
+    // DEBUG_END;
 } // StartNewDataFrame
 
 //----------------------------------------------------------------------------
 void IRAM_ATTR c_OutputRmt::ISR_TransferIntensityDataToRMT (uint32_t MaxNumEntriesToTransfer)
 {
-    /// DEBUG_START;
+    // DEBUG_START;
 
     uint32_t NumEntriesToTransfer = min(NumUsedEntriesInSendBuffer, MaxNumEntriesToTransfer);
 
-#ifdef USE_RMT_DEBUG_COUNTERS
-    if(NumEntriesToTransfer)
-    {
-        ++RmtXmtFills;
-        RmtEntriesTransfered = NumEntriesToTransfer;
-    }
-#endif // def USE_RMT_DEBUG_COUNTERS
+    RMT_DEBUG_COUNTER(RmtXmtFills++);
+    #ifdef USE_RMT_DEBUG_COUNTERS
+    RmtEntriesTransfered = NumEntriesToTransfer;
+    #endif // def USE_RMT_DEBUG_COUNTERS
+
+    rmt_item32_t * RmtChanData = (rmt_item32_t *)&(RMTMEM.chan[OutputRmtConfig.RmtChannelId].data32[0]);
+
     while(NumEntriesToTransfer)
     {
-        RMTMEM.chan[OutputRmtConfig.RmtChannelId].data32[RmtBufferWriteIndex++].val = SendBuffer[SendBufferReadIndex++].val;
+        // DEBUG_V(String("   Data.level0: ") + String(SendBuffer[SendBufferReadIndex].level0));
+        // DEBUG_V(String("Data.duration0: ") + String(SendBuffer[SendBufferReadIndex].duration0));
+        // DEBUG_V(String("   Data.level1: ") + String(SendBuffer[SendBufferReadIndex].level1));
+        // DEBUG_V(String("Data.duration1: ") + String(SendBuffer[SendBufferReadIndex].duration1));
+
+        RMT_DEBUG_COUNTER(WriteToRmt++);
+
+        RmtChanData[RmtBufferWriteIndex++].val = SendBuffer[SendBufferReadIndex++].val;
         RmtBufferWriteIndex = (RmtBufferWriteIndex >= NUM_RMT_SLOTS ? 0 : RmtBufferWriteIndex); // do wrap
         SendBufferReadIndex &= (NumSendBufferSlots - 1); // do wrap
         --NumEntriesToTransfer;
@@ -492,18 +497,20 @@ void IRAM_ATTR c_OutputRmt::ISR_TransferIntensityDataToRMT (uint32_t MaxNumEntri
     }
 
     // terminate the data stream
-    RMTMEM.chan[OutputRmtConfig.RmtChannelId].data32[RmtBufferWriteIndex].val = uint32_t(0);
+    RmtChanData[RmtBufferWriteIndex].val = uint32_t(0);
 
-    ///DEBUG_END;
+    // DEBUG_END;
 
 } // ISR_TransferIntensityDataToRMT
 
 //----------------------------------------------------------------------------
-inline void IRAM_ATTR c_OutputRmt::ISR_WriteToBuffer(uint32_t value)
+inline void IRAM_ATTR c_OutputRmt::ISR_WriteToBuffer(rmt_item32_t value)
 {
     /// DEBUG_START;
 
-    SendBuffer[SendBufferWriteIndex++].val = value;
+    RMT_DEBUG_COUNTER(WriteToBuffer++);
+
+    SendBuffer[SendBufferWriteIndex++] = value;
     SendBufferWriteIndex &= uint32_t(NumSendBufferSlots - 1);
     ++NumUsedEntriesInSendBuffer;
 
@@ -557,6 +564,7 @@ bool c_OutputRmt::StartNewFrame ()
 		// Stop the transmitter
         DisableRmtInterrupts ();
         ISR_ResetRmtBlockPointers ();
+        // DEBUG_V();
 
         #ifdef USE_RMT_DEBUG_COUNTERS
         FrameStartCounter++;
@@ -565,9 +573,6 @@ bool c_OutputRmt::StartNewFrame ()
         IntensityBitsSentLastFrame   = IntensityBitsSent;
         IntensityBitsSent            = 0;
         #endif // def USE_RMT_DEBUG_COUNTERS
-
-        ThereIsDataToSend = true;
-        // DEBUG_V();
 
         // set up to send a new frame
         StartNewDataFrame ();
@@ -612,4 +617,5 @@ bool c_OutputRmt::StartNewFrame ()
 
 } // StartNewFrame
 
-#endif // def ARDUINO_ARCH_ESP32
+#endif // ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0, 0)
+#endif // defined(ARDUINO_ARCH_ESP32)

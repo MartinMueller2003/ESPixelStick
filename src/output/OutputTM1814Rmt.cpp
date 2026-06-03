@@ -46,6 +46,9 @@ c_OutputTM1814Rmt::c_OutputTM1814Rmt (OM_OutputPortDefinition_t & OutputPortDefi
     // DEBUG_V (String ("TM1814_PIXEL_RMT_TICKS_BIT_1_HIGH: 0x") + String (TM1814_PIXEL_RMT_TICKS_BIT_1_HIGH, HEX));
     // DEBUG_V (String (" TM1814_PIXEL_RMT_TICKS_BIT_1_LOW: 0x") + String (TM1814_PIXEL_RMT_TICKS_BIT_1_LOW,  HEX));
 
+    ZeroBit = {TM1814_PIXEL_RMT_TICKS_BIT_0_HIGH, 1, TM1814_PIXEL_RMT_TICKS_BIT_0_LOW, 0};
+    OneBit  = {TM1814_PIXEL_RMT_TICKS_BIT_1_HIGH, 1, TM1814_PIXEL_RMT_TICKS_BIT_1_LOW, 0};
+
     // DEBUG_END;
 
 } // c_OutputTM1814Rmt
@@ -87,7 +90,7 @@ bool c_OutputTM1814Rmt::SetConfig (ArduinoJson::JsonObject& jsonConfig)
 
     // DEBUG_V (String ("DataPin: ") + String (DataPin));
     c_OutputRmt::OutputRmtConfig_t OutputRmtConfig;
-    OutputRmtConfig.RmtChannelId            = rmt_channel_t(OutputPortDefinition.PortId);
+    OutputRmtConfig.RmtChannelId            = uint32_t(OutputPortDefinition.PortId);
     OutputRmtConfig.DataPin                 = gpio_num_t(OutputPortDefinition.gpios.data);
     OutputRmtConfig.idle_level              = rmt_idle_level_t::RMT_IDLE_LEVEL_HIGH;
     OutputRmtConfig.arg                     = this;

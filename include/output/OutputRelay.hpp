@@ -36,23 +36,6 @@ GNU General Public License for more details.
 class c_OutputRelay : public c_OutputCommon
 {
 public:
-    struct RelayChannel_t
-    {
-        // bool        Enabled;
-        bool        httpEnabled;
-        bool        InvertOutput;
-        bool        Pwm;
-        uint8_t     OnOffTriggerLevel;
-        gpio_num_t  GpioId;
-        uint8_t     OnValue;
-        uint8_t     OffValue;
-        uint8_t     previousValue;
-#if defined(ARDUINO_ARCH_ESP32)
-        uint16_t    PwmFrequency;
-#endif // defined(ARDUINO_ARCH_ESP32)
-        uint8_t     ChannelIndex;
-    };
-
     // These functions are inherited from c_OutputCommon
     c_OutputRelay (OM_OutputPortDefinition_t & OutputPortDefinition,
                    c_OutputMgr::e_OutputProtocolType outputType);
@@ -68,28 +51,32 @@ public:
 #endif // defined(ARDUINO_ARCH_ESP32)
     void        GetDriverName (String& sDriverName);
     void        GetStatus (ArduinoJson::JsonObject & jsonStatus);
-    uint32_t    GetNumOutputBufferBytesNeeded () { return Num_Channels; }
-    uint32_t    GetNumOutputBufferChannelsServiced () { return Num_Channels; }
+    uint32_t    GetNumOutputBufferBytesNeeded () { return 1; }
+    uint32_t    GetNumOutputBufferChannelsServiced () { return 1; }
     bool        ValidateGpio (gpio_num_t ConsoleTxGpio, gpio_num_t ConsoleRxGpio);
-    void        RelayUpdate  (uint8_t RelayId, String & NewValue, String & Response);
+    void        RelayUpdate (String & NewValue, String & Response);
 
 private:
-// #   define OM_RELAY_CHANNEL_LIMIT           8
-#   define OM_RELAY_CHANNEL_LIMIT           1
 #   define OM_RELAY_UPDATE_INTERVAL_NAME    CN_updateinterval
-// #   define OM_RELAY_CHANNEL_ENABLED_NAME    CN_en
 #   define OM_RELAY_CHANNEL_INVERT_NAME     CN_inv
 #   define OM_RELAY_CHANNEL_PWM_NAME        CN_pwm
 
     bool    validate ();
-    void    OutputValue(RelayChannel_t & currentRelay, uint8_t NewValue);
+    void    OutputValue (uint8_t NewValue);
 
     // config data
-    RelayChannel_t  OutputList[OM_RELAY_CHANNEL_LIMIT];
-    uint16_t        UpdateInterval = 0;
-
-    // non config data
-    uint16_t    Num_Channels = OM_RELAY_CHANNEL_LIMIT;
+    bool        httpEnabled;
+    bool        InvertOutput;
+    bool        Pwm;
+    uint8_t     OnOffTriggerLevel;
+    gpio_num_t  GpioId;
+    uint8_t     OnValue;
+    uint8_t     OffValue;
+    uint8_t     previousValue;
+#if defined(ARDUINO_ARCH_ESP32)
+    uint16_t    PwmFrequency;
+#endif // defined(ARDUINO_ARCH_ESP32)
+    uint16_t    UpdateInterval = 0;
 
 }; // c_OutputRelay
 

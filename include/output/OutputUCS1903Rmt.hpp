@@ -58,8 +58,8 @@ private:
 
 //     {{UCS1903_PIXEL_RMT_TICKS_IDLE / 10,  0, UCS1903_PIXEL_RMT_TICKS_IDLE / 10, 1}, c_OutputRmt::RmtDataBitIdType_t::RMT_INTERFRAME_GAP_ID},
 
-    rmt_item32_t    ZeroBit = {UCS1903_PIXEL_RMT_TICKS_BIT_0_HIGH, 0, UCS1903_PIXEL_RMT_TICKS_BIT_0_LOW, 1};
-    rmt_item32_t    OneBit  = {UCS1903_PIXEL_RMT_TICKS_BIT_1_HIGH, 0, UCS1903_PIXEL_RMT_TICKS_BIT_1_LOW, 1};
+    rmt_item32_t    ZeroBit;
+    rmt_item32_t    OneBit;
     rmt_item32_t    IfgBit;
     uint32_t        IfgBitCount;
     uint32_t        IfgBitCurrentCount;

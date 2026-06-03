@@ -102,18 +102,18 @@ private:
 #endif // def USE_PIXEL_DEBUG_COUNTERS
 
     // functions used to implement pixel FSM
-    uint32_t IRAM_ATTR ISR_FramePrependData();
-    uint32_t IRAM_ATTR ISR_PixelPrependNulls();
-    uint32_t IRAM_ATTR ISR_PixelSendPrependIntensity();
+    uint32_t ISR_FramePrependData();
+    uint32_t ISR_PixelPrependNulls();
+    uint32_t ISR_PixelSendPrependIntensity();
 #ifdef SUPPORT_OutputProtocol_GECE
-    uint32_t IRAM_ATTR ISR_PixelSendGECEIntensity();
+    uint32_t ISR_PixelSendGECEIntensity();
 #endif // def SUPPORT_OutputProtocol_GECE
-    uint32_t IRAM_ATTR ISR_PixelSendIntensity();
-    uint32_t IRAM_ATTR ISR_PixelAppendNulls();
-    uint32_t IRAM_ATTR ISR_FrameAppendData();
-    uint32_t IRAM_ATTR ISR_FrameDone();
+    uint32_t ISR_PixelSendIntensity();
+    uint32_t ISR_PixelAppendNulls();
+    uint32_t ISR_FrameAppendData();
+    uint32_t ISR_FrameDone();
 
-    void IRAM_ATTR ISR_SetStartingSendPixelState();
+    void ISR_SetStartingSendPixelState();
     uint32_t (c_OutputPixel::* FrameStateFuncPtr) ();
 
     typedef union ColorOffsets_s
@@ -145,7 +145,7 @@ private:
     void updateColorOrderOffsets(); ///< Update color order
     bool validate ();        ///< confirm that the current configuration is valid
     inline uint32_t CalculateIntensityOffset(uint32_t ChannelId);
-    uint32_t IRAM_ATTR ISR_GetIntensityData();
+    uint32_t ISR_GetIntensityData();
 
 public:
     c_OutputPixel (OM_OutputPortDefinition_t & OutputPortDefinition,
@@ -166,8 +166,7 @@ public:
              void         SetIntensityDataWidth(uint32_t value);
     virtual  void         StartNewFrame();
     inline   bool IRAM_ATTR ISR_MoreDataToSend () {return (&c_OutputPixel::ISR_FrameDone != FrameStateFuncPtr);}
-             bool IRAM_ATTR ISR_GetNextIntensityToSend (uint32_t &DataToSend);
-    void                  SetPixelCount(uint32_t value) {pixel_count = value;}
-    uint32_t              GetPixelCount() {return pixel_count;}
-
+             bool         ISR_GetNextIntensityToSend (uint32_t &DataToSend);
+             void         SetPixelCount(uint32_t value) {pixel_count = value;}
+    inline   uint32_t     GetPixelCount() {return pixel_count;}
 }; // c_OutputPixel

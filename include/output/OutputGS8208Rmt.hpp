@@ -73,8 +73,8 @@ private:
     #define GS8208_PIXEL_RMT_TICKS_BIT_1_HIGH    uint16_t ( (GS8208_PIXEL_NS_BIT_1_HIGH / RMT_TickLengthNS) - 1.0)
     #define GS8208_PIXEL_RMT_TICKS_BIT_1_LOW     uint16_t ( (GS8208_PIXEL_NS_BIT_1_LOW  / RMT_TickLengthNS) + 1.0)
     #define GS8208_PIXEL_RMT_TICKS_IDLE          uint16_t ( (GS8208_PIXEL_IDLE_TIME_NS  / RMT_TickLengthNS) + 1.0)
-    rmt_item32_t ZeroBit = {GS8208_PIXEL_RMT_TICKS_BIT_0_HIGH, 1, GS8208_PIXEL_RMT_TICKS_BIT_0_LOW, 0};
-    rmt_item32_t OneBit  = {GS8208_PIXEL_RMT_TICKS_BIT_1_HIGH, 1, GS8208_PIXEL_RMT_TICKS_BIT_1_LOW, 0};
+    rmt_item32_t ZeroBit;
+    rmt_item32_t OneBit;
 
     rmt_item32_t ifgBit;
     uint32_t ifgBitCount;

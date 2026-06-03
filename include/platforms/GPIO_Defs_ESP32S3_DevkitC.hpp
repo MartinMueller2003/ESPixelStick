@@ -41,8 +41,6 @@ const OM_OutputPortDefinition_t OM_OutputPortDefinitions[] =
 #define SD_CARD_CLK_PIN         gpio_num_t::GPIO_NUM_5
 #define SD_CARD_CS_PIN          gpio_num_t::GPIO_NUM_4
 
-#define DEFAULT_RELAY_GPIO      gpio_num_t::GPIO_NUM_15
-
 // Special settings for the ESP32S3 Processors
 #define DEFAULT_CONSOLE_TX_GPIO gpio_num_t::GPIO_NUM_43
 #define DEFAULT_CONSOLE_RX_GPIO gpio_num_t::GPIO_NUM_44

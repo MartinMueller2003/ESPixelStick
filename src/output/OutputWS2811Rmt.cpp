@@ -45,6 +45,9 @@ c_OutputWS2811Rmt::c_OutputWS2811Rmt (OM_OutputPortDefinition_t & OutputPortDefi
     // DEBUG_V (String ("WS2811_PIXEL_RMT_TICKS_BIT_1_H: 0x") + String (WS2811_PIXEL_RMT_TICKS_BIT_1_HIGH, HEX));
     // DEBUG_V (String ("WS2811_PIXEL_RMT_TICKS_BIT_1_L: 0x") + String (WS2811_PIXEL_RMT_TICKS_BIT_1_LOW,  HEX));
 
+    ZeroBit = {WS2811_PIXEL_RMT_TICKS_BIT_0_HIGH, 1, WS2811_PIXEL_RMT_TICKS_BIT_0_LOW, 0};
+    OneBit  = {WS2811_PIXEL_RMT_TICKS_BIT_1_HIGH, 1, WS2811_PIXEL_RMT_TICKS_BIT_1_LOW, 0};
+
     // DEBUG_END;
 
 } // c_OutputWS2811Rmt
@@ -122,19 +125,18 @@ void c_OutputWS2811Rmt::GetStatus (ArduinoJson::JsonObject& jsonStatus)
     jsonStatus[F("Can Refresh")] = CanRefresh;
     jsonStatus[F("Cannot Refresh")] = CannotRefresh;
     jsonStatus[F("FrameDurationInMicroSec")] = FrameDurationInMicroSec;
-    jsonStatus[F("FrameStartTimeInMicroSec")] = FrameStartTimeInMicroSec;
+    jsonStatus[F("FrameStartTimeInMicroSec")] = GetFrameStartTimeInMicroSec();
     uint32_t now = micros();
     jsonStatus[F("Now")] = now;
-    jsonStatus[F("FrameStartDelta")] = now - FrameStartTimeInMicroSec;
+    jsonStatus[F("FrameStartDelta")] = now - GetFrameStartTimeInMicroSec();
 #endif // def USE_RMT_DEBUG_COUNTERS
     #ifdef WS2811_RMT_DEBUG_COUNTERS
     JsonObject JsonCounters = jsonStatus["JsonCounters"].to<JsonObject>();
     JsonWrite(JsonCounters, "GetNextBit",  RmtDebugCounters.GetNextBit);
     JsonWrite(JsonCounters, "FrameStarts", RmtDebugCounters.FrameStarts);
     JsonWrite(JsonCounters, "FrameEnds",   RmtDebugCounters.FrameEnds);
-    JsonWrite(JsonCounters, "BreakBits",   RmtDebugCounters.BreakBits);
-    JsonWrite(JsonCounters, "MabBits",     RmtDebugCounters.MabBits);
     JsonWrite(JsonCounters, "StartBits",   RmtDebugCounters.StartBits);
+    JsonWrite(JsonCounters, "IfgBits",     RmtDebugCounters.IfgBits);
     JsonWrite(JsonCounters, "DataBits",    RmtDebugCounters.DataBits);
     JsonWrite(JsonCounters, "StopBits",    RmtDebugCounters.StopBits);
     JsonWrite(JsonCounters, "Underrun",    RmtDebugCounters.Underrun);
@@ -177,10 +179,6 @@ bool c_OutputWS2811Rmt::RmtPoll ()
         // DEBUG_V(String("get the next frame started on ") + String(DataPin));
         Response = Rmt.StartNewFrame ();
 
-        #ifdef DEBUG_RMT_XLAT_ISSUES
-        Rmt.ValidateBitXlatTable(ConvertIntensityToRmtDataStream);
-        #endif // def DEBUG_RMT_XLAT_ISSUES
-
         // DEBUG_V();
 
     } while (false);
@@ -194,10 +192,17 @@ bool c_OutputWS2811Rmt::RmtPoll ()
 void c_OutputWS2811Rmt::StartNewDataFrame()
 {
     // DEBUG_START;
+
+    StartNewFrame();
+
     // DEBUG_V(String("frame started on ") + String(OutputPortDefinition.gpios.data));
     INC_WS2811_RMT_DEBUG_COUNTERS(FrameStarts);
     IfgBitCurrentCount = IfgBitCount;
-    StartNewFrame();
+
+    // set up for the next data byte
+    INC_WS2811_RMT_DEBUG_COUNTERS(DataBytes);
+    c_OutputPixel::ISR_GetNextIntensityToSend(DataPattern);
+    DataPatternMask = 0x80;
 
     // DEBUG_END;
 } // StartNewDataFrame
@@ -207,31 +212,30 @@ bool IRAM_ATTR c_OutputWS2811Rmt::ISR_GetNextBitToSend (rmt_item32_t & DataToSen
 {
     INC_WS2811_RMT_DEBUG_COUNTERS(GetNextBit);
     bool Response = true;
-    if(IfgBitCurrentCount)
+
+    if (IfgBitCurrentCount)
     {
-        INC_WS2811_RMT_DEBUG_COUNTERS(StartBits);
-        --IfgBitCurrentCount;
+        INC_WS2811_RMT_DEBUG_COUNTERS(IfgBits);
         DataToSend = IfgBit;
-        // set up for the next data byte
-        c_OutputPixel::ISR_GetNextIntensityToSend(DataPattern);
-        DataPatternMask = 0x80;
+        --IfgBitCurrentCount;
     }
-    else if(DataPatternMask)
+    else if (DataPatternMask)
     {
         INC_WS2811_RMT_DEBUG_COUNTERS(DataBits);
         DataToSend = (DataPattern & DataPatternMask) ? OneBit : ZeroBit;
+
         DataPatternMask = DataPatternMask >> 1;
         if(0 == DataPatternMask)
         {
             if(c_OutputPixel::ISR_MoreDataToSend())
             {
+                INC_WS2811_RMT_DEBUG_COUNTERS(DataBytes);
                 c_OutputPixel::ISR_GetNextIntensityToSend(DataPattern);
                 DataPatternMask = 0x80;
             }
             else
             {
                 INC_WS2811_RMT_DEBUG_COUNTERS(FrameEnds);
-                Response = false;
             }
         }
     }
@@ -239,7 +243,6 @@ bool IRAM_ATTR c_OutputWS2811Rmt::ISR_GetNextBitToSend (rmt_item32_t & DataToSen
     {
         INC_WS2811_RMT_DEBUG_COUNTERS(Underrun);
         // nothing to send
-        DataToSend.val = 0x0;
         Response = false;
     }
 

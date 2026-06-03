@@ -39,8 +39,6 @@ const OM_OutputPortDefinition_t OM_OutputPortDefinitions[] =
 #define SD_CARD_CLK_PIN         gpio_num_t::GPIO_NUM_18
 #define SD_CARD_CS_PIN          gpio_num_t::GPIO_NUM_4
 
-#define DEFAULT_RELAY_GPIO      gpio_num_t::GPIO_NUM_14
-
 // Output Types
 #define SUPPORT_OutputProtocol_TLS3001          // OM_SERIAL
 #define SUPPORT_OutputProtocol_APA102           // OM_SPI

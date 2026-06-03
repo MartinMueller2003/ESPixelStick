@@ -55,8 +55,8 @@ private:
     #define UCS8903_PIXEL_RMT_TICKS_BIT_1_LOW     uint16_t ( (UCS8903_PIXEL_NS_BIT_1_LOW  / RMT_TickLengthNS) + 1.0)
     #define UCS8903_PIXEL_RMT_TICKS_IDLE          uint16_t ( (UCS8903_PIXEL_IDLE_TIME_NS  / RMT_TickLengthNS) + 1.0)
 
-    rmt_item32_t    ZeroBit = {UCS8903_PIXEL_RMT_TICKS_BIT_0_HIGH, 0, UCS8903_PIXEL_RMT_TICKS_BIT_0_LOW, 1};
-    rmt_item32_t    OneBit  = {UCS8903_PIXEL_RMT_TICKS_BIT_1_HIGH, 0, UCS8903_PIXEL_RMT_TICKS_BIT_1_LOW, 1};
+    rmt_item32_t    ZeroBit;
+    rmt_item32_t    OneBit;
     rmt_item32_t    IfgBit;
     uint32_t        IfgBitCount;
     uint32_t        IfgBitCurrentCount;
