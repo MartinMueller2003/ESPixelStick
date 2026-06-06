@@ -171,7 +171,7 @@ inline void IRAM_ATTR ClearRmtInterrupts()
                         rmt_item32_t *symbols, bool *done);
     c_OutputCommon * pParent = nullptr;
 
-#define USE_RMT_DEBUG_COUNTERS
+// #define USE_RMT_DEBUG_COUNTERS
 #ifdef USE_RMT_DEBUG_COUNTERS
 // #define IncludeBufferData
    // debug counters
