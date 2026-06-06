@@ -187,6 +187,8 @@ void c_OutputRmt::Begin (OutputRmtConfig_t config, c_OutputCommon * _pParent )
         ESP_ERROR_CHECK(rmt_new_simple_encoder(&encoder_cfg, &rmt_encoder_handle));
         DEBUG_V();
 
+        tx_config.flags.eot_level = OutputRmtConfig.idle_level == rmt_idle_level_t::RMT_IDLE_LEVEL_HIGH;
+
         // reset the internal and external pointers to the start of the mem block
         ISR_ResetRmtBlockPointers ();
         // DEBUG_V();
@@ -251,6 +253,7 @@ void c_OutputRmt::GetStatus (ArduinoJson::JsonObject& jsonStatus)
     debugStatus["ISRpaused"]                    = ISRpaused;
     debugStatus["SendBlockIsrCounter"]          = SendBlockIsrCounter;
     debugStatus["UnknownISRcounter"]            = UnknownISRcounter;
+    debugStatus["WriteToBuffer"]                = WriteToBuffer;
 
 #ifdef IncludeBufferData
     {
@@ -486,7 +489,6 @@ bool c_OutputRmt::StartNewFrame ()
         }
 
 		// Stop the transmitter
-        rmt_disable(rmt_channel_handle);
         ISR_ResetRmtBlockPointers ();
 
         #ifdef USE_RMT_DEBUG_COUNTERS
@@ -515,8 +517,13 @@ bool c_OutputRmt::StartNewFrame ()
         // digitalWrite(42, LOW);
         // DEBUG_V("start the transmitter");
 
-        rmt_enable(rmt_channel_handle);
-        rmt_transmit(rmt_channel_handle, rmt_encoder_handle, OutputRmtConfig.BufferStart, OutputRmtConfig.NumBytesInFrame, &tx_config);
+        // rmt_enable(rmt_channel_handle);
+        OutputRmtConfig.NumBytesInFrame = 9000;
+        // DEBUG_V(String("rmt_channel_handle: ") + String(uint32_t(rmt_channel_handle)));
+        // DEBUG_V(String("rmt_encoder_handle: ") + String(uint32_t(rmt_encoder_handle)));
+        // DEBUG_V(String("       BufferStart: ") + String(uint32_t(OutputRmtConfig.BufferStart)));
+        // DEBUG_V(String("   NumBytesInFrame: ") + String(uint32_t(OutputRmtConfig.NumBytesInFrame)));
+        ESP_ERROR_CHECK_WITHOUT_ABORT(rmt_transmit(rmt_channel_handle, rmt_encoder_handle, OutputRmtConfig.BufferStart, OutputRmtConfig.NumBytesInFrame, &tx_config));
 
         // rmt_set_gpio (OutputRmtConfig.RmtChannelId, rmt_mode_t::RMT_MODE_TX, OutputRmtConfig.DataPin, false);
         // digitalWrite(42, HIGH);
