@@ -95,6 +95,7 @@ bool c_OutputWS2811Rmt::SetConfig (ArduinoJson::JsonObject& jsonConfig)
     OutputRmtConfig.arg                     = this;
     OutputRmtConfig.ISR_GetNextIntensityBit = ISR_GetNextBitToSendBase;
     OutputRmtConfig.StartNewDataFrame       = StartNewDataFrameBase;
+    OutputRmtConfig.BufferStart             = GetBufferAddress();
 
     // DEBUG_V();
     Rmt.Begin(OutputRmtConfig, this);
