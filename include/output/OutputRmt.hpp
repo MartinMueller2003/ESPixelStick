@@ -129,36 +129,32 @@ public:
     void GetDriverName      (String &value)  { value = CN_RMT; }
     void SetBitDuration     (double BitLenNs, rmt_item32_t & OutputBit, uint32_t & OutputNumBits);
 
+#if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0, 0)
 __attribute__((always_inline))
 inline void IRAM_ATTR DisableRmtInterrupts()
 {
-    #if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0, 0)
     rmt_ll_enable_tx_thres_interrupt(&RMT, OutputRmtConfig.RmtChannelId, false);
     rmt_ll_enable_tx_end_interrupt(&RMT, OutputRmtConfig.RmtChannelId, false);
     rmt_ll_enable_tx_err_interrupt(&RMT, OutputRmtConfig.RmtChannelId, false);
     ClearRmtInterrupts();
-    #endif //  ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
 }
 
 __attribute__((always_inline))
 inline void IRAM_ATTR EnableRmtInterrupts()
 {
-    #if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0, 0)
     rmt_ll_enable_tx_thres_interrupt(&RMT, OutputRmtConfig.RmtChannelId, true);
     rmt_ll_enable_tx_end_interrupt(&RMT, OutputRmtConfig.RmtChannelId, true);
     rmt_ll_enable_tx_err_interrupt(&RMT, OutputRmtConfig.RmtChannelId, true);
-    #endif // ndef rmt_ll_clear_tx_thres_interrupt
 }
 
 __attribute__((always_inline))
 inline void IRAM_ATTR ClearRmtInterrupts()
 {
-    #if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0, 0)
     rmt_ll_clear_tx_thres_interrupt(&RMT, OutputRmtConfig.RmtChannelId);
     rmt_ll_clear_tx_end_interrupt(&RMT, OutputRmtConfig.RmtChannelId);
     rmt_ll_clear_tx_err_interrupt(&RMT, OutputRmtConfig.RmtChannelId);
-    #endif // ndef rmt_ll_clear_tx_thres_interrupt
 }
+#endif // ndef rmt_ll_clear_tx_thres_interrupt
 
 #define RMT_ClockRate           80000000.0
 #define RMT_Clock_Divisor       2.0

@@ -110,8 +110,6 @@ c_OutputRmt::~c_OutputRmt ()
         RequestReboot(Reason, 100000);
 
         ISR_ResetRmtBlockPointers (); // Stop transmitter
-        DisableRmtInterrupts();
-        ClearRmtInterrupts();
         yield();
         rmt_isr_ThisPtrs[OutputRmtConfig.RmtChannelId] = (c_OutputRmt*)nullptr;
     }
@@ -461,8 +459,6 @@ void c_OutputRmt::PauseOutput(bool PauseOutput)
     else if (PauseOutput)
     {
         ///DEBUG_V("stop the output");
-        DisableRmtInterrupts();
-        ClearRmtInterrupts();
     }
 
     OutputIsPaused = PauseOutput;
