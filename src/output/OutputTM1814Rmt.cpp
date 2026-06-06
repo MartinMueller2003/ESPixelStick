@@ -97,6 +97,7 @@ bool c_OutputTM1814Rmt::SetConfig (ArduinoJson::JsonObject& jsonConfig)
     OutputRmtConfig.ISR_GetNextIntensityBit = ISR_GetNextBitToSendBase;
     OutputRmtConfig.StartNewDataFrame       = StartNewDataFrameBase;
     OutputRmtConfig.BufferStart             = GetBufferAddress();
+    OutputRmtConfig.NumBytesInFrame         = OM_MAX_NUM_CHANNELS;
 
     Rmt.Begin(OutputRmtConfig, this);
 

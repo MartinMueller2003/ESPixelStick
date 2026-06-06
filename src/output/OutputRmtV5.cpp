@@ -514,7 +514,7 @@ bool c_OutputRmt::StartNewFrame ()
         // DEBUG_V("start the transmitter");
 
         // rmt_enable(rmt_channel_handle);
-        OutputRmtConfig.NumBytesInFrame = 9000;
+    
         // DEBUG_V(String("rmt_channel_handle: ") + String(uint32_t(rmt_channel_handle)));
         // DEBUG_V(String("rmt_encoder_handle: ") + String(uint32_t(rmt_encoder_handle)));
         // DEBUG_V(String("       BufferStart: ") + String(uint32_t(OutputRmtConfig.BufferStart)));
