@@ -23,20 +23,17 @@
 #include "output/OutputRmt.hpp"
 #include <driver/rmt_tx.h>
 
-// forward declaration for the isr handler
-static void IRAM_ATTR   rmt_intr_handler (void* param);
-static c_OutputRmt *    rmt_isr_ThisPtrs[MAX_NUM_RMT_CHANNELS];
-
 #ifdef USE_RMT_DEBUG_COUNTERS
-static uint32_t RawIsrCounter = 0;
+static uint32_t         RawIsrCounter = 0;
 #endif // def USE_RMT_DEBUG_COUNTERS
 
-static TaskHandle_t SendFrameTaskHandle = NULL;
-static BaseType_t xHigherPriorityTaskWoken = pdTRUE;
-static uint32_t FrameCompletes = 0;
-static uint32_t FrameTimeouts = 0;
-static uint32_t SavedInterruptEnables = 0;
-static uint32_t SavedInterruptStatus = 0;
+static TaskHandle_t     SendFrameTaskHandle = NULL;
+static BaseType_t       xHigherPriorityTaskWoken = pdTRUE;
+static uint32_t         FrameCompletes = 0;
+static uint32_t         FrameTimeouts = 0;
+static uint32_t         SavedInterruptEnables = 0;
+static uint32_t         SavedInterruptStatus = 0;
+static c_OutputRmt *    rmt_isr_ThisPtrs[MAX_NUM_RMT_CHANNELS];
 
 //----------------------------------------------------------------------------
 void RMT_Task (void *arg)
@@ -95,7 +92,6 @@ c_OutputRmt::c_OutputRmt()
 
     memset((void *)&SendBuffer[0], 0x00, sizeof(SendBuffer));
 
-
     // DEBUG_END;
 } // c_OutputRmt
 
@@ -106,12 +102,10 @@ c_OutputRmt::~c_OutputRmt ()
 
     if (HasBeenInitialized)
     {
-        String Reason = (F("Shutting down an RMT channel requires a reboot"));
-        RequestReboot(Reason, 100000);
-
         ISR_ResetRmtBlockPointers (); // Stop transmitter
-        yield();
+        rmt_disable(rmt_channel_handle);
         rmt_isr_ThisPtrs[OutputRmtConfig.RmtChannelId] = (c_OutputRmt*)nullptr;
+        yield();
     }
 
     // DEBUG_END;
