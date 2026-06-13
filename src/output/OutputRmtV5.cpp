@@ -31,8 +31,6 @@ static TaskHandle_t     SendFrameTaskHandle = NULL;
 static BaseType_t       xHigherPriorityTaskWoken = pdTRUE;
 static uint32_t         FrameCompletes = 0;
 static uint32_t         FrameTimeouts = 0;
-static uint32_t         SavedInterruptEnables = 0;
-static uint32_t         SavedInterruptStatus = 0;
 static c_OutputRmt *    rmt_isr_ThisPtrs[MAX_NUM_RMT_CHANNELS];
 
 //----------------------------------------------------------------------------
