@@ -204,6 +204,7 @@ bool c_OutputPixel::SetConfig (ArduinoJson::JsonObject& jsonConfig)
 
     bool response = validate ();
 
+    // AdjustedBrightness = map (brightness, 0, 100, 0, 256);
     AdjustedBrightness = map (brightness, 0, 100, 0, 204);
     GECEBrightness = GECE_SET_BRIGHTNESS(map(brightness, 0, 100, 0, 204));
     // DEBUG_V (String ("brightness: ") + String (brightness));
@@ -233,6 +234,7 @@ void c_OutputPixel::updateGammaTable ()
 {
     // DEBUG_START;
     double tempBrightness = double (brightness) / 100.0;
+    // DEBUG_V (String ("    brightness: ") + String (brightness));
     // DEBUG_V (String ("tempBrightness: ") + String (tempBrightness));
 
     for (unsigned int i = 0; i < sizeof (gamma_table); ++i)
@@ -791,21 +793,25 @@ void c_OutputPixel::WriteChannelData(uint32_t StartChannelId, uint32_t ChannelCo
 {
     // DEBUG_START;
 
-    if((StartChannelId + ChannelCount) > OutputBufferSize)
+    // if((StartChannelId + ChannelCount) > OutputBufferSize)
     {
         // DEBUG_V("ERROR: Writting beyond the end of the output buffer");
         // DEBUG_V(String("StartChannelId: 0x") + String(StartChannelId, HEX));
         // DEBUG_V(String("  ChannelCount: 0x") + String(ChannelCount));
     }
-    // DEBUG_V(String("         StartChannelId: 0x") + String(StartChannelId, HEX));
-    // DEBUG_V(String("           ChannelCount: 0x") + String(ChannelCount, HEX));
+    // DEBUG_V(String("                   StartChannelId: 0x") + String(StartChannelId, HEX));
+    // DEBUG_V(String("                      ChannelCount: 0x") + String(ChannelCount, HEX));
+    // DEBUG_V(String("                AdjustedBrightness: ") + String(AdjustedBrightness));
 
     uint32_t EndChannelId = StartChannelId + ChannelCount;
     uint32_t SourceDataIndex = 0;
     for (uint32_t currentChannelId = StartChannelId; currentChannelId < EndChannelId; ++currentChannelId, ++SourceDataIndex)
     {
+        // DEBUG_V(String("      pSourceData[SourceDataIndex]: ") + String(pSourceData[SourceDataIndex]));
         uint32_t CurrentIntensityData = gamma_table[pSourceData[SourceDataIndex]];
+        // DEBUG_V(String("              CurrentIntensityData: ") + String(CurrentIntensityData));
         CurrentIntensityData = uint8_t((uint32_t(CurrentIntensityData) * AdjustedBrightness) >> 8);
+        // DEBUG_V(String("              CurrentIntensityData: ") + String(CurrentIntensityData));
         uint32_t CalculatedChannelId = CalculateIntensityOffset(currentChannelId);
         uint8_t *pBuffer = &pOutputBuffer[CalculatedChannelId];
         for(uint32_t CurrentGroupIndex = 0; CurrentGroupIndex < PixelGroupSize; ++CurrentGroupIndex)
