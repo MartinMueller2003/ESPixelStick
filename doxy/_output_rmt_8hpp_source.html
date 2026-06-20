@@ -198,7 +198,7 @@ $(function(){initNavTree('_output_rmt_8hpp_source.html',''); initResizable(true)
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    uint32_t            NumRmtSlotOverruns          = 0;</div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="keyword">const</span> uint32_t      MaxNumRmtSlotsPerInterrupt  = (_NUM_RMT_SLOTS/2);</div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="preprocessor">    #define             NumSendBufferSlots 128 </span><span class="comment">// Must be a power of 2</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="preprocessor">    #define             NumSendBufferSlots 64 </span><span class="comment">// Must be a power of 2</span></div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    rmt_item32_t        SendBuffer[NumSendBufferSlots];</div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    uint32_t            RmtBufferWriteIndex         = 0;</div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    uint32_t            SendBufferWriteIndex        = 0;</div>
