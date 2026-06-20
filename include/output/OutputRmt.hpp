@@ -96,7 +96,7 @@ private:
     uint32_t            NumRmtSlotOverruns          = 0;
     const uint32_t      MaxNumRmtSlotsPerInterrupt  = (_NUM_RMT_SLOTS/2);
 
-    #define             NumSendBufferSlots 128 // Must be a power of 2
+    #define             NumSendBufferSlots 64 // Must be a power of 2
     rmt_item32_t        SendBuffer[NumSendBufferSlots];
     uint32_t            RmtBufferWriteIndex         = 0;
     uint32_t            SendBufferWriteIndex        = 0;
