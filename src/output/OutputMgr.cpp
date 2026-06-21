@@ -160,13 +160,13 @@ union alignas(32) OutputProtocolClasses_t
     #endif // def SUPPORT_OutputProtocol_GECE
 
     #ifdef SUPPORT_OutputProtocol_DMX
-    c_OutputDMXUart OutputDMXUart;
-    c_OutputDMXRmt  OutputDMXRmt;
+    c_OutputSerialUart OutputDMXUart;
+    c_OutputSerialRmt  OutputDMXRmt;
     #endif // def SUPPORT_OutputProtocol_DMX
 
     #ifdef SUPPORT_OutputProtocol_Renard
-    c_OutputRenardUart OutputRenardUart;
-    c_OutputRenardRmt  OutputRenardRmt;
+    c_OutputSerialUart OutputRenardUart;
+    c_OutputSerialRmt  OutputRenardRmt;
     #endif // def SUPPORT_OutputProtocol_Renard
 
     #ifdef SUPPORT_OutputProtocol_Serial
@@ -216,11 +216,12 @@ union alignas(32) OutputProtocolClasses_t
     #endif // def SUPPORT_OutputProtocol_TLS3001
 
     #ifdef SUPPORT_OutputProtocol_GRINCH
-    c_OutputGRINCHSpi OutputGRINCHSpi;
+    c_OutputGrinchSpi OutputGrinchSpi;
     #endif // def SUPPORT_OutputProtocol_GRINCH
 
     #ifdef SUPPORT_OutputProtocol_FireGod
-    c_OutputFireGodSpi OutputFireGodSpi;
+    c_OutputSerialUart OutputFireGodUart;
+    c_OutputSerialRmt  OutputFireGodRmt;
     #endif // def SUPPORT_OutputProtocol_FireGod
 
     // Add new types here
