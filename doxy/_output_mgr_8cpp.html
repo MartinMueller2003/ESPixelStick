@@ -262,6 +262,10 @@ Include dependency graph for OutputMgr.cpp:</div>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_supported_output_protocol__t.html">SupportedOutputProtocol_t</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">union &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="union_output_protocol_classes__t.html">OutputProtocolClasses_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_driver_info__t.html">DriverInfo_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
@@ -276,6 +280,8 @@ Macros</h2></td></tr>
 Variables</h2></td></tr>
 <tr class="memitem:ab0dd6515a18a339a11253af8696e3edb" id="r_ab0dd6515a18a339a11253af8696e3edb"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="struct_supported_output_protocol__t.html">SupportedOutputProtocol_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab0dd6515a18a339a11253af8696e3edb">SupportedOutputProtocolList</a> []</td></tr>
 <tr class="separator:ab0dd6515a18a339a11253af8696e3edb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51001349ecf5080d706f65c4cc81e1f4" id="r_a51001349ecf5080d706f65c4cc81e1f4"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="struct_driver_info__t.html">DriverInfo_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a51001349ecf5080d706f65c4cc81e1f4">pOutputChannelDrivers</a> = nullptr</td></tr>
+<tr class="separator:a51001349ecf5080d706f65c4cc81e1f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af6b50c745df05adfe6f502280127db1f" id="r_af6b50c745df05adfe6f502280127db1f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classc___output_mgr.html">c_OutputMgr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af6b50c745df05adfe6f502280127db1f">OutputMgr</a></td></tr>
 <tr class="separator:af6b50c745df05adfe6f502280127db1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -304,7 +310,6 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">{ \</div>
-<div class="line">    static_assert(<span class="keyword">sizeof</span>(Output.OutputDriver) &gt;= <span class="keyword">sizeof</span>(ClassType)); \</div>
 <div class="line">    new(&amp;Output.OutputDriver) ClassType(Output.PortDefinition, OutputType); \</div>
 <div class="line">    Output.OutputDriverInUse = true; \</div>
 <div class="line">}</div>
@@ -358,6 +363,28 @@ Variables</h2></td></tr>
           <td class="memname"><a class="el" href="classc___output_mgr.html">c_OutputMgr</a> OutputMgr</td>
         </tr>
       </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a51001349ecf5080d706f65c4cc81e1f4" name="a51001349ecf5080d706f65c4cc81e1f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51001349ecf5080d706f65c4cc81e1f4">&#9670;&#160;</a></span>pOutputChannelDrivers</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_driver_info__t.html">DriverInfo_t</a>* pOutputChannelDrivers = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
