@@ -62,7 +62,6 @@
 
 #define AllocatePort(ClassType, Output, OutputType) \
 { \
-    static_assert(sizeof(Output.OutputDriver) >= sizeof(ClassType)); \
     new(&Output.OutputDriver) ClassType(Output.PortDefinition, OutputType); \
     Output.OutputDriverInUse = true; \
 }
@@ -146,6 +145,105 @@ static const SupportedOutputProtocol_t SupportedOutputProtocolList[] =
     #endif // def SUPPORT_OutputProtocol_FireGod
 };
 
+union alignas(32) OutputProtocolClasses_t
+{
+    c_OutputDisabled OutputDisabled;
+
+    #ifdef SUPPORT_OutputProtocol_WS2811
+    c_OutputWS2811Uart OutputWS2811Uart;
+    c_OutputWS2811Rmt  OutputWS2811Rmt;
+    #endif // def SUPPORT_OutputProtocol_WS2811
+
+    #ifdef SUPPORT_OutputProtocol_GECE
+    c_OutputGECEUart OutputGECEUart;
+    c_OutputGECERmt  OutputGECERmt;
+    #endif // def SUPPORT_OutputProtocol_GECE
+
+    #ifdef SUPPORT_OutputProtocol_DMX
+    c_OutputDMXUart OutputDMXUart;
+    c_OutputDMXRmt  OutputDMXRmt;
+    #endif // def SUPPORT_OutputProtocol_DMX
+
+    #ifdef SUPPORT_OutputProtocol_Renard
+    c_OutputRenardUart OutputRenardUart;
+    c_OutputRenardRmt  OutputRenardRmt;
+    #endif // def SUPPORT_OutputProtocol_Renard
+
+    #ifdef SUPPORT_OutputProtocol_Serial
+    c_OutputSerialUart OutputSerialUart;
+    c_OutputSerialRmt  OutputSerialRmt;
+    #endif // def SUPPORT_OutputProtocol_Serial
+
+    #ifdef SUPPORT_OutputProtocol_Relay
+    c_OutputRelay OutputRelay;
+    #endif // def SUPPORT_OutputProtocol_Relay
+
+    #ifdef SUPPORT_OutputProtocol_Servo_PCA9685
+    c_OutputServoPCA9685 OutputServoPCA9685;
+    #endif // def SUPPORT_OutputProtocol_Servo_PCA9685
+
+    #ifdef SUPPORT_OutputProtocol_UCS1903
+    c_OutputUCS1903Uart OutputUCS1903Uart;
+    c_OutputUCS1903Rmt  OutputUCS1903Rmt;
+    #endif // def SUPPORT_OutputProtocol_UCS1903
+
+    #ifdef SUPPORT_OutputProtocol_TM1814
+    c_OutputTM1814Uart OutputTM1814Uart;
+    c_OutputTM1814Rmt  OutputTM1814Rmt;
+    #endif // def SUPPORT_OutputProtocol_TM1814
+
+    #ifdef SUPPORT_OutputProtocol_WS2801
+    c_OutputWS2801Spi OutputWS2801Spi;
+    #endif // def SUPPORT_OutputProtocol_WS2801
+
+    #ifdef SUPPORT_OutputProtocol_APA102
+    c_OutputAPA102Spi OutputAPA102Spi;
+    #endif // def SUPPORT_OutputProtocol_APA102
+
+    #ifdef SUPPORT_OutputProtocol_GS8208
+    c_OutputGS8208Uart OutputGS8208Uart;
+    c_OutputGS8208Rmt  OutputGS8208Rmt;
+    #endif // def SUPPORT_OutputProtocol_GS8208
+
+    #ifdef SUPPORT_OutputProtocol_UCS8903
+    c_OutputUCS8903Uart OutputUCS8903Uart;
+    c_OutputUCS8903Rmt  OutputUCS8903Rmt;
+    #endif // def SUPPORT_OutputProtocol_UCS8903
+
+    #ifdef SUPPORT_OutputProtocol_TLS3001
+    // c_OutputTLS3001Uart OutputTLS3001Uart;
+    c_OutputTLS3001Rmt  OutputTLS3001Rmt;
+    #endif // def SUPPORT_OutputProtocol_TLS3001
+
+    #ifdef SUPPORT_OutputProtocol_GRINCH
+    c_OutputGRINCHSpi OutputGRINCHSpi;
+    #endif // def SUPPORT_OutputProtocol_GRINCH
+
+    #ifdef SUPPORT_OutputProtocol_FireGod
+    c_OutputFireGodSpi OutputFireGodSpi;
+    #endif // def SUPPORT_OutputProtocol_FireGod
+
+    // Add new types here
+};
+
+struct alignas(32) DriverInfo_t
+{
+    OutputProtocolClasses_t OutputDriver;
+    uint32_t        OutputBufferStartingOffset;
+    uint32_t        OutputBufferDataSize;
+    uint32_t        OutputBufferEndOffset;
+
+    uint32_t        OutputChannelStartingOffset;
+    uint32_t        OutputChannelSize;
+    uint32_t        OutputChannelEndOffset;
+
+    OM_OutputPortDefinition_t PortDefinition;
+    uint8_t         DriverId;
+    bool            OutputDriverInUse;
+};
+
+static DriverInfo_t * pOutputChannelDrivers  = nullptr;;
+
 //-----------------------------------------------------------------------------
 // Methods
 //-----------------------------------------------------------------------------
@@ -170,14 +268,14 @@ c_OutputMgr::c_OutputMgr ()
             NumOutputPorts = CurrentOutputPortDefinition.PortId;
         }
     }
+    
     // convert the zero based port ID into a port count
     NumOutputPorts++;
 
     // allocate a port driver control space
-    pOutputChannelDrivers = nullptr;
     // DriverInfo_t is an aligned structure
     size_t alignment = alignof(DriverInfo_t);
-    SizeOfTable = sizeof(DriverInfo_t) * NumOutputPorts;
+    uint32_t SizeOfTable = sizeof(DriverInfo_t) * NumOutputPorts;
     // Ensure total_size is a multiple of alignment (which it should be if sizeof(AlignedObject) is used)
     byte * raw_mem = (((byte*)malloc(SizeOfTable + (2*alignment))) + alignment);
     pOutputChannelDrivers = static_cast<DriverInfo_t*>((void*)raw_mem);
@@ -187,6 +285,15 @@ c_OutputMgr::c_OutputMgr ()
     for (uint8_t index = 0; index < NumOutputPorts; ++index)
     {
         DriverInfo_t & CurrentOutput = pOutputChannelDrivers[index];
+        
+        // CurrentOutput.OutputDriver;
+        // CurrentOutput.OutputBufferStartingOffset = 0;
+        // CurrentOutput.OutputBufferDataSize = 0;
+        // CurrentOutput.OutputBufferEndOffset = 0;
+        // CurrentOutput.OutputChannelStartingOffset = 0;
+        // CurrentOutput.OutputChannelSize = 0;
+        // CurrentOutput.OutputChannelEndOffset = 0;
+
         CurrentOutput.DriverId = index;
         CurrentOutput.OutputDriverInUse = false;
     }
@@ -204,6 +311,7 @@ c_OutputMgr::~c_OutputMgr()
     {
         DriverInfo_t & CurrentOutput = pOutputChannelDrivers[index];
         // the drivers will put the hardware in a safe state
+        CurrentOutput.OutputDriverInUse = false;
         ((c_OutputCommon&)(CurrentOutput.OutputDriver)).~c_OutputCommon();
     }
     // DEBUG_END;
@@ -250,9 +358,7 @@ void c_OutputMgr::Begin ()
         // make sure the pointers are set up properly
         for (uint8_t index = 0; index < NumOutputPorts; ++index)
         {
-            DriverInfo_t & CurrentOutput = pOutputChannelDrivers[index];
-            // DEBUG_V(String("DriverId: ") + String(CurrentOutput.DriverId));
-            InstantiateNewOutputChannel(CurrentOutput, e_OutputProtocolType::OutputProtocol_Disabled);
+            InstantiateNewOutputChannel(index, e_OutputProtocolType::OutputProtocol_Disabled);
             // DEBUG_V(String("init index: ") + String(index) + " Done");
         }
 
@@ -417,7 +523,7 @@ void c_OutputMgr::CreateNewConfig ()
                (CurrentOutputProtocol.RequiredPortType == OM_PortType_t::OM_ANY))
             {
                 // DEBUG_V("Port supports this protocol");
-                InstantiateNewOutputChannel(CurrentOutput, CurrentOutputProtocol.ProtocolId, false);
+                InstantiateNewOutputChannel(CurrentOutput.DriverId, CurrentOutputProtocol.ProtocolId, false);
             }
             else
             {
@@ -448,8 +554,7 @@ void c_OutputMgr::CreateNewConfig ()
     // DEBUG_V ("leave the outputs disabled");
     for (uint8_t index = 0; index < NumOutputPorts; ++index)
     {
-        DriverInfo_t & CurrentOutput = pOutputChannelDrivers[index];
-        InstantiateNewOutputChannel(CurrentOutput, e_OutputProtocolType::OutputProtocol_Disabled);
+        InstantiateNewOutputChannel(index, e_OutputProtocolType::OutputProtocol_Disabled);
     }// end for each interface
 
     // PrettyPrint(JsonConfig, "Complete OutputMgr");
@@ -549,13 +654,14 @@ void c_OutputMgr::ClearStatistics ()
     returns
         nothing
 */
-void c_OutputMgr::InstantiateNewOutputChannel(DriverInfo_t & CurrentOutput, e_OutputProtocolType NewOutputChannelType, bool StartDriver)
+void c_OutputMgr::InstantiateNewOutputChannel(uint32_t PortIndex, e_OutputProtocolType NewOutputChannelType, bool StartDriver)
 {
     // DEBUG_START;
     // BuildingNewConfig = false;
     // IsBooting = false;
     do // once
     {
+        DriverInfo_t & CurrentOutput = pOutputChannelDrivers[PortIndex];
         // DEBUG_V(String("CurrentOutput: 0x") + String(uint32_t(&CurrentOutput), HEX));
         // DEBUG_V(String("OutputDriverInUse: ") + String(CurrentOutput.OutputDriverInUse));
         // is there an existing driver?
@@ -579,7 +685,7 @@ void c_OutputMgr::InstantiateNewOutputChannel(DriverInfo_t & CurrentOutput, e_Ou
             }
 
             ((c_OutputCommon&)(CurrentOutput.OutputDriver)).~c_OutputCommon();
-            memset(CurrentOutput.OutputDriver, 0x0, sizeof(CurrentOutput.OutputDriver));
+            memset((void*) & (CurrentOutput.OutputDriver), 0x0, sizeof(CurrentOutput.OutputDriver));
             CurrentOutput.OutputDriverInUse = false;
             // DEBUG_V ();
         } // end there is an existing driver
@@ -599,7 +705,7 @@ void c_OutputMgr::InstantiateNewOutputChannel(DriverInfo_t & CurrentOutput, e_Ou
         // DEBUG_V (String("PortType: ") + String(CurrentOutput.PortType));
         // DEBUG_V (String("  PortId: ") + String(CurrentOutput.PortId));
 
-        if(!SetPortDefnitionDefaults(CurrentOutput, NewOutputChannelType))
+        if(!SetPortDefnitionDefaults(CurrentOutput.DriverId, NewOutputChannelType))
         {
             logcon(String(CN_stars) + F(" No valid port definition for port ") + String(CurrentOutput.DriverId + 1) + F(" of protocol type ") + String(NewOutputChannelType))
             AllocatePort(c_OutputDisabled, CurrentOutput, OutputProtocol_Disabled);
@@ -1011,13 +1117,14 @@ void c_OutputMgr::InstantiateNewOutputChannel(DriverInfo_t & CurrentOutput, e_Ou
 } // InstantiateNewOutputChannel
 
 //-----------------------------------------------------------------------------
-bool c_OutputMgr::SetPortDefnitionDefaults(DriverInfo_t & CurrentOutput, e_OutputProtocolType TargetProtocolType)
+bool c_OutputMgr::SetPortDefnitionDefaults(uint32_t PortIndex, e_OutputProtocolType TargetProtocolType)
 {
     // DEBUG_START;
     bool Response = false;
 
     do // once
     {
+        DriverInfo_t & CurrentOutput = pOutputChannelDrivers[PortIndex];
         // DEBUG_V(String("          DriverId: ") + String(CurrentOutput.DriverId));
         // DEBUG_V(String("TargetProtocolType: ") + String(TargetProtocolType));
 
@@ -1272,7 +1379,7 @@ bool c_OutputMgr::ProcessJsonConfig (JsonDocument& jsonConfig)
                 // DEBUG_V (String("     OutputPortType: ") + String(OutputPortType));
                 // if not, flag an error and move on to the next channel
                 logcon(String(MN_19) + OutputPortType + MN_20 + CurrentOutput.DriverId + MN_03);
-                InstantiateNewOutputChannel(CurrentOutput, e_OutputProtocolType::OutputProtocol_Disabled);
+                InstantiateNewOutputChannel(CurrentOutput.DriverId, e_OutputProtocolType::OutputProtocol_Disabled);
                 continue;
             }
             // DEBUG_V ();
@@ -1283,7 +1390,7 @@ bool c_OutputMgr::ProcessJsonConfig (JsonDocument& jsonConfig)
             {
                 // if not, flag an error and stop processing
                 logcon(String(MN_16) + CurrentOutput.DriverId + MN_18);
-                InstantiateNewOutputChannel(CurrentOutput, e_OutputProtocolType::OutputProtocol_Disabled);
+                InstantiateNewOutputChannel(CurrentOutput.DriverId, e_OutputProtocolType::OutputProtocol_Disabled);
                 continue;
             }
             // DEBUG_V ();
@@ -1291,7 +1398,7 @@ bool c_OutputMgr::ProcessJsonConfig (JsonDocument& jsonConfig)
             // DEBUG_V ();
 
             // make sure the proper output type is running
-            InstantiateNewOutputChannel(CurrentOutput, e_OutputProtocolType(OutputPortType));
+            InstantiateNewOutputChannel(CurrentOutput.DriverId, e_OutputProtocolType(OutputPortType));
 
             // DEBUG_V ();
             // PrettyPrint(OutputChannelDriverConfig, "ProcessJson Channel Driver Config");
@@ -1559,7 +1666,7 @@ void c_OutputMgr::RelayUpdate (uint8_t RelayId, String & NewValue, String & Resp
         DriverInfo_t & CurrentOutput = pOutputChannelDrivers[RelayId];
         if(e_OutputProtocolType::OutputProtocol_Relay == ((c_OutputCommon&)(CurrentOutput.OutputDriver)).GetOutputType())
         {
-            ((c_OutputRelay*)(CurrentOutput.OutputDriver))->RelayUpdate(NewValue, Response);
+            CurrentOutput.OutputDriver.OutputRelay.RelayUpdate(NewValue, Response);
             break;
         }
         #endif // def SUPPORT_OutputProtocol_Relay
