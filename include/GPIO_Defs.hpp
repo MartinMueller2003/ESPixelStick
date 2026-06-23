@@ -106,8 +106,12 @@
 #   include "platforms/GPIO_Defs_ESP32_ESP3DEUXQuattro_DMX.hpp"
 #elif defined (BOARD_ESP32_OCTA2GO)
 #   include "platforms/GPIO_Defs_ESP32_Octa2go.hpp"
+#elif defined (BOARD_ESP32_OCTA2GO_ETH)
+#   include "platforms/GPIO_Defs_ESP32_Octa2go_ETH.hpp"
 #elif defined (BOARD_ESP32_TETRA2GO)
 #   include "platforms/GPIO_Defs_ESP32_Tetra2go.hpp"
+#elif defined (BOARD_ESP32_TETRA2GO_ETH)
+#   include "platforms/GPIO_Defs_ESP32_Tetra2go_ETH.hpp"
 #elif defined (BOARD_ESP32_SOLO2GO)
 #   include "platforms/GPIO_Defs_ESP32_Solo2go.hpp"
 #elif defined (BOARD_ESP32_KR_LIGHTS_MSM)

@@ -107,7 +107,13 @@ jobs:
           - target: "esp32_tetra2go"
             chip: "esp32"
           #
+          - target: "esp32_tetra2go_eth"
+            chip: "esp32"
+          #
           - target: "esp32_octa2go"
+            chip: "esp32"
+          #
+          - target: "esp32_octa2go_eth"
             chip: "esp32"
           #
           - target: "esp32_solo2go"
