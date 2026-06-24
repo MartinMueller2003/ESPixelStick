@@ -1,5 +1,6 @@
 var NAVTREEINDEX15 =
 {
+"main_8cpp.html#a4d11f89c2bddb3507fe402ff80136079":[1,0,1,8,9],
 "main_8cpp.html#a4fc01d736fe50cf5b977f755b675f11d":[1,0,1,8,18],
 "main_8cpp.html#a653ee970a35bc7e905130d21d21abc99":[1,0,1,8,8],
 "main_8cpp.html#a70e2f5df671c5b18e60a1bbcf2c9586f":[1,0,1,8,27],
@@ -248,6 +249,5 @@ var NAVTREEINDEX15 =
 "structc___output_uart_1_1_convert_intensity_to_uart_data_stream_entry__t.html":[0,0,24,0],
 "structc___output_uart_1_1_convert_intensity_to_uart_data_stream_entry__t.html#a632aeff29e7263099a1b6d83e9387ca6":[0,0,24,0,1],
 "structc___output_uart_1_1_convert_intensity_to_uart_data_stream_entry__t.html#ab38e9de41e62d5b67862e0514185c962":[0,0,24,0,0],
-"structc___output_uart_1_1_output_uart_config__t.html":[0,0,24,1],
-"structc___output_uart_1_1_output_uart_config__t.html#a15ebb4c889658c0d5ed19d7129c9ae41":[0,0,24,1,6]
+"structc___output_uart_1_1_output_uart_config__t.html":[0,0,24,1]
 };

@@ -1,5 +1,6 @@
 var NAVTREEINDEX16 =
 {
+"structc___output_uart_1_1_output_uart_config__t.html#a15ebb4c889658c0d5ed19d7129c9ae41":[0,0,24,1,6],
 "structc___output_uart_1_1_output_uart_config__t.html#a1809bf676da3b92c8f0d421a5901317b":[0,0,24,1,15],
 "structc___output_uart_1_1_output_uart_config__t.html#a18adbfab1fed6c979e4feea916edbe2d":[0,0,24,1,9],
 "structc___output_uart_1_1_output_uart_config__t.html#a3182e98f9b7e716147836c0294b07f4f":[0,0,24,1,7],
