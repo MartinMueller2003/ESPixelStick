@@ -1251,7 +1251,7 @@
         },
         {
             "name": "ESP32 Solo2go",
-            "description": "D1 ESP32 based quad controller",
+            "description": "D1 ESP32 based single port controller",
             "chip": "esp32",
             "appbin": "esp32/esp32_solo2go-app.bin",
             "esptool": {
@@ -1274,6 +1274,41 @@
                 },
                 {
                     "name": "esp32/esp32_solo2go-app.bin",
+                    "offset": "0x10000"
+                }
+            ],
+            "filesystem": {
+                "page": "256",
+                "block": "4096",
+                "size": "0x50000",
+                "offset": "0x3B0000"
+            }
+        },
+        {
+            "name": "ESP32 Solo2go ETH",
+            "description": "D1 ESP32 based Single Port controller",
+            "chip": "esp32",
+            "appbin": "esp32/esp32_solo2go_eth-app.bin",
+            "esptool": {
+                "baudrate": "460800",
+                "options": "--before default_reset --after hard_reset",
+                "flashcmd": "write_flash -z"
+            },
+            "binfiles": [
+                {
+                    "name": "esp32/esp32_solo2go_eth-bootloader.bin",
+                    "offset": "0x01000"
+                },
+                {
+                    "name": "esp32/esp32_solo2go_eth-partitions.bin",
+                    "offset": "0x08000"
+                },
+                {
+                    "name": "esp32/boot_app0.bin",
+                    "offset": "0x0e000"
+                },
+                {
+                    "name": "esp32/esp32_solo2go_eth-app.bin",
                     "offset": "0x10000"
                 }
             ],
