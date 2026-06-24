@@ -145,34 +145,35 @@ static const SupportedOutputProtocol_t SupportedOutputProtocolList[] =
     #endif // def SUPPORT_OutputProtocol_FireGod
 };
 
+
+
+#ifdef ARDUINO_ARCH_ESP8266
+#define AddUartRmtToProtocolClassList(name) \
+    c_ ## name ## Uart name ## Uart;
+#else
+#define AddUartRmtToProtocolClassList(name) \
+    c_ ## name ## Uart name ## Uart; \
+    c_ ## name ## Uart name ## Rmt;
+#endif // def ARDUINO_ARCH_ESP32
+
 union alignas(32) OutputProtocolClasses_t
 {
     c_OutputDisabled OutputDisabled;
 
     #ifdef SUPPORT_OutputProtocol_WS2811
-    c_OutputWS2811Uart OutputWS2811Uart;
-    c_OutputWS2811Rmt  OutputWS2811Rmt;
+    AddUartRmtToProtocolClassList(OutputWS2811);
     #endif // def SUPPORT_OutputProtocol_WS2811
 
     #ifdef SUPPORT_OutputProtocol_GECE
-    c_OutputGECEUart OutputGECEUart;
-    c_OutputGECERmt  OutputGECERmt;
+    AddUartRmtToProtocolClassList(OutputGECE);
     #endif // def SUPPORT_OutputProtocol_GECE
 
-    #ifdef SUPPORT_OutputProtocol_DMX
-    c_OutputSerialUart OutputDMXUart;
-    c_OutputSerialRmt  OutputDMXRmt;
-    #endif // def SUPPORT_OutputProtocol_DMX
-
-    #ifdef SUPPORT_OutputProtocol_Renard
-    c_OutputSerialUart OutputRenardUart;
-    c_OutputSerialRmt  OutputRenardRmt;
-    #endif // def SUPPORT_OutputProtocol_Renard
-
-    #ifdef SUPPORT_OutputProtocol_Serial
-    c_OutputSerialUart OutputSerialUart;
-    c_OutputSerialRmt  OutputSerialRmt;
-    #endif // def SUPPORT_OutputProtocol_Serial
+    #if defined(SUPPORT_OutputProtocol_DMX) || \
+        defined(SUPPORT_OutputProtocol_Renard) || \
+        defined(SUPPORT_OutputProtocol_Serial) || \
+        defined(SUPPORT_OutputProtocol_FireGod)
+    AddUartRmtToProtocolClassList(OutputSerial);
+    #endif
 
     #ifdef SUPPORT_OutputProtocol_Relay
     c_OutputRelay OutputRelay;
@@ -183,13 +184,11 @@ union alignas(32) OutputProtocolClasses_t
     #endif // def SUPPORT_OutputProtocol_Servo_PCA9685
 
     #ifdef SUPPORT_OutputProtocol_UCS1903
-    c_OutputUCS1903Uart OutputUCS1903Uart;
-    c_OutputUCS1903Rmt  OutputUCS1903Rmt;
+    AddUartRmtToProtocolClassList(OutputUCS1903);
     #endif // def SUPPORT_OutputProtocol_UCS1903
 
     #ifdef SUPPORT_OutputProtocol_TM1814
-    c_OutputTM1814Uart OutputTM1814Uart;
-    c_OutputTM1814Rmt  OutputTM1814Rmt;
+    AddUartRmtToProtocolClassList(OutputTM1814);
     #endif // def SUPPORT_OutputProtocol_TM1814
 
     #ifdef SUPPORT_OutputProtocol_WS2801
@@ -201,28 +200,23 @@ union alignas(32) OutputProtocolClasses_t
     #endif // def SUPPORT_OutputProtocol_APA102
 
     #ifdef SUPPORT_OutputProtocol_GS8208
-    c_OutputGS8208Uart OutputGS8208Uart;
-    c_OutputGS8208Rmt  OutputGS8208Rmt;
+    AddUartRmtToProtocolClassList(OutputGS8208);
     #endif // def SUPPORT_OutputProtocol_GS8208
 
     #ifdef SUPPORT_OutputProtocol_UCS8903
-    c_OutputUCS8903Uart OutputUCS8903Uart;
-    c_OutputUCS8903Rmt  OutputUCS8903Rmt;
+    AddUartRmtToProtocolClassList(OutputUCS8903);
     #endif // def SUPPORT_OutputProtocol_UCS8903
 
     #ifdef SUPPORT_OutputProtocol_TLS3001
     // c_OutputTLS3001Uart OutputTLS3001Uart;
-    c_OutputTLS3001Rmt  OutputTLS3001Rmt;
+        #ifdef ARDUINO_ARCH_ESP32
+        c_OutputTLS3001Rmt  OutputTLS3001Rmt;
+        #endif // def ARDUINO_ARCH_ESP32
     #endif // def SUPPORT_OutputProtocol_TLS3001
 
     #ifdef SUPPORT_OutputProtocol_GRINCH
     c_OutputGrinchSpi OutputGrinchSpi;
     #endif // def SUPPORT_OutputProtocol_GRINCH
-
-    #ifdef SUPPORT_OutputProtocol_FireGod
-    c_OutputSerialUart OutputFireGodUart;
-    c_OutputSerialRmt  OutputFireGodRmt;
-    #endif // def SUPPORT_OutputProtocol_FireGod
 
     // Add new types here
 };
