@@ -106,7 +106,6 @@ private:
     void ISR_TransferIntensityDataToRMT (uint32_t NumEntriesToTransfer);
     size_t ISR_TransferIntensityDataToRMT (rmt_item32_t *symbols, uint32_t MaxNumEntriesToTransfer);
     void ISR_CreateIntensityData ();
-    void ISR_WriteToBuffer(rmt_item32_t value);
     bool ISR_MoreDataToSend();
     void StartNewDataFrame();
     void ISR_ResetRmtBlockPointers();
@@ -131,7 +130,7 @@ public:
 
 #if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0, 0)
 __attribute__((always_inline))
-inline void IRAM_ATTR DisableRmtInterrupts()
+inline void DisableRmtInterrupts()
 {
     rmt_ll_enable_tx_thres_interrupt(&RMT, OutputRmtConfig.RmtChannelId, false);
     rmt_ll_enable_tx_end_interrupt(&RMT, OutputRmtConfig.RmtChannelId, false);
@@ -140,7 +139,7 @@ inline void IRAM_ATTR DisableRmtInterrupts()
 }
 
 __attribute__((always_inline))
-inline void IRAM_ATTR EnableRmtInterrupts()
+inline void EnableRmtInterrupts()
 {
     rmt_ll_enable_tx_thres_interrupt(&RMT, OutputRmtConfig.RmtChannelId, true);
     rmt_ll_enable_tx_end_interrupt(&RMT, OutputRmtConfig.RmtChannelId, true);
@@ -148,7 +147,7 @@ inline void IRAM_ATTR EnableRmtInterrupts()
 }
 
 __attribute__((always_inline))
-inline void IRAM_ATTR ClearRmtInterrupts()
+inline void ClearRmtInterrupts()
 {
     rmt_ll_clear_tx_thres_interrupt(&RMT, OutputRmtConfig.RmtChannelId);
     rmt_ll_clear_tx_end_interrupt(&RMT, OutputRmtConfig.RmtChannelId);
@@ -202,6 +201,21 @@ inline void IRAM_ATTR ClearRmtInterrupts()
 #define RMT_DEBUG_COUNTER(p)
 
 #endif // def USE_RMT_DEBUG_COUNTERS
+
+private:
+__attribute__((always_inline))
+inline void WriteToBuffer(rmt_item32_t value)
+{
+    /// DEBUG_START;
+
+    RMT_DEBUG_COUNTER(WriteToBuffer++);
+
+    SendBuffer[SendBufferWriteIndex++] = value;
+    SendBufferWriteIndex &= uint32_t(NumSendBufferSlots - 1);
+    ++NumUsedEntriesInSendBuffer;
+
+    ///DEBUG_END;
+}
 
 };
 #endif // def #ifdef ARDUINO_ARCH_ESP32

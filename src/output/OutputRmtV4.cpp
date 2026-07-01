@@ -361,7 +361,7 @@ void IRAM_ATTR c_OutputRmt::ISR_CreateIntensityData ()
             // no more data to send
             break;
         }
-        ISR_WriteToBuffer(Data);
+        WriteToBuffer(Data);
         --NumAvailableBufferSlotsToFill;
     };
 
@@ -502,20 +502,6 @@ void IRAM_ATTR c_OutputRmt::ISR_TransferIntensityDataToRMT (uint32_t MaxNumEntri
     // DEBUG_END;
 
 } // ISR_TransferIntensityDataToRMT
-
-//----------------------------------------------------------------------------
-inline void IRAM_ATTR c_OutputRmt::ISR_WriteToBuffer(rmt_item32_t value)
-{
-    /// DEBUG_START;
-
-    RMT_DEBUG_COUNTER(WriteToBuffer++);
-
-    SendBuffer[SendBufferWriteIndex++] = value;
-    SendBufferWriteIndex &= uint32_t(NumSendBufferSlots - 1);
-    ++NumUsedEntriesInSendBuffer;
-
-    ///DEBUG_END;
-}
 
 //----------------------------------------------------------------------------
 void c_OutputRmt::PauseOutput(bool PauseOutput)
