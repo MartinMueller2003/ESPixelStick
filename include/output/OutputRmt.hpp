@@ -62,14 +62,11 @@ public:
     };
 
 private:
-#ifdef CONFIG_IDF_TARGET_ESP32S3
-#   define MAX_NUM_RMT_CHANNELS 4
-#else
-#   define MAX_NUM_RMT_CHANNELS 8
-#endif // def CONFIG_IDF_TARGET_ESP32S3
+
+#define MAX_NUM_RMT_CHANNELS    SOC_RMT_TX_CANDIDATES_PER_GROUP
+#define NUM_RMT_SLOTS           SOC_RMT_MEM_WORDS_PER_CHANNEL
 
 #if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
-    #define _NUM_RMT_SLOTS 64
     rmt_channel_handle_t rmt_channel_handle;
     rmt_encoder_handle_t rmt_encoder_handle;
     rmt_transmit_config_t tx_config =
@@ -84,19 +81,17 @@ private:
 #else
     #define RMT_INT_BIT         uint32_t(1 << uint32_t (OutputRmtConfig.RmtChannelId))
     #define InterrupsAreEnabled (0 != (RMT.int_ena.val & RMT_INT_BIT))
-
-    #define _NUM_RMT_SLOTS (sizeof(RMTMEM.chan[0].data32) / sizeof(RMTMEM.chan[0].data32[0]))
+    rmt_item32_t * RmtChanData = nullptr;
 
 #endif // ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
 
 
-    const uint32_t      NUM_RMT_SLOTS               = _NUM_RMT_SLOTS;
     OutputRmtConfig_t   OutputRmtConfig;
     bool                OutputIsPaused              = false;
     uint32_t            NumRmtSlotOverruns          = 0;
-    const uint32_t      MaxNumRmtSlotsPerInterrupt  = (_NUM_RMT_SLOTS/2);
+    const uint32_t      MaxNumRmtSlotsPerInterrupt  = (NUM_RMT_SLOTS/2);
 
-    #define             NumSendBufferSlots 64 // Must be a power of 2
+    #define             NumSendBufferSlots 64
     rmt_item32_t        SendBuffer[NumSendBufferSlots];
     uint32_t            RmtBufferWriteIndex         = 0;
     uint32_t            SendBufferWriteIndex        = 0;
@@ -136,7 +131,7 @@ inline void DisableRmtInterrupts()
     rmt_ll_enable_tx_end_interrupt(&RMT, OutputRmtConfig.RmtChannelId, false);
     rmt_ll_enable_tx_err_interrupt(&RMT, OutputRmtConfig.RmtChannelId, false);
     ClearRmtInterrupts();
-}
+} // DisableRmtInterrupts
 
 __attribute__((always_inline))
 inline void EnableRmtInterrupts()
@@ -144,7 +139,7 @@ inline void EnableRmtInterrupts()
     rmt_ll_enable_tx_thres_interrupt(&RMT, OutputRmtConfig.RmtChannelId, true);
     rmt_ll_enable_tx_end_interrupt(&RMT, OutputRmtConfig.RmtChannelId, true);
     rmt_ll_enable_tx_err_interrupt(&RMT, OutputRmtConfig.RmtChannelId, true);
-}
+} // EnableRmtInterrupts
 
 __attribute__((always_inline))
 inline void ClearRmtInterrupts()
@@ -152,7 +147,7 @@ inline void ClearRmtInterrupts()
     rmt_ll_clear_tx_thres_interrupt(&RMT, OutputRmtConfig.RmtChannelId);
     rmt_ll_clear_tx_end_interrupt(&RMT, OutputRmtConfig.RmtChannelId);
     rmt_ll_clear_tx_err_interrupt(&RMT, OutputRmtConfig.RmtChannelId);
-}
+} // ClearRmtInterrupts
 #endif // ndef rmt_ll_clear_tx_thres_interrupt
 
 #define RMT_ClockRate           80000000.0
@@ -206,16 +201,12 @@ private:
 __attribute__((always_inline))
 inline void WriteToBuffer(rmt_item32_t value)
 {
-    /// DEBUG_START;
-
     RMT_DEBUG_COUNTER(WriteToBuffer++);
 
-    SendBuffer[SendBufferWriteIndex++] = value;
-    SendBufferWriteIndex &= uint32_t(NumSendBufferSlots - 1);
+    SendBuffer[SendBufferWriteIndex] = value;
+    if(++SendBufferWriteIndex >= NumSendBufferSlots) {SendBufferWriteIndex = 0;}
     ++NumUsedEntriesInSendBuffer;
-
-    ///DEBUG_END;
-}
+} // WriteToBuffer
 
 };
 #endif // def #ifdef ARDUINO_ARCH_ESP32

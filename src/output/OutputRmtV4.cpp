@@ -204,6 +204,8 @@ void c_OutputRmt::Begin (OutputRmtConfig_t config, c_OutputCommon * _pParent )
         ResetGpio(OutputRmtConfig.DataPin);
         ESP_ERROR_CHECK(rmt_config(&RmtConfig));
 
+        RmtChanData = (rmt_item32_t *)&(RMTMEM.chan[OutputRmtConfig.RmtChannelId].data32[0]);
+
         // DEBUG_V();
 
         if(NULL == RMT_intr_handle)
@@ -471,27 +473,23 @@ void IRAM_ATTR c_OutputRmt::ISR_TransferIntensityDataToRMT (uint32_t MaxNumEntri
 {
     // DEBUG_START;
 
-    uint32_t NumEntriesToTransfer = min(NumUsedEntriesInSendBuffer, MaxNumEntriesToTransfer);
+    uint32_t NumEntriesToTransfer = NumUsedEntriesInSendBuffer;
+    if(NumEntriesToTransfer > MaxNumEntriesToTransfer) {NumEntriesToTransfer = MaxNumEntriesToTransfer;}
 
     RMT_DEBUG_COUNTER(RmtXmtFills++);
     #ifdef USE_RMT_DEBUG_COUNTERS
     RmtEntriesTransfered = NumEntriesToTransfer;
     #endif // def USE_RMT_DEBUG_COUNTERS
 
-    rmt_item32_t * RmtChanData = (rmt_item32_t *)&(RMTMEM.chan[OutputRmtConfig.RmtChannelId].data32[0]);
-
     while(NumEntriesToTransfer)
     {
-        // DEBUG_V(String("   Data.level0: ") + String(SendBuffer[SendBufferReadIndex].level0));
-        // DEBUG_V(String("Data.duration0: ") + String(SendBuffer[SendBufferReadIndex].duration0));
-        // DEBUG_V(String("   Data.level1: ") + String(SendBuffer[SendBufferReadIndex].level1));
-        // DEBUG_V(String("Data.duration1: ") + String(SendBuffer[SendBufferReadIndex].duration1));
-
         RMT_DEBUG_COUNTER(WriteToRmt++);
 
-        RmtChanData[RmtBufferWriteIndex++].val = SendBuffer[SendBufferReadIndex++].val;
-        RmtBufferWriteIndex = (RmtBufferWriteIndex >= NUM_RMT_SLOTS ? 0 : RmtBufferWriteIndex); // do wrap
-        SendBufferReadIndex &= (NumSendBufferSlots - 1); // do wrap
+        RmtChanData[RmtBufferWriteIndex] = SendBuffer[SendBufferReadIndex];
+
+        if(++RmtBufferWriteIndex >= NUM_RMT_SLOTS)      {RmtBufferWriteIndex = 0;} // do wrap
+        if(++SendBufferReadIndex >= NumSendBufferSlots) {SendBufferReadIndex = 0;} // do wrap
+
         --NumEntriesToTransfer;
         --NumUsedEntriesInSendBuffer;
     }
