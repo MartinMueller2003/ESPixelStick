@@ -130,7 +130,6 @@ inline void DisableRmtInterrupts()
     rmt_ll_enable_tx_thres_interrupt(&RMT, OutputRmtConfig.RmtChannelId, false);
     rmt_ll_enable_tx_end_interrupt(&RMT, OutputRmtConfig.RmtChannelId, false);
     rmt_ll_enable_tx_err_interrupt(&RMT, OutputRmtConfig.RmtChannelId, false);
-    ClearRmtInterrupts();
 } // DisableRmtInterrupts
 
 __attribute__((always_inline))
@@ -165,31 +164,36 @@ inline void ClearRmtInterrupts()
 #ifdef USE_RMT_DEBUG_COUNTERS
 // #define IncludeBufferData
    // debug counters
-   uint32_t DataCallbackCounter = 0;
-   uint32_t DataTaskcounter = 0;
-   uint32_t ISRcounter = 0;
-   uint32_t FrameStartCounter = 0;
-   uint32_t SendBlockIsrCounter = 0;
-   uint32_t RanOutOfData = 0;
-   uint32_t UnknownISRcounter = 0;
-   uint32_t IntTxEndIsrCounter = 0;
-   uint32_t IntTxThrIsrCounter = 0;
-   uint32_t RxIsr = 0;
-   uint32_t ErrorIsr = 0;
-   uint32_t IntensityValuesSent = 0;
-   uint32_t IntensityBitsSent = 0;
-   uint32_t IntensityValuesSentLastFrame = 0;
-   uint32_t IntensityBitsSentLastFrame = 0;
-   uint32_t IncompleteFrame = 0;
-   uint32_t RmtEntriesTransfered = 0;
-   uint32_t RmtXmtFills = 0;
-   uint32_t ISRpaused = 0;
-   uint32_t RmtWhiteDetected = 0;
-   uint32_t FailedToSendAllData = 0;
-   uint32_t WriteToBuffer = 0;
-   uint32_t WriteToRmt = 0;
+    struct RmtDebugCounters_t
+    {
+        uint32_t DataCallbackCounter = 0;
+        uint32_t DataTaskcounter = 0;
+        uint32_t ISRcounter = 0;
+        uint32_t FrameStartCounter = 0;
+        uint32_t SendBlockIsrCounter = 0;
+        uint32_t RanOutOfData = 0;
+        uint32_t UnknownISRcounter = 0;
+        uint32_t IntTxEndIsrCounter = 0;
+        uint32_t IntTxThrIsrCounter = 0;
+        uint32_t RxIsr = 0;
+        uint32_t ErrorIsr = 0;
+        uint32_t IntensityValuesSent = 0;
+        uint32_t IntensityBitsSent = 0;
+        uint32_t IntensityValuesSentLastFrame = 0;
+        uint32_t IntensityBitsSentLastFrame = 0;
+        uint32_t IncompleteFrame = 0;
+        uint32_t RmtEntriesTransfered = 0;
+        uint32_t RmtXmtFills = 0;
+        uint32_t ISRpaused = 0;
+        uint32_t RmtWhiteDetected = 0;
+        uint32_t FailedToSendAllData = 0;
+        uint32_t WriteToBuffer = 0;
+        uint32_t WriteToRmt = 0;
+    } ;
+    RmtDebugCounters_t RmtDebugCounters;
 
-#define RMT_DEBUG_COUNTER(p) p
+#define RMT_DEBUG_INC_COUNTER(p) (++RmtDebugCounters.p)
+#define RMT_DEBUG_COUNTER(p)  (RmtDebugCounters.p)
 
 #else
 
@@ -201,7 +205,7 @@ private:
 __attribute__((always_inline))
 inline void WriteToBuffer(rmt_item32_t value)
 {
-    RMT_DEBUG_COUNTER(WriteToBuffer++);
+    RMT_DEBUG_INC_COUNTER(WriteToBuffer);
 
     SendBuffer[SendBufferWriteIndex] = value;
     if(++SendBufferWriteIndex >= NumSendBufferSlots) {SendBufferWriteIndex = 0;}

@@ -48,11 +48,7 @@ public:
 
 private:
 
-#ifdef USE_RMT_DEBUG_COUNTERS
-    uint32_t CanRefresh = 0;
-    uint32_t CannotRefresh = 0;
-#endif // def USE_RMT_DEBUG_COUNTERS
-// The adjustments compensate for rounding errors in the calculations
+    // The adjustments compensate for rounding errors in the calculations
 #define WS2811_PIXEL_RMT_TICKS_BIT_0_HIGH    uint16_t ( (WS2811_PIXEL_NS_BIT_0_HIGH / RMT_TickLengthNS) + 0.0)
 #define WS2811_PIXEL_RMT_TICKS_BIT_0_LOW     uint16_t ( (WS2811_PIXEL_NS_BIT_0_LOW  / RMT_TickLengthNS) + 0.0)
 #define WS2811_PIXEL_RMT_TICKS_BIT_1_HIGH    uint16_t ( (WS2811_PIXEL_NS_BIT_1_HIGH / RMT_TickLengthNS) - 1.0)
@@ -81,6 +77,8 @@ private:
         uint32_t DataBytes = 0;
         uint32_t StopBits = 0;
         uint32_t Underrun = 0;
+        uint32_t CanRefresh = 0;
+        uint32_t CannotRefresh = 0;
     } RmtDebugCounters;
     #else
     #define INC_WS2811_RMT_DEBUG_COUNTERS(c)
