@@ -1326,7 +1326,7 @@
             "appbin": "esp32/esp32_kr_lights_msm-app.bin",
             "esptool": {
                 "baudrate": "460800",
-                "options": "",
+                "options": "--before default_reset --after hard_reset",
                 "flashcmd": "write_flash -z"
             },
             "binfiles": [
@@ -1361,7 +1361,7 @@
             "appbin": "esp32/esp32_ka-app.bin",
             "esptool": {
                 "baudrate": "460800",
-                "options": "",
+                "options": "--before default_reset --after hard_reset",
                 "flashcmd": "write_flash -z"
             },
             "binfiles": [
@@ -1396,7 +1396,7 @@
             "appbin": "esp32/esp32_ka_4-app.bin",
             "esptool": {
                 "baudrate": "460800",
-                "options": "",
+                "options": "--before default_reset --after hard_reset",
                 "flashcmd": "write_flash -z"
             },
             "binfiles": [
@@ -1431,7 +1431,7 @@
             "appbin": "esp32/esp32_breakdancev2-app.bin",
             "esptool": {
                 "baudrate": "460800",
-                "options": "",
+                "options": "--before default_reset --after hard_reset",
                 "flashcmd": "write_flash -z"
             },
             "binfiles": [
@@ -1466,7 +1466,7 @@
             "appbin": "esp32/esp32_relayboardx8-app.bin",
             "esptool": {
                 "baudrate": "460800",
-                "options": "",
+                "options": "--before default_reset --after hard_reset",
                 "flashcmd": "write_flash -z"
             },
             "binfiles": [
@@ -1501,7 +1501,7 @@
             "appbin": "esp32s3/esp32s3_devkitc-app.bin",
             "esptool": {
                 "baudrate": "460800",
-                "options": "",
+                "options": "--before default_reset --after hard_reset",
                 "flashcmd": "write_flash -z"
             },
             "binfiles": [
@@ -1536,7 +1536,7 @@
             "appbin": "esp32s3/esp32s3_devkitc_Internal_SD-app.bin",
             "esptool": {
                 "baudrate": "460800",
-                "options": "",
+                "options": "--before default_reset --after hard_reset",
                 "flashcmd": "write_flash -z"
             },
             "binfiles": [
@@ -1606,7 +1606,7 @@
             "appbin": "esp32/esp32_devkitv_eth-app.bin",
             "esptool": {
                 "baudrate": "460800",
-                "options": "",
+                "options": "--before default_reset --after hard_reset",
                 "flashcmd": "write_flash -z"
             },
             "binfiles": [
