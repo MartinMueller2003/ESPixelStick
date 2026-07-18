@@ -119,7 +119,9 @@ c_OutputRmt::~c_OutputRmt ()
  */
 static void IRAM_ATTR rmt_intr_handler (void* param)
 {
+#ifdef USE_RMT_DEBUG_COUNTERS
     RawIsrCounter++;
+#endif // def USE_RMT_DEBUG_COUNTERS
 #ifdef DEBUG_GPIO
     // digitalWrite(DEBUG_GPIO, HIGH);
 #endif // def DEBUG_GPIO
