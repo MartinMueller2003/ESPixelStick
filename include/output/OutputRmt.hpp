@@ -197,6 +197,7 @@ inline void ClearRmtInterrupts()
 
 #else
 
+#define RMT_DEBUG_INC_COUNTER(p)
 #define RMT_DEBUG_COUNTER(p)
 
 #endif // def USE_RMT_DEBUG_COUNTERS
