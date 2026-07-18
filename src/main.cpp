@@ -198,7 +198,7 @@ void setup()
 #ifdef ARDUINO_ARCH_ESP8266
     logcon (ESP.getFullVersion ());
 #else
-    logcon (ESP.getSdkVersion ());
+    logcon (String("ESP_IDF_VERSION:") + String(esp_get_idf_version()));
 #endif
 
     // TestHeap(uint32_t(10));
@@ -707,7 +707,7 @@ void FeedWDT ()
         // esp_task_wdt_reset ();
         rtc_wdt_protect_off();
         rtc_wdt_disable();
-        esp_task_wdt_deinit();
+        // esp_task_wdt_deinit();
     #else
         esp_task_wdt_reset ();
     #endif //  ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
