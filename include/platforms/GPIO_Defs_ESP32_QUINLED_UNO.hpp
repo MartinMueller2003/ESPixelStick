@@ -28,7 +28,7 @@ const OM_OutputPortDefinition_t OM_OutputPortDefinitions[] =
     {OM_PortId_t(1), OM_PortType_t::OM_RELAY,  {gpio_num_t::GPIO_NUM_3}},
     {OM_PortId_t(2), OM_PortType_t::OM_SERIAL, {gpio_num_t::GPIO_NUM_15}},
     {OM_PortId_t(2), OM_PortType_t::OM_RELAY,  {gpio_num_t::GPIO_NUM_15}},
-    {OM_PortId_t(3), OM_PortType_t::OM_I2C,    {gpio_num_t::GPIO_NUM_2, gpio_num_t::GPIO_NUM_2}},
+    {OM_PortId_t(3), OM_PortType_t::OM_I2C,    {gpio_num_t::GPIO_NUM_2, gpio_num_t::GPIO_NUM_32}},
 };
 
 // File Manager - Defnitions must be present even if SD is not supported
