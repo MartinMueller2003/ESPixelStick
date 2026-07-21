@@ -117,7 +117,9 @@ static size_t IRAM_ATTR ISR_encoder_callback(const void *data, size_t data_size,
                                              size_t symbols_written, size_t symbols_free,
                                              rmt_item32_t *symbols, bool *done, void *arg)
 {
+#ifdef USE_RMT_DEBUG_COUNTERS
     ++RawIsrCounter;
+#endif // def USE_RMT_DEBUG_COUNTERS
 
     return reinterpret_cast<c_OutputRmt*>(arg)->ISR_Handler(data, data_size,
                                              symbols_written, symbols_free,
