@@ -239,6 +239,7 @@ struct alignas(32) DriverInfo_t
 
 static DriverInfo_t * pOutputChannelDrivers  = nullptr;;
 
+static uint8_t OutputBuffer[OM_MAX_NUM_CHANNELS];
 //-----------------------------------------------------------------------------
 // Methods
 //-----------------------------------------------------------------------------
@@ -248,7 +249,8 @@ c_OutputMgr::c_OutputMgr ()
     ConfigFileName = String ("/") + String (CN_output_config) + CN_Dotjson;
 
     // clear the input data buffer
-    pOutputBuffer = (uint8_t*)malloc(GetBufferSize() + 1);
+    pOutputBuffer = OutputBuffer;
+    // pOutputBuffer = (uint8_t*)malloc(GetBufferSize() + 1);
     memset (pOutputBuffer, 0, GetBufferSize());
 
     uint32_t SizeOfProtocolEntry = uint32_t(&SupportedOutputProtocolList[1]) - uint32_t(&SupportedOutputProtocolList[0]);
