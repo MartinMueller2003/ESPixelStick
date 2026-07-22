@@ -1,5 +1,6 @@
 var NAVTREEINDEX14 =
 {
+"classfsm___wi_fi__state.html#a2c842ba4749d28414d3b14c87e02215c":[0,0,60,5],
 "classfsm___wi_fi__state.html#a7fb4aae7d3fd073d1ecba313fd2fccd0":[0,0,60,6],
 "classfsm___wi_fi__state.html#a8e1c8d4859d8074d588f9aba81c5a8ce":[0,0,60,7],
 "classfsm___wi_fi__state.html#a913e62e0a43e6e56271cf8832ca537c0":[0,0,60,2],
@@ -248,6 +249,5 @@ var NAVTREEINDEX14 =
 "globals_p.html":[1,1,0,15],
 "globals_r.html":[1,1,0,16],
 "globals_s.html":[1,1,0,17],
-"globals_t.html":[1,1,0,18],
-"globals_type.html":[1,1,3]
+"globals_t.html":[1,1,0,18]
 };
