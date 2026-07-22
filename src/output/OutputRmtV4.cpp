@@ -119,7 +119,9 @@ c_OutputRmt::~c_OutputRmt ()
  */
 static void IRAM_ATTR rmt_intr_handler (void* param)
 {
-    RMT_DEBUG_COUNTER(RawIsrCounter++);
+#ifdef USE_RMT_DEBUG_COUNTERS
+    RawIsrCounter++;
+#endif // def USE_RMT_DEBUG_COUNTERS
 #ifdef DEBUG_GPIO
     // digitalWrite(DEBUG_GPIO, HIGH);
 #endif // def DEBUG_GPIO
@@ -204,6 +206,8 @@ void c_OutputRmt::Begin (OutputRmtConfig_t config, c_OutputCommon * _pParent )
         ResetGpio(OutputRmtConfig.DataPin);
         ESP_ERROR_CHECK(rmt_config(&RmtConfig));
 
+        RmtChanData = (rmt_item32_t *)&(RMTMEM.chan[OutputRmtConfig.RmtChannelId].data32[0]);
+
         // DEBUG_V();
 
         if(NULL == RMT_intr_handle)
@@ -263,30 +267,30 @@ void c_OutputRmt::GetStatus (ArduinoJson::JsonObject& jsonStatus)
 
     #endif // def CONFIG_IDF_TARGET_ESP32S3
 
-    debugStatus["ErrorIsr"]                     = ErrorIsr;
+    debugStatus["ErrorIsr"]                     = RMT_DEBUG_COUNTER(ErrorIsr);
     debugStatus["FrameCompletes"]               = FrameCompletes;
-    debugStatus["FrameStartCounter"]            = FrameStartCounter;
+    debugStatus["FrameStartCounter"]            = RMT_DEBUG_COUNTER(FrameStartCounter);
     debugStatus["FrameTimeouts"]                = FrameTimeouts;
-    debugStatus["FailedToSendAllData"]          = FailedToSendAllData;
-    debugStatus["IncompleteFrame"]              = IncompleteFrame;
-    debugStatus["IntensityValuesSent"]          = IntensityValuesSent;
-    debugStatus["IntensityValuesSentLastFrame"] = IntensityValuesSentLastFrame;
-    debugStatus["IntensityBitsSent"]            = IntensityBitsSent;
-    debugStatus["IntensityBitsSentLastFrame"]   = IntensityBitsSentLastFrame;
-    debugStatus["IntTxEndIsrCounter"]           = IntTxEndIsrCounter;
-    debugStatus["IntTxThrIsrCounter"]           = IntTxThrIsrCounter;
-    debugStatus["ISRcounter"]                   = ISRcounter;
-    debugStatus["RanOutOfData"]                 = RanOutOfData;
+    debugStatus["FailedToSendAllData"]          = RMT_DEBUG_COUNTER(FailedToSendAllData);
+    debugStatus["IncompleteFrame"]              = RMT_DEBUG_COUNTER(IncompleteFrame);
+    debugStatus["IntensityValuesSent"]          = RMT_DEBUG_COUNTER(IntensityValuesSent);
+    debugStatus["IntensityValuesSentLastFrame"] = RMT_DEBUG_COUNTER(IntensityValuesSentLastFrame);
+    debugStatus["IntensityBitsSent"]            = RMT_DEBUG_COUNTER(IntensityBitsSent);
+    debugStatus["IntensityBitsSentLastFrame"]   = RMT_DEBUG_COUNTER(IntensityBitsSentLastFrame);
+    debugStatus["IntTxEndIsrCounter"]           = RMT_DEBUG_COUNTER(IntTxEndIsrCounter);
+    debugStatus["IntTxThrIsrCounter"]           = RMT_DEBUG_COUNTER(IntTxThrIsrCounter);
+    debugStatus["ISRcounter"]                   = RMT_DEBUG_COUNTER(ISRcounter);
+    debugStatus["RanOutOfData"]                 = RMT_DEBUG_COUNTER(RanOutOfData);
     debugStatus["RawIsrCounter"]                = RawIsrCounter;
     debugStatus["RMT_INT_BIT"]                  = "0x" + String (RMT_INT_BIT, HEX);
-    debugStatus["RmtEntriesTransfered"]         = RmtEntriesTransfered;
-    debugStatus["RmtWhiteDetected"]             = RmtWhiteDetected;
-    debugStatus["RmtXmtFills"]                  = RmtXmtFills;
-    debugStatus["RxIsr"]                        = RxIsr;
-    debugStatus["SendBlockIsrCounter"]          = SendBlockIsrCounter;
-    debugStatus["UnknownISRcounter"]            = UnknownISRcounter;
-    debugStatus["WriteToBuffer"]                = WriteToBuffer;
-    debugStatus["WriteToRmt"]                   = WriteToRmt;
+    debugStatus["RmtEntriesTransfered"]         = RMT_DEBUG_COUNTER(RmtEntriesTransfered);
+    debugStatus["RmtWhiteDetected"]             = RMT_DEBUG_COUNTER(RmtWhiteDetected);
+    debugStatus["RmtXmtFills"]                  = RMT_DEBUG_COUNTER(RmtXmtFills);
+    debugStatus["RxIsr"]                        = RMT_DEBUG_COUNTER(RxIsr);
+    debugStatus["SendBlockIsrCounter"]          = RMT_DEBUG_COUNTER(SendBlockIsrCounter);
+    debugStatus["UnknownISRcounter"]            = RMT_DEBUG_COUNTER(UnknownISRcounter);
+    debugStatus["WriteToBuffer"]                = RMT_DEBUG_COUNTER(WriteToBuffer);
+    debugStatus["WriteToRmt"]                   = RMT_DEBUG_COUNTER(WriteToRmt);
 
 #ifdef IncludeBufferData
     {
@@ -361,7 +365,7 @@ void IRAM_ATTR c_OutputRmt::ISR_CreateIntensityData ()
             // no more data to send
             break;
         }
-        ISR_WriteToBuffer(Data);
+        WriteToBuffer(Data);
         --NumAvailableBufferSlotsToFill;
     };
 
@@ -379,7 +383,7 @@ void IRAM_ATTR c_OutputRmt::ISR_Handler (isrTxFlags_t isrTxFlags)
     ///DEBUG_V(String("         RMT_INT_BIT: 0x") + String(RMT_INT_BIT, HEX));
     // ClearRmtInterrupts;
 
-    RMT_DEBUG_COUNTER(++ISRcounter);
+    RMT_DEBUG_INC_COUNTER(ISRcounter);
     if(OutputIsPaused)
     {
         DisableRmtInterrupts();
@@ -387,12 +391,12 @@ void IRAM_ATTR c_OutputRmt::ISR_Handler (isrTxFlags_t isrTxFlags)
     // did the transmitter stall?
     else if (isrTxFlags.End & RMT_INT_BIT )
     {
-        RMT_DEBUG_COUNTER(++IntTxEndIsrCounter);
+        RMT_DEBUG_INC_COUNTER(IntTxEndIsrCounter);
         DisableRmtInterrupts();
 
         if(NumUsedEntriesInSendBuffer)
         {
-            RMT_DEBUG_COUNTER(++FailedToSendAllData);
+            RMT_DEBUG_INC_COUNTER(FailedToSendAllData);
         }
 
         // tell the background task to start the next output
@@ -401,13 +405,13 @@ void IRAM_ATTR c_OutputRmt::ISR_Handler (isrTxFlags_t isrTxFlags)
     }
     else if (isrTxFlags.Thres & RMT_INT_BIT )
     {
-        RMT_DEBUG_COUNTER(++IntTxThrIsrCounter);
+        RMT_DEBUG_INC_COUNTER(IntTxThrIsrCounter);
 
         // do we still have data to send?
         if(NumUsedEntriesInSendBuffer)
         {
             // LOG_PORT.println(String("NumUsedEntriesInSendBuffer1: ") + String(NumUsedEntriesInSendBuffer));
-            RMT_DEBUG_COUNTER(++SendBlockIsrCounter);
+            RMT_DEBUG_INC_COUNTER(SendBlockIsrCounter);
             // transfer any prefetched data to the hardware transmitter
             ISR_TransferIntensityDataToRMT( MaxNumRmtSlotsPerInterrupt );
             // LOG_PORT.println(String("NumUsedEntriesInSendBuffer2: ") + String(NumUsedEntriesInSendBuffer));
@@ -419,7 +423,7 @@ void IRAM_ATTR c_OutputRmt::ISR_Handler (isrTxFlags_t isrTxFlags)
             // is there any data left to enqueue?
             if (0 == NumUsedEntriesInSendBuffer)
             {
-                RMT_DEBUG_COUNTER(++RanOutOfData);
+                RMT_DEBUG_INC_COUNTER(RanOutOfData);
                 DisableRmtInterrupts();
 
                 // tell the background task to start the next output
@@ -431,10 +435,10 @@ void IRAM_ATTR c_OutputRmt::ISR_Handler (isrTxFlags_t isrTxFlags)
 #ifdef USE_RMT_DEBUG_COUNTERS
     else
     {
-        RMT_DEBUG_COUNTER(++UnknownISRcounter);
+        RMT_DEBUG_INC_COUNTER(UnknownISRcounter);
         if (isrTxFlags.Err & RMT_INT_BIT)
         {
-            ErrorIsr++;
+            RMT_DEBUG_INC_COUNTER(ErrorIsr);
         }
     }
 #endif // def USE_RMT_DEBUG_COUNTERS
@@ -471,27 +475,23 @@ void IRAM_ATTR c_OutputRmt::ISR_TransferIntensityDataToRMT (uint32_t MaxNumEntri
 {
     // DEBUG_START;
 
-    uint32_t NumEntriesToTransfer = min(NumUsedEntriesInSendBuffer, MaxNumEntriesToTransfer);
+    uint32_t NumEntriesToTransfer = NumUsedEntriesInSendBuffer;
+    if(NumEntriesToTransfer > MaxNumEntriesToTransfer) {NumEntriesToTransfer = MaxNumEntriesToTransfer;}
 
-    RMT_DEBUG_COUNTER(RmtXmtFills++);
+    RMT_DEBUG_INC_COUNTER(RmtXmtFills);
     #ifdef USE_RMT_DEBUG_COUNTERS
-    RmtEntriesTransfered = NumEntriesToTransfer;
+    RMT_DEBUG_COUNTER(RmtEntriesTransfered) = NumEntriesToTransfer;
     #endif // def USE_RMT_DEBUG_COUNTERS
-
-    rmt_item32_t * RmtChanData = (rmt_item32_t *)&(RMTMEM.chan[OutputRmtConfig.RmtChannelId].data32[0]);
 
     while(NumEntriesToTransfer)
     {
-        // DEBUG_V(String("   Data.level0: ") + String(SendBuffer[SendBufferReadIndex].level0));
-        // DEBUG_V(String("Data.duration0: ") + String(SendBuffer[SendBufferReadIndex].duration0));
-        // DEBUG_V(String("   Data.level1: ") + String(SendBuffer[SendBufferReadIndex].level1));
-        // DEBUG_V(String("Data.duration1: ") + String(SendBuffer[SendBufferReadIndex].duration1));
+        RMT_DEBUG_INC_COUNTER(WriteToRmt);
 
-        RMT_DEBUG_COUNTER(WriteToRmt++);
+        RmtChanData[RmtBufferWriteIndex] = SendBuffer[SendBufferReadIndex];
 
-        RmtChanData[RmtBufferWriteIndex++].val = SendBuffer[SendBufferReadIndex++].val;
-        RmtBufferWriteIndex = (RmtBufferWriteIndex >= NUM_RMT_SLOTS ? 0 : RmtBufferWriteIndex); // do wrap
-        SendBufferReadIndex &= (NumSendBufferSlots - 1); // do wrap
+        if(++RmtBufferWriteIndex >= NUM_RMT_SLOTS)      {RmtBufferWriteIndex = 0;} // do wrap
+        if(++SendBufferReadIndex >= NumSendBufferSlots) {SendBufferReadIndex = 0;} // do wrap
+
         --NumEntriesToTransfer;
         --NumUsedEntriesInSendBuffer;
     }
@@ -502,20 +502,6 @@ void IRAM_ATTR c_OutputRmt::ISR_TransferIntensityDataToRMT (uint32_t MaxNumEntri
     // DEBUG_END;
 
 } // ISR_TransferIntensityDataToRMT
-
-//----------------------------------------------------------------------------
-inline void IRAM_ATTR c_OutputRmt::ISR_WriteToBuffer(rmt_item32_t value)
-{
-    /// DEBUG_START;
-
-    RMT_DEBUG_COUNTER(WriteToBuffer++);
-
-    SendBuffer[SendBufferWriteIndex++] = value;
-    SendBufferWriteIndex &= uint32_t(NumSendBufferSlots - 1);
-    ++NumUsedEntriesInSendBuffer;
-
-    ///DEBUG_END;
-}
 
 //----------------------------------------------------------------------------
 void c_OutputRmt::PauseOutput(bool PauseOutput)
@@ -567,11 +553,11 @@ bool c_OutputRmt::StartNewFrame ()
         // DEBUG_V();
 
         #ifdef USE_RMT_DEBUG_COUNTERS
-        FrameStartCounter++;
-        IntensityValuesSentLastFrame = IntensityValuesSent;
-        IntensityValuesSent          = 0;
-        IntensityBitsSentLastFrame   = IntensityBitsSent;
-        IntensityBitsSent            = 0;
+        RMT_DEBUG_INC_COUNTER(FrameStartCounter);
+        RMT_DEBUG_COUNTER(IntensityValuesSentLastFrame) = RMT_DEBUG_COUNTER(IntensityValuesSent);
+        RMT_DEBUG_COUNTER(IntensityValuesSent)          = 0;
+        RMT_DEBUG_COUNTER(IntensityBitsSentLastFrame)   = RMT_DEBUG_COUNTER(IntensityBitsSent);
+        RMT_DEBUG_COUNTER(IntensityBitsSent)            = 0;
         #endif // def USE_RMT_DEBUG_COUNTERS
 
         // set up to send a new frame

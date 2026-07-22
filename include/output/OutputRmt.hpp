@@ -62,14 +62,11 @@ public:
     };
 
 private:
-#ifdef CONFIG_IDF_TARGET_ESP32S3
-#   define MAX_NUM_RMT_CHANNELS 4
-#else
-#   define MAX_NUM_RMT_CHANNELS 8
-#endif // def CONFIG_IDF_TARGET_ESP32S3
+
+#define MAX_NUM_RMT_CHANNELS    SOC_RMT_TX_CANDIDATES_PER_GROUP
+#define NUM_RMT_SLOTS           SOC_RMT_MEM_WORDS_PER_CHANNEL
 
 #if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
-    #define _NUM_RMT_SLOTS 64
     rmt_channel_handle_t rmt_channel_handle;
     rmt_encoder_handle_t rmt_encoder_handle;
     rmt_transmit_config_t tx_config =
@@ -84,19 +81,17 @@ private:
 #else
     #define RMT_INT_BIT         uint32_t(1 << uint32_t (OutputRmtConfig.RmtChannelId))
     #define InterrupsAreEnabled (0 != (RMT.int_ena.val & RMT_INT_BIT))
-
-    #define _NUM_RMT_SLOTS (sizeof(RMTMEM.chan[0].data32) / sizeof(RMTMEM.chan[0].data32[0]))
+    rmt_item32_t * RmtChanData = nullptr;
 
 #endif // ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
 
 
-    const uint32_t      NUM_RMT_SLOTS               = _NUM_RMT_SLOTS;
     OutputRmtConfig_t   OutputRmtConfig;
     bool                OutputIsPaused              = false;
     uint32_t            NumRmtSlotOverruns          = 0;
-    const uint32_t      MaxNumRmtSlotsPerInterrupt  = (_NUM_RMT_SLOTS/2);
+    const uint32_t      MaxNumRmtSlotsPerInterrupt  = (NUM_RMT_SLOTS/2);
 
-    #define             NumSendBufferSlots _NUM_RMT_SLOTS
+    #define             NumSendBufferSlots 64
     rmt_item32_t        SendBuffer[NumSendBufferSlots];
     uint32_t            RmtBufferWriteIndex         = 0;
     uint32_t            SendBufferWriteIndex        = 0;
@@ -106,7 +101,6 @@ private:
     void ISR_TransferIntensityDataToRMT (uint32_t NumEntriesToTransfer);
     size_t ISR_TransferIntensityDataToRMT (rmt_item32_t *symbols, uint32_t MaxNumEntriesToTransfer);
     void ISR_CreateIntensityData ();
-    void ISR_WriteToBuffer(rmt_item32_t value);
     bool ISR_MoreDataToSend();
     void StartNewDataFrame();
     void ISR_ResetRmtBlockPointers();
@@ -129,36 +123,31 @@ public:
     void GetDriverName      (String &value)  { value = CN_RMT; }
     void SetBitDuration     (double BitLenNs, rmt_item32_t & OutputBit, uint32_t & OutputNumBits);
 
+#if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0, 0)
 __attribute__((always_inline))
-inline void IRAM_ATTR DisableRmtInterrupts()
+inline void DisableRmtInterrupts()
 {
-    #if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0, 0)
     rmt_ll_enable_tx_thres_interrupt(&RMT, OutputRmtConfig.RmtChannelId, false);
     rmt_ll_enable_tx_end_interrupt(&RMT, OutputRmtConfig.RmtChannelId, false);
     rmt_ll_enable_tx_err_interrupt(&RMT, OutputRmtConfig.RmtChannelId, false);
-    ClearRmtInterrupts();
-    #endif //  ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
-}
+} // DisableRmtInterrupts
 
 __attribute__((always_inline))
-inline void IRAM_ATTR EnableRmtInterrupts()
+inline void EnableRmtInterrupts()
 {
-    #if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0, 0)
     rmt_ll_enable_tx_thres_interrupt(&RMT, OutputRmtConfig.RmtChannelId, true);
     rmt_ll_enable_tx_end_interrupt(&RMT, OutputRmtConfig.RmtChannelId, true);
     rmt_ll_enable_tx_err_interrupt(&RMT, OutputRmtConfig.RmtChannelId, true);
-    #endif // ndef rmt_ll_clear_tx_thres_interrupt
-}
+} // EnableRmtInterrupts
 
 __attribute__((always_inline))
-inline void IRAM_ATTR ClearRmtInterrupts()
+inline void ClearRmtInterrupts()
 {
-    #if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0, 0)
     rmt_ll_clear_tx_thres_interrupt(&RMT, OutputRmtConfig.RmtChannelId);
     rmt_ll_clear_tx_end_interrupt(&RMT, OutputRmtConfig.RmtChannelId);
     rmt_ll_clear_tx_err_interrupt(&RMT, OutputRmtConfig.RmtChannelId);
-    #endif // ndef rmt_ll_clear_tx_thres_interrupt
-}
+} // ClearRmtInterrupts
+#endif // ndef rmt_ll_clear_tx_thres_interrupt
 
 #define RMT_ClockRate           80000000.0
 #define RMT_Clock_Divisor       2.0
@@ -171,41 +160,58 @@ inline void IRAM_ATTR ClearRmtInterrupts()
                         rmt_item32_t *symbols, bool *done);
     c_OutputCommon * pParent = nullptr;
 
-#define USE_RMT_DEBUG_COUNTERS
+// #define USE_RMT_DEBUG_COUNTERS
 #ifdef USE_RMT_DEBUG_COUNTERS
 // #define IncludeBufferData
    // debug counters
-   uint32_t DataCallbackCounter = 0;
-   uint32_t DataTaskcounter = 0;
-   uint32_t ISRcounter = 0;
-   uint32_t FrameStartCounter = 0;
-   uint32_t SendBlockIsrCounter = 0;
-   uint32_t RanOutOfData = 0;
-   uint32_t UnknownISRcounter = 0;
-   uint32_t IntTxEndIsrCounter = 0;
-   uint32_t IntTxThrIsrCounter = 0;
-   uint32_t RxIsr = 0;
-   uint32_t ErrorIsr = 0;
-   uint32_t IntensityValuesSent = 0;
-   uint32_t IntensityBitsSent = 0;
-   uint32_t IntensityValuesSentLastFrame = 0;
-   uint32_t IntensityBitsSentLastFrame = 0;
-   uint32_t IncompleteFrame = 0;
-   uint32_t RmtEntriesTransfered = 0;
-   uint32_t RmtXmtFills = 0;
-   uint32_t ISRpaused = 0;
-   uint32_t RmtWhiteDetected = 0;
-   uint32_t FailedToSendAllData = 0;
-   uint32_t WriteToBuffer = 0;
-   uint32_t WriteToRmt = 0;
+    struct RmtDebugCounters_t
+    {
+        uint32_t DataCallbackCounter = 0;
+        uint32_t DataTaskcounter = 0;
+        uint32_t ISRcounter = 0;
+        uint32_t FrameStartCounter = 0;
+        uint32_t SendBlockIsrCounter = 0;
+        uint32_t RanOutOfData = 0;
+        uint32_t UnknownISRcounter = 0;
+        uint32_t IntTxEndIsrCounter = 0;
+        uint32_t IntTxThrIsrCounter = 0;
+        uint32_t RxIsr = 0;
+        uint32_t ErrorIsr = 0;
+        uint32_t IntensityValuesSent = 0;
+        uint32_t IntensityBitsSent = 0;
+        uint32_t IntensityValuesSentLastFrame = 0;
+        uint32_t IntensityBitsSentLastFrame = 0;
+        uint32_t IncompleteFrame = 0;
+        uint32_t RmtEntriesTransfered = 0;
+        uint32_t RmtXmtFills = 0;
+        uint32_t ISRpaused = 0;
+        uint32_t RmtWhiteDetected = 0;
+        uint32_t FailedToSendAllData = 0;
+        uint32_t WriteToBuffer = 0;
+        uint32_t WriteToRmt = 0;
+    } ;
+    RmtDebugCounters_t RmtDebugCounters;
 
-#define RMT_DEBUG_COUNTER(p) p
+#define RMT_DEBUG_INC_COUNTER(p) (++RmtDebugCounters.p)
+#define RMT_DEBUG_COUNTER(p)  (RmtDebugCounters.p)
 
 #else
 
+#define RMT_DEBUG_INC_COUNTER(p)
 #define RMT_DEBUG_COUNTER(p)
 
 #endif // def USE_RMT_DEBUG_COUNTERS
+
+private:
+__attribute__((always_inline))
+inline void WriteToBuffer(rmt_item32_t value)
+{
+    RMT_DEBUG_INC_COUNTER(WriteToBuffer);
+
+    SendBuffer[SendBufferWriteIndex] = value;
+    if(++SendBufferWriteIndex >= NumSendBufferSlots) {SendBufferWriteIndex = 0;}
+    ++NumUsedEntriesInSendBuffer;
+} // WriteToBuffer
 
 };
 #endif // def #ifdef ARDUINO_ARCH_ESP32

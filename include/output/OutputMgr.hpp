@@ -58,7 +58,6 @@ public:
     void      SetConfig         (const char * NewConfig);  ///< Save the current configuration data to nvram
     void      SetConfig         (ArduinoJson::JsonDocument & NewConfig);  ///< Save the current configuration data to nvram
     void      GetStatus         (JsonObject & jsonStatus);
-//    void      GetPortCounts     (uint16_t& PixelCount, uint16_t& SerialCount) {PixelCount = uint16_t(OutputPortId_End); SerialCount = uint16_t(NUM_UARTS); }
     uint8_t*  GetBufferAddress  () { return pOutputBuffer; } ///< Get the address of the buffer into which the E1.31 handler will stuff data
     uint32_t  GetBufferUsedSize () { return UsedBufferSize; } ///< Get the size (in intensities) of the buffer into which the E1.31 handler will stuff data
     uint32_t  GetBufferSize     () { return uint32_t(OM_MAX_NUM_CHANNELS); } ///< Get the size (in intensities) of the buffer into which the E1.31 handler will stuff data
@@ -149,31 +148,10 @@ public:
     };
     uint32_t NumberOfOutputProtocols = uint32_t(0);
 
-    // must be 16 byte aligned. Determined by upshifting the max size of all drivers
-    // #define OutputDriverMemorySize 1200
-    #define OutputDriverMemorySize 1400
-    uint32_t GetDriverSize() {return OutputDriverMemorySize;}
 private:
-    struct alignas(16) DriverInfo_t
-    {
-        byte                OutputDriver[OutputDriverMemorySize];
-        uint32_t            OutputBufferStartingOffset  = 0;
-        uint32_t            OutputBufferDataSize        = 0;
-        uint32_t            OutputBufferEndOffset       = 0;
-
-        uint32_t            OutputChannelStartingOffset = 0;
-        uint32_t            OutputChannelSize           = 0;
-        uint32_t            OutputChannelEndOffset      = 0;
-
-        OM_OutputPortDefinition_t PortDefinition;
-        uint8_t             DriverId                    = -1;
-        bool                OutputDriverInUse           = false;
-    };
 
     // pointer(s) to the current active output drivers
-    DriverInfo_t   *pOutputChannelDrivers = nullptr;
-    uint8_t         NumOutputPorts = 0;
-    uint32_t        SizeOfTable = 0;
+    uint8_t         NumOutputPorts;
 
     // configuration parameter names for the channel manager within the config file
     #define NO_CONFIG_NEEDED time_t(-1)
@@ -186,11 +164,11 @@ private:
     bool ProcessJsonConfig (JsonDocument & jsonConfig);
     void CreateJsonConfig  (JsonObject & jsonConfig);
     void UpdateDisplayBufferReferences (void);
-    void InstantiateNewOutputChannel(DriverInfo_t &ChannelIndex, e_OutputProtocolType NewChannelType, bool StartDriver = true);
+    void InstantiateNewOutputChannel(uint32_t PortIndex, e_OutputProtocolType NewChannelType, bool StartDriver = true);
     void CreateNewConfig();
     void SetSerialUart();
     bool FindJsonChannelConfig (JsonDocument& jsonConfig, OM_PortId_t PortId, JsonObject& ChanConfig);
-    bool SetPortDefnitionDefaults(DriverInfo_t & CurrentOutput, e_OutputProtocolType TargetProtocolType);
+    bool SetPortDefnitionDefaults(uint32_t PortIndex, e_OutputProtocolType TargetProtocolType);
 
     String ConfigFileName;
 

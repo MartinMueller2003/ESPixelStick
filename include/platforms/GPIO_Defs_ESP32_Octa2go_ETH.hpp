@@ -1,6 +1,6 @@
 #pragma once
 /*
-* GPIO_Defs_ESP32_Tetra2go.hpp - Output Management class
+* GPIO_Defs_ESP32_Octa2go_ETH.hpp - Output Management class
 *
 * Project: ESPixelStick - An ESP8266 / ESP32 and E1.31 based pixel driver
 * Copyright (c) 2024-2026 Shelby Merrick
@@ -30,16 +30,56 @@ const OM_OutputPortDefinition_t OM_OutputPortDefinitions[] =
     {OM_PortId_t(2), OM_PortType_t::OM_RELAY,  {gpio_num_t::GPIO_NUM_12}},
     {OM_PortId_t(3), OM_PortType_t::OM_SERIAL, {gpio_num_t::GPIO_NUM_14}},
     {OM_PortId_t(3), OM_PortType_t::OM_RELAY,  {gpio_num_t::GPIO_NUM_14}},
-    {OM_PortId_t(4), OM_PortType_t::OM_SPI,    {gpio_num_t::GPIO_NUM_15, gpio_num_t::GPIO_NUM_25, gpio_num_t::GPIO_NUM_0}},
-    {OM_PortId_t(5), OM_PortType_t::OM_I2C,    {gpio_num_t::GPIO_NUM_21, gpio_num_t::GPIO_NUM_22}},
+    {OM_PortId_t(4), OM_PortType_t::OM_SERIAL, {gpio_num_t::GPIO_NUM_4}},
+    {OM_PortId_t(4), OM_PortType_t::OM_RELAY,  {gpio_num_t::GPIO_NUM_4}},
+    {OM_PortId_t(5), OM_PortType_t::OM_SERIAL, {gpio_num_t::GPIO_NUM_16}},
+    {OM_PortId_t(5), OM_PortType_t::OM_RELAY,  {gpio_num_t::GPIO_NUM_16}},
+    {OM_PortId_t(6), OM_PortType_t::OM_SERIAL, {gpio_num_t::GPIO_NUM_32}},
+    {OM_PortId_t(6), OM_PortType_t::OM_RELAY,  {gpio_num_t::GPIO_NUM_32}},
+    {OM_PortId_t(7), OM_PortType_t::OM_SERIAL, {gpio_num_t::GPIO_NUM_33}},
+    {OM_PortId_t(7), OM_PortType_t::OM_RELAY,  {gpio_num_t::GPIO_NUM_33}},
+    {OM_PortId_t(8), OM_PortType_t::OM_SPI,    {gpio_num_t::GPIO_NUM_15, gpio_num_t::GPIO_NUM_25, gpio_num_t::GPIO_NUM_0}},
+    {OM_PortId_t(9), OM_PortType_t::OM_I2C,    {gpio_num_t::GPIO_NUM_21, gpio_num_t::GPIO_NUM_22}},
 };
 
 // File Manager - Defnitions must be present even if SD is not supported
-#define SUPPORT_SD
+// #define SUPPORT_SD
 #define SD_CARD_MISO_PIN        gpio_num_t::GPIO_NUM_19
 #define SD_CARD_MOSI_PIN        gpio_num_t::GPIO_NUM_23
 #define SD_CARD_CLK_PIN         gpio_num_t::GPIO_NUM_18
 #define SD_CARD_CS_PIN          gpio_num_t::GPIO_NUM_5
+
+#include <ETH.h>
+#define SUPPORT_ETHERNET
+
+/*
+   * ETH_CLOCK_GPIO0_IN   - default: external clock from crystal oscillator
+   * ETH_CLOCK_GPIO0_OUT  - 50MHz clock from internal APLL output on GPIO0 - possibly an inverter is needed for LAN8720
+   * ETH_CLOCK_GPIO16_OUT - 50MHz clock from internal APLL output on GPIO16 - possibly an inverter is needed for LAN8720
+   * ETH_CLOCK_GPIO17_OUT - 50MHz clock from internal APLL inverted output on GPIO17 - tested with LAN8720
+*/
+#define DEFAULT_ETH_CLK_MODE           eth_clock_mode_t::ETH_CLOCK_GPIO17_OUT
+
+// Pin# of the enable signal for the external crystal oscillator (-1 to disable for internal APLL source)
+#define DEFAULT_ETH_POWER_PIN          gpio_num_t(-1)
+#define DEFAULT_ETH_POWER_PIN_ACTIVE   HIGH
+
+// Type of the Ethernet PHY (LAN8720 or TLK110)
+#define DEFAULT_ETH_TYPE               eth_phy_type_t::ETH_PHY_LAN8720
+
+// I2C-address of Ethernet PHY (0 or 1 for LAN8720, 31 for TLK110)
+// #define ETH_ADDR_PHY_LAN8720           0
+#define ETH_ADDR_PHY_LAN8720         1
+//#define ETH_ADDR_PHY_TLK110           31
+#define DEFAULT_ETH_ADDR               ETH_ADDR_PHY_LAN8720
+#define DEFAULT_ETH_TXEN               gpio_num_t::GPIO_NUM_21
+#define DEFAULT_ETH_TXD0               gpio_num_t::GPIO_NUM_19
+#define DEFAULT_ETH_TXD1               gpio_num_t::GPIO_NUM_22
+#define DEFAULT_ETH_CRSDV              gpio_num_t::GPIO_NUM_27
+#define DEFAULT_ETH_RXD0               gpio_num_t::GPIO_NUM_25
+#define DEFAULT_ETH_RXD1               gpio_num_t::GPIO_NUM_26
+#define DEFAULT_ETH_MDC_PIN            gpio_num_t::GPIO_NUM_23
+#define DEFAULT_ETH_MDIO_PIN           gpio_num_t::GPIO_NUM_18
 
 // Output Types
 #define SUPPORT_OutputProtocol_TLS3001          // OM_SERIAL

@@ -42,7 +42,7 @@ const OM_OutputPortDefinition_t OM_OutputPortDefinitions[] =
     {OM_PortId_t(9), OM_PortType_t::OM_I2C,    {gpio_num_t::GPIO_NUM_21, gpio_num_t::GPIO_NUM_22}},
 };
 
-// File Manager
+// File Manager - Defnitions must be present even if SD is not supported
 #define SUPPORT_SD
 #define SD_CARD_MISO_PIN        gpio_num_t::GPIO_NUM_19
 #define SD_CARD_MOSI_PIN        gpio_num_t::GPIO_NUM_23

@@ -95,6 +95,8 @@ bool c_OutputWS2811Rmt::SetConfig (ArduinoJson::JsonObject& jsonConfig)
     OutputRmtConfig.arg                     = this;
     OutputRmtConfig.ISR_GetNextIntensityBit = ISR_GetNextBitToSendBase;
     OutputRmtConfig.StartNewDataFrame       = StartNewDataFrameBase;
+    OutputRmtConfig.BufferStart             = GetBufferAddress();
+    OutputRmtConfig.NumBytesInFrame         = OM_MAX_NUM_CHANNELS;
 
     // DEBUG_V();
     Rmt.Begin(OutputRmtConfig, this);
@@ -122,8 +124,6 @@ void c_OutputWS2811Rmt::GetStatus (ArduinoJson::JsonObject& jsonStatus)
     c_OutputWS2811::GetStatus (jsonStatus);
     Rmt.GetStatus (jsonStatus);
 #ifdef USE_RMT_DEBUG_COUNTERS
-    jsonStatus[F("Can Refresh")] = CanRefresh;
-    jsonStatus[F("Cannot Refresh")] = CannotRefresh;
     jsonStatus[F("FrameDurationInMicroSec")] = FrameDurationInMicroSec;
     jsonStatus[F("FrameStartTimeInMicroSec")] = GetFrameStartTimeInMicroSec();
     uint32_t now = micros();
@@ -140,6 +140,8 @@ void c_OutputWS2811Rmt::GetStatus (ArduinoJson::JsonObject& jsonStatus)
     JsonWrite(JsonCounters, "DataBits",    RmtDebugCounters.DataBits);
     JsonWrite(JsonCounters, "StopBits",    RmtDebugCounters.StopBits);
     JsonWrite(JsonCounters, "Underrun",    RmtDebugCounters.Underrun);
+    JsonWrite(JsonCounters, "Can Refresh", CanRefresh);
+    JsonWrite(JsonCounters, "Cannot Refresh", Cannot);
     #endif // def WS2811_RMT_DEBUG_COUNTERS
 
     // // DEBUG_END;
@@ -169,12 +171,12 @@ bool c_OutputWS2811Rmt::RmtPoll ()
 
         if(!canRefresh())
         {
-            RMT_DEBUG_COUNTER(CannotRefresh++);
+            INC_WS2811_RMT_DEBUG_COUNTERS(CannotRefresh);
 
             // DEBUG_V ("not ready to send yet");
             break;
         }
-        RMT_DEBUG_COUNTER(CanRefresh++);
+        INC_WS2811_RMT_DEBUG_COUNTERS(CanRefresh);
 
         // DEBUG_V(String("get the next frame started on ") + String(DataPin));
         Response = Rmt.StartNewFrame ();

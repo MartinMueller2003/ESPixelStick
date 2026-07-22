@@ -21,10 +21,6 @@
 /*
 * M5Stack Atom driver, boards are ESP32-PICO-D4 based, no PSRAM
 *
-* Note: These boards lack PSRAM. So if you need more outputs, you probably need to
-*       raise the WebSocketFrameCollectionBufferSize a bit e.g. 12*1024. Otherwise you'll
-*       face an issue that the webUI is not rendering the output configutation section.
-*
 * Tested:
 * - Atom Lite
 * - Atom Matrix

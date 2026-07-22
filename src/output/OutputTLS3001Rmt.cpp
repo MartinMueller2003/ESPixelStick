@@ -97,6 +97,8 @@ bool c_OutputTLS3001Rmt::SetConfig (ArduinoJson::JsonObject& jsonConfig)
     OutputRmtConfig.arg                     = this;
     OutputRmtConfig.ISR_GetNextIntensityBit = ISR_GetNextBitToSendBase;
     OutputRmtConfig.StartNewDataFrame       = StartNewDataFrameBase;
+    OutputRmtConfig.BufferStart             = GetBufferAddress();
+    OutputRmtConfig.NumBytesInFrame         = OM_MAX_NUM_CHANNELS;
 
     // DEBUG_V();
     SetBitTimes();
