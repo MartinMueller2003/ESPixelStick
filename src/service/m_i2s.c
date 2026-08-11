@@ -3,6 +3,7 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
+#ifdef SUPPORT_I2S
 
 #include <string.h>
 #include <stdbool.h>
@@ -2325,3 +2326,5 @@ esp_err_t m_i2s_priv_deregister_object(int port_id)
     portEXIT_CRITICAL(&i2s_platform_spinlock);
     return ret;
 }
+
+#endif // def SUPPORT_I2S
