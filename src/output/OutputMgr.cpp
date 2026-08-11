@@ -614,10 +614,10 @@ void c_OutputMgr::GetStatus (JsonObject & jsonStatus)
 {
     // DEBUG_START;
 
-#if defined(ARDUINO_ARCH_ESP32)
+#if defined(SUPPORT_I2S)
     OutputI2S.GetStatus(jsonStatus);
     // jsonStatus["PollCount"] = PollCount;
-#endif // defined(ARDUINO_ARCH_ESP32)
+#endif // defined(SUPPORT_I2S)
 
     JsonArray OutputStatus = jsonStatus[(char*)CN_output].to<JsonArray> ();
     for (uint8_t index = 0; index < NumOutputPorts; ++index)
