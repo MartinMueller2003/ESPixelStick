@@ -17,7 +17,7 @@
 *
 */
 #include "ESPixelStick.h"
-#if defined(ARDUINO_ARCH_ESP32)
+#if defined(SUPPORT_I2S)
 
 #include "output/OutputI2S.hpp"
 #include "m_i2s.h"
@@ -352,4 +352,4 @@ void IRAM_ATTR c_OutputI2S::ISR_ProcessDma ()
 
 } // ISR_ProcessDma
 
-#endif // defined(ARDUINO_ARCH_ESP32)
+#endif // defined(SUPPORT_I2S)
