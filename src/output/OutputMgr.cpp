@@ -53,6 +53,10 @@
 
 #include "input/InputMgr.hpp"
 
+#ifdef SUPPORT_I2S
+    #include "output/OutputI2S.hpp"
+#endif // def SUPPORT_I2S
+
 #ifdef ARDUINO_ARCH_ESP32
     #define CLASS_TYPE_NAME(n)      n ## Rmt
 #else
@@ -240,6 +244,11 @@ struct alignas(32) DriverInfo_t
 static DriverInfo_t * pOutputChannelDrivers  = nullptr;;
 
 static uint8_t OutputBuffer[OM_MAX_NUM_CHANNELS];
+
+#ifdef SUPPORT_I2S
+static c_OutputI2S OutputI2S;
+#endif // def SUPPORT_I2S
+
 //-----------------------------------------------------------------------------
 // Methods
 //-----------------------------------------------------------------------------
@@ -352,6 +361,10 @@ void c_OutputMgr::Begin ()
         digitalWrite (LED_FLASH_GPIO, LED_FLASH_OFF);
         #endif // def LED_FLASH_GPIO
 
+    #ifdef SUPPORT_I2S
+        OutputI2S.Begin();
+    #endif // def SUPPORT_I2S
+    
         // make sure the pointers are set up properly
         for (uint8_t index = 0; index < NumOutputPorts; ++index)
         {
@@ -602,6 +615,7 @@ void c_OutputMgr::GetStatus (JsonObject & jsonStatus)
     // DEBUG_START;
 
 #if defined(ARDUINO_ARCH_ESP32)
+    OutputI2S.GetStatus(jsonStatus);
     // jsonStatus["PollCount"] = PollCount;
 #endif // defined(ARDUINO_ARCH_ESP32)
 
