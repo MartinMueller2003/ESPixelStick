@@ -1,15 +1,5 @@
 var NAVTREEINDEX6 =
 {
-"_g_p_i_o___defs___e_s_p32___solo2go_8hpp.html#aca6c98b14a61849654e93ee35fd1d1ab":[1,0,0,3,33,4],
-"_g_p_i_o___defs___e_s_p32___solo2go_8hpp.html#ad5e649aa028bd3be75964322c1cc6ed0":[1,0,0,3,33,0],
-"_g_p_i_o___defs___e_s_p32___solo2go_8hpp.html#ad71d400bf3d1b998be16ce4c822a22ec":[1,0,0,3,33,10],
-"_g_p_i_o___defs___e_s_p32___solo2go_8hpp.html#ad77542025da3a991160dd0707104d9af":[1,0,0,3,33,19],
-"_g_p_i_o___defs___e_s_p32___solo2go_8hpp.html#adaf0753131bfc7ffd9f67c5061606ed1":[1,0,0,3,33,23],
-"_g_p_i_o___defs___e_s_p32___solo2go_8hpp.html#aea53898829210ed1fbac67d4aa855a6e":[1,0,0,3,33,18],
-"_g_p_i_o___defs___e_s_p32___solo2go_8hpp.html#aebe2eeabee8a8434bc5edf81a88f90e4":[1,0,0,3,33,1],
-"_g_p_i_o___defs___e_s_p32___solo2go_8hpp_source.html":[1,0,0,3,33],
-"_g_p_i_o___defs___e_s_p32___solo2go___e_t_h_8hpp.html":[1,0,0,3,34],
-"_g_p_i_o___defs___e_s_p32___solo2go___e_t_h_8hpp.html#a03a909b01ab18eaa867c51c31695efc9":[1,0,0,3,34,13],
 "_g_p_i_o___defs___e_s_p32___solo2go___e_t_h_8hpp.html#a091d433e7f4c22e818fd3b6a8addf576":[1,0,0,3,34,23],
 "_g_p_i_o___defs___e_s_p32___solo2go___e_t_h_8hpp.html#a0aa30f0dcce5fa891cff33303c5481ff":[1,0,0,3,34,29],
 "_g_p_i_o___defs___e_s_p32___solo2go___e_t_h_8hpp.html#a0bd4b10e6b6d367188fa744e90d10e76":[1,0,0,3,34,20],
@@ -249,5 +239,15 @@ var NAVTREEINDEX6 =
 "_g_p_i_o___defs___e_s_p32___w_t32_e_t_h01___wasatch_8hpp.html#a8b387d3500431742534560dca1024387":[1,0,0,3,41,26],
 "_g_p_i_o___defs___e_s_p32___w_t32_e_t_h01___wasatch_8hpp.html#a8d7b2cf14cf47d06f131fc82d7132516":[1,0,0,3,41,9],
 "_g_p_i_o___defs___e_s_p32___w_t32_e_t_h01___wasatch_8hpp.html#a95aca9d392082f15e082f063a6927e10":[1,0,0,3,41,20],
-"_g_p_i_o___defs___e_s_p32___w_t32_e_t_h01___wasatch_8hpp.html#aa8f8d73c965f04acf2513dea0b5443c5":[1,0,0,3,41,11]
+"_g_p_i_o___defs___e_s_p32___w_t32_e_t_h01___wasatch_8hpp.html#aa8f8d73c965f04acf2513dea0b5443c5":[1,0,0,3,41,11],
+"_g_p_i_o___defs___e_s_p32___w_t32_e_t_h01___wasatch_8hpp.html#aac8484c1f4cc7cb788c03e1c3c1faade":[1,0,0,3,41,10],
+"_g_p_i_o___defs___e_s_p32___w_t32_e_t_h01___wasatch_8hpp.html#aca6c98b14a61849654e93ee35fd1d1ab":[1,0,0,3,41,18],
+"_g_p_i_o___defs___e_s_p32___w_t32_e_t_h01___wasatch_8hpp.html#ad71d400bf3d1b998be16ce4c822a22ec":[1,0,0,3,41,23],
+"_g_p_i_o___defs___e_s_p32___w_t32_e_t_h01___wasatch_8hpp.html#adaf0753131bfc7ffd9f67c5061606ed1":[1,0,0,3,41,33],
+"_g_p_i_o___defs___e_s_p32___w_t32_e_t_h01___wasatch_8hpp.html#addcbe236b0fb85814beced384e8d77f4":[1,0,0,3,41,7],
+"_g_p_i_o___defs___e_s_p32___w_t32_e_t_h01___wasatch_8hpp.html#aea53898829210ed1fbac67d4aa855a6e":[1,0,0,3,41,31],
+"_g_p_i_o___defs___e_s_p32___w_t32_e_t_h01___wasatch_8hpp.html#aeaea1905632a9d6e4909b54c29fb6d56":[1,0,0,3,41,3],
+"_g_p_i_o___defs___e_s_p32___w_t32_e_t_h01___wasatch_8hpp.html#aebe2eeabee8a8434bc5edf81a88f90e4":[1,0,0,3,41,15],
+"_g_p_i_o___defs___e_s_p32___w_t32_e_t_h01___wasatch_8hpp.html#aeed05cdd33507563bb8551bc006bc0f1":[1,0,0,3,41,4],
+"_g_p_i_o___defs___e_s_p32___w_t32_e_t_h01___wasatch_8hpp.html#af2936ca829929ac3e76f0969fdfbf732":[1,0,0,3,41,2]
 };
