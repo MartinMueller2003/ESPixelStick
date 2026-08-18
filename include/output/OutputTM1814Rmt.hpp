@@ -22,7 +22,7 @@
 *
 */
 #include "ESPixelStick.h"
-#if defined (SUPPORT_OutputProtocol_TM1814) && defined (ARDUINO_ARCH_ESP32)
+#if defined (SUPPORT_OutputProtocol_TM1814) && defined (SUPPORT_RMT)
 
 #include "OutputTM1814.hpp"
 #include "OutputRmt.hpp"
@@ -86,4 +86,4 @@ private:
 
 }; // c_OutputTM1814Rmt
 
-#endif // defined (SUPPORT_OutputProtocol_TM1814) && defined (ARDUINO_ARCH_ESP32)
+#endif // defined (SUPPORT_OutputProtocol_TM1814) && defined (SUPPORT_RMT)

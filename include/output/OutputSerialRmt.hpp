@@ -22,7 +22,7 @@
 *
 */
 #include "ESPixelStick.h"
-#if (defined(SUPPORT_OutputProtocol_FireGod) || defined(SUPPORT_OutputProtocol_DMX) || defined(SUPPORT_OutputProtocol_Serial) || defined(SUPPORT_OutputProtocol_Renard)) && defined(ARDUINO_ARCH_ESP32)
+#if (defined(SUPPORT_OutputProtocol_FireGod) || defined(SUPPORT_OutputProtocol_DMX) || defined(SUPPORT_OutputProtocol_Serial) || defined(SUPPORT_OutputProtocol_Renard)) && defined(SUPPORT_RMT)
 
 #include "OutputSerial.hpp"
 #include "OutputRmt.hpp"
@@ -85,4 +85,4 @@ private:
 
 }; // c_OutputSerialRmt
 
-#endif // defined(SUPPORT_OutputProtocol_FireGod) || (defined(SUPPORT_OutputProtocol_DMX) || defined(SUPPORT_OutputProtocol_Serial) || defined(SUPPORT_OutputProtocol_Renard)) && defined(ARDUINO_ARCH_ESP32)
+#endif // defined(SUPPORT_OutputProtocol_FireGod) || (defined(SUPPORT_OutputProtocol_DMX) || defined(SUPPORT_OutputProtocol_Serial) || defined(SUPPORT_OutputProtocol_Renard)) && defined(SUPPORT_RMT)

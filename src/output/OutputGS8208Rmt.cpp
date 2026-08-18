@@ -18,7 +18,7 @@
 */
 #include "ESPixelStick.h"
 
-#if defined(SUPPORT_OutputProtocol_GS8208) && defined(ARDUINO_ARCH_ESP32)
+#if defined(SUPPORT_OutputProtocol_GS8208) && defined(SUPPORT_RMT)
 
 #include "output/OutputGS8208Rmt.hpp"
 
@@ -245,4 +245,4 @@ void c_OutputGS8208Rmt::PauseOutput (bool State)
     // DEBUG_END;
 } // PauseOutput
 
-#endif // defined(SUPPORT_OutputProtocol_GS8208) && defined(ARDUINO_ARCH_ESP32)
+#endif // defined(SUPPORT_OutputProtocol_GS8208) && defined(SUPPORT_RMT)

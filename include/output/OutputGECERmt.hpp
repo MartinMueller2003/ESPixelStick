@@ -22,7 +22,7 @@
 *
 */
 #include "ESPixelStick.h"
-#if defined(SUPPORT_OutputProtocol_GECE) && defined(ARDUINO_ARCH_ESP32)
+#if defined(SUPPORT_OutputProtocol_GECE) && defined(SUPPORT_RMT)
 
 #include "OutputGECE.hpp"
 #include "OutputRmt.hpp"
@@ -90,4 +90,4 @@ private:
 
 }; // c_OutputGECERmt
 
-#endif // defined(SUPPORT_OutputProtocol_GECE) && defined(ARDUINO_ARCH_ESP32)
+#endif // defined(SUPPORT_OutputProtocol_GECE) && defined(SUPPORT_RMT)

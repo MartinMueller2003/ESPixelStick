@@ -18,7 +18,7 @@
 */
 
 #include "ESPixelStick.h"
-#if defined (SUPPORT_OutputProtocol_TM1814) && defined (ARDUINO_ARCH_ESP32)
+#if defined (SUPPORT_OutputProtocol_TM1814) && defined (SUPPORT_RMT)
 
 #include "output/OutputTM1814Rmt.hpp"
 
@@ -248,4 +248,4 @@ void c_OutputTM1814Rmt::PauseOutput (bool State)
     // DEBUG_END;
 } // PauseOutput
 
-#endif // defined (SUPPORT_OutputProtocol_TM1814) && defined (ARDUINO_ARCH_ESP32)
+#endif // defined (SUPPORT_OutputProtocol_TM1814) && defined (SUPPORT_RMT)

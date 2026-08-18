@@ -17,7 +17,7 @@
 *
 */
 #include "ESPixelStick.h"
-
+#if defined(SUPPORT_UART)
 #include "output/OutputUart.hpp"
 
 extern "C"
@@ -1256,3 +1256,5 @@ void c_OutputUart::RestoreSerialPortOperation()
     // DEBUG_END;
 
 } // RestoreSerialPortOperation
+
+#endif // defined(SUPPORT_UART)

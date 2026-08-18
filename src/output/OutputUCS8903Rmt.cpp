@@ -18,7 +18,7 @@
 */
 #include "ESPixelStick.h"
 
-#if defined(SUPPORT_OutputProtocol_UCS8903) && defined(ARDUINO_ARCH_ESP32)
+#if defined(SUPPORT_OutputProtocol_UCS8903) && defined(SUPPORT_RMT)
 
 #include "output/OutputUCS8903Rmt.hpp"
 
@@ -244,4 +244,4 @@ void c_OutputUCS8903Rmt::PauseOutput (bool State)
     // DEBUG_END;
 } // PauseOutput
 
-#endif // defined(SUPPORT_OutputProtocol_UCS8903) && defined(ARDUINO_ARCH_ESP32)
+#endif // defined(SUPPORT_OutputProtocol_UCS8903) && defined(SUPPORT_RMT)

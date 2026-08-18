@@ -18,14 +18,14 @@
 *
 */
 
-#ifdef ARDUINO_ARCH_ESP32
+#ifdef SUPPORT_I2S
 #include "ESPixelStick.h"
-#include "OutputCommon.hpp"
 #include "m_i2s.h"
 #include "driver/gpio.h"
 
 // a slot is one bit in the output item
-#define I2S_NUM_SLOTA           i2s_bits_per_chan_t::I2S_BITS_PER_CHAN_16BIT
+#define I2S_NUM_SLOTA i2s_bits_per_chan_t::I2S_BITS_PER_CHAN_8BIT
+#define I2S_MAX_NUM_PORTS 8
 union I2S_item_t
 {
     struct
@@ -39,25 +39,22 @@ union I2S_item_t
 class c_OutputI2S
 {
 public:
-    struct OutputI2SSlotConfig_t
-    {
-        uint32_t            I2SChannelId                = uint32_t(-1);
-        gpio_num_t          DataPin                     = gpio_num_t(-1);
-        void                *arg                        = nullptr;
-        bool                (*ISR_GetNextIntensityBit)  (void*arg, I2S_item_t&data, uint32_t &numSlices) = nullptr;
-    };
+struct OutputI2SChannelConfig_t
+{
+    uint32_t    I2SChannelId;
+    gpio_num_t  DataPin;
+    void        *arg;
+    bool        (*GetNextIntensityBit) (void*arg, I2S_item_t * data, uint32_t numSlices) = nullptr;
+    bool        IsActive;
+};
 
 private:
 
-    // list of GPIOs for the I2S slots 24 is the 
-    // max # slots and must be present no matter how many 
-    // slots are actually used
-    gpio_num_t GpioDataPins[24];
-    const int clock_pin = I2S_PIN_NO_CHANGE; // Pixel Clock
+    const int   clock_pin = I2S_PIN_NO_CHANGE; // Pixel Clock
+    bool        OutputIsPaused = false;
+    double      I2S_TickTimeInNS;
 
-    OutputI2SSlotConfig_t   OutputI2SSlotConfigs[I2S_NUM_SLOTA];
-
-    bool                OutputIsPaused = false;
+    #define I2STargetBitSliceTimeNS 150
 
     uint32_t SetBitSliceLen (uint8_t ChanId, double BitSliceLenNs);
     void StartSendingData   ();
@@ -74,13 +71,15 @@ public:
     c_OutputI2S ();
     virtual ~c_OutputI2S ();
 
-    void Begin              ();
-    void RegisterSlotDevice (OutputI2SSlotConfig_t config, c_OutputCommon * pParent);
-    void RemoveSlotDevice   (OutputI2SSlotConfig_t config);
-    void GetStatus          (ArduinoJson::JsonObject& jsonStatus);
-    void PauseOutput        (bool State);
-    void GetDriverName      (String &value)  { value = F("I2S"); }
-    void ISR_ProcessDma     ();
+    void        Begin               ();
+    uint8_t     RegisterSlotDevice  (OutputI2SChannelConfig_t config);
+    void        RemoveSlotDevice    (OutputI2SChannelConfig_t config);
+    void        GetStatus           (ArduinoJson::JsonObject& jsonStatus);
+    void        PauseOutput         (bool State);
+    void        GetDriverName       (String &value)  { value = F("I2S"); }
+    uint32_t    GetBitTimeSlices    (uint32_t BitTimeInNanoSec);
+    void        SetOutputState      (uint32_t I2SChannelId, bool NewState);
+    void        SetGpio             (uint32_t I2SChannelId, gpio_num_t NewGpio);
 
 // #define USE_I2S_DEBUG_COUNTERS
 #ifdef USE_I2S_DEBUG_COUNTERS
@@ -109,4 +108,4 @@ public:
 #endif // def USE_I2S_DEBUG_COUNTERS
 
 };
-#endif // def #ifdef ARDUINO_ARCH_ESP32
+#endif // def #ifdef SUPPORT_I2S

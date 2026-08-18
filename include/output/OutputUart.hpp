@@ -19,8 +19,9 @@
  */
 
 #include "ESPixelStick.h"
+#if defined(SUPPORT_UART)
 
-#ifdef ARDUINO_ARCH_ESP32
+#if defined(ARDUINO_ARCH_ESP32)
 #   include <soc/uart_reg.h>
 #   include <driver/uart.h>
 #   include <driver/gpio.h>
@@ -223,3 +224,4 @@ private:
 
 #endif // defined(ARDUINO_ARCH_ESP8266)
 };
+#endif // defined(SUPPORT_UART)

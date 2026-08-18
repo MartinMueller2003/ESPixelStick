@@ -17,7 +17,7 @@
 *
 */
 #include "ESPixelStick.h"
-#if (defined(SUPPORT_OutputProtocol_FireGod) || defined(SUPPORT_OutputProtocol_DMX) || defined(SUPPORT_OutputProtocol_Serial) || defined(SUPPORT_OutputProtocol_Renard)) && defined(ARDUINO_ARCH_ESP32)
+#if (defined(SUPPORT_OutputProtocol_FireGod) || defined(SUPPORT_OutputProtocol_DMX) || defined(SUPPORT_OutputProtocol_Serial) || defined(SUPPORT_OutputProtocol_Renard)) && defined(SUPPORT_RMT)
 
 #include "output/OutputSerialRmt.hpp"
 
@@ -322,4 +322,4 @@ void c_OutputSerialRmt::PauseOutput (bool State)
     // DEBUG_END;
 } // PauseOutput
 
-#endif // (defined(SUPPORT_OutputProtocol_FireGod) || defined(SUPPORT_OutputProtocol_DMX) || defined(SUPPORT_OutputProtocol_Serial) || defined(SUPPORT_OutputProtocol_Renard)) && defined(ARDUINO_ARCH_ESP32)
+#endif // (defined(SUPPORT_OutputProtocol_FireGod) || defined(SUPPORT_OutputProtocol_DMX) || defined(SUPPORT_OutputProtocol_Serial) || defined(SUPPORT_OutputProtocol_Renard)) && defined(SUPPORT_RMT)
