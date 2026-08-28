@@ -47,7 +47,7 @@ public:
 #endif // def ARDUINO_ARCH_ESP32
     virtual void         GetDriverName (String & sDriverName) = 0;             ///< get the name for the instantiated driver
             OM_PortId_t  GetOutputPortId ()    { return OutputPortDefinition.PortId; }     ///< return the output channel number
-            uint8_t    * GetBufferAddress ()   { return pOutputBuffer;}        ///< Get the address of the buffer into which the E1.31 handler will stuff data
+    IRAM_ATTR uint8_t  * ISR_GetBufferAddress(){ return pOutputBuffer;}        ///< Get the address of the buffer into which the E1.31 handler will stuff data
             uint32_t     GetBufferUsedSize ()  { return OutputBufferSize;}     ///< Get the address of the buffer into which the E1.31 handler will stuff data
             OM_GPIOS_t   GetOutputGpio ()      { return OutputPortDefinition.gpios; }
             OTYPE_t      GetOutputType ()      { return OutputType; }          ///< Have the instance report its type.
@@ -77,7 +77,7 @@ protected:
     uint32_t    FrameCount                  = 0;
     bool        Paused = false;
 
-    virtual void ReportNewFrame ();
+    void ISR_ReportNewFrame ();
 
     inline bool canRefresh ()
     {
