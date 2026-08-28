@@ -606,9 +606,9 @@ void c_OutputMgr::GetStatus (JsonObject & jsonStatus)
 {
     // DEBUG_START;
 
-#if defined(SUPPORT_I2S)
+    #if defined(SUPPORT_I2S)
     OutputI2S.GetStatus(jsonStatus);
-#endif // defined(SUPPORT_I2S)
+    #endif // defined(SUPPORT_I2S)
 
     JsonArray OutputStatus = jsonStatus[(char*)CN_output].to<JsonArray> ();
     for (uint8_t index = 0; index < NumOutputPorts; ++index)
