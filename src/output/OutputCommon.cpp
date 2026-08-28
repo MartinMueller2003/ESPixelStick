@@ -63,7 +63,7 @@ void c_OutputCommon::BaseGetStatus (JsonObject & jsonStatus)
 } // GetStatus
 
 //----------------------------------------------------------------------------
-void c_OutputCommon::ReportNewFrame ()
+void IRAM_ATTR c_OutputCommon::ISR_ReportNewFrame ()
 {
     // DEBUG_START;
 
@@ -111,9 +111,9 @@ void c_OutputCommon::WriteChannelData (uint32_t StartChannelId, uint32_t Channel
 
     if((StartChannelId + ChannelCount) > OutputBufferSize)
     {
-        DEBUG_V("ERROR: Writting beyond the end of the output buffer");
-        DEBUG_V(String("StartChannelId: 0x") + String(StartChannelId, HEX));
-        DEBUG_V(String("  ChannelCount: 0x") + String(ChannelCount));
+        // DEBUG_V("ERROR: Writting beyond the end of the output buffer");
+        // DEBUG_V(String("StartChannelId: 0x") + String(StartChannelId, HEX));
+        // DEBUG_V(String("  ChannelCount: 0x") + String(ChannelCount));
     }
     else
     {
