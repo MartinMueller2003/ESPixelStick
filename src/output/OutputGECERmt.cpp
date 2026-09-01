@@ -30,7 +30,7 @@ static bool IRAM_ATTR ISR_GetNextBitToSendBase (void * arg, rmt_item32_t & DataT
 //----------------------------------------------------------------------------
 static void StartNewDataFrameBase(void * arg)
 {
-    return reinterpret_cast<c_OutputGECERmt*>(arg)->StartNewDataFrame();
+    return reinterpret_cast<c_OutputGECERmt*>(arg)->ISR_StartNewDataFrame();
 }
 
 //----------------------------------------------------------------------------
@@ -87,7 +87,7 @@ bool c_OutputGECERmt::SetConfig (ArduinoJson::JsonObject& jsonConfig)
     OutputRmtConfig.arg                     = this;
     OutputRmtConfig.ISR_GetNextIntensityBit = ISR_GetNextBitToSendBase;
     OutputRmtConfig.StartNewDataFrame       = StartNewDataFrameBase;
-    OutputRmtConfig.BufferStart             = GetBufferAddress();
+    OutputRmtConfig.BufferStart             = ISR_GetBufferAddress();
     OutputRmtConfig.NumBytesInFrame         = OM_MAX_NUM_CHANNELS;
 
     Rmt.Begin(OutputRmtConfig, this);
@@ -170,13 +170,13 @@ bool c_OutputGECERmt::RmtPoll ()
 } // Poll
 
 //----------------------------------------------------------------------------
-void c_OutputGECERmt::StartNewDataFrame()
+void IRAM_ATTR c_OutputGECERmt::ISR_StartNewDataFrame()
 {
     // DEBUG_START;
     // DEBUG_V(String("frame started on ") + String(OutputPortDefinition.gpios.data));
     INC_GECE_RMT_DEBUG_COUNTERS(FrameStarts);
     StartBitCount = 1;
-    StartNewFrame();
+    ISR_StartNewFrame();
 
     // DEBUG_END;
 } // StartNewDataFrame

@@ -31,7 +31,7 @@ static bool IRAM_ATTR ISR_GetNextBitToSendBase (void * arg, rmt_item32_t & DataT
 //----------------------------------------------------------------------------
 static void StartNewDataFrameBase(void * arg)
 {
-    return reinterpret_cast<c_OutputUCS8903Rmt*>(arg)->StartNewDataFrame();
+    return reinterpret_cast<c_OutputUCS8903Rmt*>(arg)->ISR_StartNewDataFrame();
 } // StartNewDataFrameBase
 
 //----------------------------------------------------------------------------
@@ -96,7 +96,7 @@ bool c_OutputUCS8903Rmt::SetConfig (ArduinoJson::JsonObject& jsonConfig)
     OutputRmtConfig.arg                     = this;
     OutputRmtConfig.ISR_GetNextIntensityBit = ISR_GetNextBitToSendBase;
     OutputRmtConfig.StartNewDataFrame       = StartNewDataFrameBase;
-    OutputRmtConfig.BufferStart             = GetBufferAddress();
+    OutputRmtConfig.BufferStart             = ISR_GetBufferAddress();
     OutputRmtConfig.NumBytesInFrame         = OM_MAX_NUM_CHANNELS;
 
     Rmt.Begin(OutputRmtConfig, this);
@@ -178,13 +178,13 @@ bool c_OutputUCS8903Rmt::RmtPoll ()
 } // Poll
 
 //----------------------------------------------------------------------------
-void c_OutputUCS8903Rmt::StartNewDataFrame()
+void IRAM_ATTR c_OutputUCS8903Rmt::ISR_StartNewDataFrame()
 {
     // DEBUG_START;
     // DEBUG_V(String("frame started on ") + String(OutputPortDefinition.gpios.data));
     INC_UCS8903_RMT_DEBUG_COUNTERS(FrameStarts);
     IfgBitCurrentCount = IfgBitCount;
-    StartNewFrame();
+    ISR_StartNewFrame();
 
     // DEBUG_END;
 } // StartNewDataFrame

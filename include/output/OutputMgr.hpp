@@ -65,7 +65,7 @@ public:
     void      SetConfig         (const char * NewConfig);  ///< Save the current configuration data to nvram
     void      SetConfig         (ArduinoJson::JsonDocument & NewConfig);  ///< Save the current configuration data to nvram
     void      GetStatus         (JsonObject & jsonStatus);
-    uint8_t*  GetBufferAddress  () { return pOutputBuffer; } ///< Get the address of the buffer into which the E1.31 handler will stuff data
+    IRAM_ATTR uint8_t * ISR_GetBufferAddress  () { return pOutputBuffer; } ///< Get the address of the buffer into which the E1.31 handler will stuff data
     uint32_t  GetBufferUsedSize () { return UsedBufferSize; } ///< Get the size (in intensities) of the buffer into which the E1.31 handler will stuff data
     uint32_t  GetBufferSize     () { return uint32_t(OM_MAX_NUM_CHANNELS); } ///< Get the size (in intensities) of the buffer into which the E1.31 handler will stuff data
     void      DeleteConfig      () { FileMgr.DeleteFlashFile (ConfigFileName); }

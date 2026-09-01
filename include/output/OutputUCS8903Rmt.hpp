@@ -45,7 +45,7 @@ public:
     void    SetOutputBufferSize (uint32_t NumChannelsAvailable);
     void    PauseOutput(bool State);
     bool    ISR_GetNextBitToSend (rmt_item32_t &DataToSend);
-    void    StartNewDataFrame();
+    void    ISR_StartNewDataFrame();
 
 private:
     // The adjustments compensate for rounding errors in the calculations

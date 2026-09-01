@@ -97,7 +97,7 @@ bool c_OutputTLS3001Rmt::SetConfig (ArduinoJson::JsonObject& jsonConfig)
     OutputRmtConfig.arg                     = this;
     OutputRmtConfig.ISR_GetNextIntensityBit = ISR_GetNextBitToSendBase;
     OutputRmtConfig.StartNewDataFrame       = StartNewDataFrameBase;
-    OutputRmtConfig.BufferStart             = GetBufferAddress();
+    OutputRmtConfig.BufferStart             = ISR_GetBufferAddress();
     OutputRmtConfig.NumBytesInFrame         = OM_MAX_NUM_CHANNELS;
 
     // DEBUG_V();
@@ -226,7 +226,7 @@ uint32_t c_OutputTLS3001Rmt::Poll ()
 } // Poll
 
 //----------------------------------------------------------------------------
-void c_OutputTLS3001Rmt::StartNewDataFrame()
+void IRAM_ATTR c_OutputTLS3001Rmt::StartNewDataFrame()
 {
     // DEBUG_START;
     // DEBUG_V(String("frame started on ") + String(OutputPortDefinition.gpios.data));
@@ -240,7 +240,7 @@ void c_OutputTLS3001Rmt::StartNewDataFrame()
     {
         fsm_RMT_state_SendDataStart_imp.Init();
     }
-    c_OutputTLS3001::StartNewFrame();
+    c_OutputTLS3001::ISR_StartNewFrame();
 
     // DEBUG_END;
 } // StartNewDataFrame

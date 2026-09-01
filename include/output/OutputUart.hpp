@@ -118,7 +118,7 @@ private:
     void set_pin                        ();
     void TerminateSerialPortOperation   ();
     void RestoreSerialPortOperation     ();
-    void ReportNewFrame                 ();
+    void ISR_ReportNewFrame                 ();
     void StartBreak                     ();
     void EndBreak                       ();
     void GenerateBreak                  (uint32_t DurationInUs, uint32_t MarkDurationInUs);

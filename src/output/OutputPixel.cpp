@@ -808,7 +808,7 @@ void c_OutputPixel::WriteChannelData(uint32_t StartChannelId, uint32_t ChannelCo
                 break;
             }
 
-            if(uint32_t(pBuffer) >= uint32_t(&(OutputMgr.GetBufferAddress()[OutputMgr.GetBufferSize()])))
+            if(uint32_t(pBuffer) >= uint32_t(&(OutputMgr.ISR_GetBufferAddress()[OutputMgr.GetBufferSize()])))
             {
                 // DEBUG_V("This write is beyond the end of the Global Output buffer");
                 // DEBUG_V(String("      CalculatedChannelId: ") + String(CalculatedChannelId));

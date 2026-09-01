@@ -32,7 +32,7 @@ c_OutputCommon::c_OutputCommon (OM_OutputPortDefinition_t & _OutputPortDefinitio
 	HasBeenInitialized       = false;
 	OutputPortDefinition     = _OutputPortDefinition;
     OutputType               = outputProtocol;
-    pOutputBuffer            = OutputMgr.GetBufferAddress ();
+    pOutputBuffer            = OutputMgr.ISR_GetBufferAddress ();
     FrameStartTimeInMicroSec = 0;
 
 	// logcon (String ("UartId:          '") + UartId + "'");
@@ -72,7 +72,7 @@ void IRAM_ATTR c_OutputCommon::ISR_ReportNewFrame ()
 
     // DEBUG_END;
 
-} // ReportNewFrame
+} // ISR_ReportNewFrame
 
 //----------------------------------------------------------------------------
 bool c_OutputCommon::SetConfig (JsonObject & jsonConfig)

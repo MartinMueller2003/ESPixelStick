@@ -1822,7 +1822,7 @@ void c_OutputMgr::ClearBuffer()
 {
     // DEBUG_START;
 
-    memset(GetBufferAddress(), 0x00, OutputMgr.GetBufferSize());
+    memset(ISR_GetBufferAddress(), 0x00, OutputMgr.GetBufferSize());
 
     // DEBUG_END;
 
