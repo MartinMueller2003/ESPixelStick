@@ -30,7 +30,7 @@ static bool IRAM_ATTR ISR_GetNextBitToSendBase (void * arg, rmt_item32_t & DataT
 //----------------------------------------------------------------------------
 static void StartNewDataFrameBase(void * arg)
 {
-    return reinterpret_cast<c_OutputSerialRmt*>(arg)->StartNewDataFrame();
+    return reinterpret_cast<c_OutputSerialRmt*>(arg)->ISR_StartNewDataFrame();
 }
 
 //----------------------------------------------------------------------------
@@ -231,7 +231,7 @@ bool c_OutputSerialRmt::RmtPoll ()
 } // Poll
 
 //----------------------------------------------------------------------------
-void c_OutputSerialRmt::StartNewDataFrame()
+void IRAM_ATTR c_OutputSerialRmt::ISR_StartNewDataFrame()
 {
     // DEBUG_START;
     // DEBUG_V(String("frame started on ") + String(OutputPortDefinition.gpios.data));
@@ -243,7 +243,7 @@ void c_OutputSerialRmt::StartNewDataFrame()
     }
     #endif //  defined(SUPPORT_OutputProtocol_DMX)
     StartBitCount = 1;
-    StartNewFrame();
+    ISR_StartNewFrame();
 
     // DEBUG_END;
 } // StartNewDataFrame
