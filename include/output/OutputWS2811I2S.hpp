@@ -38,35 +38,39 @@ public:
     // functions to be provided by the derived class
     void    Begin ();                                        ///< set up the operating environment based on the current config (or defaults)
     bool    SetConfig (ArduinoJson::JsonObject& jsonConfig); ///< Set a new config in the driver
-    uint32_t Poll ();                                        ///< Call from loop (),  renders output data
+    uint32_t Poll () {return 0;}                             ///< Call from loop (),  renders output data
     void    GetStatus (ArduinoJson::JsonObject& jsonStatus);
     void    SetOutputBufferSize (uint32_t NumChannelsAvailable);
     void    PauseOutput(bool State);
-    bool    GetNextBitToSend (I2S_item_t * DataToSend, uint32_t numSlices);
-    void    StartNewDataFrame();
+    void    ISR_GetNextBitsToSend (c_OutputI2S::I2S_Item_t * DataToSend, uint32_t numSlices);
+    void    ISR_StartNewDataFrame();
 
     // to be removed when the I2S driver is fully implemented
     virtual bool RmtPoll() {return false;}
 
 private:
+    void    CalculateFrameBitSlices ();
 
     // The adjustments compensate for rounding errors in the calculations
     c_OutputI2S     *I2Sdriver;
 
-    uint8_t         DataBitMask;
-    uint8_t         DataBit;
+    uint32_t        DataBitMask;
+    uint32_t        DataBit;
 
-    uint32_t        ZeroHighBitCount;
-    uint32_t        ZeroLowBitCount;
+    uint32_t        ZeroHighBitSliceCount;
+    uint32_t        ZeroLowBitSliceCount;
 
-    uint32_t        OneHighBitCount;
-    uint32_t        OneLowBitCount;
+    uint32_t        OneHighBitSliceCount;
+    uint32_t        OneLowBitSliceCount;
 
-    uint32_t        HighBitCurrentCount;
-    uint32_t        LowBitCurrentCount;
+    uint32_t        HighBitCurrentSliceCount;
+    uint32_t        LowBitCurrentSliceCount;
 
-    uint32_t        IfgBitCount;
-    uint32_t        IfgBitCurrentCount;
+    uint32_t        IfgSliceCount;
+    uint32_t        IfgCurrentSliceCount;
+
+    uint32_t        IdleSliceCount;
+    uint32_t        IdleCurrentSliceCount;
 
     uint32_t        DataPattern;
     uint32_t        DataPatternMask;
@@ -79,11 +83,16 @@ private:
         uint32_t GetNextBit;
         uint32_t FrameStarts;
         uint32_t FrameEnds;
-        uint32_t IfgBits;
-        uint32_t DataBits;
+        uint32_t IdleBitSlices;
+        uint32_t IfgBitSlices;
+        uint32_t DataBitSlices;
         uint32_t DataBytes;
-        uint32_t BitHigh;
-        uint32_t BitLow;
+        uint32_t BitSliceHigh;
+        uint32_t BitSliceLow;
+        uint32_t NextDataBit;
+        uint32_t DataBits;
+        uint32_t DataBitEnd;
+        uint32_t DataByteEnd;
     } I2SDebugCounters;
     #else
     #define INC_WS2811_I2S_DEBUG_COUNTERS(c)
