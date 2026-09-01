@@ -322,7 +322,7 @@ void c_OutputSerial::SetFrameDurration ()
 } // SetFrameDurration
 
 //----------------------------------------------------------------------------
-void c_OutputSerial::StartNewFrame ()
+void IRAM_ATTR c_OutputSerial::ISR_StartNewFrame ()
 {
     // DEBUG_START;
 

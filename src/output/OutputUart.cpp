@@ -585,12 +585,12 @@ void IRAM_ATTR c_OutputUart::ISR_StartNewDataFrame()
 {
     if (nullptr != OutputUartConfig.pPixelDataSource)
     {
-        OutputUartConfig.pPixelDataSource->StartNewFrame();
+        OutputUartConfig.pPixelDataSource->ISR_StartNewFrame();
     }
     #if defined(SUPPORT_OutputProtocol_FireGod) || defined(SUPPORT_OutputProtocol_DMX) || defined(SUPPORT_OutputProtocol_Serial) || defined(SUPPORT_OutputProtocol_Renard)
     else
     {
-        OutputUartConfig.pSerialDataSource->StartNewFrame();
+        OutputUartConfig.pSerialDataSource->ISR_StartNewFrame();
     }
     #endif // defined(SUPPORT_OutputProtocol_FireGod) || defined(SUPPORT_OutputProtocol_DMX) || defined(SUPPORT_OutputProtocol_Serial) || defined(SUPPORT_OutputProtocol_Renard)
 } // StartNewDataFrame
