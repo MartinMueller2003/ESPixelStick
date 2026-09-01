@@ -20,70 +20,66 @@
 
 #ifdef SUPPORT_I2S
 #include "ESPixelStick.h"
-#include "m_i2s.h"
+#include "i2s_parallel.hpp"
 #include "driver/gpio.h"
 
-// a slot is one bit in the output item
-#define I2S_NUM_SLOTA i2s_bits_per_chan_t::I2S_BITS_PER_CHAN_8BIT
-#define I2S_MAX_NUM_PORTS 8
-union I2S_item_t
-{
-    struct
-    {
-        uint8_t data;
-        uint8_t reserved;
-    };
-    uint16_t RawData;
-};
+// #define USE_I2S_DEBUG_COUNTERS
 
 class c_OutputI2S
 {
 public:
-struct OutputI2SChannelConfig_t
-{
-    uint32_t    I2SChannelId;
-    gpio_num_t  DataPin;
-    void        *arg;
-    bool        (*GetNextIntensityBit) (void*arg, I2S_item_t * data, uint32_t numSlices) = nullptr;
-    bool        IsActive;
-};
+    // a slot is one bit in the output item
+    #define I2S_NUM_SLOTA i2s_bits_per_chan_t::I2S_BITS_PER_CHAN_8BIT
+    #define I2S_MAX_NUM_PORTS 8
+    typedef uint8_t I2S_Item_t;
+
+    struct OutputI2SChannelConfig_t
+    {
+        uint32_t    I2SChannelId;
+        gpio_num_t  DataPin;
+        void        *arg;
+        void        (*GetNextIntensityBitSlices) (void*arg, I2S_Item_t * data, uint32_t numSlices) = nullptr;
+        bool        IsActive;
+    };
+
+    // must be a multiple of 32
+    #define I2S_NumSendBufferItems 1024
+
+    struct TransmitDmaBuffer_t
+    {
+        alignas (4) lldesc_t   header; // must be first
+        #ifdef USE_I2S_DEBUG_COUNTERS
+        alignas (4) uint32_t   id;
+        alignas (4) uint32_t   UsageCounter;
+        #endif // def USE_I2S_DEBUG_COUNTERS
+        alignas (4) I2S_Item_t data[I2S_NumSendBufferItems];
+    };
 
 private:
+    // array of configuration settings
+    OutputI2SChannelConfig_t OutputI2SSlotConfigs[I2S_MAX_NUM_PORTS];
 
-    const int   clock_pin = I2S_PIN_NO_CHANGE; // Pixel Clock
-    bool        OutputIsPaused = false;
-    double      I2S_TickTimeInNS;
+    // must be more than zero
+    #define I2S_NumSendBuffers 4
 
-    #define I2STargetBitSliceTimeNS 150
-
-    uint32_t SetBitSliceLen (uint8_t ChanId, double BitSliceLenNs);
-    void StartSendingData   ();
-    void StopSendingData    ();
-    void InitI2Sdriver      ();
-
-#ifndef HasBeenInitialized
-    bool HasBeenInitialized = false;
-#endif // ndef HasBeenInitialized
-
-    TaskHandle_t I2sTaskHandle = NULL;
+    // Class to manage the io device
+    esp_i2s_parallel    i2sParallel;
 
 public:
     c_OutputI2S ();
     virtual ~c_OutputI2S ();
 
     void        Begin               ();
-    uint8_t     RegisterSlotDevice  (OutputI2SChannelConfig_t config);
-    void        RemoveSlotDevice    (OutputI2SChannelConfig_t config);
+    void        RegisterSlotDevice  (OutputI2SChannelConfig_t config, uint32_t * DataBit, uint32_t * DataBitMask);
+    void        RemoveSlotDevice    (uint32_t I2SChannelId);
     void        GetStatus           (ArduinoJson::JsonObject& jsonStatus);
-    void        PauseOutput         (bool State);
     void        GetDriverName       (String &value)  { value = F("I2S"); }
     uint32_t    GetBitTimeSlices    (uint32_t BitTimeInNanoSec);
     void        SetOutputState      (uint32_t I2SChannelId, bool NewState);
     void        SetGpio             (uint32_t I2SChannelId, gpio_num_t NewGpio);
+    void        ISR_Handler         (void * _TransmitDmaBuffer);
 
-// #define USE_I2S_DEBUG_COUNTERS
 #ifdef USE_I2S_DEBUG_COUNTERS
-// #define IncludeBufferData
    // debug counters
     struct I2SDebugCounters_t
     {
@@ -94,7 +90,11 @@ public:
         uint32_t I2SXmtFills = 0;
         uint32_t ISRpaused = 0;
         uint32_t WriteToBuffer = 0;
-    } ;
+        uint32_t ISR_handler_count = 0;
+        uint32_t ISR_FillBuffer = 0;
+        uint32_t BufferOwnerFlagError = 0;
+        uint32_t ISR_NullBufferPointer = 0;
+    };
     I2SDebugCounters_t I2SDebugCounters;
 
 #define I2S_DEBUG_INC_COUNTER(p) (++I2SDebugCounters.p)
