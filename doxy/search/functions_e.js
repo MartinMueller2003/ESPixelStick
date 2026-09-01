@@ -15,13 +15,12 @@ var searchData=
   ['remoteplayenabled_12',['RemotePlayEnabled',['../classc___input_mgr.html#a5f69ee45bb28425a665bb08ec17ce50c',1,'c_InputMgr']]],
   ['renameflashfile_13',['RenameFlashFile',['../classc___file_mgr.html#aee657c03ad56d87d9cb39970d4de4951',1,'c_FileMgr']]],
   ['renamesdfile_14',['RenameSdFile',['../classc___file_mgr.html#a58980da9ad6a1fede7c36d8fe5be4361',1,'c_FileMgr']]],
-  ['reportnewframe_15',['ReportNewFrame',['../classc___output_common.html#ae4db3605be43e71dbd0b4f929b69aa85',1,'c_OutputCommon']]],
-  ['requestreadconfigfile_16',['RequestReadConfigFile',['../classc___web_mgr.html#a461cebce4ff284be5a268e7d36fffd05',1,'c_WebMgr']]],
-  ['requestreboot_17',['RequestReboot',['../main_8cpp.html#a23252221d60de2259fe00859f716c72e',1,'RequestReboot(String &amp;Reason, uint32_t LoopDelay, bool SkipDisable):&#160;main.cpp'],['../_e_s_pixel_stick_8h.html#aaffdda62d966b7a1777fec7ce955a22e',1,'RequestReboot(String &amp;Reason, uint32_t LoopDelay, bool SkipDisable=false):&#160;main.cpp']]],
-  ['reset_18',['reset',['../classc___wi_fi_driver.html#a73ac32c8db2b76fe03893dde2a2ad134',1,'c_WiFiDriver']]],
-  ['resetcurrentcredentials_19',['ResetCurrentCredentials',['../classc___ap_credentials.html#a8ce43e55561489e4c8798c0e70376c0d',1,'c_ApCredentials']]],
-  ['resetgpio_20',['ResetGpio',['../_e_s_pixel_stick_8h.html#a97937ae3377e427d21b29966a14e964a',1,'ESPixelStick.h']]],
-  ['resetsdcard_21',['ResetSdCard',['../classc___file_mgr.html#abf9680ad0d546bd42476f6460e387ba0',1,'c_FileMgr']]],
-  ['restartblanktimer_22',['RestartBlankTimer',['../classc___input_mgr.html#ac50551f90f209dbaa2b476a20b524b71',1,'c_InputMgr']]],
-  ['rgb2hsv_23',['rgb2hsv',['../classc___input_effect_engine.html#a6751a5a67dd911744b80574029cac95c',1,'c_InputEffectEngine']]]
+  ['requestreadconfigfile_15',['RequestReadConfigFile',['../classc___web_mgr.html#a461cebce4ff284be5a268e7d36fffd05',1,'c_WebMgr']]],
+  ['requestreboot_16',['RequestReboot',['../main_8cpp.html#a23252221d60de2259fe00859f716c72e',1,'RequestReboot(String &amp;Reason, uint32_t LoopDelay, bool SkipDisable):&#160;main.cpp'],['../_e_s_pixel_stick_8h.html#aaffdda62d966b7a1777fec7ce955a22e',1,'RequestReboot(String &amp;Reason, uint32_t LoopDelay, bool SkipDisable=false):&#160;main.cpp']]],
+  ['reset_17',['reset',['../classc___wi_fi_driver.html#a73ac32c8db2b76fe03893dde2a2ad134',1,'c_WiFiDriver']]],
+  ['resetcurrentcredentials_18',['ResetCurrentCredentials',['../classc___ap_credentials.html#a8ce43e55561489e4c8798c0e70376c0d',1,'c_ApCredentials']]],
+  ['resetgpio_19',['ResetGpio',['../_e_s_pixel_stick_8h.html#a97937ae3377e427d21b29966a14e964a',1,'ESPixelStick.h']]],
+  ['resetsdcard_20',['ResetSdCard',['../classc___file_mgr.html#abf9680ad0d546bd42476f6460e387ba0',1,'c_FileMgr']]],
+  ['restartblanktimer_21',['RestartBlankTimer',['../classc___input_mgr.html#ac50551f90f209dbaa2b476a20b524b71',1,'c_InputMgr']]],
+  ['rgb2hsv_22',['rgb2hsv',['../classc___input_effect_engine.html#a6751a5a67dd911744b80574029cac95c',1,'c_InputEffectEngine']]]
 ];
