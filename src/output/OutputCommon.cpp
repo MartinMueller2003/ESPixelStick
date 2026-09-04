@@ -33,7 +33,9 @@ c_OutputCommon::c_OutputCommon (OM_OutputPortDefinition_t & _OutputPortDefinitio
 	OutputPortDefinition     = _OutputPortDefinition;
     OutputType               = outputProtocol;
     pOutputBuffer            = OutputMgr.ISR_GetBufferAddress ();
+    #ifndef SUPPORT_I2S
     FrameStartTimeInMicroSec = 0;
+    #endif // ndef SUPPORT_I2S
 
 	// logcon (String ("UartId:          '") + UartId + "'");
     // logcon (String ("OutputPortId: '") + OutputPortId + "'");
@@ -67,7 +69,9 @@ void IRAM_ATTR c_OutputCommon::ISR_ReportNewFrame ()
 {
     // DEBUG_START;
 
+    #ifndef SUPPORT_I2S
     FrameStartTimeInMicroSec = micros ();
+    #endif // ndef SUPPORT_I2S
     FrameCount++;
 
     // DEBUG_END;
