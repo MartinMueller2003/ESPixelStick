@@ -74,7 +74,7 @@ public:
     void        RemoveSlotDevice    (uint32_t I2SChannelId);
     void        GetStatus           (ArduinoJson::JsonObject& jsonStatus);
     void        GetDriverName       (String &value)  { value = F("I2S"); }
-    uint32_t    GetBitTimeSlices    (uint32_t BitTimeInNanoSec);
+    uint32_t    GetNumTimeSlicesForTargetTimeNS    (uint32_t BitTimeInNanoSec);
     void        SetOutputState      (uint32_t I2SChannelId, bool NewState);
     void        SetGpio             (uint32_t I2SChannelId, gpio_num_t NewGpio);
     void        ISR_Handler         (void * _TransmitDmaBuffer);
