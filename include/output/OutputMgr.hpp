@@ -78,9 +78,9 @@ public:
     void      RelayUpdate       (uint8_t RelayId, String & NewValue, String & Response);
     void      ClearStatistics   (void);
     uint8_t   GetNumPorts       () {return NumOutputPorts;}
-#ifdef SUPPORT_I2S
-    void *    GetI2sDriver      () {return &OutputI2S;}
-#endif // def SUPPORT_I2S
+	#ifdef SUPPORT_I2S
+	c_OutputI2S * GetI2sDriver  () {return &OutputI2S;}
+	#endif // def SUPPORT_I2S
 
 // do NOT insert into the middle of this list. Always add new types to the end of the list
     enum e_OutputProtocolType
