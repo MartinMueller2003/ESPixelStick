@@ -168,7 +168,7 @@ public:
     inline   void         SetIntensityBitTimeInUS (float value) { IntensityBitTimeInUs = value; }
              void         SetIntensityDataWidth(uint32_t value);
              void         ISR_StartNewFrame();
-    inline   bool IRAM_ATTR ISR_MoreDataToSend () {return (&c_OutputPixel::ISR_FrameDone != FrameStateFuncPtr);}
+    inline   bool         ISR_MoreDataToSend () {return (&c_OutputPixel::ISR_FrameDone != FrameStateFuncPtr);}
              bool         ISR_GetNextIntensityToSend (uint32_t &DataToSend);
              void         SetPixelCount(uint32_t value) {pixel_count = value;}
     inline   uint32_t     GetPixelCount() {return pixel_count;}
