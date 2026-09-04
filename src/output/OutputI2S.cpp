@@ -32,13 +32,13 @@ static c_OutputI2S::TransmitDmaBuffer_t TransmitDmaBuffers[I2S_NumSendBuffers] D
 //----------------------------------------------------------------------------
 static void IRAM_ATTR IRQ_Handler (void * arg, void * buffer)
 {
-    static_cast<c_OutputI2S*>(arg)->ISR_Handler(buffer);
+    static_cast<c_OutputI2S*> (arg)->ISR_Handler (buffer);
 } // IRQ_Handler
 
 //----------------------------------------------------------------------------
 void IRAM_ATTR c_OutputI2S::ISR_Handler (void * _TransmitDmaBuffer)
 {
-    I2S_DEBUG_INC_COUNTER(ISR_handler_count);
+    I2S_DEBUG_INC_COUNTER (ISR_handler_count);
 
     TransmitDmaBuffer_t * TransmitDmaBuffer = (TransmitDmaBuffer_t*)_TransmitDmaBuffer;
 
@@ -48,11 +48,11 @@ void IRAM_ATTR c_OutputI2S::ISR_Handler (void * _TransmitDmaBuffer)
 
     if (TransmitDmaBuffer->header.owner == I2sParallelDmaBufferOwnerDMA)
     {
-        I2S_DEBUG_INC_COUNTER(BufferOwnerFlagError);
+        I2S_DEBUG_INC_COUNTER (BufferOwnerFlagError);
     }
     #endif // def USE_I2S_DEBUG_COUNTERS
 
-    I2S_DEBUG_INC_COUNTER(ISR_FillBuffer);
+    I2S_DEBUG_INC_COUNTER (ISR_FillBuffer);
 
     // reset the buffer management fields
     TransmitDmaBuffer->header.length = TransmitDmaBuffer->header.size;
@@ -172,16 +172,15 @@ void c_OutputI2S::GetStatus (ArduinoJson::JsonObject& jsonStatus)
     // // DEBUG_START;
 
     #ifdef USE_I2S_DEBUG_COUNTERS
-    jsonStatus[F ("ISR_handler_count")]     = I2S_DEBUG_COUNTER(ISR_handler_count);
-    jsonStatus[F ("ISR_NullBufferPointer")] = String (I2S_DEBUG_COUNTER(ISR_NullBufferPointer));
-    jsonStatus[F ("BufferOwnerFlagError")]  = I2S_DEBUG_COUNTER(BufferOwnerFlagError);
-    jsonStatus[F ("ISR_NextBuffer")]        = I2S_DEBUG_COUNTER(ISR_FillBuffer);
-
     JsonObject debugStatus = jsonStatus["I2S Debug"].to<JsonObject> ();
 
-    debugStatus["IntensityBitsSent"]            = I2S_DEBUG_COUNTER (IntensityBitsSent);
-    debugStatus["I2SEntriesTransfered"]         = I2S_DEBUG_COUNTER (I2SEntriesTransfered);
-    debugStatus["I2SXmtFills"]                  = I2S_DEBUG_COUNTER (I2SXmtFills);
+    debugStatus["ISR_handler_count"]     = I2S_DEBUG_COUNTER (ISR_handler_count);
+    debugStatus["ISR_NullBufferPointer"] = String (I2S_DEBUG_COUNTER (ISR_NullBufferPointer));
+    debugStatus["BufferOwnerFlagError"]  = I2S_DEBUG_COUNTER (BufferOwnerFlagError);
+    debugStatus["ISR_FillBuffer"]        = I2S_DEBUG_COUNTER (ISR_FillBuffer);
+    debugStatus["IntensityBitsSent"]     = I2S_DEBUG_COUNTER (IntensityBitsSent);
+    debugStatus["I2SEntriesTransfered"]  = I2S_DEBUG_COUNTER (I2SEntriesTransfered);
+    debugStatus["I2SXmtFills"]           = I2S_DEBUG_COUNTER (I2SXmtFills);
     #endif // def USE_I2S_DEBUG_COUNTERS
     // // DEBUG_END;
 } // GetStatus
@@ -212,9 +211,6 @@ void c_OutputI2S::RegisterSlotDevice  (OutputI2SChannelConfig_t config, uint32_t
         *DataBitMask = ~(1 << config.I2SChannelId);
         // DEBUG_V (String ("DataBit: 0x") + String (*DataBit, HEX));
         SetGpio (config.I2SChannelId, config.DataPin);
-
-        // must be last
-        currentConfig.IsActive = config.IsActive;
     } while (false);
 
     // DEBUG_END;
@@ -239,7 +235,7 @@ void c_OutputI2S::RemoveSlotDevice  (uint32_t I2SChannelId)
         currentConfig.arg = nullptr;
         currentConfig.GetNextIntensityBitSlices = nullptr;
 
-        SetGpio (I2SChannelId, gpio_num_t(I2S_PIN_NO_CHANGE));
+        SetGpio (I2SChannelId, gpio_num_t (I2S_PIN_NO_CHANGE));
 
     } while (false);
 
@@ -289,13 +285,15 @@ void c_OutputI2S::SetOutputState (uint32_t I2SChannelId, bool NewState)
 {
     // DEBUG_START;
 
+    // DEBUG_V (String ("I2SChannelId: ") + String (I2SChannelId));
+    // DEBUG_V (String ("    NewState: ") + String (NewState));
     OutputI2SSlotConfigs[I2SChannelId].IsActive = NewState;
 
     // DEBUG_END;
 } // SetOutputState
 
 //----------------------------------------------------------------------------
-uint32_t c_OutputI2S::GetBitTimeSlices (uint32_t TargetBitTimeInNanoSec)
+uint32_t c_OutputI2S::GetNumTimeSlicesForTargetTimeNS (uint32_t TargetTimeInNanoSec)
 {
     // DEBUG_START;
 
@@ -303,12 +301,12 @@ uint32_t c_OutputI2S::GetBitTimeSlices (uint32_t TargetBitTimeInNanoSec)
     double I2S_TickTimeInNS = i2sParallel.get_clockNS ();
 
     // round up
-    Result = ( (TargetBitTimeInNanoSec + int (I2S_TickTimeInNS)) - 1) / int (I2S_TickTimeInNS);
+    Result = ( (TargetTimeInNanoSec + int (I2S_TickTimeInNS)) - 1) / int (I2S_TickTimeInNS);
     if (0 == Result) Result = 1;
 
-    // DEBUG_V (String ("TargetBitTimeInNanoSec: ") + String (TargetBitTimeInNanoSec));
-    // DEBUG_V (String ("      I2S_TickTimeInNS: ") + String (I2S_TickTimeInNS));
-    // DEBUG_V (String ("                Result: ") + String (Result));
+    // DEBUG_V (String ("TargetTimeInNanoSec: ") + String (TargetTimeInNanoSec));
+    // DEBUG_V (String ("   I2S_TickTimeInNS: ") + String (I2S_TickTimeInNS));
+    // DEBUG_V (String ("             Result: ") + String (Result));
     
     // DEBUG_END;
     return Result;
