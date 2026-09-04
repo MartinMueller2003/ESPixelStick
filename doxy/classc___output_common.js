@@ -19,7 +19,7 @@ var classc___output_common =
     [ "GetOutputType", "classc___output_common.html#ad7170942775d16bd0d84c5baf589b51d", null ],
     [ "GetStatus", "classc___output_common.html#ac021e275ea90fcfbdc659918d2b78c03", null ],
     [ "IsPaused", "classc___output_common.html#aa9f90f7b993e5c19fe5d5835abcca575", null ],
-    [ "ISR_GetBufferAddress", "classc___output_common.html#a3a2f04beba238b3bb517c1116a519a98", null ],
+    [ "ISR_GetBufferAddress", "classc___output_common.html#a8bbaa07dd3901ef702fc8c9e04518428", null ],
     [ "ISR_ReportNewFrame", "classc___output_common.html#a0396af9438fb6ddc2afcb50fbd4735bd", null ],
     [ "PauseOutput", "classc___output_common.html#a827738159d56992021250d85905782b7", null ],
     [ "Poll", "classc___output_common.html#ac254686a33bd04f5255a69f40a5a2788", null ],

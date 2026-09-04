@@ -15,7 +15,7 @@ var classc___output_pixel =
     [ "ISR_FramePrependData", "classc___output_pixel.html#af000876bf787489b40c162d3c7ad15e1", null ],
     [ "ISR_GetIntensityData", "classc___output_pixel.html#a39c1f87d147327deeb24f41599f9194d", null ],
     [ "ISR_GetNextIntensityToSend", "classc___output_pixel.html#ae8fd5f89d3ae702cad92fbbba84375cb", null ],
-    [ "ISR_MoreDataToSend", "classc___output_pixel.html#aa36aa9a958416f5b47fc4eba522955ad", null ],
+    [ "ISR_MoreDataToSend", "classc___output_pixel.html#a4499781100dcc395a2deef4f96f70170", null ],
     [ "ISR_PixelAppendNulls", "classc___output_pixel.html#a00fba084a7e15d8622a2fb92e11182c0", null ],
     [ "ISR_PixelPrependNulls", "classc___output_pixel.html#a3ecd6af73e9c2d10aeeb10b83d4c23e0", null ],
     [ "ISR_PixelSendIntensity", "classc___output_pixel.html#af3f157013525a26e107592566d8f8ae6", null ],

@@ -144,7 +144,7 @@ $(function(){initNavTree('_output_w_s2811_i2_s_8hpp_source.html',''); initResiza
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordtype">void</span>    GetStatus (ArduinoJson::JsonObject&amp; jsonStatus);</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordtype">void</span>    SetOutputBufferSize (uint32_t NumChannelsAvailable);</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordtype">void</span>    PauseOutput(<span class="keywordtype">bool</span> State);</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keywordtype">void</span>    ISR_GetNextBitsToSend (c_OutputI2S::I2S_Item_t * DataToSend, uint32_t numSlices);</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keywordtype">void</span>    ISR_GetNextDataSlicesToSend (c_OutputI2S::I2S_Item_t * DataToSend, uint32_t numSlices);</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordtype">void</span>    ISR_StartNewDataFrame();</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="comment">// to be removed when the I2S driver is fully implemented</span></div>
@@ -168,8 +168,8 @@ $(function(){initNavTree('_output_w_s2811_i2_s_8hpp_source.html',''); initResiza
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    uint32_t        HighBitCurrentSliceCount;</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    uint32_t        LowBitCurrentSliceCount;</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    uint32_t        IfgSliceCount;</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    uint32_t        IfgCurrentSliceCount;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    uint32_t        FrameResetSliceCount;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    uint32_t        FrameResetCurrentSliceCount;</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    uint32_t        IdleSliceCount;</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    uint32_t        IdleCurrentSliceCount;</div>
@@ -182,11 +182,11 @@ $(function(){initNavTree('_output_w_s2811_i2_s_8hpp_source.html',''); initResiza
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="preprocessor">    #define INC_WS2811_I2S_DEBUG_COUNTERS(c) (++I2SDebugCounters.c)</span></div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="keyword">struct</span></div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    {</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        uint32_t GetNextBit;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        uint32_t GetDataSlices;</div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        uint32_t FrameStarts;</div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        uint32_t FrameEnds;</div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        uint32_t IdleBitSlices;</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        uint32_t IfgBitSlices;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        uint32_t FrameResetBitSlices;</div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        uint32_t DataBitSlices;</div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        uint32_t DataBytes;</div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        uint32_t BitSliceHigh;</div>
