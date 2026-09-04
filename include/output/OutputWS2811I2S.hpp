@@ -42,7 +42,7 @@ public:
     void    GetStatus (ArduinoJson::JsonObject& jsonStatus);
     void    SetOutputBufferSize (uint32_t NumChannelsAvailable);
     void    PauseOutput(bool State);
-    void    ISR_GetNextBitsToSend (c_OutputI2S::I2S_Item_t * DataToSend, uint32_t numSlices);
+    void    ISR_GetNextDataSlicesToSend (c_OutputI2S::I2S_Item_t * DataToSend, uint32_t numSlices);
     void    ISR_StartNewDataFrame();
 
     // to be removed when the I2S driver is fully implemented
@@ -66,8 +66,8 @@ private:
     uint32_t        HighBitCurrentSliceCount;
     uint32_t        LowBitCurrentSliceCount;
 
-    uint32_t        IfgSliceCount;
-    uint32_t        IfgCurrentSliceCount;
+    uint32_t        FrameResetSliceCount;
+    uint32_t        FrameResetCurrentSliceCount;
 
     uint32_t        IdleSliceCount;
     uint32_t        IdleCurrentSliceCount;
@@ -80,11 +80,11 @@ private:
     #define INC_WS2811_I2S_DEBUG_COUNTERS(c) (++I2SDebugCounters.c)
     struct
     {
-        uint32_t GetNextBit;
+        uint32_t GetDataSlices;
         uint32_t FrameStarts;
         uint32_t FrameEnds;
         uint32_t IdleBitSlices;
-        uint32_t IfgBitSlices;
+        uint32_t FrameResetBitSlices;
         uint32_t DataBitSlices;
         uint32_t DataBytes;
         uint32_t BitSliceHigh;
