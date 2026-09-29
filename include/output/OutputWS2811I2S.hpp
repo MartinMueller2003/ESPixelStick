@@ -76,7 +76,7 @@ private:
     uint32_t        DataPattern;
     uint32_t        DataPatternMask;
 
-    #define WS2811_I2S_DEBUG_COUNTERS
+    // #define WS2811_I2S_DEBUG_COUNTERS
     #ifdef WS2811_I2S_DEBUG_COUNTERS
     #define INC_WS2811_I2S_DEBUG_COUNTER(c) (I2SDebugCounters.c++)
     struct
