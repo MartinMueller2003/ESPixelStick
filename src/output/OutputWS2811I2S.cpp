@@ -405,10 +405,8 @@ void IRAM_ATTR c_OutputWS2811I2S::ISR_SetUpNextDataBitToSend()
             INC_WS2811_I2S_DEBUG_COUNTER (DataBytes);
     
             // set up to output the next data byte
-            uint32_t TempDataPattern = 0; // todo Remove This test code
-            c_OutputPixel::ISR_GetNextIntensityToSend (TempDataPattern);
+            c_OutputPixel::ISR_GetNextIntensityToSend (DataPattern);
             DataPatternMask = 0x80;
-            DataPattern = ~DataPattern;
         } // End of byte sent processing
     
         // more bits to send in the current data byte
