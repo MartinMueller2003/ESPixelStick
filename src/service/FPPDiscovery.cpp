@@ -1,7 +1,7 @@
 /*
 * c_FPPDiscovery.cpp
 
-* Copyright (c) 2021, 2025 Shelby Merrick
+* Copyright (c) 2021, 2026 Shelby Merrick
 * http://www.forkineye.com
 *
 *  This program is provided free for you to use in any way that you wish,
@@ -1112,8 +1112,31 @@ void c_FPPDiscovery::GetSysInfoJSON (JsonObject & jsonResponse)
 
     JsonObject jsonResponseUtilization = jsonResponse[F ("Utilization")].to<JsonObject> ();
     JsonWrite(jsonResponseUtilization, F ("MemoryFree"), ESP.getFreeHeap ());
-    JsonWrite(jsonResponseUtilization, F ("Uptime"),     millis ());
+    JsonWrite(jsonResponseUtilization, F ("MemoryMax"),  ESP.getHeapSize ());
 
+    double   uptimeMS  = millis ();
+    double   UpSeconds = uptimeMS / 1000.0;
+    JsonWrite(jsonResponseUtilization, F ("Uptime"), uptimeMS);
+    JsonWrite(jsonResponseUtilization, F ("uptimeDays"), UpSeconds / 86400.0);
+    JsonWrite(jsonResponseUtilization, F ("uptimeHours"), UpSeconds / 3600.0);
+    JsonWrite(jsonResponseUtilization, F ("uptimeMinutes"), UpSeconds / 60.0);
+    JsonWrite(jsonResponseUtilization, F ("uptimeSeconds"), int(UpSeconds) % 60);
+    JsonWrite(jsonResponseUtilization, F ("uptimeStr"), String(int(uptimeMS / (1000.0 * 60.0 * 60.0 * 24.0))) + " Days, " + String(int(uptimeMS / (1000.0 * 60.0 * 60.0)) % 24) + " hours, " + String(int(uptimeMS / (1000.0 * 60.0) ) % 60) + " minutes, " + String(int(uptimeMS / 1000.0) % 60) + " seconds");
+    JsonWrite(jsonResponseUtilization, F ("uptimeTotalSeconds"), int(UpSeconds));
+
+    char buf[32];
+    sprintf(buf, "%02d:%02d", int(UpSeconds) / 60, int(UpSeconds) % 60);
+    JsonWrite(jsonResponseUtilization, F ("uptime"), buf);
+
+/*
+    "uptime": "00:38",
+    "uptimeDays": 0.0004398148148148148,
+    "uptimeHours": 0.010555555555555556,
+    "uptimeMinutes": 0.6333333333333333,
+    "uptimeSeconds": 38,
+    "uptimeStr": "0 days, 0 hours, 0 minutes, 38 seconds",
+    "uptimeTotalSeconds": 38,
+*/
     JsonWrite(jsonResponse, CN_rssi, WiFi.RSSI ());
     JsonArray jsonResponseIpAddresses = jsonResponse[F ("IPS")].to<JsonArray> ();
     jsonResponseIpAddresses.add(NetworkMgr.GetlocalIP ().toString ());
