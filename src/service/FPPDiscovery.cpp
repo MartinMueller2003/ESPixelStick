@@ -1112,7 +1112,6 @@ void c_FPPDiscovery::GetSysInfoJSON (JsonObject & jsonResponse)
 
     JsonObject jsonResponseUtilization = jsonResponse[F ("Utilization")].to<JsonObject> ();
     JsonWrite(jsonResponseUtilization, F ("MemoryFree"), ESP.getFreeHeap ());
-    JsonWrite(jsonResponseUtilization, F ("MemoryMax"),  ESP.getHeapSize ());
 
     double   uptimeMS  = millis ();
     double   UpSeconds = uptimeMS / 1000.0;
