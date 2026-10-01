@@ -1093,17 +1093,78 @@ void c_FPPDiscovery::GetSysInfoJSON (JsonObject & jsonResponse)
     String Hostname;
     NetworkMgr.GetHostname (Hostname);
 
+/*
+{
+    "HostName": "FPP-10-TEST",
+    "HostDescription": "",
+    "Platform": "Raspberry Pi",
+    "Variant": "Pi 3 Model B+",
+    "SubPlatform": "Raspberry Pi 3 Model B Plus Rev 1.3",
+    "backgroundColor": "",
+    "Mode": "player",
+    "Logo": "Raspberry_Pi_3Bplus.svg",
+    "Version": "10.1.2",
+    "Branch": "v10.1",
+    "multisync": false,
+    "OSVersion": "v2026-09 (32bit)",
+    "OSRelease": "Raspbian GNU/Linux 13 (trixie)",
+    "channelRanges": "0-299",
+    "majorVersion": 10,
+    "minorVersion": 1,
+    "typeId": 9,
+    "channelInputsEnabled": false,
+    "channelOutputsEnabled": false,
+    "uuid": "M1-000000004735f3f4",
+    "capeInfo": {
+      "name": "PiHat",
+      "id": "PiHat",
+      "version": "1.0"
+    },
+    "Utilization": {
+      "CPU": 1.2597480503899163,
+      "Memory": 18.93158746131017,
+      "Uptime": "0:9",
+      "Disk": {
+        "Media": {
+          "Free": 11313795072,
+          "Total": 15107252224
+        },
+        "Root": {
+          "Free": 11313795072,
+          "Total": 15107252224
+        }
+      }
+    },
+    "Kernel": "6.18.52-v7+",
+    "LocalGitVersion": "0fc2559a7",
+    "RemoteGitVersion": "0fc2559a7",
+    "UpgradeSource": "github.com",
+    "IPs": [
+      "192.168.10.198"
+    ]
+  }
+*/
+
     JsonWrite(jsonResponse, CN_HostName,           Hostname);
     JsonWrite(jsonResponse, F ("HostDescription"), config.id);
     JsonWrite(jsonResponse, CN_Platform,           String(CN_ESPixelStick));
     JsonWrite(jsonResponse, F ("Variant"),         FPP_VARIANT_NAME);
+    JsonWrite(jsonResponse, F ("SubPlatform"),     "");
+    JsonWrite(jsonResponse, F ("backgroundColor"), "");
     JsonWrite(jsonResponse, F ("Mode"),            String((FileMgr.SdCardIsInstalled ()) ? CN_remote : CN_bridge));
     JsonWrite(jsonResponse, CN_Version,            ConstConfig.Version);
-
+    JsonWrite(jsonResponse, F ("Branch"),          "");
+    JsonWrite(jsonResponse, F ("multisync"),    false);
+    JsonWrite(jsonResponse, F ("OSVersion"),    "");
+    JsonWrite(jsonResponse, F ("OSRelease"),    "");
+    JsonWrite(jsonResponse, F ("channelRanges"), "0");
     JsonWrite(jsonResponse, F ("majorVersion"), (uint16_t)atoi (ConstConfig.Version));
     JsonWrite(jsonResponse, F ("minorVersion"), (uint16_t)atoi (&ConstConfig.Version[2]));
     JsonWrite(jsonResponse, F ("typeId"),       FPP_TYPE_ID);
+    JsonWrite(jsonResponse, F ("channelInputsEnabled"), true);
+    JsonWrite(jsonResponse, F ("channelOutputsEnabled"), true);
     JsonWrite(jsonResponse, F ("UUID"),         NetworkMgr.GetWiFiMacAddress());
+
 #ifdef SUPPORT_UNZIP
     JsonWrite(jsonResponse, F ("zip"),          true);
 #else
@@ -1111,11 +1172,10 @@ void c_FPPDiscovery::GetSysInfoJSON (JsonObject & jsonResponse)
 #endif // def SUPPORT_UNZIP
 
     JsonObject jsonResponseUtilization = jsonResponse[F ("Utilization")].to<JsonObject> ();
-    JsonWrite(jsonResponseUtilization, F ("MemoryFree"), ESP.getFreeHeap ());
+    JsonWrite(jsonResponseUtilization, F ("Memory"), ESP.getFreeHeap ());
 
     double   uptimeMS  = millis ();
     double   UpSeconds = uptimeMS / 1000.0;
-    JsonWrite(jsonResponseUtilization, F ("Uptime"), uptimeMS);
     JsonWrite(jsonResponseUtilization, F ("uptimeDays"), UpSeconds / 86400.0);
     JsonWrite(jsonResponseUtilization, F ("uptimeHours"), UpSeconds / 3600.0);
     JsonWrite(jsonResponseUtilization, F ("uptimeMinutes"), UpSeconds / 60.0);
@@ -1125,7 +1185,7 @@ void c_FPPDiscovery::GetSysInfoJSON (JsonObject & jsonResponse)
 
     char buf[32];
     sprintf(buf, "%02d:%02d", int(UpSeconds) / 60, int(UpSeconds) % 60);
-    JsonWrite(jsonResponseUtilization, F ("uptime"), buf);
+    JsonWrite(jsonResponseUtilization, F ("Uptime"), buf);
 
 /*
     "uptime": "00:38",
