@@ -26,6 +26,7 @@
 #include "SdFat.h"
 #include <map>
 #include <vector>
+#include <atomic>
 
 #ifdef ARDUINO_ARCH_ESP32
 #   ifdef SIMULATE_SD
@@ -79,8 +80,8 @@ public:
         uint64_t Used = 0;
     };
 
-    void   DeleteFlashFile (String FileName);
-    void   RenameFlashFile (String OldName, String NewName);
+    void   DeleteFlashFile (String FileName, bool RefreshFseqList = true);
+    bool   RenameFlashFile (String OldName, String NewName);
     bool   SaveFlashFile   (const String & FileName, String & FileData);
     bool   SaveFlashFile   (const String & FileName, const char * FileData);
     bool   SaveFlashFile   (const String & FileName, JsonDocument & FileData);
@@ -288,6 +289,13 @@ public: struct __attribute__((__packed__, aligned(4))) CSD {
 #ifdef ARDUINO_ARCH_ESP32
     SemaphoreHandle_t SdAccessSemaphore = NULL;
 #endif // def ARDUINO_ARCH_ESP32
+
+#ifdef SUPPORT_FTP
+    std::atomic<bool> FtpUpdatePending{false};
+    std::atomic<bool> FtpNetworkConnected{false};
+    bool FtpRunning = false;
+    void ApplyFtpConfig();
+#endif
 
 protected:
 

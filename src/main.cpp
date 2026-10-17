@@ -64,6 +64,15 @@ extern "C"
 #endif
 
 // Debugging support
+#if defined(ARDUINO_ARCH_ESP32) && defined(DISABLE_STARTUP_BROWNOUT)
+// Arduino ships precompiled IDF libraries; sdkconfig.defaults cannot change them.
+// Replace their startup initializer so detection stays disabled before setup().
+extern "C" void __wrap_esp_brownout_init(void)
+{
+    WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0);
+}
+#endif
+
 #if defined(DEBUG)
 extern "C" void system_set_os_print(uint8 onoff);
 extern "C" void ets_install_putc1(void* routine);
@@ -166,6 +175,11 @@ void esp_alloc_failed_hook_callback(size_t requested_size, uint32_t caps, const 
 /** Arduino based setup code that is executed at startup. */
 void setup()
 {
+#ifdef ARDUINO_ARCH_ESP32
+    // Disable brownout detection before initializing peripherals.
+    WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0);
+#endif // def ARDUINO_ARCH_ESP32
+
 #ifdef DEBUG_GPIO
     ResetGpio(DEBUG_GPIO);
     pinMode(DEBUG_GPIO, OUTPUT);
@@ -176,8 +190,6 @@ void setup()
 
     config.BlankDelay = 5;
 #ifdef ARDUINO_ARCH_ESP32
-    // disable brownout detector
-    WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0);
     heap_caps_register_failed_alloc_callback(esp_alloc_failed_hook_callback);
 #endif // def ARDUINO_ARCH_ESP32
 
@@ -694,23 +706,15 @@ void _logcon (String & DriverName, String Message)
     }
 } // logcon
 
-#ifdef ARDUINO_ARCH_ESP32
-#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
-#include <rtc_wdt.h>
-#endif // ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
-#endif // def ARDUINO_ARCH_ESP32
-
 void FeedWDT ()
 {
 #ifdef ARDUINO_ARCH_ESP32
-    #if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
-        // esp_task_wdt_reset ();
-        rtc_wdt_protect_off();
-        rtc_wdt_disable();
-        // esp_task_wdt_deinit();
-    #else
+    // Shared callers include worker tasks that are not subscribed to the TWDT.
+    // Reset only the calling task's subscription; idle-task monitoring is separate.
+    if (esp_task_wdt_status(nullptr) == ESP_OK)
+    {
         esp_task_wdt_reset ();
-    #endif //  ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
+    }
 #else
     ESP.wdtFeed ();
 #endif // def ARDUINO_ARCH_ESP32

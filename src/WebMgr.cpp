@@ -19,6 +19,7 @@
 
 #include "WebMgr.hpp"
 #include "FileMgr.hpp"
+#include "WebTransfer.hpp"
 
 #include "input/InputMgr.hpp"
 #include "service/FPPDiscovery.h"
@@ -304,8 +305,9 @@ void c_WebMgr::init ()
             {
                 if (OutputMgr.GetBufferUsedSize ())
                 {
+                    const size_t ResponseSize = OutputMgr.GetBufferUsedSize();
                     AsyncWebServerResponse *response = request->beginChunkedResponse("application/octet-stream",
-                        [](uint8_t *buffer, size_t MaxChunkLen, size_t index) -> size_t
+                        [ResponseSize](uint8_t *buffer, size_t MaxChunkLen, size_t index) -> size_t
                         {
                             // Write up to "MaxChunkLen" bytes into "buffer" and return the amount written.
                             // index equals the amount of bytes that have been already sent
@@ -315,7 +317,7 @@ void c_WebMgr::init ()
                             // DEBUG_V(String("            MaxChunkLen: ") + String(MaxChunkLen));
                             // DEBUG_V(String("      GetBufferUsedSize: ") + String(OutputMgr.GetBufferUsedSize ()));
                             // DEBUG_V(String("                  index: ") + String(index));
-                            size_t NumBytesAvailableToSend = min(MaxChunkLen, (size_t(OutputMgr.GetBufferUsedSize ()) - index));
+                            size_t NumBytesAvailableToSend = DiagnosticChunkSize(MaxChunkLen, ResponseSize, OutputMgr.GetBufferUsedSize(), index);
                             // DEBUG_V(String("NumBytesAvailableToSend: ") + String(NumBytesAvailableToSend));
                             if(0 != NumBytesAvailableToSend)
                             {
@@ -323,7 +325,7 @@ void c_WebMgr::init ()
                             }
                             return NumBytesAvailableToSend;
                         });
-                    response->setContentLength(OutputMgr.GetBufferUsedSize ());
+                    response->setContentLength(ResponseSize);
                     response->setContentType(F("application/octet-stream"));
                     response->addHeader(F("server"), F("ESPS Diag Data"));
                     request->send(response);
@@ -402,7 +404,11 @@ void c_WebMgr::init ()
                         (HTTP_PUT  == RequestMethod))
                 {
                     // DEBUG_V(String("           url: ") + request->url());
-                    FileMgr.RenameFlashFile(RequestFileName + ".tmp", RequestFileName);
+                    if (!FileMgr.RenameFlashFile(RequestFileName + ".tmp", RequestFileName))
+                    {
+                        request->send (500, CN_applicationSLASHjson, F("{\"status\":\"Could not commit config\"}"));
+                        return;
+                    }
                     if(RequestReadConfigFile(RequestFileName))
                     {
                         request->send (200, CN_applicationSLASHjson, F("{\"status\":\"XFER Complete\"}"));
@@ -411,7 +417,7 @@ void c_WebMgr::init ()
                     else
                     {
                         // delete unexpected config file.
-                        FileMgr.DeleteFlashFile(RequestFileName + ".tmp");
+                        FileMgr.DeleteFlashFile(RequestFileName + ".tmp", false);
                         request->send (404, CN_applicationSLASHjson, F("{\"status\":\"File Not supported\"}"));
                     }
                 }
@@ -435,7 +441,7 @@ void c_WebMgr::init ()
                 if(0 == index)
                 {
                     // DEBUG_V("Deleting config file.");
-                    FileMgr.DeleteFlashFile(filename);
+                    FileMgr.DeleteFlashFile(filename + ".tmp", false);
                 }
 
                 if(FileMgr.SaveFlashFile(filename + ".tmp", index, data, len, final))
@@ -446,9 +452,7 @@ void c_WebMgr::init ()
                 {
                     logcon(String(F("Upload failed for: ")) + filename);
                     // remove the incomplete file
-                    FileMgr.DeleteFlashFile(filename + ".tmp");
-                    // This will cause the defaults to be recreated.
-                    RequestReadConfigFile(filename);
+                    FileMgr.DeleteFlashFile(filename + ".tmp", false);
 
                     // DEBUG_V("Save Chunk - Failed");
                     request->send (404, CN_applicationSLASHjson, F("{\"status\":\"Could not save data\"}"));
@@ -472,7 +476,7 @@ void c_WebMgr::init ()
                 if(0 == index)
                 {
                     // DEBUG_V("Deleting config file.");
-                    FileMgr.DeleteFlashFile(UploadFileName);
+                    FileMgr.DeleteFlashFile(UploadFileName + ".tmp", false);
                 }
 
             	if(FileMgr.SaveFlashFile(UploadFileName + ".tmp", index, data, len, total <= (index+len)))
@@ -482,10 +486,8 @@ void c_WebMgr::init ()
                 else
                 {
                     // remove the incomplete file
-                    FileMgr.DeleteFlashFile(String("/") + UploadFileName + ".tmp");
+                    FileMgr.DeleteFlashFile(String("/") + UploadFileName + ".tmp", false);
                     logcon(String(F("Upload failed for: ")) + UploadFileName);
-                    // This will cause the defaults to be recreated.
-                    RequestReadConfigFile(UploadFileName);
 
                     // DEBUG_V("Save Chunk - Failed");
                     request->send (404, CN_applicationSLASHjson, F("{\"status\":\"Could not save data\"}"));

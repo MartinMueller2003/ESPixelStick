@@ -2,7 +2,6 @@
 /firmware/
 /.doxygen/doc/
 /.vscode/
-!/.vscode/extensions.json
 /dist/*.html
 /node_modules/
 /data
@@ -16,3 +15,6 @@ Changelog.pdf
 *.ino.generic.bin
 *.gz
 *.pyc
+/build/
+/managed_components/
+CMakeLists.txt
