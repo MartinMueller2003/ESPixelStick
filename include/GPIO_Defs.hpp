@@ -134,6 +134,11 @@
 #   error "No valid platform definition"
 #endif // ndef platform specific GPIO definitions
 
+// Available on the same pixel-capable boards as WS2811.
+#if defined(SUPPORT_OutputProtocol_WS2811)
+#   define SUPPORT_OutputProtocol_MonsterPermanent
+#endif
+
 #if defined(SUPPORT_SD) || defined(SUPPORT_SD_MMC)
 #   define SUPPORT_FPP
 #endif // defined(SUPPORT_SD) || defined(SUPPORT_SD_MMC)

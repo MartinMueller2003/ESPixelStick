@@ -19,6 +19,7 @@
 #include "ESPixelStick.h"
 #include "utility/SaferStringConversion.hpp"
 #include "input/InputEffectEngine.hpp"
+#include "WatchdogProgress.hpp"
 #include <vector>
 
 //-----------------------------------------------------------------------------
@@ -88,7 +89,7 @@ c_InputEffectEngine::c_InputEffectEngine (c_InputMgr::e_InputChannelIds NewInput
 
     SetBufferInfo (BufferSize);
 
-    TransitionInfo.TargetColorIterator = TransitionColorTable.begin();
+    TransitionInfo.TargetColorIndex = 0;
 
     // DEBUG_END;
 } // c_InputEffectEngine
@@ -104,7 +105,7 @@ c_InputEffectEngine::c_InputEffectEngine () :
 
     SetBufferInfo (0);
 
-    TransitionInfo.TargetColorIterator = TransitionColorTable.begin();
+    TransitionInfo.TargetColorIndex = 0;
 
     // DEBUG_END;
 
@@ -332,6 +333,7 @@ void c_InputEffectEngine::PollFlash ()
 //-----------------------------------------------------------------------------
 void c_InputEffectEngine::Process ()
 {
+    WatchdogProgress.effect = 20;
     // DEBUG_START;
     // DEBUG_V (String ("HasBeenInitialized: ") + HasBeenInitialized);
     // DEBUG_V (String ("PixelCount: ") + PixelCount);
@@ -357,14 +359,14 @@ void c_InputEffectEngine::Process ()
         }
 
         // timer has expired
+        WatchdogProgress.effect = 21;
         uint32_t wait = (this->*ActiveEffect->func)();
-        uint32_t NewEffectWait = max ((int)wait, MIN_EFFECT_DELAY);
-        if(NewEffectWait != EffectWait)
-        {
-            EffectWait = NewEffectWait;
-            // DEBUG_V ("Update timer");
-            EffectDelayTimer.StartTimer(EffectWait, true);
-        }
+        WatchdogProgress.effect = 22;
+        EffectWait = max ((int)wait, MIN_EFFECT_DELAY);
+        // Schedule from the frame that just completed. A repeating timer
+        // accumulates missed intervals while configuration is being saved and
+        // then renders those frames back-to-back when InputMgrTask resumes.
+        EffectDelayTimer.StartTimer(EffectWait, false);
         EffectCounter++;
         InputMgr.RestartBlankTimer (GetInputChannelId ());
 
@@ -419,13 +421,9 @@ void c_InputEffectEngine::Poll ()
 
         // // DEBUG_V("timer has expired");
         uint32_t wait = (this->*ActiveEffect->func)();
-        uint32_t NewEffectWait = max ((int)wait, MIN_EFFECT_DELAY);
-        if(NewEffectWait != EffectWait)
-        {
-            EffectWait = NewEffectWait;
-            // // DEBUG_V ("Update timer");
-            EffectDelayTimer.StartTimer(EffectWait, true);
-        }
+        EffectWait = max ((int)wait, MIN_EFFECT_DELAY);
+        // Do not catch up missed animation ticks after configuration work.
+        EffectDelayTimer.StartTimer(EffectWait, false);
         // // DEBUG_V("Update Blank timer");
         EffectCounter++;
         InputMgr.RestartBlankTimer (GetInputChannelId ());
@@ -511,6 +509,7 @@ void c_InputEffectEngine::SetBufferInfo (uint32_t BufferSize)
 //-----------------------------------------------------------------------------
 bool c_InputEffectEngine::SetConfig (ArduinoJson::JsonObject& jsonConfig)
 {
+    WatchdogProgress.effect = 1;
     // DEBUG_START;
     String effectName;
     String effectColor;
@@ -548,8 +547,6 @@ bool c_InputEffectEngine::SetConfig (ArduinoJson::JsonObject& jsonConfig)
 
     // avoid divide by zero errors later in the processing.
     TransitionInfo.StepsToTarget = max(uint32_t(1), TransitionInfo.StepsToTarget);
-    // Pretend we reached the currnt color.
-    TransitionInfo.CurrentColor = *TransitionInfo.TargetColorIterator;
 
     // apply minimum transition hold time
     TransitionInfo.TimeAtTargetMs = max(uint32_t(1), TransitionInfo.TimeAtTargetMs);
@@ -562,6 +559,7 @@ bool c_InputEffectEngine::SetConfig (ArduinoJson::JsonObject& jsonConfig)
         FlashInfo.MinIntensity = FlashInfo.MaxIntensity;
     }
 
+    WatchdogProgress.effect = 2;
     JsonArray TransitionsArray = jsonConfig[(char*)CN_transitions];
     if(TransitionsArray)
     {
@@ -583,6 +581,7 @@ bool c_InputEffectEngine::SetConfig (ArduinoJson::JsonObject& jsonConfig)
         }
     }
 
+    WatchdogProgress.effect = 3;
     JsonArray MarqueeGroupArray = jsonConfig[(char*)CN_MarqueeGroups];
     if(MarqueeGroupArray)
     {
@@ -613,13 +612,18 @@ bool c_InputEffectEngine::SetConfig (ArduinoJson::JsonObject& jsonConfig)
 
     SetBufferInfo (InputDataBufferSize);
 
+    WatchdogProgress.effect = 4;
     setColor (effectColor);
+    WatchdogProgress.effect = 5;
+    ResetTransitionState();
     validateConfiguration ();
 
     // Update the config fields in case the validator changed them
     GetConfig (jsonConfig);
 
+    WatchdogProgress.effect = 6;
     setEffect (effectName);
+    WatchdogProgress.effect = 7;
 
     // DEBUG_V (String ("IsInputChannelActive: ") + String (IsInputChannelActive));
 
@@ -656,6 +660,19 @@ void c_InputEffectEngine::SetMqttConfig (MQTTConfiguration_t& mqttConfig)
 } // SetConfig
 
 //-----------------------------------------------------------------------------
+void c_InputEffectEngine::ResetTransitionState()
+{
+    if (TransitionColorTable.empty())
+    {
+        TransitionColorTable.push_back({double(EffectColor.r), double(EffectColor.g), double(EffectColor.b)});
+    }
+    TransitionInfo.TargetColorIndex = 0;
+    TransitionInfo.CurrentColor = TransitionColorTable[0];
+    TransitionInfo.StepValue = {0.0, 0.0, 0.0};
+    TransitionInfo.HoldStartTimeMs = 0;
+}
+
+//-----------------------------------------------------------------------------
 void c_InputEffectEngine::validateConfiguration ()
 {
     // DEBUG_START;
@@ -684,9 +701,9 @@ void c_InputEffectEngine::setBrightness (float brightness)
 // Yukky maths here. Input speeds from 1..10 get mapped to 17782..100
 void c_InputEffectEngine::setSpeed (uint16_t speed)
 {
-    EffectSpeed = speed;
+    EffectSpeed = max(uint32_t(1), min(uint32_t(10), uint32_t(speed)));
     // DEBUG_V(String("EffectSpeed: ") + String(speed));
-    setDelay (pow (10, (10 - speed) / 4.0 + 2));
+    setDelay (pow (10.0, (10.0 - double(EffectSpeed)) / 4.0 + 2.0));
 }
 
 //-----------------------------------------------------------------------------
@@ -719,11 +736,15 @@ void c_InputEffectEngine::setEffect (const String & effectName)
             {
                 // DEBUG_V ("Starting New Effect");
                 ActiveEffect = &ListOfEffects[EffectIndex];
-                EffectDelayTimer.StartTimer(EffectDelay, true);
-                EffectWait = MIN_EFFECT_DELAY;
                 EffectCounter = 0;
                 EffectStep = 0;
             }
+
+            // Render the first frame immediately and let it choose the correct
+            // per-frame interval. This also applies speed/configuration changes
+            // when the selected effect itself did not change.
+            EffectWait = 0;
+            EffectDelayTimer.CancelTimer();
             break;
         }
         EffectIndex++;
@@ -1043,6 +1064,8 @@ uint16_t c_InputEffectEngine::effectRandom ()
 //-----------------------------------------------------------------------------
 uint16_t c_InputEffectEngine::effectTransition ()
 {
+    if (TransitionColorTable.empty()) { clearAll(); return (EffectDelay / 10); }
+    TransitionInfo.TargetColorIndex %= TransitionColorTable.size();
     /*
         All pixels will be changed to the next color in a list of colors
     */
@@ -1066,20 +1089,20 @@ uint16_t c_InputEffectEngine::effectTransition ()
         // DEBUG_V("need to calculate a new target color");
 
         // remove any calculation errors
-        TransitionInfo.CurrentColor = *TransitionInfo.TargetColorIterator;
+        TransitionInfo.CurrentColor = TransitionColorTable[TransitionInfo.TargetColorIndex];
 
-        ++TransitionInfo.TargetColorIterator;
+        ++TransitionInfo.TargetColorIndex;
 
         // wrap the index
-        if(TransitionInfo.TargetColorIterator == TransitionColorTable.end())
+        if(TransitionInfo.TargetColorIndex >= TransitionColorTable.size())
         {
             // DEBUG_V("Wrap Transition iterator");
-            TransitionInfo.TargetColorIterator = TransitionColorTable.begin();
+            TransitionInfo.TargetColorIndex = 0;
         }
 
-        CalculateTransitionStepValue (TransitionInfo.TargetColorIterator->r, TransitionInfo.CurrentColor.r, TransitionInfo.StepValue.r);
-        CalculateTransitionStepValue (TransitionInfo.TargetColorIterator->g, TransitionInfo.CurrentColor.g, TransitionInfo.StepValue.g);
-        CalculateTransitionStepValue (TransitionInfo.TargetColorIterator->b, TransitionInfo.CurrentColor.b, TransitionInfo.StepValue.b);
+        CalculateTransitionStepValue (TransitionColorTable[TransitionInfo.TargetColorIndex].r, TransitionInfo.CurrentColor.r, TransitionInfo.StepValue.r);
+        CalculateTransitionStepValue (TransitionColorTable[TransitionInfo.TargetColorIndex].g, TransitionInfo.CurrentColor.g, TransitionInfo.StepValue.g);
+        CalculateTransitionStepValue (TransitionColorTable[TransitionInfo.TargetColorIndex].b, TransitionInfo.CurrentColor.b, TransitionInfo.StepValue.b);
 
         // start timer to hold color
         TransitionInfo.HoldStartTimeMs = millis();
@@ -1089,9 +1112,9 @@ uint16_t c_InputEffectEngine::effectTransition ()
         // DEBUG_V(String("   TransitionInfo.StepValue.r: ") + String(TransitionInfo.StepValue.r));
         // DEBUG_V(String("   TransitionInfo.StepValue.g: ") + String(TransitionInfo.StepValue.g));
         // DEBUG_V(String("   TransitionInfo.StepValue.b: ") + String(TransitionInfo.StepValue.b));
-        // DEBUG_V(String("           TargetColor.r: ") + String(TransitionInfo.TargetColorIterator->r));
-        // DEBUG_V(String("           TargetColor.g: ") + String(TransitionInfo.TargetColorIterator->g));
-        // DEBUG_V(String("           TargetColor.b: ") + String(TransitionInfo.TargetColorIterator->b));
+        // DEBUG_V(String("           TargetColor.r: ") + String(TransitionColorTable[TransitionInfo.TargetColorIndex].r));
+        // DEBUG_V(String("           TargetColor.g: ") + String(TransitionColorTable[TransitionInfo.TargetColorIndex].g));
+        // DEBUG_V(String("           TargetColor.b: ") + String(TransitionColorTable[TransitionInfo.TargetColorIndex].b));
         // DEBUG_V(String("TransitionInfo.CurrentColor.r: ") + String(TransitionInfo.CurrentColor.r));
         // DEBUG_V(String("TransitionInfo.CurrentColor.g: ") + String(TransitionInfo.CurrentColor.g));
         // DEBUG_V(String("TransitionInfo.CurrentColor.b: ") + String(TransitionInfo.CurrentColor.b));
@@ -1100,9 +1123,9 @@ uint16_t c_InputEffectEngine::effectTransition ()
     {
         // DEBUG_V("need to calculate next transition color");
 
-        ConditionalIncrementColor(TransitionInfo.TargetColorIterator->r, TransitionInfo.CurrentColor.r, TransitionInfo.StepValue.r);
-        ConditionalIncrementColor(TransitionInfo.TargetColorIterator->g, TransitionInfo.CurrentColor.g, TransitionInfo.StepValue.g);
-        ConditionalIncrementColor(TransitionInfo.TargetColorIterator->b, TransitionInfo.CurrentColor.b, TransitionInfo.StepValue.b);
+        ConditionalIncrementColor(TransitionColorTable[TransitionInfo.TargetColorIndex].r, TransitionInfo.CurrentColor.r, TransitionInfo.StepValue.r);
+        ConditionalIncrementColor(TransitionColorTable[TransitionInfo.TargetColorIndex].g, TransitionInfo.CurrentColor.g, TransitionInfo.StepValue.g);
+        ConditionalIncrementColor(TransitionColorTable[TransitionInfo.TargetColorIndex].b, TransitionInfo.CurrentColor.b, TransitionInfo.StepValue.b);
     }
 
     CRGB TempColor;
@@ -1143,10 +1166,12 @@ uint16_t c_InputEffectEngine::effectMarquee ()
     uint32_t NumPixelsToProcess = PixelCount;
     do
     {
+        const uint32_t PixelsRemainingBeforeGroups = NumPixelsToProcess;
         // iterate through the groups until we have processed all of the pixels.
         for(auto CurrentGroup : MarqueueGroupTable)
         {
             uint32_t groupPixelCount = CurrentGroup.NumPixelsInGroup;
+            if (groupPixelCount == 0) { continue; }
             double CurrentBrightness = (EffectReverse) ? CurrentGroup.EndingIntensity : CurrentGroup.StartingIntensity;
             double BrightnessInterval = (double(CurrentGroup.StartingIntensity) - double(CurrentGroup.EndingIntensity))/double(groupPixelCount);
 
@@ -1199,6 +1224,8 @@ uint16_t c_InputEffectEngine::effectMarquee ()
             }
         }
 
+        // An empty/all-zero group list must not spin forever on InputMgrTask.
+        if (NumPixelsToProcess == PixelsRemainingBeforeGroups) { break; }
     } while (NumPixelsToProcess);
 
     // advance to the next starting location
@@ -1301,9 +1328,9 @@ bool c_InputEffectEngine::ColorHasReachedTarget()
 {
     // DEBUG_START;
 
-    bool response = ( ColorHasReachedTarget(TransitionInfo.TargetColorIterator->r, TransitionInfo.CurrentColor.r, TransitionInfo.StepValue.r) &&
-                      ColorHasReachedTarget(TransitionInfo.TargetColorIterator->g, TransitionInfo.CurrentColor.g, TransitionInfo.StepValue.g) &&
-                      ColorHasReachedTarget(TransitionInfo.TargetColorIterator->b, TransitionInfo.CurrentColor.b, TransitionInfo.StepValue.b));
+    bool response = ( ColorHasReachedTarget(TransitionColorTable[TransitionInfo.TargetColorIndex].r, TransitionInfo.CurrentColor.r, TransitionInfo.StepValue.r) &&
+                      ColorHasReachedTarget(TransitionColorTable[TransitionInfo.TargetColorIndex].g, TransitionInfo.CurrentColor.g, TransitionInfo.StepValue.g) &&
+                      ColorHasReachedTarget(TransitionColorTable[TransitionInfo.TargetColorIndex].b, TransitionInfo.CurrentColor.b, TransitionInfo.StepValue.b));
 
     if(response)
     {

@@ -126,6 +126,7 @@ public:
 private:
 #define EFFECTS_TASK_PRIORITY 5
 
+    void ResetTransitionState();
     void validateConfiguration ();
 
     bool HasBeenInitialized = false;
@@ -192,7 +193,7 @@ private:
         uint32_t    StepsToTarget   = 300; // number of NumStepsToTarget
         uint32_t    TimeAtTargetMs  = 100; // number of milli seconds to stay at the target color.
         uint32_t    HoldStartTimeMs = 0; // time at which transition hold time was started. 0 == off
-        std::vector<c_InputEffectEngine::dCRGB>::iterator TargetColorIterator;
+        uint32_t    TargetColorIndex = 0;
     } TransitionInfo;
 
     bool ColorHasReachedTarget ();

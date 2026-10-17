@@ -1,0 +1,59 @@
+#pragma once
+/*
+* OutputMonsterPermanentUart.h - MonsterPermanent driver code for ESPixelStick UART
+*
+* Project: ESPixelStick - An ESP8266 / ESP32 and E1.31 based pixel driver
+* Copyright (c) 2015, 2022 Shelby Merrick
+* http://www.forkineye.com
+*
+*  This program is provided free for you to use in any way that you wish,
+*  subject to the laws and regulations where you are using it.  Due diligence
+*  is strongly suggested before using this code.  Please give credit where due.
+*
+*  The Author makes no warranty of any kind, express or implied, with regard
+*  to this program or the documentation contained in this document.  The
+*  Author shall not be liable in any event for incidental or consequential
+*  damages in connection with, or arising out of, the furnishing, performance
+*  or use of these programs.
+*
+*   This is a derived class that converts data in the output buffer into
+*   pixel intensities and then transmits them through the configured serial
+*   interface.
+*
+*/
+
+#include "ESPixelStick.h"
+#if defined(SUPPORT_OutputProtocol_MonsterPermanent) && defined(SUPPORT_UART)
+
+#include "OutputMonsterPermanent.hpp"
+#include "OutputUart.hpp"
+
+class c_OutputMonsterPermanentUart : public c_OutputMonsterPermanent
+{
+public:
+    // These functions are inherited from c_OutputCommon
+    c_OutputMonsterPermanentUart (OM_OutputPortDefinition_t & OutputPortDefinition,
+                        c_OutputMgr::e_OutputProtocolType outputType);
+    virtual ~c_OutputMonsterPermanentUart ();
+
+    // functions to be provided by the derived class
+    void    Begin ();                                         ///< set up the operating environment based on the current config (or defaults)
+    uint32_t Poll ();
+    void    PauseOutput (bool State);
+    bool    SetConfig (ArduinoJson::JsonObject& jsonConfig);
+    void    GetConfig (ArduinoJson::JsonObject& jsonConfig);
+    void    GetStatus (ArduinoJson::JsonObject& jsonStatus);
+
+#define MonsterPermanent_NUM_DATA_BYTES_PER_INTENSITY_BYTE    4
+
+private:
+    c_OutputUart Uart;
+#ifdef MonsterPermanent_UART_DEBUG_COUNTERS
+    uint32_t NewFrameCounter = 0;
+    uint32_t TimeSinceLastFrameMS = 0;
+    uint32_t TimeLastFrameStartedMS = 0;
+#endif // def MonsterPermanent_UART_DEBUG_COUNTERS
+
+}; // c_OutputMonsterPermanentUart
+
+#endif // defined(SUPPORT_OutputProtocol_MonsterPermanent) && defined(SUPPORT_UART)

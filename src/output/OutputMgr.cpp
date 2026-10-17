@@ -41,6 +41,10 @@
 #include "output/OutputUCS1903Rmt.hpp"
 #include "output/OutputUCS1903Uart.hpp"
 #include "output/OutputWS2801Spi.hpp"
+#include "DriverAccess.hpp"
+#include "output/OutputMonsterPermanentI2S.hpp"
+#include "output/OutputMonsterPermanentRmt.hpp"
+#include "output/OutputMonsterPermanentUart.hpp"
 #include "output/OutputWS2811I2S.hpp"
 #include "output/OutputWS2811Rmt.hpp"
 #include "output/OutputWS2811Uart.hpp"
@@ -91,6 +95,9 @@ static const SupportedOutputProtocol_t SupportedOutputProtocolList[] =
 {
     {c_OutputMgr::e_OutputProtocolType::OutputProtocol_Disabled, "Disabled", OM_PortType_t::OM_ANY},
 
+    #ifdef SUPPORT_OutputProtocol_MonsterPermanent
+    {c_OutputMgr::e_OutputProtocolType::OutputProtocol_MonsterPermanent, "Monster Permanent", OM_PortType_t::OM_SERIAL},
+    #endif
     #ifdef SUPPORT_OutputProtocol_WS2811
     {c_OutputMgr::e_OutputProtocolType::OutputProtocol_WS2811, "WS2811", OM_PortType_t::OM_SERIAL},
     #endif // def SUPPORT_OutputProtocol_WS2811
@@ -159,6 +166,9 @@ static const SupportedOutputProtocol_t SupportedOutputProtocolList[] =
 union alignas(32) OutputProtocolClasses_t
 {
     c_OutputDisabled OutputDisabled;
+    #ifdef SUPPORT_OutputProtocol_MonsterPermanent
+    AddToProtocolClassList(OutputMonsterPermanent);
+    #endif
 
     #ifdef SUPPORT_OutputProtocol_WS2811
     AddToProtocolClassList(OutputWS2811);
@@ -324,6 +334,8 @@ c_OutputMgr::~c_OutputMgr()
 ///< Start the module
 void c_OutputMgr::Begin ()
 {
+    InitializeDriverAccess();
+    DriverAccessGuard DriverGuard;
     // DEBUG_START;
     // DEBUG_V(String("Current CPU ID: ") + String(xPortGetCoreID()));
 
@@ -399,6 +411,7 @@ void c_OutputMgr::Begin ()
 //-----------------------------------------------------------------------------
 void c_OutputMgr::CreateJsonConfig (JsonObject& jsonConfig)
 {
+    DriverAccessGuard DriverGuard;
     // DEBUG_START;
 
     // PrettyPrint (jsonConfig, String ("jsonConfig"));
@@ -604,6 +617,7 @@ void c_OutputMgr::GetConfig (byte * Response, uint32_t maxlen )
 //-----------------------------------------------------------------------------
 void c_OutputMgr::GetStatus (JsonObject & jsonStatus)
 {
+    DriverAccessGuard DriverGuard;
     // DEBUG_START;
 
     #if defined(SUPPORT_I2S)
@@ -877,6 +891,30 @@ void c_OutputMgr::InstantiateNewOutputChannel(uint32_t PortIndex, e_OutputProtoc
                 break;
             }
             #endif // SUPPORT_OutputProtocol_Servo_PCA9685
+
+            #ifdef SUPPORT_OutputProtocol_MonsterPermanent
+            case e_OutputProtocolType::OutputProtocol_MonsterPermanent:
+            {
+                // DEBUG_V ("OutputType_MonsterPermanent");
+                if (CurrentOutput.PortDefinition.PortType == OM_PortType_t::OM_SERIAL)
+                {
+                    // DEBUG_V ("UART");
+                    // DEBUG_V (String (F (" Starting MonsterPermanent for port '")) + CurrentOutput.DriverId + "'. " + CN_stars);
+                    AllocatePort(CLASS_TYPE_NAME(c_OutputMonsterPermanent), CurrentOutput, OutputProtocol_MonsterPermanent);
+                    // DEBUG_V ();
+                    break;
+                }
+
+                if (!BuildingNewConfig)
+                {
+                    logcon(CN_stars + String(F(" Cannot Start MonsterPermanent for port '")) + CurrentOutput.DriverId + "'. " + CN_stars);
+                }
+                AllocatePort(c_OutputDisabled, CurrentOutput, OutputProtocol_Disabled);
+                // DEBUG_V ();
+
+                break;
+            }
+            #endif // def SUPPORT_OutputProtocol_MonsterPermanent
 
             #ifdef SUPPORT_OutputProtocol_WS2811
             case e_OutputProtocolType::OutputProtocol_WS2811:
@@ -1210,6 +1248,7 @@ bool c_OutputMgr::SetPortDefnitionDefaults(uint32_t PortIndex, e_OutputProtocolT
 */
 void c_OutputMgr::LoadConfig ()
 {
+    DriverAccessGuard DriverGuard;
     // DEBUG_START;
 
     ConfigLoadNeeded = NO_CONFIG_NEEDED;
@@ -1540,6 +1579,7 @@ void c_OutputMgr::SetSerialUart()
 //-----------------------------------------------------------------------------
 void c_OutputMgr::Poll()
 {
+    DriverAccessGuard DriverGuard;
     // //DEBUG_START;
 
 #ifdef LED_FLASH_GPIO
@@ -1677,6 +1717,7 @@ void c_OutputMgr::RelayUpdate (uint8_t RelayId, String & NewValue, String & Resp
 //-----------------------------------------------------------------------------
 void c_OutputMgr::PauseOutputs(bool PauseTheOutput)
 {
+    DriverAccessGuard DriverGuard;
     // DEBUG_START;
     // DEBUG_V(String("PauseTheOutput: ") + String(PauseTheOutput));
 
@@ -1694,6 +1735,7 @@ void c_OutputMgr::PauseOutputs(bool PauseTheOutput)
 //-----------------------------------------------------------------------------
 void c_OutputMgr::WriteChannelData(uint32_t StartChannelId, uint32_t ChannelCount, uint8_t *pSourceData)
 {
+    DriverAccessGuard DriverGuard;
     // DEBUG_START;
 
     do // once
@@ -1759,6 +1801,7 @@ void c_OutputMgr::WriteChannelData(uint32_t StartChannelId, uint32_t ChannelCoun
 //-----------------------------------------------------------------------------
 void c_OutputMgr::ReadChannelData(uint32_t StartChannelId, uint32_t ChannelCount, byte *pTargetData)
 {
+    DriverAccessGuard DriverGuard;
     // DEBUG_START;
 
     do // once

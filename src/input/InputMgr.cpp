@@ -22,6 +22,8 @@
 */
 
 #include "ESPixelStick.h"
+#include "DriverAccess.hpp"
+#include "WatchdogProgress.hpp"
 
 //-----------------------------------------------------------------------------
 // bring in driver definitions
@@ -107,10 +109,15 @@ void InputMgrTask (void *arg)
             // DEBUG_V(String("handle time wrap and long frames. DeltaTime:") + String(DeltaTime));
             PollTime = pdMS_TO_TICKS(MinPollTimeMs);
         }
+        // A rounded-down delay of zero only yields to equal-priority tasks;
+        // block at least one tick so the idle task can run and feed its WDT.
+        if (PollTime == 0) { PollTime = 1; }
+        WatchdogProgress.input = 0;
         vTaskDelay(PollTime);
         FeedWDT();
 
         PollStartTime = millis();
+        WatchdogProgress.stackFree = uxTaskGetStackHighWaterMark(nullptr);
 
         InputMgr.Process();
         FeedWDT();
@@ -176,6 +183,8 @@ c_InputMgr::~c_InputMgr ()
 ///< Start the module
 void c_InputMgr::Begin (uint32_t BufferSize)
 {
+    InitializeDriverAccess();
+    DriverAccessGuard DriverGuard;
     // DEBUG_START;
 
     // DEBUG_V(String("Current CPU ID: ") + String(xPortGetCoreID()));
@@ -360,6 +369,7 @@ void c_InputMgr::CreateNewConfig ()
 //-----------------------------------------------------------------------------
 void c_InputMgr::GetConfig (byte * Response, uint32_t maxlen)
 {
+    DriverAccessGuard DriverGuard;
     // DEBUGSTART;
 
     FileMgr.ReadFlashFile (ConfigFileName, Response, maxlen);
@@ -371,6 +381,7 @@ void c_InputMgr::GetConfig (byte * Response, uint32_t maxlen)
 //-----------------------------------------------------------------------------
 void c_InputMgr::GetStatus (JsonObject& jsonStatus)
 {
+    DriverAccessGuard DriverGuard;
     // DEBUG_START;
 
     JsonObject InputButtonStatus = jsonStatus[F ("inputbutton")].to<JsonObject> ();
@@ -686,6 +697,8 @@ void c_InputMgr::InstantiateNewInputChannel (e_InputChannelIds ChannelIndex, e_I
 */
 void c_InputMgr::LoadConfig ()
 {
+    DriverAccessGuard DriverGuard;
+    WatchdogProgress.input = 10;
     // DEBUG_START;
 
     ConfigLoadNeeded = NO_CONFIG_NEEDED;
@@ -695,6 +708,7 @@ void c_InputMgr::LoadConfig ()
         {
             // DEBUG_V ("");
             JsonObject JsonConfig = JsonConfigDoc.as<JsonObject> ();
+            WatchdogProgress.input = 11;
             // DEBUG_V ("");
             this->ProcessJsonConfig (JsonConfig);
             // DEBUG_V ("");
@@ -714,6 +728,7 @@ void c_InputMgr::LoadConfig ()
     }
 
     configInProgress = false;
+    WatchdogProgress.input = 14;
     // DEBUG_END;
 
 } // LoadConfig
@@ -722,6 +737,9 @@ void c_InputMgr::LoadConfig ()
 ///< Called from loop(), renders Input data
 void c_InputMgr::Process ()
 {
+    WatchdogProgress.input = 1;
+    DriverAccessGuard DriverGuard;
+    WatchdogProgress.input = 2;
     // DEBUG_START;
     // do we need to save the current config?
 
@@ -733,6 +751,7 @@ void c_InputMgr::Process ()
             break;
         }
 
+        WatchdogProgress.input = 3;
         ExternalInput.Poll ();
 
         if (NO_CONFIG_NEEDED != ConfigLoadNeeded)
@@ -748,6 +767,7 @@ void c_InputMgr::Process ()
 
         if(RebootInProgress())
         {
+            FeedWDT();
             break;
         }
 
@@ -760,6 +780,9 @@ void c_InputMgr::Process ()
                 continue;
             }
 
+            WatchdogProgress.channel = CurrentInput.DriverId;
+            WatchdogProgress.type = ((c_InputCommon*)(CurrentInput.InputDriver))->GetInputType();
+            WatchdogProgress.input = 5;
             ((c_InputCommon*)(CurrentInput.InputDriver))->SetBlankTimerIsRunning (aBlankTimerIsRunning);
 
             if(!aBlankTimerIsRunning)
@@ -778,6 +801,7 @@ void c_InputMgr::Process ()
         if (false == aBlankTimerIsRunning && config.BlankDelay != 0)
         {
             // DEBUG_V("Clear Input Buffer");
+            WatchdogProgress.input = 6;
             OutputMgr.ClearBuffer ();
             RestartBlankTimer (InputSecondaryChannelId);
         } // ALL blank timers have expired
@@ -949,13 +973,17 @@ bool c_InputMgr::ProcessJsonConfig (JsonObject & jsonConfig)
                 EffectEngineIsConfiguredToRun[ChannelIndex] = (e_InputType::InputType_Effects == ((c_InputCommon*)(InputChannelDrivers[ChannelIndex].InputDriver))->GetInputType()) ? true : false;
 
                 // send the config to the driver. At this level we have no idea what is in it
+                WatchdogProgress.input = 12;
+                WatchdogProgress.channel = ChannelIndex;
+                WatchdogProgress.type = ChannelType;
                 ((c_InputCommon*)(InputChannelDrivers[ChannelIndex].InputDriver))->SetConfig (InputChannelDriverConfig);
+                WatchdogProgress.input = 13;
                 // DEBUG_V (String("Response: ") + Response);
             }
         } // end for each channel
 
-        // let the file manager restart FTP if it can.
-        FileMgr.UpdateFtp();
+        // Effect/input settings do not change FTP settings. In particular, do
+        // not stop/restart its sockets from InputMgrTask while loopTask polls it.
 
         Response = true;
 
@@ -1056,6 +1084,7 @@ void c_InputMgr::SetConfig(JsonDocument & NewConfigData)
 //-----------------------------------------------------------------------------
 void c_InputMgr::SetBufferInfo (uint32_t BufferSize)
 {
+    DriverAccessGuard DriverGuard;
     // DEBUG_START;
 
     InputDataBufferSize = BufferSize;
@@ -1081,6 +1110,7 @@ void c_InputMgr::SetBufferInfo (uint32_t BufferSize)
 //-----------------------------------------------------------------------------
 void c_InputMgr::SetOperationalState (bool ActiveFlag)
 {
+    DriverAccessGuard DriverGuard;
     // DEBUG_START;
     // DEBUG_V(String("ActiveFlag: ") + String(ActiveFlag));
 

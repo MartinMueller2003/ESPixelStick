@@ -232,36 +232,51 @@ void c_FileMgr::UpdateFtp()
 //-----------------------------------------------------------------------------
 void c_FileMgr::NetworkStateChanged (bool NewState)
 {
-    // DEBUG_START;
 #ifdef SUPPORT_FTP
+    // Network callbacks and config loads can run on other tasks. Only Poll()
+    // may start, stop or service the FTP server instance.
+    FtpNetworkConnected.store(NewState);
+    FtpUpdatePending.store(true);
+#endif
+} // NetworkStateChanged
+
+#ifdef SUPPORT_FTP
+void c_FileMgr::ApplyFtpConfig()
+{
+    // DEBUG_START;
     // DEBUG_V("Disable FTP");
-    ftpSrv.end();
+    if (FtpRunning)
+    {
+        ftpSrv.end();
+        FtpRunning = false;
+    }
 
     // DEBUG_V(String("       NewState: ") + String(NewState));
     // DEBUG_V(String("SdCardInstalled: ") + String(SdCardInstalled));
     // DEBUG_V(String("     FtpEnabled: ") + String(FtpEnabled));
-    if(NewState && SdCardInstalled && FtpEnabled)
+    if(FtpNetworkConnected.load() && SdCardInstalled && FtpEnabled)
     {
         logcon("Starting FTP server.");
         ftpSrv.setCallback(ftp_callback);
         ftpSrv.setTransferCallback(ftp_transferCallback);
         ftpSrv.begin(FtpUserName, FtpPassword, WelcomeString);
+        FtpRunning = true;
     }
     else
     {
         // DEBUG_V("Not starting FTP service");
     }
-#endif // def SUPPORT_FTP
-
     // DEBUG_END;
-} // NetworkStateChanged
+} // ApplyFtpConfig
+#endif
 
 //-----------------------------------------------------------------------------
 void c_FileMgr::Poll()
  {
     // xDEBUG_START;
 #ifdef SUPPORT_FTP
-    if(FtpEnabled)
+    if (FtpUpdatePending.exchange(false)) { ApplyFtpConfig(); }
+    if(FtpRunning)
     {
         FeedWDT();
         ftpSrv.handleFTP();
@@ -643,7 +658,7 @@ void c_FileMgr::ResetSdCard()
 } // ResetSdCard
 
 //-----------------------------------------------------------------------------
-void c_FileMgr::DeleteFlashFile (String FileName)
+void c_FileMgr::DeleteFlashFile (String FileName, bool RefreshFseqList)
 {
     // DEBUG_START;
 
@@ -651,7 +666,7 @@ void c_FileMgr::DeleteFlashFile (String FileName)
 
     if(LittleFS.exists(FileName)) { LittleFS.remove (FileName); }
 
-    if(!FileName.equals(CN_fseqfilelist))
+    if(RefreshFseqList && !FileName.equals(CN_fseqfilelist))
     {
         BuildFseqList(false);
     }
@@ -661,7 +676,7 @@ void c_FileMgr::DeleteFlashFile (String FileName)
 } // DeleteConfigFile
 
 //-----------------------------------------------------------------------------
-void c_FileMgr::RenameFlashFile (String OldName, String NewName)
+bool c_FileMgr::RenameFlashFile (String OldName, String NewName)
 {
      // DEBUG_START;
 
@@ -671,13 +686,20 @@ void c_FileMgr::RenameFlashFile (String OldName, String NewName)
      // DEBUG_V(String("OldName: ") + OldName);
      // DEBUG_V(String("NewName: ") + NewName);
 
-    DeleteFlashFile(NewName);
+    // LittleFS replaces the destination during rename. Keep the live config
+    // intact until the complete temporary file can be committed.
     if(!LittleFS.rename(OldName, NewName))
     {
         logcon(String(CN_stars) + F("Could not rename '") + OldName + F("' to '") + NewName + F("'") + CN_stars);
+        return false;
+    }
+    if (OldName.startsWith(CN_slashsdslash) || NewName.startsWith(CN_slashsdslash))
+    {
+        BuildFseqList(false);
     }
 
      // DEBUG_END;
+    return true;
 } // RenameFlashFile
 
 //-----------------------------------------------------------------------------
@@ -899,7 +921,7 @@ bool c_FileMgr::SaveFlashFile(const String & FileName, uint32_t index, uint8_t *
     }
     else
     {
-        file = LittleFS.open(FileName.c_str(), "a");
+        file = LittleFS.open(FileName.c_str(), "r+");
     }
     // DEBUG_V("");
 
@@ -910,7 +932,11 @@ bool c_FileMgr::SaveFlashFile(const String & FileName, uint32_t index, uint8_t *
     else
     {
         // DEBUG_V("");
-        file.seek(int(index), SeekMode::SeekSet);
+        if (file.size() != index || !file.seek(index, SeekMode::SeekSet))
+        {
+            file.close();
+            return false;
+        }
         // DEBUG_V("");
 
         size_t NumBytesSaved = file.write(data, size_t(len));
@@ -920,7 +946,7 @@ bool c_FileMgr::SaveFlashFile(const String & FileName, uint32_t index, uint8_t *
 
         logcon(CfgFileMessagePrefix + String(F("saved ")) + String(NumBytesSaved) + F(" bytes."));
 
-        Response = true;
+        Response = (NumBytesSaved == len);
     }
 
     // DEBUG_END;

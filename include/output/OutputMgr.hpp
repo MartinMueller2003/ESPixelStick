@@ -151,6 +151,10 @@ public:
         OutputProtocol_FireGod = 16,
         #endif // def SUPPORT_OutputProtocol_FireGod
 
+        #ifdef SUPPORT_OutputProtocol_MonsterPermanent
+        OutputProtocol_MonsterPermanent = 17,
+        #endif
+
         // Add new types here
 
         // Must be last

@@ -113,6 +113,15 @@
 
 <script>
 
+    // Monster accepts ordinary RGB; white conversion happens in the transmitter.
+    $('#monster_permanent #PixelCommon #color_order').html('<option value="rgb">RGB (white to CW)</option>');
+    $('#monster_permanent #PixelCommon #color_order').attr('data-monster-permanent', 'true');
+    $('#monster_permanent #PixelCommon label[for="pixel_count"]').text('Module Count');
+    $('#monster_permanent #PixelCommon #pixel_count').attr('title', 'Number of physical lighting modules');
+    $('#monster_permanent #PixelCommon #interframetime').attr('min', 80);
+    $('#monster_permanent #PixelCommon #appendnullcount').attr('max', 3000);
+    $('#monster_permanent #PixelCommon #prependnullcount, #monster_permanent #PixelCommon #appendnullcount, #monster_permanent #PixelCommon #interframetime').attr('onchange', 'PixelCountOnChange(this)');
+
     function SetFps(path)
     {
         // var NumberOfPixels       = parseInt($('#pixel_count').val (), 10);
@@ -125,7 +134,17 @@
         // var TimePerByte          = TimePerBit * BitsPerByte; = 0.00001
         // var InterFrameGap        = parseInt($('#interframetime').val (), 10) / 1000000;
         // var TimePerFrame         = (TimePerByte * NumberOfBytesInFrame) + InterFrameGap;
-        var TimePerFrame = (0.00001 * (parseInt($(path + ' #pixel_count').val (), 10) * $(path + ' #color_order option:selected').val().length)) + (parseInt($(path + ' #interframetime').val (), 10) / 1000000);
+        var bytesPerPixel = $(path + ' #color_order option:selected').val().length;
+        var pixelCount = parseInt($(path + ' #pixel_count').val(), 10);
+        if ($(path + ' #color_order').attr('data-monster-permanent') === 'true') {
+            bytesPerPixel = 6; // Always R, G, B, CW, WW, 00 on the wire.
+            pixelCount += parseInt($(path + ' #prependnullcount').val(), 10) || 0;
+            pixelCount += parseInt($(path + ' #appendnullcount').val(), 10) || 0;
+        }
+        var TimePerFrame = (0.00001 * pixelCount * bytesPerPixel) + (parseInt($(path + ' #interframetime').val(), 10) / 1000000);
+        if ($(path + ' #color_order').attr('data-monster-permanent') === 'true') {
+            TimePerFrame = Math.max(0.025, TimePerFrame); // Firmware refresh limit.
+        }
         var rateMs = TimePerFrame * 1000;
         var hz = 1 / TimePerFrame;
         $(path + ' #refreshRate').html(Math.ceil(rateMs) + ' ms / ' + Math.floor(hz) + ' fps');

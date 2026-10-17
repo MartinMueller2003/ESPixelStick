@@ -28,6 +28,8 @@ class c_OutputPixel : public c_OutputCommon
 {
 protected:
 
+    // Expand ordinary RGB input into fixed six-byte Monster Permanent records.
+    void EnableMonsterPermanentRgb() { MonsterPermanentRgb = true; updateColorOrderOffsets(); }
     void SetFramePrependInformation (const uint8_t* data, uint32_t len);
     void SetFrameAppendInformation  (const uint8_t* data, uint32_t len);
     void SetPixelPrependInformation (const uint8_t* data, uint32_t len);
@@ -39,6 +41,9 @@ protected:
 private:
 #define PIXEL_DEFAULT_INTENSITY_BYTES_PER_PIXEL 3
 
+    bool MonsterPermanentRgb = false;
+    uint8_t MonsterRecord[6] = {0};
+    uint8_t MonsterRecordIndex = 6;
     uint32_t      NumIntensityBytesPerPixel = PIXEL_DEFAULT_INTENSITY_BYTES_PER_PIXEL;
 
     uint8_t     * NextPixelToSend             = nullptr;
@@ -168,7 +173,7 @@ public:
     inline   void         SetIntensityBitTimeInUS (float value) { IntensityBitTimeInUs = value; }
              void         SetIntensityDataWidth(uint32_t value);
              void         ISR_StartNewFrame();
-    inline   bool         ISR_MoreDataToSend () {return (&c_OutputPixel::ISR_FrameDone != FrameStateFuncPtr);}
+    inline   bool         ISR_MoreDataToSend () {return MonsterRecordIndex < 6 || (&c_OutputPixel::ISR_FrameDone != FrameStateFuncPtr);}
              bool         ISR_GetNextIntensityToSend (uint32_t &DataToSend);
              void         SetPixelCount(uint32_t value) {pixel_count = value;}
     inline   uint32_t     GetPixelCount() {return pixel_count;}

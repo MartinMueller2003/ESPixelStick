@@ -1,0 +1,9 @@
+<div id="monster_permanent">
+    <legend class="esps-legend" id="Title">Monster Permanent Configuration</legend>
+    <p>Each physical module uses three input channels: red, green, blue.
+       Neutral white (R = G = B) drives cool white at that intensity, with RGB off.
+       Colored RGB values stay unchanged with both white channels off. Warm white is always off.</p>
+    <p>The controller always sends R, G, B, CW, WW, 00 (48 bits), MSB first at 800 kHz,
+       with a LOW reset of at least 80 &micro;s. The reserved byte is always zero.</p>
+    <div class="loadable" id="PixelCommon"></div>
+</div>
