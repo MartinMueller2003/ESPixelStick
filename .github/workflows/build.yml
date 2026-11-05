@@ -244,10 +244,10 @@ jobs:
       # Build and move the web pages
       - name: Compile Web Pages
         run: |
-          gulp
-          gulp md
+          npx gulp
+          npx gulp md
           if [ -z "$ESPS_RELEASE" ]; then
-          gulp ci
+          npx gulp ci
           fi
           mv data/* dist/fs
 
