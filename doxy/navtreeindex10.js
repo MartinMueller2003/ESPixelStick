@@ -1,5 +1,6 @@
 var NAVTREEINDEX10 =
 {
+"classc___input_artnet.html#ab4bee64bcdc72ba0ccca461794b94887":[0,0,6,8],
 "classc___input_artnet.html#abdc112016ca2ee2520738a850994943d":[0,0,6,31],
 "classc___input_artnet.html#ac6bd00a3f820560363715444d2c51acc":[0,0,6,18],
 "classc___input_artnet.html#acf91f737e9f231b01b6b53ceb1d0a6fa":[0,0,6,11],
@@ -248,6 +249,5 @@ var NAVTREEINDEX10 =
 "classc___input_f_p_p_remote_play_file.html#a28afd8eea9136543891254dbda371dc2":[0,0,14,12],
 "classc___input_f_p_p_remote_play_file.html#a2e2773b98872d6d58537de2d36131059":[0,0,14,20],
 "classc___input_f_p_p_remote_play_file.html#a3817166d37aee9933378edc4a8eb5500":[0,0,14,6],
-"classc___input_f_p_p_remote_play_file.html#a4f6faaac8129be24da260c3421e40515":[0,0,14,27],
-"classc___input_f_p_p_remote_play_file.html#a588e1c419a88dc3536d9867f25f074cd":[0,0,14,8]
+"classc___input_f_p_p_remote_play_file.html#a4f6faaac8129be24da260c3421e40515":[0,0,14,27]
 };
