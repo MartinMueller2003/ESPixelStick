@@ -1,7 +1,5 @@
 var NAVTREEINDEX8 =
 {
-"_input_f_p_p_remote_8h_source.html":[1,0,0,0,8],
-"_input_f_p_p_remote_play_effect_8cpp.html":[1,0,1,0,9],
 "_input_f_p_p_remote_play_effect_8hpp.html":[1,0,0,0,9],
 "_input_f_p_p_remote_play_effect_8hpp_source.html":[1,0,0,0,9],
 "_input_f_p_p_remote_play_effect_fsm_8cpp.html":[1,0,1,0,10],
@@ -249,5 +247,7 @@ var NAVTREEINDEX8 =
 "_web_mgr_8cpp.html#af746297775839f25b039311b3bf9db74":[1,0,1,10,5],
 "_web_mgr_8cpp.html#aff0c9421511c7f4c149e388c0b5e14f2":[1,0,1,10,10],
 "_web_mgr_8hpp.html":[1,0,0,14],
-"_web_mgr_8hpp.html#a061febd0dccc042bdc16cee44909f888":[1,0,0,14,1]
+"_web_mgr_8hpp.html#a061febd0dccc042bdc16cee44909f888":[1,0,0,14,1],
+"_web_mgr_8hpp.html#aff0c9421511c7f4c149e388c0b5e14f2":[1,0,0,14,2],
+"_web_mgr_8hpp_source.html":[1,0,0,14]
 };

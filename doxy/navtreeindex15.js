@@ -1,7 +1,5 @@
 var NAVTREEINDEX15 =
 {
-"main_8cpp.html":[1,0,1,8],
-"main_8cpp.html#a03b64a11fdb210669823536c42932fd0":[1,0,1,8,16],
 "main_8cpp.html#a067b67c856af5452506085e83cdb2b01":[1,0,1,8,4],
 "main_8cpp.html#a1af7f3c5a2d6b297590babbefc5c6fe8":[1,0,1,8,1],
 "main_8cpp.html#a23252221d60de2259fe00859f716c72e":[1,0,1,8,13],
@@ -249,5 +247,7 @@ var NAVTREEINDEX15 =
 "structc___input_f_p_p_remote_play_item_1_1_file_control__t.html#aea4b01009d214debae7f4446ce207928":[0,0,15,0,3],
 "structc___input_f_p_p_remote_play_item_1_1_file_control__t.html#af00fce7294575f3321f4a2e6956c49cb":[0,0,15,0,7],
 "structc___input_f_p_p_remote_play_item_1_1_file_control__t.html#afab732064f1162ed86a513660420385e":[0,0,15,0,9],
-"structc___input_f_p_p_remote_play_item_1_1_file_control__t.html#afabd2e7a215bb39f0358bbd67fd71887":[0,0,15,0,2]
+"structc___input_f_p_p_remote_play_item_1_1_file_control__t.html#afabd2e7a215bb39f0358bbd67fd71887":[0,0,15,0,2],
+"structc___input_mgr_1_1_driver_info__t.html":[0,0,17,0],
+"structc___input_mgr_1_1_driver_info__t.html#a14765d7fa7e8464a52291058a491f45a":[0,0,17,0,1]
 };

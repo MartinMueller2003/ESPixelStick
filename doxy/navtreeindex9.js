@@ -1,7 +1,5 @@
 var NAVTREEINDEX9 =
 {
-"_web_mgr_8hpp.html#aff0c9421511c7f4c149e388c0b5e14f2":[1,0,0,14,2],
-"_web_mgr_8hpp_source.html":[1,0,0,14],
 "_wi_fi_driver_8cpp.html":[1,0,1,1,3],
 "_wi_fi_driver_8cpp.html#a0ebe6461ee3cf86afe9947933e987872":[1,0,1,1,3,4],
 "_wi_fi_driver_8cpp.html#a510cac49a374af32c1a0cdf3163f62fc":[1,0,1,1,3,5],
@@ -249,5 +247,7 @@ var NAVTREEINDEX9 =
 "classc___file_mgr.html#aee657c03ad56d87d9cb39970d4de4951":[0,0,2,45],
 "classc___file_mgr.html#af54dcecfe3bc5ab961bcde0826c206a4":[0,0,2,20],
 "classc___file_mgr.html#af671a65c5556bf8a1f3da52191c0f218":[0,0,2,76],
-"classc___file_mgr.html#afd39c494beddbc229522e53fb4ce56d4":[0,0,2,22]
+"classc___file_mgr.html#afd39c494beddbc229522e53fb4ce56d4":[0,0,2,22],
+"classc___file_mgr.html#aff37690a9e5ab9311170fdf20ba1f6ec":[0,0,2,49],
+"classc___input_alexa.html":[0,0,5]
 };
