@@ -1,6 +1,5 @@
 var NAVTREEINDEX15 =
 {
-"index.html":[],
 "main_8cpp.html":[1,0,1,8],
 "main_8cpp.html#a03b64a11fdb210669823536c42932fd0":[1,0,1,8,16],
 "main_8cpp.html#a067b67c856af5452506085e83cdb2b01":[1,0,1,8,4],
@@ -249,5 +248,6 @@ var NAVTREEINDEX15 =
 "structc___input_f_p_p_remote_play_item_1_1_file_control__t.html#a9791f313006fcb00e7737b3e113b13a5":[0,0,15,0,8],
 "structc___input_f_p_p_remote_play_item_1_1_file_control__t.html#aea4b01009d214debae7f4446ce207928":[0,0,15,0,3],
 "structc___input_f_p_p_remote_play_item_1_1_file_control__t.html#af00fce7294575f3321f4a2e6956c49cb":[0,0,15,0,7],
-"structc___input_f_p_p_remote_play_item_1_1_file_control__t.html#afab732064f1162ed86a513660420385e":[0,0,15,0,9]
+"structc___input_f_p_p_remote_play_item_1_1_file_control__t.html#afab732064f1162ed86a513660420385e":[0,0,15,0,9],
+"structc___input_f_p_p_remote_play_item_1_1_file_control__t.html#afabd2e7a215bb39f0358bbd67fd71887":[0,0,15,0,2]
 };

@@ -71,8 +71,8 @@ var NAVTREEINDEX =
 "classc___network_mgr.html",
 "classc___wi_fi_driver.html#a45f9635bbd7c4978e9ed82995c1b96d1",
 "classfsm___wi_fi__state___connected_to_sta.html#abfbcf5f75763d8730f6e8cf9ee365a83",
-"index.html",
-"structc___input_f_p_p_remote_play_item_1_1_file_control__t.html#afabd2e7a215bb39f0358bbd67fd71887"
+"main_8cpp.html",
+"structc___input_mgr_1_1_driver_info__t.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
