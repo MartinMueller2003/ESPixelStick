@@ -428,16 +428,22 @@ void c_WiFiDriver::ProcessApScanResults ()
                 RoamTargetChannel = BestChannel;
                 fsm_WiFi_state_Roaming_imp.Init ();
             }
-            else if ((0 == OtherApCount) && (NumNetworksFound >= 0))
+            else if ((0 == OtherApCount) && (NumNetworksFound >= 0) && (++NoOtherApScans >= WIFI_ROAM_GIVE_UP_SCANS))
             {
-                // Nothing to move to. The set of APs does not change while we stay connected.
+                // Several scans in a row saw no other AP: a single AP install. The set of APs does
+                // not change while we stay connected, so stop checking until the next connection.
                 logcon (F ("No other AP advertises the SSID. Roam checks stop until the next connection"));
                 RoamChecksAllowed = false;
             }
             else
             {
-                // Check again later, waiting longer each time the result is the same
-                logcon (F ("No stronger AP found. Staying on the current AP"));
+                // Check again later, waiting longer each time the result is the same. A single scan
+                // can miss an AP, so one empty result is treated like "nothing better".
+                if (0 != OtherApCount)
+                {
+                    NoOtherApScans = 0;
+                }
+                logcon ((0 == OtherApCount) ? F ("No other AP seen this time. Checking again later") : F ("No stronger AP found. Staying on the current AP"));
                 RoamCheckTimer.StartTimer (RoamCheckWaitMs, false);
                 RoamCheckWaitMs = RoamCheckWaitMs * 2;
                 if (RoamCheckWaitMs > WIFI_ROAM_MAX_RETRY_TIME_MS)
@@ -1265,6 +1271,7 @@ void fsm_WiFi_state_ConnectedToAP::Init ()
 
     // give the link time to settle before looking for a stronger AP
     pWiFiDriver->WeakSignalCount   = 0;
+    pWiFiDriver->NoOtherApScans    = 0;
     pWiFiDriver->RoamChecksAllowed = true;
     pWiFiDriver->RoamCheckWaitMs   = WIFI_ROAM_RETRY_TIME_MS;
     pWiFiDriver->RoamCheckTimer.StartTimer (WIFI_ROAM_SETTLE_TIME_MS, false);

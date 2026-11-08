@@ -46,6 +46,9 @@
 #ifndef WIFI_ROAM_MIN_IMPROVEMENT
 #   define WIFI_ROAM_MIN_IMPROVEMENT   10     ///< dB. A candidate AP must beat the current AP by at least this much
 #endif
+#ifndef WIFI_ROAM_GIVE_UP_SCANS
+#   define WIFI_ROAM_GIVE_UP_SCANS     3      ///< Consecutive scans that see no other AP before roam checks stop for this connection
+#endif
 #ifndef WIFI_ROAM_SETTLE_TIME_MS
 #   define WIFI_ROAM_SETTLE_TIME_MS    (30 * MilliSecondsInASecond)       ///< Wait after connecting before the first check
 #endif
@@ -151,6 +154,7 @@ private:
     FastTimer   NextPoll;
     uint32_t    PollInterval = MilliSecondsInASecond;
     bool        ReportedIsWiFiConnected = false;
+    uint8_t     NoOtherApScans    = 0;          // Consecutive roam scans that saw no other AP for the SSID
 
     char        ap_ssid[65];
     char        ap_passphrase[65];
