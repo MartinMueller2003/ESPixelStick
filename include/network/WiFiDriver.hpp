@@ -114,6 +114,7 @@ public:
     void      Disable ();
     void      Enable ();
     String    GetWiFiMacAddress() {return WiFi.macAddress ();}
+    void      SetPrimaryInputIsActive (bool value) { PrimaryInputIsActive = value; }
 
 private:
 #define DEFAULT_SSID_NOT_SET "DEFAULT_SSID_NOT_SET"
@@ -138,6 +139,7 @@ private:
     bool        RoamingEnabled    = WIFI_ROAM_ENABLED;          // Move to a stronger AP when the signal stays weak
     int32_t     RoamTargetChannel = 0;
     bool        ConnectionIsPinned = false;     // The current attempt targets a specific BSSID
+    bool        PrimaryInputIsActive = false;   // Show data is arriving on the primary input. No roam scan while it is
     uint16_t    RoamWeakTime      = WIFI_ROAM_WEAK_POLLS;       // Seconds the signal must stay weak before a scan
     void        StartApScan (bool IsRoamCheck);
     void        ProcessApScanResults ();

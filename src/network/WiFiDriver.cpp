@@ -479,6 +479,14 @@ void c_WiFiDriver::CheckSignalStrength ()
             break;
         }
 
+        if (PrimaryInputIsActive)
+        {
+            // Show data is arriving. A scan would interrupt it, so the weak signal
+            // clock only runs while the primary input is idle.
+            WeakSignalCount = 0;
+            break;
+        }
+
         int32_t CurrentRssi = WiFi.RSSI ();
         if (CurrentRssi >= RoamRssiThreshold)
         {
