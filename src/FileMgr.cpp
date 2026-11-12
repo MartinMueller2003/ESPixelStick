@@ -1182,7 +1182,7 @@ void c_FileMgr::DescribeSdCardToUser ()
 {
     // DEBUG_START;
 
-    logcon (String (F ("SD Card Size: ")) + int64String (SdCardSize) + "Bytes");
+    logcon (String (F ("SD Card Size: ")) + int64String (SdCardSize) + " Bytes");
 /*
     // DEBUG_V("Open Root");
     FsFile root;
