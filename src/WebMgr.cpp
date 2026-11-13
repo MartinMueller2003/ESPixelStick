@@ -132,6 +132,20 @@ void c_WebMgr::NetworkStateChanged (bool NewNetworkState)
 } // NetworkStateChanged
 
 //-----------------------------------------------------------------------------
+// Refuse a request while less than this much heap is free: serving it costs the response and its
+// buffers, and a failed allocation there is fatal on the ESP8266. The library measures the heap the
+// buffers come from. On the ESP32 that is the byte-addressable internal pool, and the floor stays off
+// there for now: a browser's six parallel connections take that pool to a few KB on every page load,
+// a floor refuses the page's own status poll before it helps, and a refused request costs a retry.
+#ifndef WEB_REQUEST_MIN_FREE_HEAP
+#   ifdef ARDUINO_ARCH_ESP32
+#       define WEB_REQUEST_MIN_FREE_HEAP 0
+#   else
+#       define WEB_REQUEST_MIN_FREE_HEAP (6 * 1024)
+#   endif // def ARDUINO_ARCH_ESP32
+#endif // ndef WEB_REQUEST_MIN_FREE_HEAP
+
+//-----------------------------------------------------------------------------
 // Configure and start the web server
 void c_WebMgr::init ()
 {
@@ -144,6 +158,7 @@ void c_WebMgr::init ()
             delete async;
         }
         #endif // def ARDUINO_ARCH_ESP8266
+        AsyncWebServer::setMinFreeHeapForRequests(WEB_REQUEST_MIN_FREE_HEAP);
         // DEBUG_START;
         // Add header for SVG plot support?
     	DefaultHeaders::Instance ().addHeader (F ("Access-Control-Allow-Origin"),  "*");
