@@ -1,5 +1,7 @@
 var NAVTREEINDEX13 =
 {
+"classc___wi_fi_driver.html#a0eb8a8e3622457c82c824638a27bc282":[0,0,25,8],
+"classc___wi_fi_driver.html#a0f9150ccd57dd9f749950aaf50dfd2d0":[0,0,25,21],
 "classc___wi_fi_driver.html#a11cbfc5b295d14c77c3a33ebf11d6338":[0,0,25,9],
 "classc___wi_fi_driver.html#a13d03a37aa4b2ec495b52dfebfe48ef5":[0,0,25,15],
 "classc___wi_fi_driver.html#a17db7497fdfa6670badda943e337dcb7":[0,0,25,48],
@@ -247,7 +249,5 @@ var NAVTREEINDEX13 =
 "classfsm___wi_fi__state___boot.html#a8063e8f2dff740f938a920e287b68709":[0,0,60,6],
 "classfsm___wi_fi__state___boot.html#a8ea05a9fb25e520e9bb7526525070b08":[0,0,60,1],
 "classfsm___wi_fi__state___boot.html#aa1d11e85ab2226381ea24d1163f83e55":[0,0,60,0],
-"classfsm___wi_fi__state___boot.html#ab85f244d7f7ebf64a24b95abf67cc5a6":[0,0,60,3],
-"classfsm___wi_fi__state___boot.html#abbfc0b8712b4f0383f9012dce41854cb":[0,0,60,2],
-"classfsm___wi_fi__state___connected_to_a_p.html":[0,0,61]
+"classfsm___wi_fi__state___boot.html#ab85f244d7f7ebf64a24b95abf67cc5a6":[0,0,60,3]
 };

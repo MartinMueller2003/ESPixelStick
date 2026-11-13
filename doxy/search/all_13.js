@@ -19,9 +19,10 @@ var searchData=
   ['updateisinprogress_16',['UpdateIsInProgress',['../class_e_f_update.html#a85d676640a316f0129c5275e0514bbbc',1,'EFUpdate']]],
   ['updatemdns_17',['UpdateMdns',['../classc___network_mgr.html#a4f2bed5aa8b01c9e0471116176e44f2a',1,'c_NetworkMgr']]],
   ['uploadfilename_18',['UploadFileName',['../classc___f_p_p_discovery.html#ae140f6d6f54d71b86cf627f8dad3ab4e',1,'c_FPPDiscovery']]],
-  ['use_5fmiso_5fpullup_19',['USE_MISO_PULLUP',['../_g_p_i_o___defs___e_s_p32___t_t_g_o___t8_8hpp.html#a9781b9899e299551a92f968cfcf68004',1,'GPIO_Defs_ESP32_TTGO_T8.hpp']]],
-  ['used_20',['Used',['../structc___file_mgr_1_1_sd_info.html#a31a8fe08aa340ed6a3d2c16aa581e5ca',1,'c_FileMgr::SdInfo']]],
-  ['usedbuffersize_21',['UsedBufferSize',['../classc___output_mgr.html#a5484318ee435976c6ab5b9b2c32e53da',1,'c_OutputMgr']]],
-  ['usedhcp_22',['UseDhcp',['../classc___wi_fi_driver.html#ab5080bdd7d15b1a5042d944f078fab3e',1,'c_WiFiDriver']]],
-  ['user_23',['user',['../classc___input_m_q_t_t.html#abffca11b66f7991c1c9c2793c3bcdc1c',1,'c_InputMQTT']]]
+  ['usablefreeheap_19',['UsableFreeHeap',['../_web_mgr_8cpp.html#a5775605350ec389403a2917991fd5a09',1,'WebMgr.cpp']]],
+  ['use_5fmiso_5fpullup_20',['USE_MISO_PULLUP',['../_g_p_i_o___defs___e_s_p32___t_t_g_o___t8_8hpp.html#a9781b9899e299551a92f968cfcf68004',1,'GPIO_Defs_ESP32_TTGO_T8.hpp']]],
+  ['used_21',['Used',['../structc___file_mgr_1_1_sd_info.html#a31a8fe08aa340ed6a3d2c16aa581e5ca',1,'c_FileMgr::SdInfo']]],
+  ['usedbuffersize_22',['UsedBufferSize',['../classc___output_mgr.html#a5484318ee435976c6ab5b9b2c32e53da',1,'c_OutputMgr']]],
+  ['usedhcp_23',['UseDhcp',['../classc___wi_fi_driver.html#ab5080bdd7d15b1a5042d944f078fab3e',1,'c_WiFiDriver']]],
+  ['user_24',['user',['../classc___input_m_q_t_t.html#abffca11b66f7991c1c9c2793c3bcdc1c',1,'c_InputMQTT']]]
 ];

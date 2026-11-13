@@ -2,9 +2,11 @@ var _web_mgr_8cpp =
 [
     [ "ESPALEXA_ASYNC", "_web_mgr_8cpp.html#a1566cbab7ed3269dd88fd34a6385824e", null ],
     [ "ESPALEXA_MAXDEVICES", "_web_mgr_8cpp.html#a66938c35f93b90332c6e8a5b612ba2b0", null ],
+    [ "WEB_REQUEST_MIN_FREE_HEAP", "_web_mgr_8cpp.html#a5ef5f7e1f5774c687d0d71cb430178c0", null ],
     [ "PrettyPrint", "_web_mgr_8cpp.html#ab2cab25565163f647adbe103a4cf0358", null ],
     [ "PrettyPrint", "_web_mgr_8cpp.html#a9ff9121bc3b70ed36279c307fdcde0ca", null ],
     [ "PrettyPrint", "_web_mgr_8cpp.html#a47bc5f5aa91e940e6cfc297466285595", null ],
+    [ "UsableFreeHeap", "_web_mgr_8cpp.html#a5775605350ec389403a2917991fd5a09", null ],
     [ "webServer", "_web_mgr_8cpp.html#af746297775839f25b039311b3bf9db74", null ],
     [ "AlexaDevice", "_web_mgr_8cpp.html#a7f4acfea913ec6e785ec087b6f0ebae0", null ],
     [ "efupdate", "_web_mgr_8cpp.html#ad5f3fb1400161c793beaa51883045634", null ],

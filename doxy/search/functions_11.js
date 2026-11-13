@@ -8,5 +8,6 @@ var searchData=
   ['updateftp_5',['UpdateFtp',['../classc___file_mgr.html#ad973709189a6ae71111cf897307c7cf0',1,'c_FileMgr']]],
   ['updategammatable_6',['updateGammaTable',['../classc___output_pixel.html#ae85f097b7467cb4aeb13a6dce4902127',1,'c_OutputPixel']]],
   ['updateisinprogress_7',['UpdateIsInProgress',['../class_e_f_update.html#a85d676640a316f0129c5275e0514bbbc',1,'EFUpdate']]],
-  ['updatemdns_8',['UpdateMdns',['../classc___network_mgr.html#a4f2bed5aa8b01c9e0471116176e44f2a',1,'c_NetworkMgr']]]
+  ['updatemdns_8',['UpdateMdns',['../classc___network_mgr.html#a4f2bed5aa8b01c9e0471116176e44f2a',1,'c_NetworkMgr']]],
+  ['usablefreeheap_9',['UsableFreeHeap',['../_web_mgr_8cpp.html#a5775605350ec389403a2917991fd5a09',1,'WebMgr.cpp']]]
 ];

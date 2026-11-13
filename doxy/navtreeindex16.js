@@ -1,5 +1,8 @@
 var NAVTREEINDEX16 =
 {
+"structc___input_f_p_p_remote_play_file_1_1_sync_control__t.html#a1dc2cc5e71151ab373a647a7c173fbee":[0,0,14,0,1],
+"structc___input_f_p_p_remote_play_file_1_1_sync_control__t.html#ade26f678a0787377ddeb15f9816cd321":[0,0,14,0,2],
+"structc___input_f_p_p_remote_play_file_1_1_sync_control__t.html#af4d6347f6220a2ccf589ec32274a301a":[0,0,14,0,0],
 "structc___input_f_p_p_remote_play_item_1_1_file_control__t.html":[0,0,15,0],
 "structc___input_f_p_p_remote_play_item_1_1_file_control__t.html#a0961f1086bc4ef801954ac3f312f3535":[0,0,15,0,1],
 "structc___input_f_p_p_remote_play_item_1_1_file_control__t.html#a34e0a55c3d00b4a6618bbb7781af6912":[0,0,15,0,0],
