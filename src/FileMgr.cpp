@@ -1966,9 +1966,9 @@ void c_FileMgr::BuildFseqList(bool DisplayFileNames)
                 CurrentEntry.close();
                 continue;
             }
-
+/*
             AddFseqListEntry(ListFile, CurrentEntry, numFiles, usedBytes, DisplayFileNames);
-
+*/
             CurrentEntry.close();
             CurrentEntryName = InputDir.getNextFileName ();
 
