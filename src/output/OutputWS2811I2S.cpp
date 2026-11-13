@@ -287,14 +287,19 @@ void IRAM_ATTR c_OutputWS2811I2S::ISR_StartNewDataFrame ()
 } // StartNewDataFrame
 
 //----------------------------------------------------------------------------
-bool IRAM_ATTR c_OutputWS2811I2S::ISR_GetNextDataSlicesToSend (c_OutputI2S::I2S_Item_t * pDataToSend, uint32_t numSlices, c_OutputI2S::I2S_Item_t DefaultIntensitySliceData)
+bool IRAM_ATTR c_OutputWS2811I2S::ISR_GetNextDataSlicesToSend (c_OutputI2S::I2S_Item_t * pDataToSend, uint32_t & numSlices, c_OutputI2S::I2S_Item_t DefaultIntensitySliceData)
 {
     bool MoreDataToSend = true;
     INC_WS2811_I2S_DEBUG_COUNTER (GetDataSlices);
 
+    // NOTE: The data request is always uint32 aligned and is a multiple on uint32s long
+
     // Place to build the next data slices to send
     c_OutputI2S::I2S_Item_t CurrentData;
     CurrentData = DefaultIntensitySliceData;
+
+    // do we need to send a frame reset?
+
 
     while (numSlices > 0)
     {
@@ -303,7 +308,7 @@ bool IRAM_ATTR c_OutputWS2811I2S::ISR_GetNextDataSlicesToSend (c_OutputI2S::I2S_
             case OutputWS2811I2S_FSM_States::_OutputWS2811I2S_FSM_State_FrameReset:
             {
                 INC_WS2811_I2S_DEBUG_COUNTER (FrameResetBitSlices);
-
+                
                 if (--FrameResetCurrentSliceCount == 0)
                 {
                     OutputWS2811I2S_FSM_State = c_OutputWS2811I2S::OutputWS2811I2S_FSM_States::_OutputWS2811I2S_FSM_State_DataHigh;

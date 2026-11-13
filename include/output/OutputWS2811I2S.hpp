@@ -42,7 +42,7 @@ public:
     void    GetStatus (ArduinoJson::JsonObject& jsonStatus);
     void    SetOutputBufferSize (uint32_t NumChannelsAvailable);
     void    PauseOutput (bool State);
-    bool    ISR_GetNextDataSlicesToSend (c_OutputI2S::I2S_Item_t * DataToSend, uint32_t numSlices, c_OutputI2S::I2S_Item_t DefaultIntensitySliceData);
+    bool    ISR_GetNextDataSlicesToSend (c_OutputI2S::I2S_Item_t * DataToSend, uint32_t & numSlices, c_OutputI2S::I2S_Item_t DefaultIntensitySliceData);
     void    ISR_StartNewDataFrame ();
 
     // to be removed when the I2S driver is fully implemented
