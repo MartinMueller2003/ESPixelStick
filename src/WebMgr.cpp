@@ -132,6 +132,34 @@ void c_WebMgr::NetworkStateChanged (bool NewNetworkState)
 } // NetworkStateChanged
 
 //-----------------------------------------------------------------------------
+// The free heap the status page shows. ESP.getFreeHeap() on the ESP32 counts IRAM-only heap as well,
+// which neither malloc nor the network stack can use, so a board can read 95 KB free while the pool
+// the web server and WiFi buffers come from is at 1 KB. Report the byte-addressable internal heap there.
+static inline uint32_t UsableFreeHeap ()
+{
+#ifdef ARDUINO_ARCH_ESP32
+    uint32_t Response = heap_caps_get_free_size (MALLOC_CAP_INTERNAL | MALLOC_CAP_8BIT);
+#else
+    uint32_t Response = ESP.getFreeHeap ();
+#endif // def ARDUINO_ARCH_ESP32
+    return Response;
+} // UsableFreeHeap
+
+//-----------------------------------------------------------------------------
+// Refuse a request while less than this much heap is free: serving it costs the response and its
+// buffers, and a failed allocation there is fatal on the ESP8266. The library measures the heap the
+// buffers come from. On the ESP32 that is the byte-addressable internal pool, and the floor stays off
+// there for now: a browser's six parallel connections take that pool to a few KB on every page load,
+// a floor refuses the page's own status poll before it helps, and a refused request costs a retry.
+#ifndef WEB_REQUEST_MIN_FREE_HEAP
+#   ifdef ARDUINO_ARCH_ESP32
+#       define WEB_REQUEST_MIN_FREE_HEAP 0
+#   else
+#       define WEB_REQUEST_MIN_FREE_HEAP (6 * 1024)
+#   endif // def ARDUINO_ARCH_ESP32
+#endif // ndef WEB_REQUEST_MIN_FREE_HEAP
+
+//-----------------------------------------------------------------------------
 // Configure and start the web server
 void c_WebMgr::init ()
 {
@@ -144,6 +172,7 @@ void c_WebMgr::init ()
             delete async;
         }
         #endif // def ARDUINO_ARCH_ESP8266
+        AsyncWebServer::setMinFreeHeapForRequests(WEB_REQUEST_MIN_FREE_HEAP);
         // DEBUG_START;
         // Add header for SVG plot support?
     	DefaultHeaders::Instance ().addHeader (F ("Access-Control-Allow-Origin"),  "*");
@@ -771,7 +800,7 @@ void c_WebMgr::ProcessXJRequest (AsyncWebServerRequest* client)
     JsonObject status = WebJsonDoc[(char*)CN_status].to<JsonObject> ();
     JsonObject system = status[(char*)CN_system].to<JsonObject> ();
 
-    JsonWrite(system, F ("freeheap"), ESP.getFreeHeap ());
+    JsonWrite(system, F ("freeheap"), UsableFreeHeap ());
     JsonWrite(system, F ("uptime"), millis ());
     JsonWrite(system, F ("currenttime"), now ());
     JsonWrite(system, F ("SDinstalled"), FileMgr.SdCardIsInstalled ());
@@ -867,7 +896,7 @@ void c_WebMgr::ProcessHeapRequest (AsyncWebServerRequest* client)
     JsonObject status = WebJsonDoc[(char*)CN_Heap_colon].to<JsonObject> ();
     // DEBUG_V();
 
-    JsonWrite(status, F ("freeheap"), ESP.getFreeHeap ());
+    JsonWrite(status, F ("freeheap"), UsableFreeHeap ());
     // DEBUG_V();
 #ifdef ARDUINO_ARCH_ESP32
     JsonWrite(status, F ("n804_Free_Max"),  heap_caps_get_largest_free_block(0x804));
