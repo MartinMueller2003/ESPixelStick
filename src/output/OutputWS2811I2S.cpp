@@ -273,7 +273,7 @@ bool IRAM_ATTR c_OutputWS2811I2S::ISR_GetNextDataSlicesToSend (c_OutputI2S::I2S_
     // NOTE: The data request is always uint32 aligned and is a multiple of uint32s long
 
     // Place to build the next data slices to send
-    memset(&ResetBit, DefaultIntensitySliceData, sizeof(ResetBit));
+    memset(&ResetBit, (DefaultIntensitySliceData & DataBitMask), sizeof(ResetBit));
 
     OneBit.DataAsBytes[2] = DefaultIntensitySliceData | DataBit;
     OneBit.DataAsBytes[3] = DefaultIntensitySliceData | DataBit;
