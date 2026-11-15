@@ -22,15 +22,6 @@
 #include "output/OutputWS2811I2S.hpp"
 #include "output/OutputMgr.hpp"
 
-union DataAsUint32_t
-{
-    c_OutputI2S::I2S_Item_t DataAsBytes[4];
-    uint32_t AsUint32;
-};
-
-static DataAsUint32_t OneBit;
-static DataAsUint32_t ZeroBit;
-
 //----------------------------------------------------------------------------
 #ifdef WS2811_I2S_DEBUG_COUNTERS
 uint32_t StartNewFrameBaseCount = 0;
@@ -115,7 +106,7 @@ void c_OutputWS2811I2S::Begin ()
     // DEBUG_V (String ("DataPin: ") + String (DataPin));
 
     FrameResetBitCount        = 0;
-    FrameResetRemainingBitCount = 0;
+    FrameResetRemainingSliceCount = 0;
 
     c_OutputI2S::OutputI2SChannelConfig_t OutputI2SConfig;
     OutputI2SConfig.I2SChannelId              = uint32_t (OutputPortDefinition.PortId);
@@ -260,7 +251,7 @@ void c_OutputWS2811I2S::GetStatus (ArduinoJson::JsonObject& jsonStatus)
     JsonWrite (JsonCounters, "DataBitMask",                 String (DataBitMask, HEX));
     JsonWrite (JsonCounters, "DataBit",                     String (DataBit, HEX));
     JsonWrite (JsonCounters, "FrameResetBitCount",          FrameResetBitCount);
-    JsonWrite (JsonCounters, "FrameResetRemainingBitCount", FrameResetRemainingBitCount);
+    JsonWrite (JsonCounters, "FrameResetRemainingBitCount", FrameResetRemainingSliceCount);
     JsonWrite (JsonCounters, "DataPattern",                 String (DataPattern, HEX));
     JsonWrite (JsonCounters, "DataPatternMask",             String (DataPatternMask, HEX));
 
@@ -279,7 +270,7 @@ void IRAM_ATTR c_OutputWS2811I2S::ISR_StartNewDataFrame ()
     // DEBUG_V (String ("frame started on ") + String (OutputPortDefinition.gpios.data));
     INC_WS2811_I2S_DEBUG_COUNTER (FrameStarts);
 
-    FrameResetRemainingBitCount  = FrameResetBitCount;
+    FrameResetRemainingSliceCount  = FrameResetBitCount;
     OutputWS2811I2S_FSM_State = c_OutputWS2811I2S::OutputWS2811I2S_FSM_States::_OutputWS2811I2S_FSM_State_FrameReset;
 
     // DEBUG_END;
@@ -311,7 +302,7 @@ bool IRAM_ATTR c_OutputWS2811I2S::ISR_GetNextDataSlicesToSend (c_OutputI2S::I2S_
 
     // NOTE: The data request is always uint32 aligned and is a multiple of uint32s long
 
-    while (numSlices > sizeof(OneBit.AsUint32) - 1)
+    while (numSlices)
     {
         INC_WS2811_I2S_DEBUG_COUNTER (GetDataSlicesII);
 
@@ -333,22 +324,22 @@ bool IRAM_ATTR c_OutputWS2811I2S::ISR_GetNextDataSlicesToSend (c_OutputI2S::I2S_
                 INC_WS2811_I2S_DEBUG_COUNTER (FrameResetI);
 
                 // at this point, the output buffer pointer is aligned to a uint32 boundary. The numSlices is also now a multpl of 4
-                uint NumBytesToSend = min (FrameResetRemainingBitCount, numSlices);
-                memset(pDataToSend, (DefaultIntensitySliceData & DataBitMask), NumBytesToSend);
-                numSlices -= NumBytesToSend;
-                pDataToSend += NumBytesToSend;
-                FrameResetRemainingBitCount -= NumBytesToSend;
+                uint NumSlicesToSend = min (FrameResetRemainingSliceCount, numSlices);
+                memset(pDataToSend, (DefaultIntensitySliceData & DataBitMask), NumSlicesToSend);
+                numSlices -= NumSlicesToSend;
+                pDataToSend += NumSlicesToSend;
+                FrameResetRemainingSliceCount -= NumSlicesToSend;
 
                 INC_WS2811_I2S_DEBUG_COUNTER (FrameResetII);
 
                 // did the counter wrap?
-                if ((0 == FrameResetRemainingBitCount) || (FrameResetRemainingBitCount > FrameResetBitCount))
+                if ((0 == FrameResetRemainingSliceCount) || (FrameResetRemainingSliceCount > FrameResetBitCount))
                 {
                     INC_WS2811_I2S_DEBUG_COUNTER (FrameResetDone);
 
                     ISR_SetUpNextDataToSend ();
                     OutputWS2811I2S_FSM_State = c_OutputWS2811I2S::OutputWS2811I2S_FSM_States::_OutputWS2811I2S_FSM_State_Data;
-                } // end if ((0 == FrameResetRemainingBitCount) || (FrameResetRemainingBitCount > FrameResetBitCount))
+                } // end if ((0 == FrameResetRemainingSliceCount) || (FrameResetRemainingSliceCount > FrameResetBitCount))
 
                 INC_WS2811_I2S_DEBUG_COUNTER (FrameResetIII);
 

@@ -60,7 +60,7 @@ private:
     uint32_t        DataBit;
 
     uint32_t        FrameResetBitCount;
-    uint32_t        FrameResetRemainingBitCount;
+    uint32_t        FrameResetRemainingSliceCount;
 
     uint32_t        IdleSliceCount;
     uint32_t        IdleCurrentSliceCount;
@@ -104,6 +104,15 @@ private:
     };
     OutputWS2811I2S_FSM_States volatile OutputWS2811I2S_FSM_State = OutputWS2811I2S_FSM_States::_OutputWS2811I2S_FSM_State_Idle;
     
+    union DataAsUint32_t
+    {
+        c_OutputI2S::I2S_Item_t DataAsBytes[4];
+        uint32_t AsUint32;
+    };
+
+    DataAsUint32_t OneBit;
+    DataAsUint32_t ZeroBit;
+
 }; // c_OutputWS2811I2S
 
 #endif // defined(SUPPORT_OutputProtocol_WS2811) && defined(SUPPORT_I2S)
