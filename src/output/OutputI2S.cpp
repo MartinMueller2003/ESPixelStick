@@ -57,10 +57,11 @@ void IRAM_ATTR c_OutputI2S::ISR_Handler (void * _TransmitDmaBuffer)
     TransmitDmaBuffer->header.length = TransmitDmaBuffer->header.size;
     TransmitDmaBuffer->header.offset = 0; // Always start at the begining of the buffer
     
+    uint32_t numSlices = TransmitDmaBuffer->header.size;
     if (pCurrentPort->IsActive)
     {
         // fill in the data
-        if (false == pCurrentPort->GetNextIntensityBitSlices (pCurrentPort->arg, (I2S_Item_t *) (TransmitDmaBuffer->header.buf), TransmitDmaBuffer->header.size, DefaultIntensitySliceData))
+        if (false == pCurrentPort->GetNextIntensityBitSlices (pCurrentPort->arg, (I2S_Item_t *) (TransmitDmaBuffer->header.buf), numSlices, DefaultIntensitySliceData))
         {
             // port does not have more intensity bit slices, move to the next port
             ISR_MoveToNextPort ();
@@ -71,6 +72,9 @@ void IRAM_ATTR c_OutputI2S::ISR_Handler (void * _TransmitDmaBuffer)
         // current port is not active, move to the next port
         ISR_MoveToNextPort ();
     }
+
+    // set the number of slices actually used
+    TransmitDmaBuffer->header.length = TransmitDmaBuffer->header.size - numSlices;
 
     // hand the buffer back to the dma engine
     TransmitDmaBuffer->header.eof = true; // cause an end of buffer interrupt
@@ -236,9 +240,15 @@ void c_OutputI2S::RegisterSlotDevice (OutputI2SChannelConfig_t config, uint32_t 
             break;
         }
 
-        if (nullptr == config.StartNewFrame)
+        if (nullptr == config.GetNextIntensityBitSlices)
         {
-            logcon (F ("Invalid StartNewFrame function pointer"));
+            logcon (F ("Invalid GetNextIntensityBit function pointer"));
+            break;
+        }
+
+        if (nullptr == config.SetDefaultDataValue)
+        {
+            logcon (F ("Invalid SetDefaultDataValue function pointer"));
             break;
         }
 
@@ -246,6 +256,7 @@ void c_OutputI2S::RegisterSlotDevice (OutputI2SChannelConfig_t config, uint32_t 
         currentConfig.arg = config.arg;
         currentConfig.GetNextIntensityBitSlices = config.GetNextIntensityBitSlices;
         currentConfig.StartNewFrame = config.StartNewFrame;
+        currentConfig.SetDefaultDataValue = config.SetDefaultDataValue;
         currentConfig.IdleLevelIsHigh = config.IdleLevelIsHigh;
 
         *DataBit = 1 << config.I2SChannelId;
@@ -262,6 +273,14 @@ void c_OutputI2S::RegisterSlotDevice (OutputI2SChannelConfig_t config, uint32_t 
             DefaultIntensitySliceData &= *DataBitMask;
         }
     
+        // DEBUG_V("notify the active channels that there is a new default output value");
+        for(auto currentPort : OutputI2SSlotConfigs)
+        {
+            if(nullptr !=currentPort.SetDefaultDataValue)
+            {
+                currentPort.SetDefaultDataValue (currentPort.arg, DefaultIntensitySliceData);
+            }
+        }
     } while (false);
 
     // DEBUG_END;
@@ -289,6 +308,7 @@ void c_OutputI2S::RemoveSlotDevice (uint32_t I2SChannelId)
         currentConfig.arg = nullptr;
         currentConfig.GetNextIntensityBitSlices = nullptr;
         currentConfig.StartNewFrame = nullptr;
+        currentConfig.SetDefaultDataValue = nullptr;
 
         SetGpio (I2SChannelId, gpio_num_t (I2S_PIN_NO_CHANGE));
 

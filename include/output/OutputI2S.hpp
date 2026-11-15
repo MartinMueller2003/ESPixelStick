@@ -39,8 +39,9 @@ public:
         uint32_t    I2SChannelId;
         gpio_num_t  DataPin;
         void        *arg;
-        bool        (*GetNextIntensityBitSlices) (void*arg, I2S_Item_t * data, uint32_t numSlices, I2S_Item_t DefaultIntensitySliceData) = nullptr;
+        bool        (*GetNextIntensityBitSlices) (void * arg, I2S_Item_t * data, uint32_t & numSlices, I2S_Item_t DefaultIntensitySliceData) = nullptr;
         void        (*StartNewFrame) (void*arg) = nullptr;
+        void        (*SetDefaultDataValue) (void*arg, I2S_Item_t DefaultIntensitySliceData) = nullptr;
         bool        IsActive;
         bool        IdleLevelIsHigh;
     };
