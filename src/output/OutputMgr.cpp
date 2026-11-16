@@ -47,6 +47,7 @@
 #include "output/OutputGS8208Uart.hpp"
 #include "output/OutputGS8208Rmt.hpp"
 #include "output/OutputUCS8903Uart.hpp"
+#include "output/OutputUCS8903I2S.hpp"
 #include "output/OutputUCS8903Rmt.hpp"
 #include "output/OutputTLS3001Rmt.hpp"
 // needs to be last
