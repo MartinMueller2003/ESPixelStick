@@ -78,7 +78,7 @@ public:
     virtual ~c_OutputI2S ();
 
     void        Begin               ();
-    void        RegisterSlotDevice  (OutputI2SChannelConfig_t config, uint32_t * DataBit, uint32_t * DataBitMask);
+    void        RegisterSlotDevice  (OutputI2SChannelConfig_t config, I2S_Item_t & DataBit, I2S_Item_t & DataBitMask);
     void        RemoveSlotDevice    (uint32_t I2SChannelId);
     void        GetStatus           (ArduinoJson::JsonObject& jsonStatus);
     void        GetDriverName       (String &value)  { value = F("I2S"); }

@@ -222,7 +222,7 @@ void c_OutputI2S::GetStatus (ArduinoJson::JsonObject& jsonStatus)
 } // GetStatus
 
 //----------------------------------------------------------------------------
-void c_OutputI2S::RegisterSlotDevice (OutputI2SChannelConfig_t config, uint32_t * DataBit, uint32_t * DataBitMask)
+void c_OutputI2S::RegisterSlotDevice (OutputI2SChannelConfig_t config, I2S_Item_t & DataBit, I2S_Item_t & DataBitMask)
 {
     // DEBUG_START;
 
@@ -259,18 +259,18 @@ void c_OutputI2S::RegisterSlotDevice (OutputI2SChannelConfig_t config, uint32_t 
         currentConfig.SetDefaultDataValue = config.SetDefaultDataValue;
         currentConfig.IdleLevelIsHigh = config.IdleLevelIsHigh;
 
-        *DataBit = 1 << config.I2SChannelId;
-        *DataBitMask = ~ (1 << config.I2SChannelId);
+        DataBit = 1 << config.I2SChannelId;
+        DataBitMask = ~ (1 << config.I2SChannelId);
         // DEBUG_V (String ("DataBit: 0x") + String (*DataBit, HEX));
         SetGpio (config.I2SChannelId, config.DataPin);
 
         if (config.IdleLevelIsHigh)
         {
-            DefaultIntensitySliceData |= *DataBit;
+            DefaultIntensitySliceData |= DataBit;
         }
         else
         {
-            DefaultIntensitySliceData &= *DataBitMask;
+            DefaultIntensitySliceData &= DataBitMask;
         }
     
         // DEBUG_V("notify the active channels that there is a new default output value");
