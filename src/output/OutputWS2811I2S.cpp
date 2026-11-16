@@ -105,7 +105,7 @@ void c_OutputWS2811I2S::Begin ()
 
     // DEBUG_V (String ("DataPin: ") + String (DataPin));
 
-    FrameResetBitCount        = 0;
+    FrameResetSliceCount        = 0;
     FrameResetRemainingSliceCount = 0;
 
     c_OutputI2S::OutputI2SChannelConfig_t OutputI2SConfig;
@@ -150,8 +150,8 @@ void c_OutputWS2811I2S::CalculateFrameBitSlices ()
     // uint32_t IdleLenNS = (MinFrameLenNS > FrameDurationInNS) ? MinFrameLenNS - FrameDurationInNS : 2 *NanoSecondsInAMicroSecond; 
     // DEBUG_V (String ("                   IdleLenNS: ") + String (IdleLenNS));
     
-    FrameResetBitCount = I2Sdriver->GetNumTimeSlicesForTargetTimeNS (InterFrameGapInMicroSec * NanoSecondsInAMicroSecond);
-    FrameResetBitCount = (FrameResetBitCount + 3) & ~3; // round up to the nearest multiple of 4
+    FrameResetSliceCount = I2Sdriver->GetNumTimeSlicesForTargetTimeNS (InterFrameGapInMicroSec * NanoSecondsInAMicroSecond);
+    FrameResetSliceCount = (FrameResetSliceCount + 3) & ~3; // round up to the nearest multiple of 4
     // DEBUG_V (String ("        FrameResetSliceCount: ") + String (FrameResetSliceCount));
 
     // DEBUG_END;
@@ -250,7 +250,7 @@ void c_OutputWS2811I2S::GetStatus (ArduinoJson::JsonObject& jsonStatus)
 
     JsonWrite (JsonCounters, "DataBitMask",                 String (DataBitMask, HEX));
     JsonWrite (JsonCounters, "DataBit",                     String (DataBit, HEX));
-    JsonWrite (JsonCounters, "FrameResetBitCount",          FrameResetBitCount);
+    JsonWrite (JsonCounters, "FrameResetBitCount",          FrameResetSliceCount);
     JsonWrite (JsonCounters, "FrameResetRemainingBitCount", FrameResetRemainingSliceCount);
     JsonWrite (JsonCounters, "DataPattern",                 String (DataPattern, HEX));
     JsonWrite (JsonCounters, "DataPatternMask",             String (DataPatternMask, HEX));
@@ -270,7 +270,7 @@ void IRAM_ATTR c_OutputWS2811I2S::ISR_StartNewDataFrame ()
     // DEBUG_V (String ("frame started on ") + String (OutputPortDefinition.gpios.data));
     INC_WS2811_I2S_DEBUG_COUNTER (FrameStarts);
 
-    FrameResetRemainingSliceCount  = FrameResetBitCount;
+    FrameResetRemainingSliceCount  = FrameResetSliceCount;
     OutputWS2811I2S_FSM_State = c_OutputWS2811I2S::OutputWS2811I2S_FSM_States::_OutputWS2811I2S_FSM_State_FrameReset;
 
     // DEBUG_END;
@@ -302,7 +302,7 @@ bool IRAM_ATTR c_OutputWS2811I2S::ISR_GetNextDataSlicesToSend (c_OutputI2S::I2S_
 
     // NOTE: The data request is always uint32 aligned and is a multiple of uint32s long
 
-    while (numSlices)
+    while (numSlices && MoreDataToSend)
     {
         INC_WS2811_I2S_DEBUG_COUNTER (GetDataSlicesII);
 
@@ -333,13 +333,13 @@ bool IRAM_ATTR c_OutputWS2811I2S::ISR_GetNextDataSlicesToSend (c_OutputI2S::I2S_
                 INC_WS2811_I2S_DEBUG_COUNTER (FrameResetII);
 
                 // did the counter wrap?
-                if ((0 == FrameResetRemainingSliceCount) || (FrameResetRemainingSliceCount > FrameResetBitCount))
+                if ((0 == FrameResetRemainingSliceCount) || (FrameResetRemainingSliceCount > FrameResetSliceCount))
                 {
                     INC_WS2811_I2S_DEBUG_COUNTER (FrameResetDone);
 
                     ISR_SetUpNextDataToSend ();
                     OutputWS2811I2S_FSM_State = c_OutputWS2811I2S::OutputWS2811I2S_FSM_States::_OutputWS2811I2S_FSM_State_Data;
-                } // end if ((0 == FrameResetRemainingSliceCount) || (FrameResetRemainingSliceCount > FrameResetBitCount))
+                } // end if ((0 == FrameResetRemainingSliceCount) || (FrameResetRemainingSliceCount > FrameResetSliceCount))
 
                 INC_WS2811_I2S_DEBUG_COUNTER (FrameResetIII);
 
@@ -373,6 +373,7 @@ bool IRAM_ATTR c_OutputWS2811I2S::ISR_GetNextDataSlicesToSend (c_OutputI2S::I2S_
                             INC_WS2811_I2S_DEBUG_COUNTER (DataIV);
                             // stop sending data bits
                             OutputWS2811I2S_FSM_State = c_OutputWS2811I2S::OutputWS2811I2S_FSM_States::_OutputWS2811I2S_FSM_State_Idle;
+                            MoreDataToSend = false;
                             break;
                         } // end if(!ISR_SetUpNextDataToSend())
                     } // end new data pattern needed
@@ -386,25 +387,14 @@ bool IRAM_ATTR c_OutputWS2811I2S::ISR_GetNextDataSlicesToSend (c_OutputI2S::I2S_
                 // fill the remaining data buffer with default data.
                 INC_WS2811_I2S_DEBUG_COUNTER (IdleSliceCount);
                 MoreDataToSend = false;
-                memset(pDataToSend, DefaultIntensitySliceData, numSlices);
-        
-                numSlices = 0;
-                pDataToSend += numSlices;
                 break;
             } // end OutputWS2811I2S_FSM_States::_OutputWS2811I2S_FSM_State_Idle:
 
             default:
             {
-                OutputWS2811I2S_FSM_State = c_OutputWS2811I2S::OutputWS2811I2S_FSM_States::_OutputWS2811I2S_FSM_State_Idle;
-
                 INC_WS2811_I2S_DEBUG_COUNTER (UnKnownFrameState);
-
+                OutputWS2811I2S_FSM_State = c_OutputWS2811I2S::OutputWS2811I2S_FSM_States::_OutputWS2811I2S_FSM_State_Idle;
                 MoreDataToSend = false;
-                memset(pDataToSend, DefaultIntensitySliceData, numSlices);
-        
-                numSlices = 0;
-                pDataToSend += numSlices;
-        
                 break;
             } // end default case
         } // switch (CurrentFsmState)

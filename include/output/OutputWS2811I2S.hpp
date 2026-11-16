@@ -59,7 +59,7 @@ private:
     uint32_t        DataBitMask;
     uint32_t        DataBit;
 
-    uint32_t        FrameResetBitCount;
+    uint32_t        FrameResetSliceCount;
     uint32_t        FrameResetRemainingSliceCount;
 
     uint32_t        IdleSliceCount;
