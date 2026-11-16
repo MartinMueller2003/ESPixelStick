@@ -118,7 +118,7 @@ void c_OutputWS2811I2S::Begin ()
     OutputI2SConfig.IdleLevelIsHigh           = true; // idle is low
     OutputI2SConfig.IsActive                  = false; // do not output data
 
-    I2Sdriver->RegisterSlotDevice (OutputI2SConfig, &DataBit, &DataBitMask);
+    I2Sdriver->RegisterSlotDevice (OutputI2SConfig, DataBit, DataBitMask);
 
     // DEBUG_V (String ("    DataBit: 0x") + String (DataBit, HEX));
     // DEBUG_V (String ("DataBitMask: 0x") + String (DataBitMask, HEX));
@@ -280,6 +280,10 @@ void IRAM_ATTR c_OutputWS2811I2S::ISR_StartNewDataFrame ()
 void c_OutputWS2811I2S::SetDefaultDataValue (c_OutputI2S::I2S_Item_t DefaultIntensitySliceData)
 {
     // DEBUG_START;
+
+    // DEBUG_V (String ("     SetDefaultDataValue:0x") + String (DefaultIntensitySliceData, HEX));
+    // DEBUG_V (String ("                 DataBit:0x") + String (DataBit, HEX));
+    // DEBUG_V (String ("             DataBitMask:0x") + String (DataBitMask, HEX));
 
     OneBit.DataAsBytes[2] = DefaultIntensitySliceData | DataBit;
     OneBit.DataAsBytes[3] = DefaultIntensitySliceData | DataBit;
