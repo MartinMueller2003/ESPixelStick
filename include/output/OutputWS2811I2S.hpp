@@ -56,19 +56,16 @@ private:
     // The adjustments compensate for rounding errors in the calculations
     c_OutputI2S     *I2Sdriver;
 
-    uint32_t        DataBitMask;
-    uint32_t        DataBit;
+    c_OutputI2S::I2S_Item_t DataBitMask;
+    c_OutputI2S::I2S_Item_t DataBit;
 
     uint32_t        FrameResetSliceCount;
     uint32_t        FrameResetRemainingSliceCount;
 
-    uint32_t        IdleSliceCount;
-    uint32_t        IdleCurrentSliceCount;
-
     uint32_t        DataPattern;
     uint32_t        DataPatternMask;
 
-    #define WS2811_I2S_DEBUG_COUNTERS
+    // #define WS2811_I2S_DEBUG_COUNTERS
     #ifdef WS2811_I2S_DEBUG_COUNTERS
     #define INC_WS2811_I2S_DEBUG_COUNTER(c) (I2SDebugCounters.c++)
     struct
