@@ -60,19 +60,19 @@ var NAVTREEINDEX =
 "_const_names_8cpp.html#af22c2ba529ecb3b73ff345f8f119ebce",
 "_const_names_8hpp.html#ae083a5e9def6af78cb69e46ab533599a",
 "_g_p_i_o___defs___e_s_p32___d1___m_i_n_i___e_t_h_8hpp.html",
-"_g_p_i_o___defs___e_s_p32___lo_lin___d32___p_r_o___e_t_h_8hpp_source.html",
-"_g_p_i_o___defs___e_s_p32___q_u_i_n_l_e_d___q_u_a_d___a_e___plus__8_8hpp.html#ad5e649aa028bd3be75964322c1cc6ed0",
-"_g_p_i_o___defs___e_s_p32___relay___board__x8_8hpp.html#a026446f1360e0a3b8fd62986b687b5cf",
-"_g_p_i_o___defs___e_s_p32___w_t32_e_t_h01_8hpp.html#ad71d400bf3d1b998be16ce4c822a22ec",
-"_input_f_p_p_remote_8cpp.html#a05f2ca589c42eecadaecf95f69428333",
-"_web_mgr_8cpp.html#a5ef5f7e1f5774c687d0d71cb430178c0",
-"classc___file_mgr.html#ad1e8a2ab1fb887e915321d40f1959df3",
-"classc___input_f_p_p_remote.html#a2e5e64a21ad76c7015c6500393be7da3",
-"classc___input_mgr.html#adf546839c7f7aa002620aa0b5780e186",
-"classc___wi_fi_driver.html#a13d03a37aa4b2ec495b52dfebfe48ef5",
-"classfsm___wi_fi__state___connected_to_a_p.html#a30ec314444c4d729bb83a84afc4f67fe",
-"globals_vars_o.html",
-"structc___input_f_p_p_remote_play_item_1_1_file_control__t.html"
+"_g_p_i_o___defs___e_s_p32___lo_lin___d32___p_r_o___e_t_h_8hpp.html#af2936ca829929ac3e76f0969fdfbf732",
+"_g_p_i_o___defs___e_s_p32___q_u_i_n_l_e_d___q_u_a_d___a_e___plus__8_8hpp.html#aca6c98b14a61849654e93ee35fd1d1ab",
+"_g_p_i_o___defs___e_s_p32___relay___board__x8_8hpp.html",
+"_g_p_i_o___defs___e_s_p32___w_t32_e_t_h01_8hpp.html#aca6c98b14a61849654e93ee35fd1d1ab",
+"_input_f_p_p_remote_8cpp.html",
+"_web_mgr_8cpp.html",
+"classc___file_mgr.html#abf9680ad0d546bd42476f6460e387ba0",
+"classc___input_f_p_p_remote.html#a1026fa25a114a817ca6a47a3df45d047",
+"classc___input_mgr.html#ad0133347ca029d6e96ba7c0281a3444d",
+"classc___wi_fi_driver.html#a07e5aa4bfbe3e838bd38fce6fa949c27",
+"classfsm___wi_fi__state___boot.html#ab85f244d7f7ebf64a24b95abf67cc5a6",
+"globals_vars_i.html",
+"structc___input_f_p_p_remote_play_file_1_1_sync_control__t.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

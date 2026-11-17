@@ -26,6 +26,7 @@ var dir_994de0fd01319e484ee1453a6afebed0 =
     [ "OutputTLS3001.cpp", "_output_t_l_s3001_8cpp.html", null ],
     [ "OutputTLS3001Rmt.cpp", "_output_t_l_s3001_rmt_8cpp.html", null ],
     [ "OutputTM1814.cpp", "_output_t_m1814_8cpp.html", null ],
+    [ "OutputTM1814I2S.cpp", "_output_t_m1814_i2_s_8cpp.html", null ],
     [ "OutputTM1814Rmt.cpp", "_output_t_m1814_rmt_8cpp.html", null ],
     [ "OutputTM1814Uart.cpp", "_output_t_m1814_uart_8cpp.html", null ],
     [ "OutputUart.cpp", "_output_uart_8cpp.html", null ],
