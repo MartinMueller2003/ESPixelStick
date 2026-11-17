@@ -34,6 +34,7 @@ var dir_994de0fd01319e484ee1453a6afebed0 =
     [ "OutputUCS1903Rmt.cpp", "_output_u_c_s1903_rmt_8cpp.html", null ],
     [ "OutputUCS1903Uart.cpp", "_output_u_c_s1903_uart_8cpp.html", null ],
     [ "OutputUCS8903.cpp", "_output_u_c_s8903_8cpp.html", null ],
+    [ "OutputUCS8903I2S.cpp", "_output_u_c_s8903_i2_s_8cpp.html", null ],
     [ "OutputUCS8903Rmt.cpp", "_output_u_c_s8903_rmt_8cpp.html", null ],
     [ "OutputUCS8903Uart.cpp", "_output_u_c_s8903_uart_8cpp.html", null ],
     [ "OutputWS2801.cpp", "_output_w_s2801_8cpp.html", null ],

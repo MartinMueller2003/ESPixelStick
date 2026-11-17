@@ -32,6 +32,7 @@ var dir_28ea8e66f7bbbd0bcb5bade88239d5de =
     [ "OutputTM1814Uart.hpp", "_output_t_m1814_uart_8hpp.html", null ],
     [ "OutputUart.hpp", "_output_uart_8hpp.html", null ],
     [ "OutputUCS1903.hpp", "_output_u_c_s1903_8hpp.html", null ],
+    [ "OutputUCS1903I2S.hpp", "_output_u_c_s1903_i2_s_8hpp.html", null ],
     [ "OutputUCS1903Rmt.hpp", "_output_u_c_s1903_rmt_8hpp.html", null ],
     [ "OutputUCS1903Uart.hpp", "_output_u_c_s1903_uart_8hpp.html", null ],
     [ "OutputUCS8903.hpp", "_output_u_c_s8903_8hpp.html", null ],
