@@ -24,7 +24,9 @@
 // GPIO 34 and 35 are the button inputs (input only), GPIO 15, 16, 17 and 36 are shared with the QEXP port, I2C and the PDM
 // microphone, so there is no SPI or I2C output port here.
 
- #define FPP_VARIANT_NAME "QUINLED_Dig-Octa_v4"
+// Same FPP variant name as the v2 environment: xLights matches its controller definition on this string, and the v4 has the
+// same eight pixel ports, relay and protocol list, so the existing "QUINLED_Dig-Octa" definition fits it.
+ #define FPP_VARIANT_NAME "QUINLED_Dig-Octa"
 
 //Output Manager
 // MAX 8 Serial ports on ESP32
