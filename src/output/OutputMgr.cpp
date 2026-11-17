@@ -39,6 +39,7 @@
 #include "output/OutputTM1814Rmt.hpp"
 #include "output/OutputTM1814Uart.hpp"
 #include "output/OutputUCS1903Rmt.hpp"
+#include "output/OutputUCS1903I2S.hpp"
 #include "output/OutputUCS1903Uart.hpp"
 #include "output/OutputWS2801Spi.hpp"
 #include "output/OutputWS2811I2S.hpp"

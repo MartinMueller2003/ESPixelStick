@@ -1,5 +1,5 @@
 /*
-* OutputUCS8903I2S.cpp - UCS8903 driver code for ESPixelStick I2S Channel
+* OutputUCS1903I2S.cpp - UCS1903 driver code for ESPixelStick I2S Channel
 *
 * Project: ESPixelStick - An ESP8266 / ESP32 and E1.31 based pixel driver
 * Copyright (c) 2015, 2026 Shelby Merrick
@@ -17,70 +17,70 @@
 *
 */
 #include "ESPixelStick.h"
-#if defined (SUPPORT_OutputProtocol_UCS8903) && defined (SUPPORT_I2S)
+#if defined (SUPPORT_OutputProtocol_UCS1903) && defined (SUPPORT_I2S)
 
-#include "output/OutputUCS8903I2S.hpp"
+#include "output/OutputUCS1903I2S.hpp"
 #include "output/OutputMgr.hpp"
 
 //----------------------------------------------------------------------------
-#ifdef UCS8903_I2S_DEBUG_COUNTERS
+#ifdef UCS1903_I2S_DEBUG_COUNTERS
 uint32_t StartNewFrameBaseCount = 0;
 uint32_t GetDataSlicesToSendBaseCount = 0;
 uint32_t SetDefaultDataValueBaseCount = 0;
-#endif // def UCS8903_I2S_DEBUG_COUNTERS
+#endif // def UCS1903_I2S_DEBUG_COUNTERS
 
 //----------------------------------------------------------------------------
 // return false if there are no more data slices to send
 static void IRAM_ATTR StartNewFrameBase (void * arg)
 {
-    #ifdef UCS8903_I2S_DEBUG_COUNTERS
+    #ifdef UCS1903_I2S_DEBUG_COUNTERS
     StartNewFrameBaseCount++;
-    #endif // def UCS8903_I2S_DEBUG_COUNTERS
+    #endif // def UCS1903_I2S_DEBUG_COUNTERS
     
-    reinterpret_cast<c_OutputUCS8903I2S*> (arg)->ISR_StartNewDataFrame ();
+    reinterpret_cast<c_OutputUCS1903I2S*> (arg)->ISR_StartNewDataFrame ();
 } // StartNewFrameBase
 
 //----------------------------------------------------------------------------
 // return false if there are no more data slices to send
 static bool IRAM_ATTR GetDataSlicesToSendBase (void * arg, c_OutputI2S::I2S_Item_t * DataToSend, uint32_t & numSlices, c_OutputI2S::I2S_Item_t DefaultIntensitySliceData)
 {
-    #ifdef UCS8903_I2S_DEBUG_COUNTERS
+    #ifdef UCS1903_I2S_DEBUG_COUNTERS
     ++GetDataSlicesToSendBaseCount;
-    #endif // def UCS8903_I2S_DEBUG_COUNTERS
+    #endif // def UCS1903_I2S_DEBUG_COUNTERS
 
-    return reinterpret_cast<c_OutputUCS8903I2S*> (arg)->ISR_GetNextDataSlicesToSend (DataToSend, numSlices, DefaultIntensitySliceData);
+    return reinterpret_cast<c_OutputUCS1903I2S*> (arg)->ISR_GetNextDataSlicesToSend (DataToSend, numSlices, DefaultIntensitySliceData);
 } // ISR_GetNextBitToSend
 
 //----------------------------------------------------------------------------
 static void SetDefaultDataValueBase (void * arg, c_OutputI2S::I2S_Item_t DefaultIntensitySliceData)
 {
-    #ifdef UCS8903_I2S_DEBUG_COUNTERS
+    #ifdef UCS1903_I2S_DEBUG_COUNTERS
     ++SetDefaultDataValueBaseCount;
-    #endif // def UCS8903_I2S_DEBUG_COUNTERS
+    #endif // def UCS1903_I2S_DEBUG_COUNTERS
 
-    reinterpret_cast<c_OutputUCS8903I2S*> (arg)->SetDefaultDataValue (DefaultIntensitySliceData);
+    reinterpret_cast<c_OutputUCS1903I2S*> (arg)->SetDefaultDataValue (DefaultIntensitySliceData);
 } // SetDefaultDataValueBase
 
 //----------------------------------------------------------------------------
-c_OutputUCS8903I2S::c_OutputUCS8903I2S (OM_OutputPortDefinition_t & OutputPortDefinition,
+c_OutputUCS1903I2S::c_OutputUCS1903I2S (OM_OutputPortDefinition_t & OutputPortDefinition,
                                       c_OutputMgr::e_OutputProtocolType outputType) :
-    c_OutputUCS8903 (OutputPortDefinition, outputType)
+    c_OutputUCS1903 (OutputPortDefinition, outputType)
 {
     // DEBUG_START;
 
-    // DEBUG_V (String ("UCS8903_PIXEL_I2S_TICKS_BIT_0_H: 0x") + String (UCS8903_PIXEL_I2S_TICKS_BIT_0_HIGH, HEX));
-    // DEBUG_V (String ("UCS8903_PIXEL_I2S_TICKS_BIT_0_L: 0x") + String (UCS8903_PIXEL_I2S_TICKS_BIT_0_LOW,  HEX));
-    // DEBUG_V (String ("UCS8903_PIXEL_I2S_TICKS_BIT_1_H: 0x") + String (UCS8903_PIXEL_I2S_TICKS_BIT_1_HIGH, HEX));
-    // DEBUG_V (String ("UCS8903_PIXEL_I2S_TICKS_BIT_1_L: 0x") + String (UCS8903_PIXEL_I2S_TICKS_BIT_1_LOW,  HEX));
+    // DEBUG_V (String ("UCS1903_PIXEL_I2S_TICKS_BIT_0_H: 0x") + String (UCS1903_PIXEL_I2S_TICKS_BIT_0_HIGH, HEX));
+    // DEBUG_V (String ("UCS1903_PIXEL_I2S_TICKS_BIT_0_L: 0x") + String (UCS1903_PIXEL_I2S_TICKS_BIT_0_LOW,  HEX));
+    // DEBUG_V (String ("UCS1903_PIXEL_I2S_TICKS_BIT_1_H: 0x") + String (UCS1903_PIXEL_I2S_TICKS_BIT_1_HIGH, HEX));
+    // DEBUG_V (String ("UCS1903_PIXEL_I2S_TICKS_BIT_1_L: 0x") + String (UCS1903_PIXEL_I2S_TICKS_BIT_1_LOW,  HEX));
 
-    OutputUCS8903I2S_FSM_State = OutputUCS8903I2S_FSM_States::_OutputUCS8903I2S_FSM_State_Idle;
+    OutputUCS1903I2S_FSM_State = OutputUCS1903I2S_FSM_States::_OutputUCS1903I2S_FSM_State_Idle;
 
     // DEBUG_END;
 
-} // c_OutputUCS8903I2S
+} // c_OutputUCS1903I2S
 
 //----------------------------------------------------------------------------
-c_OutputUCS8903I2S::~c_OutputUCS8903I2S ()
+c_OutputUCS1903I2S::~c_OutputUCS1903I2S ()
 {
     // DEBUG_START;
     if (HasBeenInitialized)
@@ -89,23 +89,23 @@ c_OutputUCS8903I2S::~c_OutputUCS8903I2S ()
     }
 
     // DEBUG_END;
-} // ~c_OutputUCS8903I2S
+} // ~c_OutputUCS1903I2S
 
 //----------------------------------------------------------------------------
-void c_OutputUCS8903I2S::Begin ()
+void c_OutputUCS1903I2S::Begin ()
 {
     // DEBUG_START;
 
     I2Sdriver = OutputMgr.GetI2sDriver ();
 
-    c_OutputUCS8903::Begin ();
+    c_OutputUCS1903::Begin ();
 
     // make sure we are in the paused state
     PauseOutput (true);
 
     // DEBUG_V (String ("DataPin: ") + String (DataPin));
 
-    FrameResetSliceCount          = 0;
+    FrameResetSliceCount        = 0;
     FrameResetRemainingSliceCount = 0;
 
     c_OutputI2S::OutputI2SChannelConfig_t OutputI2SConfig;
@@ -118,7 +118,6 @@ void c_OutputUCS8903I2S::Begin ()
     OutputI2SConfig.IdleLevelIsHigh           = true; // idle is low
     OutputI2SConfig.IsActive                  = false; // do not output data
 
-    // this call returns the bit mask and bit value to use for the data pin in the I2S output item
     I2Sdriver->RegisterSlotDevice (OutputI2SConfig, DataBit, DataBitMask);
 
     // DEBUG_V (String ("    DataBit: 0x") + String (DataBit, HEX));
@@ -131,7 +130,7 @@ void c_OutputUCS8903I2S::Begin ()
 } // Begin
 
 //----------------------------------------------------------------------------
-void c_OutputUCS8903I2S::CalculateFrameBitSlices ()
+void c_OutputUCS1903I2S::CalculateFrameBitSlices ()
 {
     // DEBUG_START;
 
@@ -151,9 +150,8 @@ void c_OutputUCS8903I2S::CalculateFrameBitSlices ()
     // uint32_t IdleLenNS = (MinFrameLenNS > FrameDurationInNS) ? MinFrameLenNS - FrameDurationInNS : 2 *NanoSecondsInAMicroSecond; 
     // DEBUG_V (String ("                   IdleLenNS: ") + String (IdleLenNS));
     
-    // DEBUG_V (String ("     InterFrameGapInMicroSec: ") + String (InterFrameGapInMicroSec));
     FrameResetSliceCount = I2Sdriver->GetNumTimeSlicesForTargetTimeNS (InterFrameGapInMicroSec * NanoSecondsInAMicroSecond);
-    FrameResetSliceCount = (FrameResetSliceCount + 3) & ~3; // round up to the nearest multiple of 4
+    FrameResetSliceCount = (FrameResetSliceCount + (sizeof(DataAsUint_t) - 1)) & ~(sizeof(DataAsUint_t) - 1); // round up to the nearest multiple of the data type size
     // DEBUG_V (String ("        FrameResetSliceCount: ") + String (FrameResetSliceCount));
 
     // DEBUG_END;
@@ -161,13 +159,13 @@ void c_OutputUCS8903I2S::CalculateFrameBitSlices ()
 } // CalculateFrameBits
 
 //----------------------------------------------------------------------------
-bool c_OutputUCS8903I2S::SetConfig (ArduinoJson::JsonObject& jsonConfig)
+bool c_OutputUCS1903I2S::SetConfig (ArduinoJson::JsonObject& jsonConfig)
 {
     // DEBUG_START;
 
     PauseOutput (true);
 
-    bool response = c_OutputUCS8903::SetConfig (jsonConfig);
+    bool response = c_OutputUCS1903::SetConfig (jsonConfig);
 
     // update the output GPIO
     I2Sdriver->SetGpio (OutputPortDefinition.PortId, OutputPortDefinition.gpios.data);
@@ -190,12 +188,12 @@ bool c_OutputUCS8903I2S::SetConfig (ArduinoJson::JsonObject& jsonConfig)
 } // SetConfig
 
 //----------------------------------------------------------------------------
-void c_OutputUCS8903I2S::SetOutputBufferSize (uint32_t NumChannelsToOutput)
+void c_OutputUCS1903I2S::SetOutputBufferSize (uint32_t NumChannelsToOutput)
 {
     // DEBUG_START;
 
     // DEBUG_V (String ("NumChannelsToOutput: ") + String (NumChannelsToOutput));
-    c_OutputUCS8903::SetOutputBufferSize (NumChannelsToOutput);
+    c_OutputUCS1903::SetOutputBufferSize (NumChannelsToOutput);
 
     if (OutputBufferSize)
     {
@@ -215,17 +213,17 @@ void c_OutputUCS8903I2S::SetOutputBufferSize (uint32_t NumChannelsToOutput)
 } // SetBufferSize
 
 //----------------------------------------------------------------------------
-void c_OutputUCS8903I2S::GetStatus (ArduinoJson::JsonObject& jsonStatus)
+void c_OutputUCS1903I2S::GetStatus (ArduinoJson::JsonObject& jsonStatus)
 {
     // // DEBUG_START;
-    c_OutputUCS8903::GetStatus (jsonStatus);
+    c_OutputUCS1903::GetStatus (jsonStatus);
 
     #ifdef USE_I2S_DEBUG_COUNTERS
     jsonStatus[F ("FrameDurationInMicroSec")] = FrameDurationInMicroSec;
     #endif // def USE_I2S_DEBUG_COUNTERS
 
-    #ifdef UCS8903_I2S_DEBUG_COUNTERS
-    JsonObject JsonCounters = jsonStatus["UCS8903_I2S_DEBUG_COUNTERS"].to<JsonObject> ();
+    #ifdef UCS1903_I2S_DEBUG_COUNTERS
+    JsonObject JsonCounters = jsonStatus["UCS1903_I2S_DEBUG_COUNTERS"].to<JsonObject> ();
     
     JsonWrite (JsonCounters, "GetDataSlicesToSendBaseCount",GetDataSlicesToSendBaseCount);
     JsonWrite (JsonCounters, "SetDefaultDataValueBaseCount", SetDefaultDataValueBaseCount);
@@ -257,29 +255,29 @@ void c_OutputUCS8903I2S::GetStatus (ArduinoJson::JsonObject& jsonStatus)
     JsonWrite (JsonCounters, "DataPattern",                 String (DataPattern, HEX));
     JsonWrite (JsonCounters, "DataPatternMask",             String (DataPatternMask, HEX));
 
-    #endif // def UCS8903_I2S_DEBUG_COUNTERS
+    #endif // def UCS1903_I2S_DEBUG_COUNTERS
 
     // // DEBUG_END;
 } // GetStatus
 
 //----------------------------------------------------------------------------
-void IRAM_ATTR c_OutputUCS8903I2S::ISR_StartNewDataFrame ()
+void IRAM_ATTR c_OutputUCS1903I2S::ISR_StartNewDataFrame ()
 {
     // DEBUG_START;
 
-    c_OutputUCS8903::ISR_StartNewFrame ();
+    c_OutputUCS1903::ISR_StartNewFrame ();
 
     // DEBUG_V (String ("frame started on ") + String (OutputPortDefinition.gpios.data));
-    INC_UCS8903_I2S_DEBUG_COUNTER (FrameStarts);
+    INC_UCS1903_I2S_DEBUG_COUNTER (FrameStarts);
 
     FrameResetRemainingSliceCount  = FrameResetSliceCount;
-    OutputUCS8903I2S_FSM_State = c_OutputUCS8903I2S::OutputUCS8903I2S_FSM_States::_OutputUCS8903I2S_FSM_State_FrameReset;
+    OutputUCS1903I2S_FSM_State = c_OutputUCS1903I2S::OutputUCS1903I2S_FSM_States::_OutputUCS1903I2S_FSM_State_FrameReset;
 
     // DEBUG_END;
 } // StartNewDataFrame
 
 //----------------------------------------------------------------------------
-void c_OutputUCS8903I2S::SetDefaultDataValue (c_OutputI2S::I2S_Item_t DefaultIntensitySliceData)
+void c_OutputUCS1903I2S::SetDefaultDataValue (c_OutputI2S::I2S_Item_t DefaultIntensitySliceData)
 {
     // DEBUG_START;
 
@@ -290,130 +288,135 @@ void c_OutputUCS8903I2S::SetDefaultDataValue (c_OutputI2S::I2S_Item_t DefaultInt
     OneBit.DataAsBytes[2] = DefaultIntensitySliceData | DataBit;
     OneBit.DataAsBytes[3] = DefaultIntensitySliceData | DataBit;
     OneBit.DataAsBytes[0] = DefaultIntensitySliceData | DataBit;
-    OneBit.DataAsBytes[1] = DefaultIntensitySliceData & DataBitMask;
-
+    OneBit.DataAsBytes[1] = DefaultIntensitySliceData | DataBit;
+    OneBit.DataAsBytes[6] = DefaultIntensitySliceData | DataBit;
+    OneBit.DataAsBytes[7] = DefaultIntensitySliceData | DataBit;
+    OneBit.DataAsBytes[4] = DefaultIntensitySliceData & DataBitMask;
+    OneBit.DataAsBytes[5] = DefaultIntensitySliceData & DataBitMask;
+    
     ZeroBit.DataAsBytes[2] = DefaultIntensitySliceData | DataBit;
-    ZeroBit.DataAsBytes[3] = DefaultIntensitySliceData & DataBitMask;
+    ZeroBit.DataAsBytes[3] = DefaultIntensitySliceData | DataBit;
     ZeroBit.DataAsBytes[0] = DefaultIntensitySliceData & DataBitMask;
     ZeroBit.DataAsBytes[1] = DefaultIntensitySliceData & DataBitMask;
+    ZeroBit.DataAsBytes[6] = DefaultIntensitySliceData & DataBitMask;
+    ZeroBit.DataAsBytes[7] = DefaultIntensitySliceData & DataBitMask;
+    ZeroBit.DataAsBytes[4] = DefaultIntensitySliceData & DataBitMask;
+    ZeroBit.DataAsBytes[5] = DefaultIntensitySliceData & DataBitMask;
 
     // DEBUG_END;
 } // SetDefaultDataValue
 
 //----------------------------------------------------------------------------
-bool IRAM_ATTR c_OutputUCS8903I2S::ISR_GetNextDataSlicesToSend (c_OutputI2S::I2S_Item_t * pDataToSend, uint32_t & numSlices, c_OutputI2S::I2S_Item_t DefaultIntensitySliceData)
+bool IRAM_ATTR c_OutputUCS1903I2S::ISR_GetNextDataSlicesToSend (c_OutputI2S::I2S_Item_t * pDataToSend, uint32_t & numSlices, c_OutputI2S::I2S_Item_t DefaultIntensitySliceData)
 {
     bool MoreDataToSend = true;
-    INC_UCS8903_I2S_DEBUG_COUNTER (GetDataSlicesI);
+    INC_UCS1903_I2S_DEBUG_COUNTER (GetDataSlicesI);
 
     // NOTE: The data request is always uint32 aligned and is a multiple of uint32s long
 
-    while (numSlices && MoreDataToSend)
+    INC_UCS1903_I2S_DEBUG_COUNTER (GetDataSlicesII);
+
+    switch (OutputUCS1903I2S_FSM_State)
     {
-        INC_UCS8903_I2S_DEBUG_COUNTER (GetDataSlicesII);
-
-        switch (OutputUCS8903I2S_FSM_State)
+        case OutputUCS1903I2S_FSM_States::_OutputUCS1903I2S_FSM_State_FrameReset:
         {
-            case OutputUCS8903I2S_FSM_States::_OutputUCS8903I2S_FSM_State_FrameReset:
+            INC_UCS1903_I2S_DEBUG_COUNTER (FrameReset);
+            
+            // Send as many slices as we can to fill the output buffer with the default data value.  The output buffer is always aligned to a DataAsUint_t boundary and the number of slices requested is always a multiple of the DataAsUint_t size.  The FrameResetRemainingSliceCount is also a multiple of the DataAsUint_t size, so we can fill the output buffer with a memset call.
+            uint NumSlicesToSend = min (FrameResetRemainingSliceCount, numSlices);
+            memset(pDataToSend, (DefaultIntensitySliceData & DataBitMask), NumSlicesToSend);
+            numSlices -= NumSlicesToSend;
+            pDataToSend += NumSlicesToSend;
+            FrameResetRemainingSliceCount -= NumSlicesToSend;
+
+            // do we need to send more slices?
+            if(FrameResetRemainingSliceCount > 0)
             {
-                INC_UCS8903_I2S_DEBUG_COUNTER (FrameReset);
-                
-                // align output to a word boundary
-                uint NumEntriesToSendToAlignOutputToUint32 = min (uint(pDataToSend) & 0x02, numSlices);
-                if(NumEntriesToSendToAlignOutputToUint32)
-                {
-                    memset(pDataToSend, (DefaultIntensitySliceData & DataBitMask), NumEntriesToSendToAlignOutputToUint32);
-                    numSlices -= NumEntriesToSendToAlignOutputToUint32;
-                    pDataToSend += NumEntriesToSendToAlignOutputToUint32;
-                } // end if(NumEntriesToSendToAlignOutputToUint32)
-
-                INC_UCS8903_I2S_DEBUG_COUNTER (FrameResetI);
-
-                // at this point, the output buffer pointer is aligned to a uint32 boundary. The numSlices is also now a multpl of 4
-                uint NumSlicesToSend = min (FrameResetRemainingSliceCount, numSlices);
-                memset(pDataToSend, (DefaultIntensitySliceData & DataBitMask), NumSlicesToSend);
-                numSlices -= NumSlicesToSend;
-                pDataToSend += NumSlicesToSend;
-                FrameResetRemainingSliceCount -= NumSlicesToSend;
-
-                INC_UCS8903_I2S_DEBUG_COUNTER (FrameResetII);
-
-                // did the counter wrap?
-                if ((0 == FrameResetRemainingSliceCount) || (FrameResetRemainingSliceCount > FrameResetSliceCount))
-                {
-                    INC_UCS8903_I2S_DEBUG_COUNTER (FrameResetDone);
-
-                    ISR_SetUpNextDataToSend ();
-                    OutputUCS8903I2S_FSM_State = c_OutputUCS8903I2S::OutputUCS8903I2S_FSM_States::_OutputUCS8903I2S_FSM_State_Data;
-                } // end if ((0 == FrameResetRemainingSliceCount) || (FrameResetRemainingSliceCount > FrameResetSliceCount))
-
-                INC_UCS8903_I2S_DEBUG_COUNTER (FrameResetIII);
-
+                // come back to finish in the next buffer
+                INC_UCS1903_I2S_DEBUG_COUNTER (FrameResetI);
                 break;
-            } // end case OutputUCS8903I2S_FSM_States::_OutputUCS8903I2S_FSM_State_FrameReset
+            } // end if(FrameResetRemainingSliceCount > 0)
 
-            case OutputUCS8903I2S_FSM_States::_OutputUCS8903I2S_FSM_State_Data:
+            INC_UCS1903_I2S_DEBUG_COUNTER (FrameResetII);
+
+            // align output to a bit boundary
+            uint NumEntriesToSendToAlignOutputToUint = min (uint(pDataToSend) & (sizeof(DataAsUint_t)-1), numSlices);
+            if(NumEntriesToSendToAlignOutputToUint)
             {
-                INC_UCS8903_I2S_DEBUG_COUNTER (DataI);
+                INC_UCS1903_I2S_DEBUG_COUNTER (FrameResetAlignments);
 
-                uint NumBitsToSend = numSlices / sizeof(OneBit.AsUint32);
+                memset(pDataToSend, (DefaultIntensitySliceData & DataBitMask), NumEntriesToSendToAlignOutputToUint);
+                numSlices -= NumEntriesToSendToAlignOutputToUint;
+                pDataToSend += NumEntriesToSendToAlignOutputToUint;
+            } // end if(NumEntriesToSendToAlignOutputToUint)
 
-                while (NumBitsToSend > 0)
+            // at this point, the output buffer pointer is aligned to a DataAsUint_t boundary.
+
+            INC_UCS1903_I2S_DEBUG_COUNTER (FrameResetDone);
+
+            // fall through to the send data state to send the first data pattern
+            OutputUCS1903I2S_FSM_State = OutputUCS1903I2S_FSM_States::_OutputUCS1903I2S_FSM_State_Data;
+
+        } // end case OutputUCS1903I2S_FSM_States::_OutputUCS1903I2S_FSM_State_FrameReset
+
+        case OutputUCS1903I2S_FSM_States::_OutputUCS1903I2S_FSM_State_Data:
+        {
+            INC_UCS1903_I2S_DEBUG_COUNTER (DataI);
+
+            uint NumBitsToSend = numSlices / sizeof(DataAsUint_t);
+
+            while (NumBitsToSend > 0)
+            {
+                INC_UCS1903_I2S_DEBUG_COUNTER (DataII);
+
+                * ((DataAsUint_t*) pDataToSend) = (DataPattern & DataBitMask) ? OneBit : ZeroBit;
+
+                --NumBitsToSend;
+                numSlices -= sizeof(DataAsUint_t);
+                pDataToSend += sizeof(DataAsUint_t);
+
+                DataPatternMask = DataPatternMask >> 1;
+
+                // did we just send the last bit of the current data pattern?
+                if (0 == DataPatternMask)
                 {
-                    INC_UCS8903_I2S_DEBUG_COUNTER (DataII);
+                    INC_UCS1903_I2S_DEBUG_COUNTER (DataIII);
 
-                    * ((uint32_t*) (pDataToSend)) = (DataPattern & DataBitMask) ? OneBit.AsUint32 : ZeroBit.AsUint32;
-
-                    --NumBitsToSend;
-                    numSlices -= sizeof(OneBit.AsUint32);
-                    pDataToSend += sizeof(OneBit.AsUint32);
-    
-                    DataPatternMask = DataPatternMask >> 1;
-                    if (0 == DataPatternMask)
+                    // try to get another data pattern to send
+                    if(!ISR_SetUpNextDataToSend())
                     {
-                        INC_UCS8903_I2S_DEBUG_COUNTER (DataIII);
+                        INC_UCS1903_I2S_DEBUG_COUNTER (DataIV);
+                        // stop sending data bits
+                        OutputUCS1903I2S_FSM_State = c_OutputUCS1903I2S::OutputUCS1903I2S_FSM_States::_OutputUCS1903I2S_FSM_State_Idle;
+                        MoreDataToSend = false;
+                        break;
+                    } // end if(!ISR_SetUpNextDataToSend())
+                } // end new data pattern needed
+            } // end while (NumBitsToSend > 0)
 
-                        // try to get another data pattern to send
-                        if(!ISR_SetUpNextDataToSend())
-                        {
-                            INC_UCS8903_I2S_DEBUG_COUNTER (DataIV);
-                            // stop sending data bits
-                            OutputUCS8903I2S_FSM_State = c_OutputUCS8903I2S::OutputUCS8903I2S_FSM_States::_OutputUCS8903I2S_FSM_State_Idle;
-                            MoreDataToSend = false;
-                            break;
-                        } // end if(!ISR_SetUpNextDataToSend())
-                    } // end new data pattern needed
-                } // end while (NumBitsToSend > 0)
+            // come back when we get a new buffer to fill
+            break;
 
-                break;
-            } // end case OutputUCS8903I2S_FSM_States::_OutputUCS8903I2S_FSM_State_Data
+        } // end case OutputUCS1903I2S_FSM_States::_OutputUCS1903I2S_FSM_State_Data
 
-            case OutputUCS8903I2S_FSM_States::_OutputUCS8903I2S_FSM_State_Idle:
-            {
-                // fill the remaining data buffer with default data.
-                INC_UCS8903_I2S_DEBUG_COUNTER (IdleSliceCount);
-                MoreDataToSend = false;
-                break;
-            } // end OutputUCS8903I2S_FSM_States::_OutputUCS8903I2S_FSM_State_Idle:
+        case OutputUCS1903I2S_FSM_States::_OutputUCS1903I2S_FSM_State_Idle:
+        default:
+        {
+            // nothing to do. Just leave.
+            INC_UCS1903_I2S_DEBUG_COUNTER (IdleSliceCount);
+            OutputUCS1903I2S_FSM_State = c_OutputUCS1903I2S::OutputUCS1903I2S_FSM_States::_OutputUCS1903I2S_FSM_State_Idle;
+            MoreDataToSend = false;
+            break;
+        } // end default case
+    } // switch (CurrentFsmState)
 
-            default:
-            {
-                INC_UCS8903_I2S_DEBUG_COUNTER (UnKnownFrameState);
-                OutputUCS8903I2S_FSM_State = c_OutputUCS8903I2S::OutputUCS8903I2S_FSM_States::_OutputUCS8903I2S_FSM_State_Idle;
-                MoreDataToSend = false;
-                break;
-            } // end default case
-        } // switch (CurrentFsmState)
-
-        INC_UCS8903_I2S_DEBUG_COUNTER (GetDataSlicesIII);
-
-    } // while (numSlices > 0)
+    INC_UCS1903_I2S_DEBUG_COUNTER (GetDataSlicesIII);
 
     return MoreDataToSend;
 } // ISR_GetNextDataSlicesToSend
 
 //----------------------------------------------------------------------------
-bool IRAM_ATTR c_OutputUCS8903I2S::ISR_SetUpNextDataToSend ()
+bool IRAM_ATTR c_OutputUCS1903I2S::ISR_SetUpNextDataToSend ()
 {
     // 1 bit of data has completed move to the next bit of data
     bool MoreDataToSend = true;
@@ -426,20 +429,20 @@ bool IRAM_ATTR c_OutputUCS8903I2S::ISR_SetUpNextDataToSend ()
         if (false == c_OutputPixel::ISR_MoreDataToSend ())
         {
             // Frame is complete, set up for the next frame
-            INC_UCS8903_I2S_DEBUG_COUNTER (FrameEnds);
+            INC_UCS1903_I2S_DEBUG_COUNTER (FrameEnds);
             MoreDataToSend = false;
 
-            OutputUCS8903I2S_FSM_State = OutputUCS8903I2S_FSM_States::_OutputUCS8903I2S_FSM_State_Idle;
+            OutputUCS1903I2S_FSM_State = OutputUCS1903I2S_FSM_States::_OutputUCS1903I2S_FSM_State_Idle;
             break;
         }
     
         // there is more data to send in the current frame
-        INC_UCS8903_I2S_DEBUG_COUNTER (DataByteCount);
+        INC_UCS1903_I2S_DEBUG_COUNTER (DataByteCount);
 
         // set up to output the next data byte
         c_OutputPixel::ISR_GetNextIntensityToSend (DataPattern);
         // next bit is MSBit
-        DataPatternMask = 0x8000;
+        DataPatternMask = 0x80;
 
     } while (false); // do once
 
@@ -447,7 +450,7 @@ bool IRAM_ATTR c_OutputUCS8903I2S::ISR_SetUpNextDataToSend ()
 } // ISR_SetUpNextDataToSend
 
 //----------------------------------------------------------------------------
-void c_OutputUCS8903I2S::PauseOutput (bool State)
+void c_OutputUCS1903I2S::PauseOutput (bool State)
 {
     // DEBUG_START;
 
@@ -457,12 +460,12 @@ void c_OutputUCS8903I2S::PauseOutput (bool State)
     if (IsPaused ())
     {
         // DEBUG_V ("Currently Paused, Make sure we are ready to start at the beginning of the next frame");
-        OutputUCS8903I2S_FSM_State = OutputUCS8903I2S_FSM_States::_OutputUCS8903I2S_FSM_State_Idle;
+        OutputUCS1903I2S_FSM_State = OutputUCS1903I2S_FSM_States::_OutputUCS1903I2S_FSM_State_Idle;
     }
-    c_OutputUCS8903::PauseOutput (State);
+    c_OutputUCS1903::PauseOutput (State);
     I2Sdriver->SetOutputState (OutputPortDefinition.PortId, !State);
 
     // DEBUG_END;
 } // PauseOutput
 
-#endif // defined (SUPPORT_OutputProtocol_UCS8903) && defined (SUPPORT_I2S)
+#endif // defined (SUPPORT_OutputProtocol_UCS1903) && defined (SUPPORT_I2S)
