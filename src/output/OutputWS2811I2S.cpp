@@ -151,7 +151,7 @@ void c_OutputWS2811I2S::CalculateFrameBitSlices ()
     // DEBUG_V (String ("                   IdleLenNS: ") + String (IdleLenNS));
     
     FrameResetSliceCount = I2Sdriver->GetNumTimeSlicesForTargetTimeNS (InterFrameGapInMicroSec * NanoSecondsInAMicroSecond);
-    FrameResetSliceCount = (FrameResetSliceCount + 3) & ~3; // round up to the nearest multiple of 4
+    FrameResetSliceCount = (FrameResetSliceCount + (sizeof(DataAsUint_t) - 1)) & ~(sizeof(DataAsUint_t) - 1); // round up to the nearest multiple of the data type size
     // DEBUG_V (String ("        FrameResetSliceCount: ") + String (FrameResetSliceCount));
 
     // DEBUG_END;
@@ -306,106 +306,103 @@ bool IRAM_ATTR c_OutputWS2811I2S::ISR_GetNextDataSlicesToSend (c_OutputI2S::I2S_
 
     // NOTE: The data request is always uint32 aligned and is a multiple of uint32s long
 
-    while (numSlices && MoreDataToSend)
+    INC_WS2811_I2S_DEBUG_COUNTER (GetDataSlicesII);
+
+    switch (OutputWS2811I2S_FSM_State)
     {
-        INC_WS2811_I2S_DEBUG_COUNTER (GetDataSlicesII);
-
-        switch (OutputWS2811I2S_FSM_State)
+        case OutputWS2811I2S_FSM_States::_OutputWS2811I2S_FSM_State_FrameReset:
         {
-            case OutputWS2811I2S_FSM_States::_OutputWS2811I2S_FSM_State_FrameReset:
-            {
-                INC_WS2811_I2S_DEBUG_COUNTER (FrameReset);
-                
-                // align output to a word boundary
-                uint NumEntriesToSendToAlignOutputToUint32 = min (uint(pDataToSend) & 0x02, numSlices);
-                if(NumEntriesToSendToAlignOutputToUint32)
-                {
-                    memset(pDataToSend, (DefaultIntensitySliceData & DataBitMask), NumEntriesToSendToAlignOutputToUint32);
-                    numSlices -= NumEntriesToSendToAlignOutputToUint32;
-                    pDataToSend += NumEntriesToSendToAlignOutputToUint32;
-                } // end if(NumEntriesToSendToAlignOutputToUint32)
+            INC_WS2811_I2S_DEBUG_COUNTER (FrameReset);
+            
+            // Send as many slices as we can to fill the output buffer with the default data value.  The output buffer is always aligned to a DataAsUint_t boundary and the number of slices requested is always a multiple of the DataAsUint_t size.  The FrameResetRemainingSliceCount is also a multiple of the DataAsUint_t size, so we can fill the output buffer with a memset call.
+            uint NumSlicesToSend = min (FrameResetRemainingSliceCount, numSlices);
+            memset(pDataToSend, (DefaultIntensitySliceData & DataBitMask), NumSlicesToSend);
+            numSlices -= NumSlicesToSend;
+            pDataToSend += NumSlicesToSend;
+            FrameResetRemainingSliceCount -= NumSlicesToSend;
 
+            // do we need to send more slices?
+            if(FrameResetRemainingSliceCount > 0)
+            {
+                // come back to finish in the next buffer
                 INC_WS2811_I2S_DEBUG_COUNTER (FrameResetI);
-
-                // at this point, the output buffer pointer is aligned to a uint32 boundary. The numSlices is also now a multpl of 4
-                uint NumSlicesToSend = min (FrameResetRemainingSliceCount, numSlices);
-                memset(pDataToSend, (DefaultIntensitySliceData & DataBitMask), NumSlicesToSend);
-                numSlices -= NumSlicesToSend;
-                pDataToSend += NumSlicesToSend;
-                FrameResetRemainingSliceCount -= NumSlicesToSend;
-
-                INC_WS2811_I2S_DEBUG_COUNTER (FrameResetII);
-
-                // did the counter wrap?
-                if ((0 == FrameResetRemainingSliceCount) || (FrameResetRemainingSliceCount > FrameResetSliceCount))
-                {
-                    INC_WS2811_I2S_DEBUG_COUNTER (FrameResetDone);
-
-                    ISR_SetUpNextDataToSend ();
-                    OutputWS2811I2S_FSM_State = c_OutputWS2811I2S::OutputWS2811I2S_FSM_States::_OutputWS2811I2S_FSM_State_Data;
-                } // end if ((0 == FrameResetRemainingSliceCount) || (FrameResetRemainingSliceCount > FrameResetSliceCount))
-
-                INC_WS2811_I2S_DEBUG_COUNTER (FrameResetIII);
-
                 break;
-            } // end case OutputWS2811I2S_FSM_States::_OutputWS2811I2S_FSM_State_FrameReset
+            } // end if(FrameResetRemainingSliceCount > 0)
 
-            case OutputWS2811I2S_FSM_States::_OutputWS2811I2S_FSM_State_Data:
+            INC_WS2811_I2S_DEBUG_COUNTER (FrameResetII);
+
+            // align output to a bit boundary
+            uint NumEntriesToSendToAlignOutputToUint = min (uint(pDataToSend) & (sizeof(DataAsUint_t)-1), numSlices);
+            if(NumEntriesToSendToAlignOutputToUint)
             {
-                INC_WS2811_I2S_DEBUG_COUNTER (DataI);
+                INC_WS2811_I2S_DEBUG_COUNTER (FrameResetAlignments);
 
-                uint NumBitsToSend = numSlices / sizeof(OneBit.AsUint32);
+                memset(pDataToSend, (DefaultIntensitySliceData & DataBitMask), NumEntriesToSendToAlignOutputToUint);
+                numSlices -= NumEntriesToSendToAlignOutputToUint;
+                pDataToSend += NumEntriesToSendToAlignOutputToUint;
+            } // end if(NumEntriesToSendToAlignOutputToUint)
 
-                while (NumBitsToSend > 0)
+            // at this point, the output buffer pointer is aligned to a DataAsUint_t boundary.
+
+            INC_WS2811_I2S_DEBUG_COUNTER (FrameResetDone);
+
+            // fall through to the send data state to send the first data pattern
+            OutputWS2811I2S_FSM_State = OutputWS2811I2S_FSM_States::_OutputWS2811I2S_FSM_State_Data;
+
+        } // end case OutputWS2811I2S_FSM_States::_OutputWS2811I2S_FSM_State_FrameReset
+
+        case OutputWS2811I2S_FSM_States::_OutputWS2811I2S_FSM_State_Data:
+        {
+            INC_WS2811_I2S_DEBUG_COUNTER (DataI);
+
+            uint NumBitsToSend = numSlices / sizeof(DataAsUint_t);
+
+            while (NumBitsToSend > 0)
+            {
+                INC_WS2811_I2S_DEBUG_COUNTER (DataII);
+
+                * ((DataAsUint_t*) pDataToSend) = (DataPattern & DataBitMask) ? OneBit : ZeroBit;
+
+                --NumBitsToSend;
+                numSlices -= sizeof(DataAsUint_t);
+                pDataToSend += sizeof(DataAsUint_t);
+
+                DataPatternMask = DataPatternMask >> 1;
+
+                // did we just send the last bit of the current data pattern?
+                if (0 == DataPatternMask)
                 {
-                    INC_WS2811_I2S_DEBUG_COUNTER (DataII);
+                    INC_WS2811_I2S_DEBUG_COUNTER (DataIII);
 
-                    * ((uint32_t*) (pDataToSend)) = (DataPattern & DataBitMask) ? OneBit.AsUint32 : ZeroBit.AsUint32;
-
-                    --NumBitsToSend;
-                    numSlices -= sizeof(OneBit.AsUint32);
-                    pDataToSend += sizeof(OneBit.AsUint32);
-    
-                    DataPatternMask = DataPatternMask >> 1;
-                    if (0 == DataPatternMask)
+                    // try to get another data pattern to send
+                    if(!ISR_SetUpNextDataToSend())
                     {
-                        INC_WS2811_I2S_DEBUG_COUNTER (DataIII);
+                        INC_WS2811_I2S_DEBUG_COUNTER (DataIV);
+                        // stop sending data bits
+                        OutputWS2811I2S_FSM_State = c_OutputWS2811I2S::OutputWS2811I2S_FSM_States::_OutputWS2811I2S_FSM_State_Idle;
+                        MoreDataToSend = false;
+                        break;
+                    } // end if(!ISR_SetUpNextDataToSend())
+                } // end new data pattern needed
+            } // end while (NumBitsToSend > 0)
 
-                        // try to get another data pattern to send
-                        if(!ISR_SetUpNextDataToSend())
-                        {
-                            INC_WS2811_I2S_DEBUG_COUNTER (DataIV);
-                            // stop sending data bits
-                            OutputWS2811I2S_FSM_State = c_OutputWS2811I2S::OutputWS2811I2S_FSM_States::_OutputWS2811I2S_FSM_State_Idle;
-                            MoreDataToSend = false;
-                            break;
-                        } // end if(!ISR_SetUpNextDataToSend())
-                    } // end new data pattern needed
-                } // end while (NumBitsToSend > 0)
+            // come back when we get a new buffer to fill
+            break;
 
-                break;
-            } // end case OutputWS2811I2S_FSM_States::_OutputWS2811I2S_FSM_State_Data
+        } // end case OutputWS2811I2S_FSM_States::_OutputWS2811I2S_FSM_State_Data
 
-            case OutputWS2811I2S_FSM_States::_OutputWS2811I2S_FSM_State_Idle:
-            {
-                // fill the remaining data buffer with default data.
-                INC_WS2811_I2S_DEBUG_COUNTER (IdleSliceCount);
-                MoreDataToSend = false;
-                break;
-            } // end OutputWS2811I2S_FSM_States::_OutputWS2811I2S_FSM_State_Idle:
+        case OutputWS2811I2S_FSM_States::_OutputWS2811I2S_FSM_State_Idle:
+        default:
+        {
+            // nothing to do. Just leave.
+            INC_WS2811_I2S_DEBUG_COUNTER (IdleSliceCount);
+            OutputWS2811I2S_FSM_State = c_OutputWS2811I2S::OutputWS2811I2S_FSM_States::_OutputWS2811I2S_FSM_State_Idle;
+            MoreDataToSend = false;
+            break;
+        } // end default case
+    } // switch (CurrentFsmState)
 
-            default:
-            {
-                INC_WS2811_I2S_DEBUG_COUNTER (UnKnownFrameState);
-                OutputWS2811I2S_FSM_State = c_OutputWS2811I2S::OutputWS2811I2S_FSM_States::_OutputWS2811I2S_FSM_State_Idle;
-                MoreDataToSend = false;
-                break;
-            } // end default case
-        } // switch (CurrentFsmState)
-
-        INC_WS2811_I2S_DEBUG_COUNTER (GetDataSlicesIII);
-
-    } // while (numSlices > 0)
+    INC_WS2811_I2S_DEBUG_COUNTER (GetDataSlicesIII);
 
     return MoreDataToSend;
 } // ISR_GetNextDataSlicesToSend
