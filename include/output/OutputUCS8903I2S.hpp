@@ -101,14 +101,14 @@ private:
     };
     OutputUCS8903I2S_FSM_States volatile OutputUCS8903I2S_FSM_State = OutputUCS8903I2S_FSM_States::_OutputUCS8903I2S_FSM_State_Idle;
     
-    union DataAsUint32_t
+    union DataAsUint_t
     {
         c_OutputI2S::I2S_Item_t DataAsBytes[4];
-        uint32_t AsUint32;
+        uint32_t AsUint;
     };
 
-    DataAsUint32_t OneBit;
-    DataAsUint32_t ZeroBit;
+    DataAsUint_t OneBit;
+    DataAsUint_t ZeroBit;
 
 }; // c_OutputUCS8903I2S
 
