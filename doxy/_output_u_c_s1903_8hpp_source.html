@@ -150,13 +150,13 @@ $(function(){initNavTree('_output_u_c_s1903_8hpp_source.html',''); initResizable
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="preprocessor">#define UCS1903_PIXEL_DATA_RATE              800000.0</span></div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">#define UCS1903_PIXEL_NS_BIT_TOTAL           ( (1.0 / UCS1903_PIXEL_DATA_RATE) * NanoSecondsInASecond)</span></div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="preprocessor">#define UCS1903_PIXEL_NS_BIT_0_HIGH          250.0 </span><span class="comment">// 250ns +/- 150ns per datasheet</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="preprocessor">#define UCS1903_PIXEL_NS_BIT_0_HIGH          500.0 </span><span class="comment">// 500ns +/- 150ns per datasheet</span></div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="preprocessor">#define UCS1903_PIXEL_NS_BIT_0_LOW           (UCS1903_PIXEL_NS_BIT_TOTAL - UCS1903_PIXEL_NS_BIT_0_HIGH)</span></div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="preprocessor">#define UCS1903_PIXEL_NS_BIT_1_HIGH          1000.0 </span><span class="comment">// 1000ns +/- 150ns per datasheet</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="preprocessor">#define UCS1903_PIXEL_NS_BIT_1_HIGH          2000.0 </span><span class="comment">// 2000ns +/- 150ns per datasheet</span></div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="preprocessor">#define UCS1903_PIXEL_NS_BIT_1_LOW           (UCS1903_PIXEL_NS_BIT_TOTAL - UCS1903_PIXEL_NS_BIT_1_HIGH)</span></div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="preprocessor">#define UCS1903_PIXEL_IDLE_TIME_NS           25000.0 </span><span class="comment">// 24us per datasheet</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="preprocessor">#define UCS1903_PIXEL_IDLE_TIME_NS           24000.0 </span><span class="comment">// 24us per datasheet</span></div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="preprocessor">#define UCS1903_PIXEL_IDLE_TIME_US           (UCS1903_PIXEL_IDLE_TIME_NS / float(NanoSecondsInAMicroSecond))</span></div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="preprocessor">#define UCS1903_PIXEL_BITS_PER_INTENSITY     8</span></div>
