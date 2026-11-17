@@ -84,7 +84,7 @@ const OM_OutputPortDefinition_t OM_OutputPortDefinitions[] =
 // #define SUPPORT_OutputProtocol_GS8208           // OM_SERIAL
 // #define SUPPORT_OutputProtocol_Renard           // OM_SERIAL
 // #define SUPPORT_OutputProtocol_Serial           // OM_SERIAL
-// #define SUPPORT_OutputProtocol_TM1814           // OM_SERIAL
+#define SUPPORT_OutputProtocol_TM1814           // OM_SERIAL
 #define SUPPORT_OutputProtocol_UCS1903          // OM_SERIAL
 #define SUPPORT_OutputProtocol_UCS8903          // OM_SERIAL
 // #define SUPPORT_OutputProtocol_WS2801           // OM_SPI

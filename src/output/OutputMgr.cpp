@@ -37,6 +37,7 @@
 #include "output/OutputSerialRmt.hpp"
 #include "output/OutputServoPCA9685.hpp"
 #include "output/OutputTM1814Rmt.hpp"
+#include "output/OutputTM1814I2S.hpp"
 #include "output/OutputTM1814Uart.hpp"
 #include "output/OutputUCS1903Rmt.hpp"
 #include "output/OutputUCS1903I2S.hpp"
