@@ -24,9 +24,9 @@
 
 //----------------------------------------------------------------------------
 #ifdef WS2811_I2S_DEBUG_COUNTERS
-uint32_t StartNewFrameBaseCount = 0;
-uint32_t GetDataSlicesToSendBaseCount = 0;
-uint32_t SetDefaultDataValueBaseCount = 0;
+static uint32_t StartNewFrameBaseCount = 0;
+static uint32_t GetDataSlicesToSendBaseCount = 0;
+static uint32_t SetDefaultDataValueBaseCount = 0;
 #endif // def WS2811_I2S_DEBUG_COUNTERS
 
 //----------------------------------------------------------------------------
