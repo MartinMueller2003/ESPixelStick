@@ -11,6 +11,7 @@ var dir_28ea8e66f7bbbd0bcb5bade88239d5de =
     [ "OutputGrinch.hpp", "_output_grinch_8hpp.html", null ],
     [ "OutputGrinchSpi.hpp", "_output_grinch_spi_8hpp.html", null ],
     [ "OutputGS8208.hpp", "_output_g_s8208_8hpp.html", null ],
+    [ "OutputGS8208I2S.hpp", "_output_g_s8208_i2_s_8hpp.html", null ],
     [ "OutputGS8208Rmt.hpp", "_output_g_s8208_rmt_8hpp.html", null ],
     [ "OutputGS8208Uart.hpp", "_output_g_s8208_uart_8hpp.html", null ],
     [ "OutputI2S.hpp", "_output_i2_s_8hpp.html", null ],

@@ -10,6 +10,7 @@ var dir_994de0fd01319e484ee1453a6afebed0 =
     [ "OutputGrinch.cpp", "_output_grinch_8cpp.html", null ],
     [ "OutputGrinchSpi.cpp", "_output_grinch_spi_8cpp.html", null ],
     [ "OutputGS8208.cpp", "_output_g_s8208_8cpp.html", null ],
+    [ "OutputGS8208I2S.cpp", "_output_g_s8208_i2_s_8cpp.html", null ],
     [ "OutputGS8208Rmt.cpp", "_output_g_s8208_rmt_8cpp.html", null ],
     [ "OutputGS8208Uart.cpp", "_output_g_s8208_uart_8cpp.html", null ],
     [ "OutputI2S.cpp", "_output_i2_s_8cpp.html", null ],
