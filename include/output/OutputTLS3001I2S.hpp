@@ -46,7 +46,6 @@ public:
     bool    ISR_GetNextDataSlicesToSend (c_OutputI2S::I2S_Item_t * DataToSend, uint32_t & numSlices, c_OutputI2S::I2S_Item_t DefaultIntensitySliceData);
     void    ISR_StartNewDataFrame ();
     void    SetDefaultDataValue (c_OutputI2S::I2S_Item_t DefaultIntensitySliceData);
-    virtual bool RmtPoll() {return false;}
 
 private:
     void    CalculateFrameBitSlices ();

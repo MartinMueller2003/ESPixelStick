@@ -46,9 +46,6 @@ public:
     void    ISR_StartNewDataFrame ();
     void    SetDefaultDataValue (c_OutputI2S::I2S_Item_t DefaultIntensitySliceData);
 
-    // to be removed when the I2S driver is fully implemented
-    virtual bool RmtPoll() {return false;}
-
 private:
     void    CalculateFrameBitSlices ();
     bool    ISR_SetUpNextDataToSend ();
