@@ -1,5 +1,8 @@
 var NAVTREEINDEX8 =
 {
+"_input_effect_engine_8hpp.html":[1,0,0,0,7],
+"_input_effect_engine_8hpp.html#aeb892f8a099b6b835d7c59c14e144c97":[1,0,0,0,7,9],
+"_input_effect_engine_8hpp.html#afb1ea67d223be2f871ab4a13bfebaa7f":[1,0,0,0,7,10],
 "_input_effect_engine_8hpp_source.html":[1,0,0,0,7],
 "_input_f_p_p_remote_8cpp.html":[1,0,1,0,8],
 "_input_f_p_p_remote_8cpp.html#a05f2ca589c42eecadaecf95f69428333":[1,0,1,0,8,0],
@@ -246,8 +249,5 @@ var NAVTREEINDEX8 =
 "_output_w_s2811_rmt_8cpp.html":[1,0,1,2,44],
 "_output_w_s2811_rmt_8hpp.html":[1,0,0,2,47],
 "_output_w_s2811_rmt_8hpp_source.html":[1,0,0,2,47],
-"_output_w_s2811_uart_8cpp.html":[1,0,1,2,45],
-"_output_w_s2811_uart_8hpp.html":[1,0,0,2,48],
-"_output_w_s2811_uart_8hpp_source.html":[1,0,0,2,48],
-"_safer_string_conversion_8hpp.html":[1,0,0,5,1]
+"_output_w_s2811_uart_8cpp.html":[1,0,1,2,45]
 };

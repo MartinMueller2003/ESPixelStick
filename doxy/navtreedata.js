@@ -60,19 +60,19 @@ var NAVTREEINDEX =
 "_const_names_8cpp.html#af22c2ba529ecb3b73ff345f8f119ebce",
 "_const_names_8hpp.html#ae083a5e9def6af78cb69e46ab533599a",
 "_g_p_i_o___defs___e_s_p32___d1___m_i_n_i___e_t_h_8hpp.html",
-"_g_p_i_o___defs___e_s_p32___lo_lin___d32___p_r_o___e_t_h_8hpp.html#aeed05cdd33507563bb8551bc006bc0f1",
-"_g_p_i_o___defs___e_s_p32___q_u_i_n_l_e_d___q_u_a_d___a_e___plus__8_8hpp.html#aba5621a9fd6fd7ddca8fd3249560f239",
-"_g_p_i_o___defs___e_s_p32___q_u_i_n_l_e_d___u_n_o___e_t_h___e_s_p_s_v3_8hpp_source.html",
-"_g_p_i_o___defs___e_s_p32___w_t32_e_t_h01_8hpp.html#aac8484c1f4cc7cb788c03e1c3c1faade",
-"_input_effect_engine_8hpp_source.html",
-"_safer_string_conversion_8hpp.html#abaa5f3baa5ae9ae6df677674285ab8da",
-"classc___file_mgr.html#a9d269a5325ae97f480a9c8e7671c862e",
-"classc___input_effect_engine.html#af644c98b39b0208e8ac0fdeae19ea999",
-"classc___input_mgr.html#ab7a89ecb21bf23364999dedc7e474fc5a53152edb2a4e1bd28a5218adf7a20293",
-"classc___web_mgr.html#acffc5a44584e814738cfa0034a899f7e",
-"classfsm___wi_fi__state.html#a97a2adc75a27ce7c9feefa0d2e85a5dd",
-"globals_vars.html",
-"structc___input_effect_engine_1_1d_c_r_g_b.html"
+"_g_p_i_o___defs___e_s_p32___lo_lin___d32___p_r_o___e_t_h_8hpp.html#aac8484c1f4cc7cb788c03e1c3c1faade",
+"_g_p_i_o___defs___e_s_p32___q_u_i_n_l_e_d___q_u_a_d___a_e___plus__8_8hpp.html#a7b8e7343d5a9d62e3814873ef3b2b68c",
+"_g_p_i_o___defs___e_s_p32___q_u_i_n_l_e_d___u_n_o___e_t_h___e_s_p_s_v3_8hpp.html#aebe2eeabee8a8434bc5edf81a88f90e4",
+"_g_p_i_o___defs___e_s_p32___w_t32_e_t_h01_8hpp.html#a8d7b2cf14cf47d06f131fc82d7132516",
+"_input_effect_engine_8hpp.html",
+"_output_w_s2811_uart_8hpp.html",
+"classc___file_mgr.html#a96fc290cd73476fc1f47b0ab86031cb2",
+"classc___input_effect_engine.html#af2a085457faf63d2844b94416316d16c",
+"classc___input_mgr.html#ab7a89ecb21bf23364999dedc7e474fc5a29fdbebdf53bfa92857223acd1ccfc80",
+"classc___web_mgr.html#abbef88f739edfe4f685eba944885bc12",
+"classfsm___wi_fi__state.html#a7fb4aae7d3fd073d1ecba313fd2fccd0",
+"globals_u.html",
+"structc___input_effect_engine_1_1d_c_h_s_v.html#a5675fbfefcee1336abc54018b5b2d0b5"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
