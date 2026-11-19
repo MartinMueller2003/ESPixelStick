@@ -75,7 +75,7 @@ private:
     uint32_t        BitSliceCount;
     uint32_t        CurrentBitSliceCount;
 
-    #define SERIAL_I2S_DEBUG_COUNTERS
+    // #define SERIAL_I2S_DEBUG_COUNTERS
     #ifdef SERIAL_I2S_DEBUG_COUNTERS
     #define INC_SERIAL_I2S_DEBUG_COUNTERS(c) (++SerialI2SDebugCounters.c)
     struct
