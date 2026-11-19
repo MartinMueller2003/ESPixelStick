@@ -24,6 +24,7 @@ var dir_994de0fd01319e484ee1453a6afebed0 =
     [ "OutputServoPCA9685.cpp", "_output_servo_p_c_a9685_8cpp.html", null ],
     [ "OutputSpi.cpp", "_output_spi_8cpp.html", null ],
     [ "OutputTLS3001.cpp", "_output_t_l_s3001_8cpp.html", null ],
+    [ "OutputTLS3001I2S.cpp", "_output_t_l_s3001_i2_s_8cpp.html", null ],
     [ "OutputTLS3001Rmt.cpp", "_output_t_l_s3001_rmt_8cpp.html", null ],
     [ "OutputTM1814.cpp", "_output_t_m1814_8cpp.html", null ],
     [ "OutputTM1814I2S.cpp", "_output_t_m1814_i2_s_8cpp.html", null ],

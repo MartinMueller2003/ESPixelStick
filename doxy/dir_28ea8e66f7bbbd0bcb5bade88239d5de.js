@@ -25,6 +25,8 @@ var dir_28ea8e66f7bbbd0bcb5bade88239d5de =
     [ "OutputServoPCA9685.hpp", "_output_servo_p_c_a9685_8hpp.html", null ],
     [ "OutputSpi.hpp", "_output_spi_8hpp.html", null ],
     [ "OutputTLS3001.hpp", "_output_t_l_s3001_8hpp.html", null ],
+    [ "OutputTLS3001I2S.hpp", "_output_t_l_s3001_i2_s_8hpp.html", null ],
+    [ "OutputTLS3001I2SFsm.hpp", "_output_t_l_s3001_i2_s_fsm_8hpp.html", null ],
     [ "OutputTLS3001Rmt.hpp", "_output_t_l_s3001_rmt_8hpp.html", null ],
     [ "OutputTLS3001RmtFsm.hpp", "_output_t_l_s3001_rmt_fsm_8hpp.html", null ],
     [ "OutputTM1814.hpp", "_output_t_m1814_8hpp.html", null ],

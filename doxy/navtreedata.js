@@ -60,19 +60,19 @@ var NAVTREEINDEX =
 "_const_names_8cpp.html#af22c2ba529ecb3b73ff345f8f119ebce",
 "_const_names_8hpp.html#ae083a5e9def6af78cb69e46ab533599a",
 "_g_p_i_o___defs___e_s_p32___d1___m_i_n_i___e_t_h_8hpp.html",
-"_g_p_i_o___defs___e_s_p32___lo_lin___d32___p_r_o___e_t_h_8hpp.html#af2936ca829929ac3e76f0969fdfbf732",
-"_g_p_i_o___defs___e_s_p32___q_u_i_n_l_e_d___q_u_a_d___a_e___plus__8_8hpp.html#aca6c98b14a61849654e93ee35fd1d1ab",
-"_g_p_i_o___defs___e_s_p32___relay___board__x8_8hpp.html",
-"_g_p_i_o___defs___e_s_p32___w_t32_e_t_h01_8hpp.html#aca6c98b14a61849654e93ee35fd1d1ab",
-"_input_f_p_p_remote_8cpp.html",
-"_web_mgr_8cpp.html",
-"classc___file_mgr.html#abf9680ad0d546bd42476f6460e387ba0",
-"classc___input_f_p_p_remote.html#a1026fa25a114a817ca6a47a3df45d047",
-"classc___input_mgr.html#ad0133347ca029d6e96ba7c0281a3444d",
-"classc___wi_fi_driver.html#a07e5aa4bfbe3e838bd38fce6fa949c27",
-"classfsm___wi_fi__state___boot.html#ab85f244d7f7ebf64a24b95abf67cc5a6",
-"globals_vars_i.html",
-"structc___input_f_p_p_remote_play_file_1_1_sync_control__t.html"
+"_g_p_i_o___defs___e_s_p32___lo_lin___d32___p_r_o___e_t_h_8hpp.html#aeed05cdd33507563bb8551bc006bc0f1",
+"_g_p_i_o___defs___e_s_p32___q_u_i_n_l_e_d___q_u_a_d___a_e___plus__8_8hpp.html#aba5621a9fd6fd7ddca8fd3249560f239",
+"_g_p_i_o___defs___e_s_p32___q_u_i_n_l_e_d___u_n_o___e_t_h___e_s_p_s_v3_8hpp_source.html",
+"_g_p_i_o___defs___e_s_p32___w_t32_e_t_h01_8hpp.html#aac8484c1f4cc7cb788c03e1c3c1faade",
+"_input_effect_engine_8hpp_source.html",
+"_sensor_d_s18_b20_8cpp.html",
+"classc___file_mgr.html#aaba83240f519b443944a15cf6fd03963",
+"classc___input_effect_engine.html#afaf6b474467520e248c2e79d3bdc8146",
+"classc___input_mgr.html#ab7a89ecb21bf23364999dedc7e474fc5ac02c03efd74ae5f6fe72e72aa48b9adf",
+"classc___web_mgr.html#aeb7f891688b50a8ac2ac6865aec01006",
+"classfsm___wi_fi__state___boot.html",
+"globals_vars_c.html",
+"structc___input_effect_engine_1_1d_c_r_g_b.html#a9b1970cbb330d919cba1c8a1110e073c"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

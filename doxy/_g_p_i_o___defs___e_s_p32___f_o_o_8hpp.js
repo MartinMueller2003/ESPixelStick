@@ -20,6 +20,7 @@ var _g_p_i_o___defs___e_s_p32___f_o_o_8hpp =
     [ "SD_CARD_MISO_PIN", "_g_p_i_o___defs___e_s_p32___f_o_o_8hpp.html#a1683e2f1e1a3fb629bd7c17dfd8d1e58", null ],
     [ "SD_CARD_MOSI_PIN", "_g_p_i_o___defs___e_s_p32___f_o_o_8hpp.html#aca6c98b14a61849654e93ee35fd1d1ab", null ],
     [ "SUPPORT_ETHERNET", "_g_p_i_o___defs___e_s_p32___f_o_o_8hpp.html#a3caa63f16e3dcb8b7b137a99d926439a", null ],
+    [ "SUPPORT_OutputProtocol_TLS3001", "_g_p_i_o___defs___e_s_p32___f_o_o_8hpp.html#a52141ff03bfb24abc29ac1916a6a9b06", null ],
     [ "SUPPORT_OutputProtocol_TM1814", "_g_p_i_o___defs___e_s_p32___f_o_o_8hpp.html#a13852417ea1c6f73a1969b1108bf9963", null ],
     [ "SUPPORT_OutputProtocol_UCS1903", "_g_p_i_o___defs___e_s_p32___f_o_o_8hpp.html#a463bb7058b8a5724a1b0ac3a700edb45", null ],
     [ "SUPPORT_OutputProtocol_UCS8903", "_g_p_i_o___defs___e_s_p32___f_o_o_8hpp.html#aea53898829210ed1fbac67d4aa855a6e", null ],

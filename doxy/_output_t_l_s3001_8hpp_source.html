@@ -194,15 +194,16 @@ $(function(){initNavTree('_output_t_l_s3001_8hpp_source.html',''); initResizable
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="preprocessor">#define TLS3001_PIXEL_DATA_RATE             1000000.0 </span><span class="comment">// bits /sec</span></div>
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="preprocessor">#define TLS3001_PIXEL_NS_BIT                ((1.0 / TLS3001_PIXEL_DATA_RATE) * NanoSecondsInASecond)</span></div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="preprocessor">#define TLS3001_MIN_IDLE_TIME_US             50</span></div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="preprocessor">#define TLS3001_DEFAULT_FRAMES_BETWEEN_RESETS  40</span></div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        uint32_t NumFramesAllowedBetweenResets = TLS3001_DEFAULT_FRAMES_BETWEEN_RESETS;</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        uint32_t NumFramesSinceLastReset = uint32_t(-1); <span class="comment">// Force a reset on power on.</span></div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>}; <span class="comment">// c_OutputTLS3001</span></div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="preprocessor">#endif </span><span class="comment">// def SUPPORT_OutputProtocol_TLS3001</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="preprocessor">#define TLS3001_NumLeadingOnes                15</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="preprocessor">#define TLS3001_DEFAULT_FRAMES_BETWEEN_RESETS  40</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        uint32_t NumFramesAllowedBetweenResets = TLS3001_DEFAULT_FRAMES_BETWEEN_RESETS;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        uint32_t NumFramesSinceLastReset = uint32_t(-1); <span class="comment">// Force a reset on power on.</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>}; <span class="comment">// c_OutputTLS3001</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="preprocessor">#endif </span><span class="comment">// def SUPPORT_OutputProtocol_TLS3001</span></div>
 <div class="ttc" id="a_const_names_8cpp_html_a75c2a3f7f633e2c74a754939905b0a76"><div class="ttname"><a href="_const_names_8cpp.html#a75c2a3f7f633e2c74a754939905b0a76">CN_TLS3001</a></div><div class="ttdeci">const CN_PROGMEM char CN_TLS3001[]</div><div class="ttdef"><b>Definition</b> ConstNames.cpp:228</div></div>
 <div class="ttc" id="a_e_s_pixel_stick_8h_html"><div class="ttname"><a href="_e_s_pixel_stick_8h.html">ESPixelStick.h</a></div></div>
 <div class="ttc" id="a_output_pixel_8hpp_html"><div class="ttname"><a href="_output_pixel_8hpp.html">OutputPixel.hpp</a></div></div>
