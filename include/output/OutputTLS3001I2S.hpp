@@ -88,7 +88,7 @@ protected:
     DataAsUint_t ZeroBit;
     DataAsUint_t IdleBit;
 
-    #define USE_TLS3001I2S_COUNTERS
+    // #define USE_TLS3001I2S_COUNTERS
     #ifdef USE_TLS3001I2S_COUNTERS
         #define INCREMENT_TLS3001_COUNTER(c) (++TLS3001I2SCounters.c)
         #define INCREMENT_TLS3001_FSM_COUNTER(c) (++Parent->TLS3001I2SCounters.c)
