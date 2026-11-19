@@ -216,25 +216,30 @@ void setup()
     // TestHeap(uint32_t(15));
     // DEBUG_V(String("LoadConfig Heap: ") + String(ESP.getFreeHeap()));
     LoadConfig();
+    BOOT_TRACE ("config loaded");
 
     // TestHeap(uint32_t(20));
     // DEBUG_V(String("InputMgr Heap: ") + String(ESP.getFreeHeap()));
     // connect the input processing to the output processing.
     InputMgr.Begin (0);
+    BOOT_TRACE ("inputs started");
 
     // TestHeap(uint32_t(30));
     // DEBUG_V(String("OutputMgr Heap: ") + String(ESP.getFreeHeap()));
     // Set up the output manager to start sending data to the serial ports
     OutputMgr.Begin();
+    BOOT_TRACE ("outputs started");
 
     // TestHeap(uint32_t(40));
     // DEBUG_V(String("NetworkMgr Heap: ") + String(ESP.getFreeHeap()));
     NetworkMgr.Begin();
+    BOOT_TRACE ("network started");
 
     // TestHeap(uint32_t(50));
     // DEBUG_V(String("WebMgr Heap: ") + String(ESP.getFreeHeap()));
     // Configure and start the web server
     WebMgr.Begin(&config);
+    BOOT_TRACE ("web started");
 
 #ifdef SUPPORT_SENSOR_DS18B20
     // TestHeap(uint32_t(60));
@@ -244,6 +249,7 @@ void setup()
 
     // DEBUG_V(String("FPPDiscovery Heap: ") + String(ESP.getFreeHeap()));
     FPPDiscovery.begin ();
+    BOOT_TRACE ("fpp started");
 
     // DEBUG_V(String("Final Heap: ") + String(ESP.getFreeHeap()));
 
@@ -603,6 +609,28 @@ void loop()
     WebMgr.Process ();
     // DEBUG_V();
 
+#ifdef SUPPORT_BOOT_TRACE
+    {
+        // Record each new heap low-water mark, in 1 KB steps. The mark is reached exactly when the heap
+        // is at its worst, and writing the line makes LittleFS.open() allocate, so the value and the time
+        // it was seen are kept here and written once a block is free again (#26).
+        static uint32_t HeapLowWater    = 0xFFFFFFFF;
+        static uint32_t LowWaterTime    = 0;
+        static bool     LowWaterPending = false;
+        uint32_t FreeHeapNow = ESP.getFreeHeap ();
+        if (FreeHeapNow + 1024 < HeapLowWater)
+        {
+            HeapLowWater    = FreeHeapNow;
+            LowWaterTime    = millis ();
+            LowWaterPending = true;
+        }
+        if (LowWaterPending && FileMgr.BootTraceCanWrite ())
+        {
+            LowWaterPending = false;
+            FileMgr.BootTrace ((String (F ("heap low-water ")) + String (HeapLowWater) + F (" at ") + String (LowWaterTime) + F (" ms")).c_str ());
+        }
+    }
+#endif // def SUPPORT_BOOT_TRACE
     FileMgr.Poll ();
     // DEBUG_V();
 
@@ -665,6 +693,7 @@ bool RebootInProgress()
 void RequestReboot(String & Reason, uint32_t LoopDelay, bool SkipDisable /* = false */)
 {
     GlobalRebootReason = Reason;
+    BOOT_TRACE ((String (F ("reboot requested: ")) + Reason).c_str ());
     RebootCount = LoopDelay;
     if(!SkipDisable)
     {
