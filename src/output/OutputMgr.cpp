@@ -52,6 +52,7 @@
 #include "output/OutputUCS8903I2S.hpp"
 #include "output/OutputUCS8903Rmt.hpp"
 #include "output/OutputTLS3001Rmt.hpp"
+#include "output/OutputTLS3001I2S.hpp"
 // needs to be last
 #include "output/OutputMgr.hpp"
 
@@ -213,7 +214,7 @@ union alignas(32) OutputProtocolClasses_t
     #ifdef SUPPORT_OutputProtocol_TLS3001
     // c_OutputTLS3001Uart OutputTLS3001Uart;
         #ifdef ARDUINO_ARCH_ESP32
-        c_OutputTLS3001Rmt  OutputTLS3001Rmt;
+        AddToProtocolClassList(OutputTLS3001);
         #endif // def ARDUINO_ARCH_ESP32
     #endif // def SUPPORT_OutputProtocol_TLS3001
 
