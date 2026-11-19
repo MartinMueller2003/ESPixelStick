@@ -48,7 +48,8 @@ public:
     void    SetDefaultDataValue (c_OutputI2S::I2S_Item_t DefaultIntensitySliceData);
 
 private:
-    void    SetUpI2SBitTimes();
+    void CalculateFrameBitSlices ();
+    bool ISR_SetUpNextDataToSend ();
 
     c_OutputI2S     *I2Sdriver;
 
@@ -58,32 +59,39 @@ private:
         uint32_t AsUint;
     };
 
-    DataAsUint_t    OneBit;
-    DataAsUint_t    ZeroBit;
-    DataAsUint_t    idle_level;
+    c_OutputI2S::I2S_Item_t    DataBitMask;
+    c_OutputI2S::I2S_Item_t    DataBit;
+
+    c_OutputI2S::I2S_Item_t    OneBit;
+    c_OutputI2S::I2S_Item_t    ZeroBit;
 
     uint32_t        DataPattern;
     uint32_t        DataPatternMask;
 
-    uint32_t        BreakBitCount = 0;
-    uint32_t        MabBitCount = 0;
-    uint32_t        StartBitCount = 0;
-    uint32_t        StopBitCount = 0;
+    uint32_t        BreakSliceCount;
+    uint32_t        CurrentBreakSliceCount;
+    uint32_t        MabSliceCount;
+    uint32_t        CurrentMabSliceCount;
+    uint32_t        BitSliceCount;
+    uint32_t        CurrentBitSliceCount;
 
-    // #define SERIAL_I2S_DEBUG_COUNTERS
+    #define SERIAL_I2S_DEBUG_COUNTERS
     #ifdef SERIAL_I2S_DEBUG_COUNTERS
     #define INC_SERIAL_I2S_DEBUG_COUNTERS(c) (++SerialI2SDebugCounters.c)
     struct
     {
-        uint32_t GetNextBit = 0;
-        uint32_t FrameStarts = 0;
-        uint32_t FrameEnds = 0;
-        uint32_t BreakBits = 0;
-        uint32_t MabBits = 0;
-        uint32_t StartBits = 0;
-        uint32_t DataBits = 0;
-        uint32_t StopBits = 0;
-        uint32_t Underrun = 0;
+        uint32_t GetNextDataSlicesToSend;
+        uint32_t BreakBits;
+        uint32_t MabBits;
+        uint32_t GetNextDataSlicesToSendI;
+        uint32_t GetNextDataSlicesToSendII;
+        uint32_t GetNextDataSlicesToSendIII;
+        uint32_t StartNewDataFrame;
+        uint32_t StartNewDataFrameI;
+        uint32_t StartNewDataFrameII;
+        uint32_t SetUpNextDataToSend;
+        uint32_t SetUpNextDataToSendI;
+        uint32_t SetUpNextDataToSendII;
     } SerialI2SDebugCounters;
     #else
     #define INC_SERIAL_I2S_DEBUG_COUNTERS(c)

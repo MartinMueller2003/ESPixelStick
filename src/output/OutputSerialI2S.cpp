@@ -17,21 +17,48 @@
 *
 */
 #include "ESPixelStick.h"
-#if (defined(SUPPORT_OutputProtocol_FireGod) || defined(SUPPORT_OutputProtocol_DMX) || defined(SUPPORT_OutputProtocol_Serial) || defined(SUPPORT_OutputProtocol_Renard)) && defined(SUPPORT_I2S)
+#if (defined (SUPPORT_OutputProtocol_FireGod) || defined (SUPPORT_OutputProtocol_DMX) || defined (SUPPORT_OutputProtocol_Serial) || defined (SUPPORT_OutputProtocol_Renard)) && defined (SUPPORT_I2S)
 
 #include "output/OutputSerialI2S.hpp"
 
 //----------------------------------------------------------------------------
-static bool IRAM_ATTR ISR_GetNextBitToSendBase (void * arg, I2S_item32_t & DataToSend)
+#ifdef SERIAL_I2S_DEBUG_COUNTERS
+static uint32_t StartNewFrameBaseCount = 0;
+static uint32_t GetDataSlicesToSendBaseCount = 0;
+static uint32_t SetDefaultDataValueBaseCount = 0;
+#endif // def SERIAL_I2S_DEBUG_COUNTERS
+
+//----------------------------------------------------------------------------
+// return false if there are no more data slices to send
+static void IRAM_ATTR StartNewFrameBase (void * arg)
 {
-    return reinterpret_cast<c_OutputSerialI2S*>(arg)->ISR_GetNextBitToSend(DataToSend);
+    #ifdef SERIAL_I2S_DEBUG_COUNTERS
+    StartNewFrameBaseCount++;
+    #endif // def SERIAL_I2S_DEBUG_COUNTERS
+    
+    reinterpret_cast<c_OutputSerialI2S*> (arg)->ISR_StartNewDataFrame ();
+} // StartNewFrameBase
+
+//----------------------------------------------------------------------------
+// return false if there are no more data slices to send
+static bool IRAM_ATTR GetDataSlicesToSendBase (void * arg, c_OutputI2S::I2S_Item_t * DataToSend, uint32_t & numSlices, c_OutputI2S::I2S_Item_t DefaultIntensitySliceData)
+{
+    #ifdef SERIAL_I2S_DEBUG_COUNTERS
+    ++GetDataSlicesToSendBaseCount;
+    #endif // def SERIAL_I2S_DEBUG_COUNTERS
+
+    return reinterpret_cast<c_OutputSerialI2S*> (arg)->ISR_GetNextDataSlicesToSend (DataToSend, numSlices, DefaultIntensitySliceData);
 } // ISR_GetNextBitToSend
 
 //----------------------------------------------------------------------------
-static void StartNewDataFrameBase(void * arg)
+static void SetDefaultDataValueBase (void * arg, c_OutputI2S::I2S_Item_t DefaultIntensitySliceData)
 {
-    return reinterpret_cast<c_OutputSerialI2S*>(arg)->ISR_StartNewDataFrame();
-}
+    #ifdef SERIAL_I2S_DEBUG_COUNTERS
+    ++SetDefaultDataValueBaseCount;
+    #endif // def SERIAL_I2S_DEBUG_COUNTERS
+
+    reinterpret_cast<c_OutputSerialI2S*> (arg)->SetDefaultDataValue (DefaultIntensitySliceData);
+} // SetDefaultDataValueBase
 
 //----------------------------------------------------------------------------
 c_OutputSerialI2S::c_OutputSerialI2S (OM_OutputPortDefinition_t & OutputPortDefinition,
@@ -39,6 +66,12 @@ c_OutputSerialI2S::c_OutputSerialI2S (OM_OutputPortDefinition_t & OutputPortDefi
     c_OutputSerial (OutputPortDefinition, outputType)
 {
     // DEBUG_START;
+
+    CurrentBreakSliceCount = 0;
+    CurrentMabSliceCount   = 0;
+    CurrentBitSliceCount   = 0;
+
+    memset (&SerialI2SDebugCounters, 0, sizeof (SerialI2SDebugCounters));
 
     // DEBUG_END;
 
@@ -48,6 +81,10 @@ c_OutputSerialI2S::c_OutputSerialI2S (OM_OutputPortDefinition_t & OutputPortDefi
 c_OutputSerialI2S::~c_OutputSerialI2S ()
 {
     // DEBUG_START;
+    if (HasBeenInitialized)
+    {
+        I2Sdriver->RemoveSlotDevice (OutputPortDefinition.PortId);
+    }
 
     // DEBUG_END;
 } // ~c_OutputSerialI2S
@@ -59,7 +96,29 @@ void c_OutputSerialI2S::Begin ()
 {
     // DEBUG_START;
 
+    I2Sdriver = OutputMgr.GetI2sDriver ();
+
     c_OutputSerial::Begin ();
+
+    // make sure we are in the paused state
+    PauseOutput (true);
+
+    // DEBUG_V (String ("DataPin: ") + String (DataPin));
+
+    c_OutputI2S::OutputI2SChannelConfig_t OutputI2SConfig;
+    OutputI2SConfig.I2SChannelId              = uint32_t (OutputPortDefinition.PortId);
+    OutputI2SConfig.DataPin                   = gpio_num_t (OutputPortDefinition.gpios.data);
+    OutputI2SConfig.arg                       = this;
+    OutputI2SConfig.StartNewFrame             = StartNewFrameBase;
+    OutputI2SConfig.GetNextIntensityBitSlices = GetDataSlicesToSendBase;
+    OutputI2SConfig.SetDefaultDataValue       = SetDefaultDataValueBase;
+    OutputI2SConfig.IdleLevelIsHigh           = true; // idle is low
+    OutputI2SConfig.IsActive                  = false; // do not output data
+
+    I2Sdriver->RegisterSlotDevice (OutputI2SConfig, DataBit, DataBitMask);
+
+    // DEBUG_V (String ("    DataBit: 0x") + String (DataBit, HEX));
+    // DEBUG_V (String ("DataBitMask: 0x") + String (DataBitMask, HEX));
 
     HasBeenInitialized = true;
 
@@ -68,24 +127,36 @@ void c_OutputSerialI2S::Begin ()
 } // Begin
 
 //----------------------------------------------------------------------------
+void c_OutputSerialI2S::CalculateFrameBitSlices ()
+{
+    // DEBUG_START;
+
+    float BitTimeNS = (1.0 / float (CurrentBaudrate)) * NanoSecondsInASecond;
+    // DEBUG_V (String (" CurrentBaudrate: ") + String (CurrentBaudrate));
+    // DEBUG_V (String ("       BitTimeNS: ") + String (BitTimeNS));
+
+    // DEBUG_V (String ("BitTimeNS: ") + String (BitTimeNS));
+    // DEBUG_V (String ("I2S_TickLengthNS: ") + String (I2S_TickLengthNS));
+
+    BreakSliceCount = I2Sdriver->GetNumTimeSlicesForTargetTimeNS (DMX_BREAK_US * NanoSecondsInAMicroSecond);
+    MabSliceCount   = I2Sdriver->GetNumTimeSlicesForTargetTimeNS (DMX_MAB_US * NanoSecondsInAMicroSecond);
+    BitSliceCount   = I2Sdriver->GetNumTimeSlicesForTargetTimeNS (BitTimeNS);
+
+    // DEBUG_END;
+
+} // CalculateFrameBits
+
+//----------------------------------------------------------------------------
 bool c_OutputSerialI2S::SetConfig (ArduinoJson::JsonObject& jsonConfig)
 {
     // DEBUG_START;
 
     bool response = c_OutputSerial::SetConfig (jsonConfig);
     // DEBUG_V (String ("DataPin: ") + String (DataPin));
-    c_OutputI2S::OutputI2SConfig_t OutputI2SConfig;
-    OutputI2SConfig.I2SChannelId            = uint32_t(OutputPortDefinition.DeviceId);
-    OutputI2SConfig.DataPin                 = gpio_num_t(OutputPortDefinition.gpios.data);
-    OutputI2SConfig.idle_level              = idle_level;
-    OutputI2SConfig.arg                     = this;
-    OutputI2SConfig.ISR_GetNextIntensityBit = ISR_GetNextBitToSendBase;
-    OutputI2SConfig.StartNewDataFrame       = StartNewDataFrameBase;
-    OutputI2SConfig.BufferStart             = ISR_GetBufferAddress();
-    OutputI2SConfig.NumBytesInFrame         = OM_MAX_NUM_CHANNELS;
+    PauseOutput (true);
 
-    I2S.Begin(OutputI2SConfig, this);
-    SetUpI2SBitTimes();
+    // update the output GPIO
+    I2Sdriver->SetGpio (OutputPortDefinition.PortId, OutputPortDefinition.gpios.data);
 
     // DEBUG_END;
     return response;
@@ -93,77 +164,26 @@ bool c_OutputSerialI2S::SetConfig (ArduinoJson::JsonObject& jsonConfig)
 } // SetConfig
 
 //----------------------------------------------------------------------------
-void c_OutputSerialI2S::SetUpI2SBitTimes()
-{
-    // DEBUG_START;
-
-    float BitTimeNS = (1.0 / float(CurrentBaudrate)) * NanoSecondsInASecond;
-    // DEBUG_V(String(" CurrentBaudrate: ") + String(CurrentBaudrate));
-    // DEBUG_V(String("       BitTimeNS: ") + String(BitTimeNS));
-
-    // DEBUG_V(String("BitTimeNS: ") + String(BitTimeNS));
-    // DEBUG_V(String("I2S_TickLengthNS: ") + String(I2S_TickLengthNS));
-
-    uint32_t BitCount = 0;
-
-    // one start bit
-    I2S.SetBitDuration(BitTimeNS, StartBit, BitCount);
-    StartBit.level0 = 0;
-    StartBit.level1 = 0;
-    // DEBUG_V(String("StartBit: ") + String(StartBit.duration0 * 2) + " ticks");
-
-    // 00
-    I2S.SetBitDuration(BitTimeNS * 2, DataBitArray[0], BitCount);
-    DataBitArray[0].level0 = 0;
-    DataBitArray[0].level1 = 0;
-    // DEBUG_V(String("DataBitArray[0]: ") + String(DataBitArray[0].duration0 * 2) + " ticks");
-
-    // 01
-    I2S.SetBitDuration(BitTimeNS * 2, DataBitArray[1], BitCount);
-    DataBitArray[1].level0 = 1;
-    DataBitArray[1].level1 = 0;
-    // DEBUG_V(String("DataBitArray[1]: ") + String(DataBitArray[1].duration0 * 2) + " ticks");
-
-    // 10
-    I2S.SetBitDuration(BitTimeNS * 2, DataBitArray[2], BitCount);
-    DataBitArray[2].level0 = 0;
-    DataBitArray[2].level1 = 1;
-    // DEBUG_V(String("DataBitArray[2]: ") + String(DataBitArray[2].duration0 * 2) + " ticks");
-
-    // 11
-    I2S.SetBitDuration(BitTimeNS * 2, DataBitArray[3], BitCount);
-    DataBitArray[3].level0 = 1;
-    DataBitArray[3].level1 = 1;
-    // DEBUG_V(String("DataBitArray[3]: ") + String(DataBitArray[3].duration0 * 2) + " ticks");
-
-    // two stop bits
-    I2S.SetBitDuration(BitTimeNS * 2, StopBit, BitCount);
-    StopBit.level0 = 1;
-    StopBit.level1 = 1;
-    // DEBUG_V(String("StopBit: ") + String(StopBit.duration0 * 2) + " ticks");
-
-    // Break bits
-    I2S.SetBitDuration((DMX_BREAK_US * NanoSecondsInAMicroSecond), BreakBit, BitCount);
-    BreakBit.level0 = 0;
-    BreakBit.level1 = 0;
-    // DEBUG_V(String("BreakBit: ") + String(BreakBit.duration0 * 2) + " ticks");
-
-    // Break bits
-    I2S.SetBitDuration((DMX_MAB_US * NanoSecondsInAMicroSecond), MabBit, BitCount);
-    MabBit.level0 = 1;
-    MabBit.level1 = 1;
-    // DEBUG_V(String("MabBit: ") + String(MabBit.duration0 * 2) + " ticks");
-
-    // DEBUG_END;
-} // SetUpI2SBitTimes
-
-//----------------------------------------------------------------------------
-void c_OutputSerialI2S::SetOutputBufferSize(uint32_t NumChannelsAvailable)
+void c_OutputSerialI2S::SetOutputBufferSize (uint32_t NumChannelsAvailable)
 {
     // DEBUG_START;
 
     c_OutputSerial::SetOutputBufferSize (NumChannelsAvailable);
-    SetUpI2SBitTimes();
+
+    if (OutputBufferSize)
+    {
+        // DEBUG_V ("start the transmiter");
+        PauseOutput (true);
+        CalculateFrameBitSlices ();
+        PauseOutput (false);
+    }
+    else
+    {
+        // DEBUG_V ("stop the transmiter");
+        PauseOutput (true);
+    }
+
+    ISR_StartNewDataFrame ();
 
     // DEBUG_END;
 
@@ -174,152 +194,186 @@ void c_OutputSerialI2S::GetStatus (ArduinoJson::JsonObject& jsonStatus)
 {
     // DEBUG_START;
 
-    c_OutputSerial::GetStatus(jsonStatus);
-    I2S.GetStatus(jsonStatus);
+    c_OutputSerial::GetStatus (jsonStatus);
 
     #ifdef SERIAL_I2S_DEBUG_COUNTERS
-    JsonObject JsonCounters = jsonStatus["JsonCounters"].to<JsonObject>();
-    JsonWrite(JsonCounters, "GetNextBit",  I2SDebugCounters.GetNextBit);
-    JsonWrite(JsonCounters, "FrameStarts", I2SDebugCounters.FrameStarts);
-    JsonWrite(JsonCounters, "FrameEnds",   I2SDebugCounters.FrameEnds);
-    JsonWrite(JsonCounters, "BreakBits",   I2SDebugCounters.BreakBits);
-    JsonWrite(JsonCounters, "MabBits",     I2SDebugCounters.MabBits);
-    JsonWrite(JsonCounters, "StartBits",   I2SDebugCounters.StartBits);
-    JsonWrite(JsonCounters, "DataBits",    I2SDebugCounters.DataBits);
-    JsonWrite(JsonCounters, "StopBits",    I2SDebugCounters.StopBits);
-    JsonWrite(JsonCounters, "Underrun",    I2SDebugCounters.Underrun);
+    JsonObject JsonCounters = jsonStatus["JsonCounters"].to<JsonObject> ();
+
+    JsonWrite (JsonCounters, "StartNewFrameBaseCount",       StartNewFrameBaseCount);
+    JsonWrite (JsonCounters, "GetDataSlicesToSendBaseCount", GetDataSlicesToSendBaseCount);
+    JsonWrite (JsonCounters, "SetDefaultDataValueBaseCount", SetDefaultDataValueBaseCount);
+
+    JsonWrite (JsonCounters, "StartNewDataFrame",            SerialI2SDebugCounters.StartNewDataFrame);
+    JsonWrite (JsonCounters, "StartNewDataFrameI",           SerialI2SDebugCounters.StartNewDataFrameI);
+    JsonWrite (JsonCounters, "StartNewDataFrameII",          SerialI2SDebugCounters.StartNewDataFrameII);
+    JsonWrite (JsonCounters, "GetNextDataSlicesToSend",      SerialI2SDebugCounters.GetNextDataSlicesToSend);
+    JsonWrite (JsonCounters, "BreakBits",                    SerialI2SDebugCounters.BreakBits);
+    JsonWrite (JsonCounters, "MabBits",                      SerialI2SDebugCounters.MabBits);
+    JsonWrite (JsonCounters, "GetNextDataSlicesToSendI",     SerialI2SDebugCounters.GetNextDataSlicesToSendI);
+    JsonWrite (JsonCounters, "GetNextDataSlicesToSendII",    SerialI2SDebugCounters.GetNextDataSlicesToSendII);
+    JsonWrite (JsonCounters, "GetNextDataSlicesToSendIII",   SerialI2SDebugCounters.GetNextDataSlicesToSendIII);
+    JsonWrite (JsonCounters, "SetUpNextDataToSend",          SerialI2SDebugCounters.SetUpNextDataToSend);
+    JsonWrite (JsonCounters, "SetUpNextDataToSendI",         SerialI2SDebugCounters.SetUpNextDataToSendI);
+    JsonWrite (JsonCounters, "SetUpNextDataToSendII",        SerialI2SDebugCounters.SetUpNextDataToSendII);
+
     #endif // def SERIAL_I2S_DEBUG_COUNTERS
 
     // DEBUG_END;
 } // GetStatus
 
 //----------------------------------------------------------------------------
-uint32_t c_OutputSerialI2S::Poll ()
+void IRAM_ATTR c_OutputSerialI2S::ISR_StartNewDataFrame ()
 {
     // DEBUG_START;
+    // DEBUG_V (String ("frame started on ") + String (OutputPortDefinition.gpios.data));
+    INC_SERIAL_I2S_DEBUG_COUNTERS (StartNewDataFrame);
 
-    // DEBUG_END;
-    return ActualFrameDurationMicroSec;
+    c_OutputSerial::ISR_StartNewFrame ();
 
-} // Poll
-
-//----------------------------------------------------------------------------
-bool c_OutputSerialI2S::I2SPoll ()
-{
-    // DEBUG_START;
-    bool Response = false;
-    do // Once
+    #if defined (SUPPORT_OutputProtocol_DMX)
+    if (OutputType == c_OutputMgr::e_OutputProtocolType::OutputProtocol_DMX)
     {
-        if (gpio_num_t(-1) == OutputPortDefinition.gpios.data)
-        {
-            break;
-        }
-
-        // What for the next possible frame time
-        if(!canRefresh()) {break;}
-
-        // DEBUG_V("get the next frame started");
-        Response = I2S.StartNewFrame ();
-
-        // DEBUG_V();
-
-    } while (false);
-
-    // DEBUG_END;
-    return Response;
-
-} // Poll
-
-//----------------------------------------------------------------------------
-void IRAM_ATTR c_OutputSerialI2S::ISR_StartNewDataFrame()
-{
-    // DEBUG_START;
-    // DEBUG_V(String("frame started on ") + String(OutputPortDefinition.gpios.data));
-    INC_SERIAL_I2S_DEBUG_COUNTERS(FrameStarts);
-    #if defined(SUPPORT_OutputProtocol_DMX)
-    if(OutputType == c_OutputMgr::e_OutputProtocolType::OutputProtocol_DMX)
-    {
-        BreakBitCount = 1;
+        INC_SERIAL_I2S_DEBUG_COUNTERS (StartNewDataFrameI);
+        CurrentBreakSliceCount = BreakSliceCount;
+        CurrentMabSliceCount   = MabSliceCount;
     }
-    #endif //  defined(SUPPORT_OutputProtocol_DMX)
-    StartBitCount = 1;
-    ISR_StartNewFrame();
+    else
+    {
+        INC_SERIAL_I2S_DEBUG_COUNTERS (StartNewDataFrameII);
+        CurrentBreakSliceCount = 0;
+        CurrentMabSliceCount   = 0;
+    }
+    #endif //  defined (SUPPORT_OutputProtocol_DMX)
+
+    ISR_SetUpNextDataToSend ();
 
     // DEBUG_END;
 } // StartNewDataFrame
 
 //----------------------------------------------------------------------------
-bool IRAM_ATTR c_OutputSerialI2S::ISR_GetNextBitToSend (I2S_item32_t & DataToSend)
+void c_OutputSerialI2S::SetDefaultDataValue (c_OutputI2S::I2S_Item_t DefaultIntensitySliceData)
 {
-    INC_SERIAL_I2S_DEBUG_COUNTERS(GetNextBit);
-    bool Response = true;
-    if(BreakBitCount)
-    {
-        INC_SERIAL_I2S_DEBUG_COUNTERS(BreakBits);
-        BreakBitCount = 0;
-        DataToSend = BreakBit;
-        MabBitCount = 1;
-    }
-    else if(MabBitCount)
-    {
-        INC_SERIAL_I2S_DEBUG_COUNTERS(MabBits);
-        MabBitCount = 0;
-        DataToSend = MabBit;
-        StartBitCount = 1;
-    }
-    else if(StartBitCount)
-    {
-        INC_SERIAL_I2S_DEBUG_COUNTERS(StartBits);
-        StartBitCount = 0;
-        DataToSend = StartBit;
-        // set up for the next data byte
-        c_OutputSerial::ISR_GetNextIntensityToSend(DataPattern);
-        CurrentDataPairId = 4;
-        StopBitCount = 1;
-    }
-    else if(CurrentDataPairId)
-    {
-        INC_SERIAL_I2S_DEBUG_COUNTERS(DataBits);
-        --CurrentDataPairId;
-        DataToSend = DataBitArray[DataPattern & 0x3];
-        DataPattern = DataPattern >> 2;
-    }
-    else if(StopBitCount)
-    {
-        INC_SERIAL_I2S_DEBUG_COUNTERS(StopBits);
-        StopBitCount = 0;
-        DataToSend = StopBit;
+    // DEBUG_START;
 
-        if(c_OutputSerial::ISR_MoreDataToSend())
-        {
-            StartBitCount = 1;
-        }
-        else
-        {
-            INC_SERIAL_I2S_DEBUG_COUNTERS(FrameEnds);
-            Response = false;
-        }
-    }
-    else
-    {
-        INC_SERIAL_I2S_DEBUG_COUNTERS(Underrun);
-        // nothing to send
-        DataToSend.val = 0x0;
-        Response = false;
-    }
+    // DEBUG_V (String ("     SetDefaultDataValue:0x") + String (DefaultIntensitySliceData, HEX));
 
-    return Response;
+    OneBit = DefaultIntensitySliceData | DataBit;
+    ZeroBit = DefaultIntensitySliceData & DataBitMask;
+
+    // DEBUG_END;
+} // SetDefaultDataValue
+
+//----------------------------------------------------------------------------
+bool IRAM_ATTR c_OutputSerialI2S::ISR_GetNextDataSlicesToSend (c_OutputI2S::I2S_Item_t * pDataToSend, uint32_t & numSlices, c_OutputI2S::I2S_Item_t DefaultIntensitySliceData)
+{
+    INC_SERIAL_I2S_DEBUG_COUNTERS (GetNextDataSlicesToSend);
+
+    bool MoreDataToSend = true;
+
+    #if defined (SUPPORT_OutputProtocol_DMX)
+    while (CurrentBreakSliceCount && numSlices)
+    {
+        INC_SERIAL_I2S_DEBUG_COUNTERS (BreakBits);
+        * ( (c_OutputI2S::I2S_Item_t*) ( ( (uint32_t) (pDataToSend)) ^ 0x2)) = ZeroBit;
+        --CurrentBreakSliceCount;
+        numSlices -= sizeof (ZeroBit);
+        pDataToSend += sizeof (ZeroBit);
+
+    } // while (CurrentBreakSliceCount && numSlices)
+
+    while (CurrentMabSliceCount && numSlices)
+    {
+        INC_SERIAL_I2S_DEBUG_COUNTERS (MabBits);
+
+        * ( (c_OutputI2S::I2S_Item_t*) ( ( (uint32_t) (pDataToSend)) ^ 0x2)) = OneBit;
+        --CurrentMabSliceCount;
+        numSlices -= sizeof (OneBit);
+        pDataToSend += sizeof (OneBit);
+
+    } // while (CurrentMabSliceCount && numSlices)
+    #endif // defined (SUPPORT_OutputProtocol_DMX)
+
+    // send data bytes.
+    while (numSlices && MoreDataToSend && CurrentBitSliceCount)
+    {
+        INC_SERIAL_I2S_DEBUG_COUNTERS (GetNextDataSlicesToSendI);
+
+        * ( (c_OutputI2S::I2S_Item_t*) ( ( (uint32_t) (pDataToSend)) ^ 0x2)) = (DataPattern & DataPatternMask) ? OneBit : ZeroBit;
+        numSlices -= sizeof (OneBit);
+        pDataToSend += sizeof (OneBit);
+        --CurrentBitSliceCount;
+
+        // have more slices in the current data bit to send?
+        if (0 == CurrentBitSliceCount)
+        {
+            INC_SERIAL_I2S_DEBUG_COUNTERS (GetNextDataSlicesToSendII);
+
+            // move to the next bit of data
+            DataPatternMask = DataPatternMask >> 1;
+            CurrentBitSliceCount = BitSliceCount;
+
+            if (0 == DataPatternMask)
+            {
+                INC_SERIAL_I2S_DEBUG_COUNTERS (GetNextDataSlicesToSendIII);
+                MoreDataToSend = ISR_SetUpNextDataToSend ();
+            }
+        }
+    } // while (numSlices && MoreDataToSend && CurrentBitSliceCount)
+
+    return MoreDataToSend;
 } // ISR_GetNextBitToSend
+
+//----------------------------------------------------------------------------
+bool IRAM_ATTR c_OutputSerialI2S::ISR_SetUpNextDataToSend ()
+{
+    // 1 bit of data has completed move to the next bit of data
+    bool MoreDataToSend = true;
+    INC_SERIAL_I2S_DEBUG_COUNTERS (SetUpNextDataToSend);
+
+    do // once
+    {
+        // do we need to set up the next data byte to send?
+
+        // is there another data byte to send?
+        if (false == c_OutputSerial::ISR_MoreDataToSend ())
+        {
+            // Frame is complete, set up for the next frame
+            INC_SERIAL_I2S_DEBUG_COUNTERS (SetUpNextDataToSendI);
+
+            MoreDataToSend = false;
+            DataPatternMask = 0;
+            break;
+        }
+    
+        // there is more data to send in the current frame
+        INC_SERIAL_I2S_DEBUG_COUNTERS (SetUpNextDataToSendII);
+
+        // set up to output the next data byte
+        DataPattern = 0;
+        c_OutputSerial::ISR_GetNextIntensityToSend (DataPattern);
+
+        // add start and stop bits to the data byte
+        DataPattern = (DataPattern << 2) | 0b00000000011; // add start and stop bits to the data byte
+        DataPatternMask = 0b10000000000; // send 11 bits: 1 Start + 8 data + 2 stop bits
+        CurrentBitSliceCount = BitSliceCount;
+    
+    } while (false); // do once
+
+    return MoreDataToSend;
+} // ISR_SetUpNextDataToSend
 
 //----------------------------------------------------------------------------
 void c_OutputSerialI2S::PauseOutput (bool State)
 {
     // DEBUG_START;
 
-    c_OutputSerial::PauseOutput(State);
-    I2S.PauseOutput(State);
+    // DEBUG_V (String ("PortId: ") + String (OutputPortDefinition.PortId));
+    // DEBUG_V (String (" New State: ") + String (State));
+    // DEBUG_V (String (" Old State: ") + String (IsPaused ()));
+    c_OutputSerial::PauseOutput (State);
+    I2Sdriver->SetOutputState (OutputPortDefinition.PortId, !State);
 
     // DEBUG_END;
 } // PauseOutput
 
-#endif // (defined(SUPPORT_OutputProtocol_FireGod) || defined(SUPPORT_OutputProtocol_DMX) || defined(SUPPORT_OutputProtocol_Serial) || defined(SUPPORT_OutputProtocol_Renard)) && defined(SUPPORT_I2S)
+#endif // (defined (SUPPORT_OutputProtocol_FireGod) || defined (SUPPORT_OutputProtocol_DMX) || defined (SUPPORT_OutputProtocol_Serial) || defined (SUPPORT_OutputProtocol_Renard)) && defined (SUPPORT_I2S)

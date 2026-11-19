@@ -79,11 +79,11 @@ const OM_OutputPortDefinition_t OM_OutputPortDefinitions[] =
 // Output Types
 #define SUPPORT_OutputProtocol_TLS3001          // OM_SERIAL
 // #define SUPPORT_OutputProtocol_APA102           // OM_SPI
-// #define SUPPORT_OutputProtocol_DMX              // OM_SERIAL
+#define SUPPORT_OutputProtocol_DMX              // OM_SERIAL
 // #define SUPPORT_OutputProtocol_GECE             // OM_SERIAL
 // #define SUPPORT_OutputProtocol_GS8208           // OM_SERIAL
-// #define SUPPORT_OutputProtocol_Renard           // OM_SERIAL
-// #define SUPPORT_OutputProtocol_Serial           // OM_SERIAL
+#define SUPPORT_OutputProtocol_Renard           // OM_SERIAL
+#define SUPPORT_OutputProtocol_Serial           // OM_SERIAL
 #define SUPPORT_OutputProtocol_TM1814           // OM_SERIAL
 #define SUPPORT_OutputProtocol_UCS1903          // OM_SERIAL
 #define SUPPORT_OutputProtocol_UCS8903          // OM_SERIAL

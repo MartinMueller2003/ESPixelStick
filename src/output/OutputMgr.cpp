@@ -35,6 +35,7 @@
 #include "output/OutputRelay.hpp"
 #include "output/OutputSerialUart.hpp"
 #include "output/OutputSerialRmt.hpp"
+#include "output/OutputSerialI2S.hpp"
 #include "output/OutputServoPCA9685.hpp"
 #include "output/OutputTM1814Rmt.hpp"
 #include "output/OutputTM1814I2S.hpp"
