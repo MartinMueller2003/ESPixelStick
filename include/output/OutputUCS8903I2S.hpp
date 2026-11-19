@@ -65,7 +65,7 @@ private:
     uint32_t        DataPattern;
     uint32_t        DataPatternMask;
 
-    #define UCS8903_I2S_DEBUG_COUNTERS
+    // #define UCS8903_I2S_DEBUG_COUNTERS
     #ifdef UCS8903_I2S_DEBUG_COUNTERS
     #define INC_UCS8903_I2S_DEBUG_COUNTER(c) (I2SDebugCounters.c++)
     struct
