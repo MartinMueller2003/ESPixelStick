@@ -71,7 +71,9 @@ c_OutputSerialI2S::c_OutputSerialI2S (OM_OutputPortDefinition_t & OutputPortDefi
     CurrentMabSliceCount   = 0;
     CurrentBitSliceCount   = 0;
 
+    #ifdef SERIAL_I2S_DEBUG_COUNTERS
     memset (&SerialI2SDebugCounters, 0, sizeof (SerialI2SDebugCounters));
+    #endif // def SERIAL_I2S_DEBUG_COUNTERS
 
     // DEBUG_END;
 
