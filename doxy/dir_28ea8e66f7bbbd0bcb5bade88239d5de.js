@@ -20,6 +20,7 @@ var dir_28ea8e66f7bbbd0bcb5bade88239d5de =
     [ "OutputRelay.hpp", "_output_relay_8hpp.html", null ],
     [ "OutputRmt.hpp", "_output_rmt_8hpp.html", null ],
     [ "OutputSerial.hpp", "_output_serial_8hpp.html", null ],
+    [ "OutputSerialI2S.hpp", "_output_serial_i2_s_8hpp.html", null ],
     [ "OutputSerialRmt.hpp", "_output_serial_rmt_8hpp.html", null ],
     [ "OutputSerialUart.hpp", "_output_serial_uart_8hpp.html", null ],
     [ "OutputServoPCA9685.hpp", "_output_servo_p_c_a9685_8hpp.html", null ],

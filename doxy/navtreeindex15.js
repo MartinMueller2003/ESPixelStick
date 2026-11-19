@@ -1,5 +1,8 @@
 var NAVTREEINDEX15 =
 {
+"globals_vars.html":[1,1,2,0],
+"globals_vars_a.html":[1,1,2,1],
+"globals_vars_b.html":[1,1,2,2],
 "globals_vars_c.html":[1,1,2,3],
 "globals_vars_d.html":[1,1,2,4],
 "globals_vars_e.html":[1,1,2,5],
@@ -246,8 +249,5 @@ var NAVTREEINDEX15 =
 "structc___input_effect_engine_1_1d_c_h_s_v.html":[0,0,11,1],
 "structc___input_effect_engine_1_1d_c_h_s_v.html#a5675fbfefcee1336abc54018b5b2d0b5":[0,0,11,1,2],
 "structc___input_effect_engine_1_1d_c_h_s_v.html#a8ba380a9ebbd1f09d5a75c05ae85b6e9":[0,0,11,1,1],
-"structc___input_effect_engine_1_1d_c_h_s_v.html#abdf7e91e3392c5a95445f48793059260":[0,0,11,1,0],
-"structc___input_effect_engine_1_1d_c_r_g_b.html":[0,0,11,2],
-"structc___input_effect_engine_1_1d_c_r_g_b.html#a073dd638084287ace9f3a514c994bbf1":[0,0,11,2,2],
-"structc___input_effect_engine_1_1d_c_r_g_b.html#a3b8fd353a7a3937773114d2e51154da4":[0,0,11,2,0]
+"structc___input_effect_engine_1_1d_c_h_s_v.html#abdf7e91e3392c5a95445f48793059260":[0,0,11,1,0]
 };

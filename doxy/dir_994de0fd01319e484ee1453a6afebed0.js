@@ -19,6 +19,7 @@ var dir_994de0fd01319e484ee1453a6afebed0 =
     [ "OutputRmtV4.cpp", "_output_rmt_v4_8cpp.html", null ],
     [ "OutputRmtV5.cpp", "_output_rmt_v5_8cpp.html", null ],
     [ "OutputSerial.cpp", "_output_serial_8cpp.html", null ],
+    [ "OutputSerialI2S.cpp", "_output_serial_i2_s_8cpp.html", null ],
     [ "OutputSerialRmt.cpp", "_output_serial_rmt_8cpp.html", null ],
     [ "OutputSerialUart.cpp", "_output_serial_uart_8cpp.html", null ],
     [ "OutputServoPCA9685.cpp", "_output_servo_p_c_a9685_8cpp.html", null ],
