@@ -273,10 +273,10 @@ void c_OutputI2S::RegisterSlotDevice (OutputI2SChannelConfig_t config, I2S_Item_
             DefaultIntensitySliceData &= DataBitMask;
         }
     
-        // DEBUG_V("notify the active channels that there is a new default output value");
-        for(auto currentPort : OutputI2SSlotConfigs)
+        // DEBUG_V ("notify the active channels that there is a new default output value");
+        for (auto currentPort : OutputI2SSlotConfigs)
         {
-            if(nullptr !=currentPort.SetDefaultDataValue)
+            if (nullptr != currentPort.SetDefaultDataValue)
             {
                 currentPort.SetDefaultDataValue (currentPort.arg, DefaultIntensitySliceData);
             }
