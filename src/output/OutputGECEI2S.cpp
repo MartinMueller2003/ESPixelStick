@@ -17,7 +17,7 @@
 *
 */
 #include "ESPixelStick.h"
-#if defined(SUPPORT_OutputProtocol_GECE) && defined(SUPPORT_I2S)
+#if defined (SUPPORT_OutputProtocol_GECE) && defined (SUPPORT_I2S) 
 
 #include "output/OutputGECEI2S.hpp"
 
@@ -29,48 +29,48 @@ static uint32_t SetDefaultDataValueBaseCount = 0;
 
 //----------------------------------------------------------------------------
 // return false if there are no more data slices to send
-static void IRAM_ATTR StartNewFrameBase (void * arg)
+static void IRAM_ATTR StartNewFrameBase (void * arg) 
 {
     #ifdef GECE_I2S_DEBUG_COUNTERS
     StartNewFrameBaseCount++;
     #endif // def GECE_I2S_DEBUG_COUNTERS
 
-    reinterpret_cast<c_OutputGECEI2S*> (arg)->ISR_StartNewDataFrame ();
+    reinterpret_cast<c_OutputGECEI2S*> (arg) ->ISR_StartNewDataFrame ();
 } // StartNewFrameBase
 
 //----------------------------------------------------------------------------
 // return false if there are no more data slices to send
-static bool IRAM_ATTR GetDataSlicesToSendBase (void * arg, c_OutputI2S::I2S_Item_t * DataToSend, uint32_t & numSlices, c_OutputI2S::I2S_Item_t DefaultIntensitySliceData)
+static bool IRAM_ATTR GetDataSlicesToSendBase (void * arg, c_OutputI2S::I2S_Item_t * DataToSend, uint32_t & numSlices, c_OutputI2S::I2S_Item_t DefaultIntensitySliceData) 
 {
     #ifdef GECE_I2S_DEBUG_COUNTERS
     ++GetDataSlicesToSendBaseCount;
     #endif // def GECE_I2S_DEBUG_COUNTERS
 
-    return reinterpret_cast<c_OutputGECEI2S*> (arg)->ISR_GetNextDataSlicesToSend (DataToSend, numSlices, DefaultIntensitySliceData);
+    return reinterpret_cast<c_OutputGECEI2S*> (arg) ->ISR_GetNextDataSlicesToSend (DataToSend, numSlices, DefaultIntensitySliceData);
 } // ISR_GetNextBitToSend
 
 //----------------------------------------------------------------------------
-static void SetDefaultDataValueBase (void * arg, c_OutputI2S::I2S_Item_t DefaultIntensitySliceData)
+static void SetDefaultDataValueBase (void * arg, c_OutputI2S::I2S_Item_t DefaultIntensitySliceData) 
 {
     #ifdef GECE_I2S_DEBUG_COUNTERS
     ++SetDefaultDataValueBaseCount;
     #endif // def GECE_I2S_DEBUG_COUNTERS
 
-    reinterpret_cast<c_OutputGECEI2S*> (arg)->SetDefaultDataValue (DefaultIntensitySliceData);
+    reinterpret_cast<c_OutputGECEI2S*> (arg) ->SetDefaultDataValue (DefaultIntensitySliceData);
+
 } // SetDefaultDataValueBase
 
-
 //----------------------------------------------------------------------------
-c_OutputGECEI2S::c_OutputGECEI2S(OM_OutputPortDefinition_t & OutputPortDefinition,
+c_OutputGECEI2S::c_OutputGECEI2S (OM_OutputPortDefinition_t & OutputPortDefinition,
                                  c_OutputMgr::e_OutputProtocolType outputType) :
-    c_OutputGECE(OutputPortDefinition, outputType)
+    c_OutputGECE (OutputPortDefinition, outputType) 
 {
     // DEBUG_START;
 
     I2Sdriver = OutputMgr.GetI2sDriver ();
 
     #ifdef GECE_I2S_DEBUG_COUNTERS
-    memset (&I2SDebugCounters, 0, sizeof (I2SDebugCounters));
+    memset (&I2SDebugCounters, 0, sizeof (I2SDebugCounters) );
     #endif // def GECE_I2S_DEBUG_COUNTERS
 
     // DEBUG_END;
@@ -78,11 +78,11 @@ c_OutputGECEI2S::c_OutputGECEI2S(OM_OutputPortDefinition_t & OutputPortDefinitio
 } // c_OutputGECEI2S
 
 //----------------------------------------------------------------------------
-c_OutputGECEI2S::~c_OutputGECEI2S ()
+c_OutputGECEI2S::~c_OutputGECEI2S () 
 {
     // DEBUG_START;
 
-    if (HasBeenInitialized)
+    if (I2Sdriver) 
     {
         I2Sdriver->RemoveSlotDevice (OutputPortDefinition.PortId);
     }
@@ -91,7 +91,7 @@ c_OutputGECEI2S::~c_OutputGECEI2S ()
 } // ~c_OutputGECEI2S
 
 //----------------------------------------------------------------------------
-void c_OutputGECEI2S::Begin ()
+void c_OutputGECEI2S::Begin () 
 {
     // DEBUG_START;
 
@@ -100,7 +100,7 @@ void c_OutputGECEI2S::Begin ()
 
     c_OutputGECE::Begin ();
 
-    // DEBUG_V (String ("DataPin: ") + String (gpio_num_t (OutputPortDefinition.gpios.data)));
+    // DEBUG_V (String ("DataPin: ") + String (gpio_num_t (OutputPortDefinition.gpios.data) ) );
 
     c_OutputI2S::OutputI2SChannelConfig_t OutputI2SConfig;
     OutputI2SConfig.I2SChannelId              = uint32_t (OutputPortDefinition.PortId);
@@ -109,13 +109,13 @@ void c_OutputGECEI2S::Begin ()
     OutputI2SConfig.StartNewFrame             = StartNewFrameBase;
     OutputI2SConfig.GetNextIntensityBitSlices = GetDataSlicesToSendBase;
     OutputI2SConfig.SetDefaultDataValue       = SetDefaultDataValueBase;
-    OutputI2SConfig.IdleLevelIsHigh           = true; // idle is low
+    OutputI2SConfig.IdleLevelIsHigh           = false; // idle is low
     OutputI2SConfig.IsActive                  = false; // do not output data
 
     I2Sdriver->RegisterSlotDevice (OutputI2SConfig, DataBit, DataBitMask);
 
-    // DEBUG_V (String ("    DataBit: 0x") + String (DataBit, HEX));
-    // DEBUG_V (String ("DataBitMask: 0x") + String (DataBitMask, HEX));
+    // DEBUG_V (String ("    DataBit: 0x") + String (DataBit, HEX) );
+    // DEBUG_V (String ("DataBitMask: 0x") + String (DataBitMask, HEX) );
 
     HasBeenInitialized = true;
 
@@ -125,40 +125,32 @@ void c_OutputGECEI2S::Begin ()
 } // Begin
 
 //----------------------------------------------------------------------------
-void c_OutputGECEI2S::CalculateFrameBitSlices ()
+void c_OutputGECEI2S::CalculateFrameBitSlices () 
 {
     // DEBUG_START;
 
-    if(I2Sdriver)
-    {
-        FrameReset.first.DataBitDataValueCount = I2Sdriver->GetNumTimeSlicesForTargetTimeNS (20 * NanoSecondsInAMicroSecond);
-        FrameReset.second.DataBitDataValueCount = I2Sdriver->GetNumTimeSlicesForTargetTimeNS (20 * NanoSecondsInAMicroSecond);
-    
-        StartBit.first.DataBitDataValueCount = I2Sdriver->GetNumTimeSlicesForTargetTimeNS (4 * NanoSecondsInAMicroSecond);
-        StartBit.second.DataBitDataValueCount = I2Sdriver->GetNumTimeSlicesForTargetTimeNS (4 * NanoSecondsInAMicroSecond);
-    
-        ZeroBit.first.DataBitDataValueCount = I2Sdriver->GetNumTimeSlicesForTargetTimeNS (6 * NanoSecondsInAMicroSecond);
-        ZeroBit.second.DataBitDataValueCount = I2Sdriver->GetNumTimeSlicesForTargetTimeNS (25 * NanoSecondsInAMicroSecond);
-    
-        OneBit.first.DataBitDataValueCount = I2Sdriver->GetNumTimeSlicesForTargetTimeNS (25 * NanoSecondsInAMicroSecond);
-        OneBit.second.DataBitDataValueCount = I2Sdriver->GetNumTimeSlicesForTargetTimeNS (6 * NanoSecondsInAMicroSecond);
-    
-        StopBit.first.DataBitDataValueCount = I2Sdriver->GetNumTimeSlicesForTargetTimeNS (30 * NanoSecondsInAMicroSecond);
-        StopBit.second.DataBitDataValueCount = I2Sdriver->GetNumTimeSlicesForTargetTimeNS (30 * NanoSecondsInAMicroSecond);
-    }
+
+    StartBit.first.DataBitDataValueCount = I2Sdriver->GetNumTimeSlicesForTargetTimeNS (40 * NanoSecondsInAMicroSecond) - 1;
+    StartBit.second.DataBitDataValueCount = I2Sdriver->GetNumTimeSlicesForTargetTimeNS (10 * NanoSecondsInAMicroSecond) - 1;
+
+    ZeroBit.first.DataBitDataValueCount = I2Sdriver->GetNumTimeSlicesForTargetTimeNS (10 * NanoSecondsInAMicroSecond) - 1;
+    ZeroBit.second.DataBitDataValueCount = I2Sdriver->GetNumTimeSlicesForTargetTimeNS (20 * NanoSecondsInAMicroSecond) - 1;
+
+    OneBit.first.DataBitDataValueCount = I2Sdriver->GetNumTimeSlicesForTargetTimeNS (20 * NanoSecondsInAMicroSecond) - 1;
+    OneBit.second.DataBitDataValueCount = I2Sdriver->GetNumTimeSlicesForTargetTimeNS (10 * NanoSecondsInAMicroSecond) - 1;
 
     // DEBUG_END;
 
 } // CalculateFrameBits
 
 //----------------------------------------------------------------------------
-bool c_OutputGECEI2S::SetConfig (ArduinoJson::JsonObject& jsonConfig)
+bool c_OutputGECEI2S::SetConfig (ArduinoJson::JsonObject& jsonConfig) 
 {
     // DEBUG_START;
 
     bool response = c_OutputGECE::SetConfig (jsonConfig);
 
-    // DEBUG_V (String ("DataPin: ") + String (gpio_num_t (OutputPortDefinition.gpios.data)));
+    // DEBUG_V (String ("DataPin: ") + String (gpio_num_t (OutputPortDefinition.gpios.data) ) );
 
     // DEBUG_END;
     return response;
@@ -166,13 +158,13 @@ bool c_OutputGECEI2S::SetConfig (ArduinoJson::JsonObject& jsonConfig)
 } // SetConfig
 
 //----------------------------------------------------------------------------
-void c_OutputGECEI2S::SetOutputBufferSize (uint32_t NumChannelsAvailable)
+void c_OutputGECEI2S::SetOutputBufferSize (uint32_t NumChannelsAvailable) 
 {
     // DEBUG_START;
 
     c_OutputGECE::SetOutputBufferSize (NumChannelsAvailable);
 
-    if (OutputBufferSize && HasBeenInitialized)
+    if (OutputBufferSize && HasBeenInitialized) 
     {
         // DEBUG_V ("start the transmiter");
         PauseOutput (true);
@@ -190,13 +182,13 @@ void c_OutputGECEI2S::SetOutputBufferSize (uint32_t NumChannelsAvailable)
 } // SetBufferSize
 
 //----------------------------------------------------------------------------
-void c_OutputGECEI2S::GetStatus (ArduinoJson::JsonObject& jsonStatus)
+void c_OutputGECEI2S::GetStatus (ArduinoJson::JsonObject& jsonStatus) 
 {
     c_OutputGECE::GetStatus (jsonStatus);
     I2Sdriver->GetStatus (jsonStatus);
 
     #ifdef GECE_I2S_DEBUG_COUNTERS
-    JsonObject JsonCounters = jsonStatus["JsonCounters"].to<JsonObject>();
+    JsonObject JsonCounters = jsonStatus["JsonCounters"].to<JsonObject> ();
 
     JsonWrite (JsonCounters, "StartNewFrameBaseCount",       StartNewFrameBaseCount);
     JsonWrite (JsonCounters, "GetDataSlicesToSendBaseCount", GetDataSlicesToSendBaseCount);
@@ -204,6 +196,7 @@ void c_OutputGECEI2S::GetStatus (ArduinoJson::JsonObject& jsonStatus)
 
     JsonWrite (JsonCounters, "StartNewDataFrame",            I2SDebugCounters.StartNewDataFrame);
     JsonWrite (JsonCounters, "GetNextDataSlicesToSend",      I2SDebugCounters.GetNextDataSlicesToSend);
+    JsonWrite (JsonCounters, "GetNextDataSlicesToSendNumSlices", I2SDebugCounters.GetNextDataSlicesToSendNumSlices);
     JsonWrite (JsonCounters, "GetNextDataSlicesToSendI",     I2SDebugCounters.GetNextDataSlicesToSendI);
     JsonWrite (JsonCounters, "GetNextDataSlicesToSendII",    I2SDebugCounters.GetNextDataSlicesToSendII);
     JsonWrite (JsonCounters, "GetNextDataSlicesToSendIII",   I2SDebugCounters.GetNextDataSlicesToSendIII);
@@ -232,28 +225,25 @@ void c_OutputGECEI2S::GetStatus (ArduinoJson::JsonObject& jsonStatus)
 } // GetStatus
 
 //----------------------------------------------------------------------------
-void IRAM_ATTR c_OutputGECEI2S::ISR_StartNewDataFrame()
+void IRAM_ATTR c_OutputGECEI2S::ISR_StartNewDataFrame () 
 {
-    INC_GECE_I2S_DEBUG_COUNTERS(StartNewDataFrame);
+    INC_GECE_I2S_DEBUG_COUNTERS (StartNewDataFrame);
 
-    c_OutputGECE::ISR_StartNewFrame();
-    ISR_SetUpNextDataToSend();
+    c_OutputGECE::ISR_StartNewFrame ();
+    ISR_SetUpNextDataToSend ();
 
 } // StartNewDataFrame
 
 //----------------------------------------------------------------------------
-void c_OutputGECEI2S::SetDefaultDataValue (c_OutputI2S::I2S_Item_t DefaultIntensitySliceData)
+void c_OutputGECEI2S::SetDefaultDataValue (c_OutputI2S::I2S_Item_t DefaultIntensitySliceData) 
 {
     // DEBUG_START;
 
-    // DEBUG_V (String ("     SetDefaultDataValue:0x") + String (DefaultIntensitySliceData, HEX));
-    // DEBUG_V (String ("                 DataBit:0x") + String (DataBit, HEX));
-    // DEBUG_V (String ("             DataBitMask:0x") + String (DataBitMask, HEX));
+    // DEBUG_V (String ("     SetDefaultDataValue:0x") + String (DefaultIntensitySliceData, HEX) );
+    // DEBUG_V (String ("                 DataBit:0x") + String (DataBit, HEX) );
+    // DEBUG_V (String ("             DataBitMask:0x") + String (DataBitMask, HEX) );
 
-    FrameReset.first.DataValue = DefaultIntensitySliceData & DataBitMask;
-    FrameReset.second.DataValue = DefaultIntensitySliceData & DataBitMask;
-
-    StartBit.first.DataValue = DefaultIntensitySliceData | DataBit;
+    StartBit.first.DataValue = DefaultIntensitySliceData & DataBitMask;
     StartBit.second.DataValue = DefaultIntensitySliceData | DataBit;
 
     ZeroBit.first.DataValue = DefaultIntensitySliceData & DataBitMask;
@@ -262,151 +252,109 @@ void c_OutputGECEI2S::SetDefaultDataValue (c_OutputI2S::I2S_Item_t DefaultIntens
     OneBit.first.DataValue = DefaultIntensitySliceData & DataBitMask;
     OneBit.second.DataValue = DefaultIntensitySliceData | DataBit;
 
-    StopBit.first.DataValue = DefaultIntensitySliceData | DataBit;
-    StopBit.second.DataValue = DefaultIntensitySliceData | DataBit;
-
     // DEBUG_END;
 } // SetDefaultDataValue
 
 //----------------------------------------------------------------------------
-bool IRAM_ATTR c_OutputGECEI2S::ISR_GetNextDataSlicesToSend (c_OutputI2S::I2S_Item_t * pDataToSend, uint32_t & numSlices, c_OutputI2S::I2S_Item_t DefaultIntensitySliceData)
+bool IRAM_ATTR c_OutputGECEI2S::ISR_GetNextDataSlicesToSend (c_OutputI2S::I2S_Item_t * pDataToSend, uint32_t & numSlices, c_OutputI2S::I2S_Item_t DefaultIntensitySliceData) 
 {
-    return false;
-    INC_GECE_I2S_DEBUG_COUNTERS(GetNextDataSlicesToSend);
+    INC_GECE_I2S_DEBUG_COUNTERS (GetNextDataSlicesToSend);
+    SET_GECE_I2S_DEBUG_COUNTERS (GetNextDataSlicesToSendNumSlices, numSlices);
 
     bool MoreDataToSend = true;
-    while(numSlices && MoreDataToSend)
+
+    while (numSlices && MoreDataToSend) 
     {
-        while(numSlices && FrameReset.first.CurrentCount)
+        while (numSlices && StartBit.first.CurrentCount) 
         {
-            INC_GECE_I2S_DEBUG_COUNTERS(GetNextDataSlicesToSendI);
+            INC_GECE_I2S_DEBUG_COUNTERS (GetNextDataSlicesToSendIII);
             
-            * ( (c_OutputI2S::I2S_Item_t*) ( ( (uint32_t) (pDataToSend)) ^ 0x2)) = FrameReset.first.DataValue;
-            pDataToSend += sizeof (FrameReset.first.DataValue);
-            numSlices-= sizeof (FrameReset.first.DataValue);
-            FrameReset.first.CurrentCount--;
-        } // while(numSlices && FrameReset.first.CurrentCount)
-
-        while(numSlices && FrameReset.second.CurrentCount)
-        {
-            INC_GECE_I2S_DEBUG_COUNTERS(GetNextDataSlicesToSendII);
-            
-            * ( (c_OutputI2S::I2S_Item_t*) ( ( (uint32_t) (pDataToSend)) ^ 0x2)) = FrameReset.second.DataValue;
-            pDataToSend += sizeof (FrameReset.second.DataValue);
-            numSlices-= sizeof (FrameReset.second.DataValue);
-            FrameReset.second.CurrentCount--;
-        } // while(numSlices && FrameReset.second.CurrentCount)
-
-        while(numSlices && StartBit.first.CurrentCount)
-        {
-            INC_GECE_I2S_DEBUG_COUNTERS(GetNextDataSlicesToSendIII);
-            
-            * ( (c_OutputI2S::I2S_Item_t*) ( ( (uint32_t) (pDataToSend)) ^ 0x2)) = StartBit.first.DataValue;
+            * ( (c_OutputI2S::I2S_Item_t*) ( ( (uint32_t) (pDataToSend) ) ^ 0x2) ) = StartBit.first.DataValue;
             pDataToSend += sizeof (StartBit.first.DataValue);
             numSlices-= sizeof (StartBit.first.DataValue);
             StartBit.first.CurrentCount--;
-        } // while(numSlices && StartBit.first.CurrentCount)
+        } // while (numSlices && StartBit.first.CurrentCount) 
 
-        while(numSlices && StartBit.second.CurrentCount)
+        while (numSlices && StartBit.second.CurrentCount) 
         {
-            INC_GECE_I2S_DEBUG_COUNTERS(GetNextDataSlicesToSendIV);
+            INC_GECE_I2S_DEBUG_COUNTERS (GetNextDataSlicesToSendIV);
             
-            * ( (c_OutputI2S::I2S_Item_t*) ( ( (uint32_t) (pDataToSend)) ^ 0x2)) = StartBit.second.DataValue;
+            * ( (c_OutputI2S::I2S_Item_t*) ( ( (uint32_t) (pDataToSend) ) ^ 0x2) ) = StartBit.second.DataValue;
             pDataToSend += sizeof (StartBit.second.DataValue);
             numSlices-= sizeof (StartBit.second.DataValue);
             StartBit.second.CurrentCount--;
-        } // while(numSlices && StartBit.second.CurrentCount)
+        } // while (numSlices && StartBit.second.CurrentCount) 
 
-        while(numSlices && DataPatternMask)
+        while (numSlices && DataPatternMask) 
         {
-            INC_GECE_I2S_DEBUG_COUNTERS(GetNextDataSlicesToSendV);
+            INC_GECE_I2S_DEBUG_COUNTERS (GetNextDataSlicesToSendV);
             
             // do the databit stuff here
-            while(numSlices && CurrentBit.first.CurrentCount)
+            while (numSlices && CurrentBit.first.CurrentCount) 
             {
-                INC_GECE_I2S_DEBUG_COUNTERS(GetNextDataSlicesToSendVI);
+                INC_GECE_I2S_DEBUG_COUNTERS (GetNextDataSlicesToSendVI);
                 
-                * ( (c_OutputI2S::I2S_Item_t*) ( ( (uint32_t) (pDataToSend)) ^ 0x2)) = CurrentBit.first.DataValue;
+                * ( (c_OutputI2S::I2S_Item_t*) ( ( (uint32_t) (pDataToSend) ) ^ 0x2) ) = CurrentBit.first.DataValue;
                 pDataToSend += sizeof (CurrentBit.first.DataValue);
                 numSlices-= sizeof (CurrentBit.first.DataValue);
                 CurrentBit.first.CurrentCount--;
         
-            } // while(numSlices && CurrentBit.first.CurrentCount)
+            } // while (numSlices && CurrentBit.first.CurrentCount) 
         
-            while(numSlices && CurrentBit.second.CurrentCount)
+            while (numSlices && CurrentBit.second.CurrentCount) 
             {
-                INC_GECE_I2S_DEBUG_COUNTERS(GetNextDataSlicesToSendVII);
+                INC_GECE_I2S_DEBUG_COUNTERS (GetNextDataSlicesToSendVII);
                 
-                * ( (c_OutputI2S::I2S_Item_t*) ( ( (uint32_t) (pDataToSend)) ^ 0x2)) = CurrentBit.second.DataValue;
+                * ( (c_OutputI2S::I2S_Item_t*) ( ( (uint32_t) (pDataToSend) ) ^ 0x2) ) = CurrentBit.second.DataValue;
                 pDataToSend += sizeof (CurrentBit.second.DataValue);
                 numSlices-= sizeof (CurrentBit.second.DataValue);
                 CurrentBit.second.CurrentCount--;
         
-            } // while(numSlices && CurrentBit.second.CurrentCount)
+            } // while (numSlices && CurrentBit.second.CurrentCount) 
 
-            INC_GECE_I2S_DEBUG_COUNTERS(GetNextDataSlicesToSendVIII);
+            INC_GECE_I2S_DEBUG_COUNTERS (GetNextDataSlicesToSendVIII);
 
             DataPatternMask = DataPatternMask >> 1;
 
-            if (0 == DataPatternMask)
+            if (0 == DataPatternMask) 
             {
-                INC_GECE_I2S_DEBUG_COUNTERS(GetNextDataSlicesToSendIX);
+                INC_GECE_I2S_DEBUG_COUNTERS (GetNextDataSlicesToSendIX);
                 // no more bits in this frame
                 break;
             }
-            else if (DataPattern & DataPatternMask)
+            else if (DataPattern & DataPatternMask) 
             {
-                INC_GECE_I2S_DEBUG_COUNTERS(GetNextDataSlicesToSendXI);
+                INC_GECE_I2S_DEBUG_COUNTERS (GetNextDataSlicesToSendXI);
                 // One Bit
                 CurrentBit = OneBit;
             }
             else
             {
-                INC_GECE_I2S_DEBUG_COUNTERS(GetNextDataSlicesToSendXII);
+                INC_GECE_I2S_DEBUG_COUNTERS (GetNextDataSlicesToSendXII);
                 // Zero Bit
                 CurrentBit = ZeroBit;
             }
 
-            INC_GECE_I2S_DEBUG_COUNTERS(GetNextDataSlicesToSendXIII);
+            INC_GECE_I2S_DEBUG_COUNTERS (GetNextDataSlicesToSendXIII);
             CurrentBit.first.CurrentCount = CurrentBit.first.DataBitDataValueCount;
             CurrentBit.second.CurrentCount = CurrentBit.second.DataBitDataValueCount;
 
-        } // while(numSlices && CurrentBit.second.CurrentCount)
+        } // while (numSlices && CurrentBit.second.CurrentCount) 
 
-        while(numSlices && StopBit.first.CurrentCount)
+        // did we finish the pixel?
+        if (0 == DataPatternMask) 
         {
-            INC_GECE_I2S_DEBUG_COUNTERS(GetNextDataSlicesToSendXIV);
-            
-            * ( (c_OutputI2S::I2S_Item_t*) ( ( (uint32_t) (pDataToSend)) ^ 0x2)) = StopBit.first.DataValue;
-            pDataToSend += sizeof (StopBit.first.DataValue);
-            numSlices-= sizeof (StopBit.first.DataValue);
-            StopBit.first.CurrentCount--;
-        } // while(numSlices && StopBit.first.CurrentCount)
-
-        while(numSlices && StopBit.second.CurrentCount)
-        {
-            INC_GECE_I2S_DEBUG_COUNTERS(GetNextDataSlicesToSendXV);
-            
-            * ( (c_OutputI2S::I2S_Item_t*) ( ( (uint32_t) (pDataToSend)) ^ 0x2)) = StopBit.second.DataValue;
-            pDataToSend += sizeof (StopBit.second.DataValue);
-            numSlices-= sizeof (StopBit.second.DataValue);
-            StopBit.second.CurrentCount--;
-
-        } // while(numSlices && StopBit.second.CurrentCount)
-
-        if(0 == StopBit.second.CurrentCount)
-        {
-            INC_GECE_I2S_DEBUG_COUNTERS(GetNextDataSlicesToSendXVI);
-            MoreDataToSend = ISR_SetUpNextDataToSend();
+            INC_GECE_I2S_DEBUG_COUNTERS (GetNextDataSlicesToSendXVI);
+            MoreDataToSend = ISR_SetUpNextDataToSend ();
         }
 
-    } // while (numSlices && MoreDataToSend)
+    } // while (numSlices && MoreDataToSend) 
     return MoreDataToSend;
 
 } // ISR_GetNextBitToSend
 
 //----------------------------------------------------------------------------
-bool IRAM_ATTR c_OutputGECEI2S::ISR_SetUpNextDataToSend ()
+bool IRAM_ATTR c_OutputGECEI2S::ISR_SetUpNextDataToSend () 
 {
     bool MoreDataToSend = true;
     INC_GECE_I2S_DEBUG_COUNTERS (SetUpNextDataToSend);
@@ -416,25 +364,20 @@ bool IRAM_ATTR c_OutputGECEI2S::ISR_SetUpNextDataToSend ()
         // do we need to set up the next data byte to send?
 
         // is there another data byte to send?
-        if (false == c_OutputPixel::ISR_MoreDataToSend ())
+        if (false == c_OutputPixel::ISR_MoreDataToSend () ) 
         {
             // Frame is complete, set up for the next frame
             INC_GECE_I2S_DEBUG_COUNTERS (SetUpNextDataToSendI);
+
             MoreDataToSend = false;
             DataPatternMask - 0;
 
-            FrameReset.first.CurrentCount  = 0;
-            FrameReset.second.CurrentCount = 0;
-        
             StartBit.first.CurrentCount  = 0;
             StartBit.second.CurrentCount = 0;
         
             CurrentBit.first.CurrentCount  = 0;
             CurrentBit.second.CurrentCount = 0;
-    
-            StopBit.first.CurrentCount  = 0;
-            StopBit.second.CurrentCount = 0;
-    
+
             break;
         }
 
@@ -443,11 +386,11 @@ bool IRAM_ATTR c_OutputGECEI2S::ISR_SetUpNextDataToSend ()
 
         // set up to output the next data byte
         c_OutputPixel::ISR_GetNextIntensityToSend (DataPattern);
+
         // next bit is MSBit
         DataPatternMask = 0x02000000;
-        return false;
 
-        if (DataPattern & DataPatternMask)
+        if (DataPattern & DataPatternMask) 
         {
             INC_GECE_I2S_DEBUG_COUNTERS (SetUpNextDataToSendIII);
             // One Bit
@@ -459,40 +402,31 @@ bool IRAM_ATTR c_OutputGECEI2S::ISR_SetUpNextDataToSend ()
             CurrentBit = ZeroBit;
         }
 
-        FrameReset.first.CurrentCount  = FrameReset.first.DataBitDataValueCount;
-        FrameReset.second.CurrentCount = FrameReset.second.DataBitDataValueCount;
-    
         StartBit.first.CurrentCount  = StartBit.first.DataBitDataValueCount;
         StartBit.second.CurrentCount = StartBit.second.DataBitDataValueCount;
     
         CurrentBit.first.CurrentCount  = CurrentBit.first.DataBitDataValueCount;
         CurrentBit.second.CurrentCount = CurrentBit.second.DataBitDataValueCount;
 
-        StopBit.first.CurrentCount  = StopBit.first.DataBitDataValueCount;
-        StopBit.second.CurrentCount = StopBit.second.DataBitDataValueCount;
-    
     } while (false); // do once
 
     return MoreDataToSend;
 } // ISR_SetUpNextDataToSend
 
 //----------------------------------------------------------------------------
-void c_OutputGECEI2S::PauseOutput (bool State)
+void c_OutputGECEI2S::PauseOutput (bool State) 
 {
     // DEBUG_START;
 
-    // DEBUG_V (String ("PortId: ") + String (OutputPortDefinition.PortId));
-    // DEBUG_V (String (" New State: ") + String (State));
-    // DEBUG_V (String (" Old State: ") + String (IsPaused ()));
-    c_OutputGECE::PauseOutput(State);
-    // DEBUG_V(String("I2Sdriver: 0x") + String(uint32_t(I2Sdriver), HEX));
-    if(I2Sdriver)
-    {
-        // I2Sdriver->SetOutputState (OutputPortDefinition.PortId, !State);
-        I2Sdriver->SetOutputState (OutputPortDefinition.PortId, false);
-    }
+    // DEBUG_V (String ("PortId: ") + String (OutputPortDefinition.PortId) );
+    // DEBUG_V (String (" New State: ") + String (State) );
+    // DEBUG_V (String (" Old State: ") + String (IsPaused () ) );
+    c_OutputGECE::PauseOutput (State);
+    // DEBUG_V (String ("I2Sdriver: 0x") + String (uint32_t (I2Sdriver) , HEX) );
+
+    I2Sdriver->SetOutputState (OutputPortDefinition.PortId, !State);
 
     // DEBUG_END;
 } // PauseOutput
 
-#endif // defined(SUPPORT_OutputProtocol_GECE) && defined(SUPPORT_I2S)
+#endif // defined (SUPPORT_OutputProtocol_GECE) && defined (SUPPORT_I2S) 

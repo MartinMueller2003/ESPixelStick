@@ -62,12 +62,10 @@ private:
         DataBitTransition_t second;
     }; // DataBitCounts_t
 
-    DataBitCounts_t FrameReset;
     DataBitCounts_t StartBit;
     DataBitCounts_t ZeroBit;
     DataBitCounts_t OneBit;
     DataBitCounts_t CurrentBit;
-    DataBitCounts_t StopBit;
 
     void    CalculateFrameBitSlices ();
     bool    ISR_SetUpNextDataToSend ();
@@ -83,10 +81,12 @@ private:
     #define GECE_I2S_DEBUG_COUNTERS
     #ifdef GECE_I2S_DEBUG_COUNTERS
     #define INC_GECE_I2S_DEBUG_COUNTERS(c) (++I2SDebugCounters.c)
+    #define SET_GECE_I2S_DEBUG_COUNTERS(c, v) (I2SDebugCounters.c = v)
     struct
     {
         uint32_t StartNewDataFrame;
         uint32_t GetNextDataSlicesToSend;
+        uint32_t GetNextDataSlicesToSendNumSlices;
         uint32_t GetNextDataSlicesToSendI;
         uint32_t GetNextDataSlicesToSendII;
         uint32_t GetNextDataSlicesToSendIII;
