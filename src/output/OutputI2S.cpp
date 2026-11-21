@@ -21,7 +21,6 @@
 
 #include "output/OutputI2S.hpp"
 #include "driver/gpio.h"
-#include "esp_rom_gpio.h"
 #include "esp_attr.h"
 
 //----------------------------------------------------------------------------
