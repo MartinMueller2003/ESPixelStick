@@ -5,6 +5,7 @@ var dir_994de0fd01319e484ee1453a6afebed0 =
     [ "OutputCommon.cpp", "_output_common_8cpp.html", null ],
     [ "OutputDisabled.cpp", "_output_disabled_8cpp.html", null ],
     [ "OutputGECE.cpp", "_output_g_e_c_e_8cpp.html", null ],
+    [ "OutputGECEI2S.cpp", "_output_g_e_c_e_i2_s_8cpp.html", null ],
     [ "OutputGECERmt.cpp", "_output_g_e_c_e_rmt_8cpp.html", null ],
     [ "OutputGECEUart.cpp", "_output_g_e_c_e_uart_8cpp.html", null ],
     [ "OutputGrinch.cpp", "_output_grinch_8cpp.html", null ],

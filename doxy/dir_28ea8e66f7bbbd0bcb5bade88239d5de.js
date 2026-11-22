@@ -6,6 +6,7 @@ var dir_28ea8e66f7bbbd0bcb5bade88239d5de =
     [ "OutputDisabled.hpp", "_output_disabled_8hpp.html", "_output_disabled_8hpp" ],
     [ "OutputGECE.hpp", "_output_g_e_c_e_8hpp.html", null ],
     [ "OutputGECEFrame.hpp", "_output_g_e_c_e_frame_8hpp.html", "_output_g_e_c_e_frame_8hpp" ],
+    [ "OutputGECEI2S.hpp", "_output_g_e_c_e_i2_s_8hpp.html", null ],
     [ "OutputGECERmt.hpp", "_output_g_e_c_e_rmt_8hpp.html", null ],
     [ "OutputGECEUart.hpp", "_output_g_e_c_e_uart_8hpp.html", null ],
     [ "OutputGrinch.hpp", "_output_grinch_8hpp.html", null ],
