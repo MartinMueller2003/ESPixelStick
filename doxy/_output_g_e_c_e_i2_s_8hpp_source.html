@@ -220,19 +220,21 @@ $(function(){initNavTree('_output_g_e_c_e_i2_s_8hpp_source.html',''); initResiza
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    } I2SDebugCounters;</div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="preprocessor">    #else</span></div>
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="preprocessor">    #define INC_GECE_I2S_DEBUG_COUNTERS(c)</span></div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="preprocessor">    #endif </span><span class="comment">// def GECE_I2S_DEBUG_COUNTERS</span></div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="preprocessor">    #define SET_GECE_I2S_DEBUG_COUNTERS(c, v)</span></div>
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    <span class="keyword">enum</span> OutputWS2811I2S_FSM_States</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    {</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        _OutputWS2811I2S_FSM_State_FrameReset,</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        _OutputWS2811I2S_FSM_State_Data,</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>        _OutputWS2811I2S_FSM_State_Idle</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    };</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    OutputWS2811I2S_FSM_States <span class="keyword">volatile</span> OutputWS2811I2S_FSM_State = OutputWS2811I2S_FSM_States::_OutputWS2811I2S_FSM_State_Idle;</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>}; <span class="comment">// c_OutputGECEI2S</span></div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="preprocessor">    #endif </span><span class="comment">// def GECE_I2S_DEBUG_COUNTERS</span></div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    <span class="keyword">enum</span> OutputWS2811I2S_FSM_States</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    {</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>        _OutputWS2811I2S_FSM_State_FrameReset,</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>        _OutputWS2811I2S_FSM_State_Data,</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        _OutputWS2811I2S_FSM_State_Idle</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    };</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    OutputWS2811I2S_FSM_States <span class="keyword">volatile</span> OutputWS2811I2S_FSM_State = OutputWS2811I2S_FSM_States::_OutputWS2811I2S_FSM_State_Idle;</div>
 <div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span> </div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span><span class="preprocessor">#endif </span><span class="comment">// defined(SUPPORT_OutputProtocol_GECE) &amp;&amp; defined(SUPPORT_I2S)</span></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>}; <span class="comment">// c_OutputGECEI2S</span></div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span><span class="preprocessor">#endif </span><span class="comment">// defined(SUPPORT_OutputProtocol_GECE) &amp;&amp; defined(SUPPORT_I2S)</span></div>
 <div class="ttc" id="a_e_s_pixel_stick_8h_html"><div class="ttname"><a href="_e_s_pixel_stick_8h.html">ESPixelStick.h</a></div></div>
 <div class="ttc" id="a_output_g_e_c_e_8hpp_html"><div class="ttname"><a href="_output_g_e_c_e_8hpp.html">OutputGECE.hpp</a></div></div>
 <div class="ttc" id="a_output_i2_s_8hpp_html"><div class="ttname"><a href="_output_i2_s_8hpp.html">OutputI2S.hpp</a></div></div>
