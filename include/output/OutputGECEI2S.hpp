@@ -81,7 +81,7 @@ private:
     uint32_t        DataPattern;
     uint32_t        DataPatternMask;
 
-    #define GECE_I2S_DEBUG_COUNTERS
+    // #define GECE_I2S_DEBUG_COUNTERS
     #ifdef GECE_I2S_DEBUG_COUNTERS
     #define INC_GECE_I2S_DEBUG_COUNTERS(c) (++I2SDebugCounters.c)
     #define SET_GECE_I2S_DEBUG_COUNTERS(c, v) (I2SDebugCounters.c = v)
