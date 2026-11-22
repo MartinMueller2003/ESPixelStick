@@ -69,7 +69,7 @@ c_OutputGECEI2S::c_OutputGECEI2S (OM_OutputPortDefinition_t & OutputPortDefiniti
 
     I2Sdriver = OutputMgr.GetI2sDriver ();
     NeedToEnumeratePixels = true;
-    StartupSliceDelay = 1024 * 20;
+    StartupSliceDelay = 1024 * 2000;
 
     #ifdef GECE_I2S_DEBUG_COUNTERS
     memset (&I2SDebugCounters, 0, sizeof (I2SDebugCounters) );
@@ -119,7 +119,7 @@ void c_OutputGECEI2S::Begin ()
     // DEBUG_V (String ("    DataBit: 0x") + String (DataBit, HEX) );
     // DEBUG_V (String ("DataBitMask: 0x") + String (DataBitMask, HEX) );
 
-    c_OutputPixel::ClearGecePixelId();
+    c_OutputPixel::ClearGecePixelId ();
 
     HasBeenInitialized = true;
 
@@ -229,6 +229,8 @@ void c_OutputGECEI2S::GetStatus (ArduinoJson::JsonObject& jsonStatus)
     JsonWrite (JsonCounters, "SetUpNextDataToSendIII",       I2SDebugCounters.SetUpNextDataToSendIII);
     JsonWrite (JsonCounters, "SetUpNextDataToSendIV",        I2SDebugCounters.SetUpNextDataToSendIV);
     JsonWrite (JsonCounters, "SetUpNextDataToSendV",         I2SDebugCounters.SetUpNextDataToSendV);
+    JsonWrite (JsonCounters, "SetUpNextDataToSendVI",        I2SDebugCounters.SetUpNextDataToSendVI);
+    JsonWrite (JsonCounters, "SetUpNextDataToSendVII",       I2SDebugCounters.SetUpNextDataToSendVII);
 
     #endif // def GECE_I2S_DEBUG_COUNTERS
 
@@ -275,7 +277,6 @@ bool IRAM_ATTR c_OutputGECEI2S::ISR_GetNextDataSlicesToSend (c_OutputI2S::I2S_It
 
     while (numSlices && MoreDataToSend) 
     {
-        
         while (numSlices && StartupSliceDelay) 
         {
             INC_GECE_I2S_DEBUG_COUNTERS (GetNextDataSlicesToSendIII);
@@ -284,6 +285,11 @@ bool IRAM_ATTR c_OutputGECEI2S::ISR_GetNextDataSlicesToSend (c_OutputI2S::I2S_It
             pDataToSend += sizeof (StartBit.second.DataValue);
             numSlices-= sizeof (StartBit.second.DataValue);
             StartupSliceDelay--;
+
+            if(0 == StartupSliceDelay)
+            {
+                ISR_StartNewDataFrame();
+            }
         } // while (numSlices && StartupSliceDelay) 
 
         while (numSlices && StartBit.first.CurrentCount) 
@@ -384,11 +390,11 @@ bool IRAM_ATTR c_OutputGECEI2S::ISR_SetUpNextDataToSend ()
     {
         // do we need to set up the next data byte to send?
 
-        if(NeedToEnumeratePixels)
+        if (NeedToEnumeratePixels)
         {
             INC_GECE_I2S_DEBUG_COUNTERS (SetUpNextDataToSendI);
 
-            if (64 > GetGecePixelId())
+            if (63 == GetGecePixelId ())
             {
                 NeedToEnumeratePixels = false;
             }
@@ -416,13 +422,15 @@ bool IRAM_ATTR c_OutputGECEI2S::ISR_SetUpNextDataToSend ()
         // there is more data to send in the current frame
         INC_GECE_I2S_DEBUG_COUNTERS (SetUpNextDataToSendIII);
 
-        if(NeedToEnumeratePixels)
+        if (NeedToEnumeratePixels)
         {
+            INC_GECE_I2S_DEBUG_COUNTERS (SetUpNextDataToSendIV);
             // build a GECE intensity frame
-            c_OutputPixel::ISR_PixelSendGECEIntensity ();
+            DataPattern = c_OutputPixel::ISR_PixelSendGECEIntensity ();
         }
         else
         {
+            INC_GECE_I2S_DEBUG_COUNTERS (SetUpNextDataToSendV);
             // set up to output the next data byte
             c_OutputPixel::ISR_GetNextIntensityToSend (DataPattern);
         }
@@ -432,13 +440,13 @@ bool IRAM_ATTR c_OutputGECEI2S::ISR_SetUpNextDataToSend ()
 
         if (DataPattern & DataPatternMask) 
         {
-            INC_GECE_I2S_DEBUG_COUNTERS (SetUpNextDataToSendIV);
+            INC_GECE_I2S_DEBUG_COUNTERS (SetUpNextDataToSendVI);
             // One Bit
             CurrentBit = OneBit;
         }
         else
         {
-            INC_GECE_I2S_DEBUG_COUNTERS (SetUpNextDataToSendV);
+            INC_GECE_I2S_DEBUG_COUNTERS (SetUpNextDataToSendVII);
             CurrentBit = ZeroBit;
         }
 

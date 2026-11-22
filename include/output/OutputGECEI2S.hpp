@@ -112,6 +112,8 @@ private:
         uint32_t SetUpNextDataToSendIII;
         uint32_t SetUpNextDataToSendIV;
         uint32_t SetUpNextDataToSendV;
+        uint32_t SetUpNextDataToSendVI;
+        uint32_t SetUpNextDataToSendVII;
 
     } I2SDebugCounters;
     #else
