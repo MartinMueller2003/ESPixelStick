@@ -78,7 +78,7 @@ protected:
     bool        Paused = false;
 
     void ISR_ReportNewFrame ();
-#ifndef SUPPORT_I2S
+
     inline bool canRefresh ()
     {
         uint32_t Now = micros ();
@@ -95,5 +95,5 @@ protected:
 
     private:   uint32_t FrameStartTimeInMicroSec = 0;
     public:    uint32_t GetFrameStartTimeInMicroSec() {return FrameStartTimeInMicroSec;}
-#endif // ndef SUPPORT_I2S
+
 }; // c_OutputCommon
