@@ -2,13 +2,27 @@
 
 1. Signal & Bit Timing (30 µs Bit Cell)
 
-The data line idles LOW (0V) between frames. Every bit occupies a 30 µs window:
+GE Color Effects (GECE) pixels use a proprietary one-wire protocol with relatively slow timing compared to WS2811/WS2812 pixels.
 
-Symbol	Waveform Sequence	Timing Breakdown
-Idle / Inter-frame	LOW	≥ 30 µs between 26-bit packets
-Start Bit	HIGH → LOW	10 µs HIGH, then 20 µs LOW
-Logic 0	LOW → HIGH	10 µs LOW, then 20 µs HIGH
-Logic 1	LOW → HIGH	20 µs LOW, then 10 µs HIGH
+Typical bit timing is:
+
+Signal	Low Time	High Time	Total Bit Time
+Start bit	—	10 µs	10 µs
+Logic 0	10 µs	20 µs	30 µs
+Logic 1	20 µs	10 µs	30 µs
+
+Additional protocol details:
+
+Idle bus state: Low
+Minimum inter-frame gap: 30 µs
+Frame length: 26 bits
+6-bit pixel address
+8-bit brightness
+4-bit Blue
+4-bit Green
+4-bit Red
+Data is transmitted MSB first
+A complete frame takes about 820 µs to transmit using the standard timing.
 
 • Edge Sensitivity: Notice that both data bits (0 and 1) start LOW and transition HIGH, with the rising edge occurring 
   either 10 µs or 20 µs into the bit period.

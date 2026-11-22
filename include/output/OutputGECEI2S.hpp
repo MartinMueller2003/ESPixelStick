@@ -118,6 +118,8 @@ private:
     } I2SDebugCounters;
     #else
     #define INC_GECE_I2S_DEBUG_COUNTERS(c)
+    #define SET_GECE_I2S_DEBUG_COUNTERS(c, v)
+
     #endif // def GECE_I2S_DEBUG_COUNTERS
 
     enum OutputWS2811I2S_FSM_States
