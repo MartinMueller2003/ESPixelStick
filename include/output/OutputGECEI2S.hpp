@@ -48,6 +48,7 @@ public:
 
 private:
 // The adjustments compensate for rounding errors in the calculations
+    bool NeedToEnumeratePixels;
 
     struct DataBitTransition_t
     {
@@ -66,6 +67,8 @@ private:
     DataBitCounts_t ZeroBit;
     DataBitCounts_t OneBit;
     DataBitCounts_t CurrentBit;
+
+    uint32_t StartupSliceDelay;
 
     void    CalculateFrameBitSlices ();
     bool    ISR_SetUpNextDataToSend ();
@@ -108,7 +111,8 @@ private:
         uint32_t SetUpNextDataToSendII;
         uint32_t SetUpNextDataToSendIII;
         uint32_t SetUpNextDataToSendIV;
-        
+        uint32_t SetUpNextDataToSendV;
+
     } I2SDebugCounters;
     #else
     #define INC_GECE_I2S_DEBUG_COUNTERS(c)

@@ -31,6 +31,7 @@
 #include "output/OutputAPA102Spi.hpp"
 #include "output/OutputGECEUart.hpp"
 #include "output/OutputGECERmt.hpp"
+#include "output/OutputGECEI2S.hpp"
 #include "output/OutputGrinchSpi.hpp"
 #include "output/OutputRelay.hpp"
 #include "output/OutputSerialUart.hpp"
