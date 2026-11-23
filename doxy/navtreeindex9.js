@@ -1,5 +1,6 @@
 var NAVTREEINDEX9 =
 {
+"_output_w_s2801_8hpp.html":[1,0,0,2,45],
 "_output_w_s2801_8hpp_source.html":[1,0,0,2,45],
 "_output_w_s2801_spi_8cpp.html":[1,0,1,2,43],
 "_output_w_s2801_spi_8hpp.html":[1,0,0,2,46],
@@ -248,6 +249,5 @@ var NAVTREEINDEX9 =
 "classc___file_mgr.html#a79819b60462db86b5bfd13e185381b92":[0,0,2,24],
 "classc___file_mgr.html#a7996698d27e5bd8d874b519c09c82f0a":[0,0,2,6],
 "classc___file_mgr.html#a7a43a2cccd3db13e5a6678a2cc087096":[0,0,2,60],
-"classc___file_mgr.html#a7ed46a08080b395e231db4496e600c02":[0,0,2,82],
-"classc___file_mgr.html#a7fc07abded89ba2dc2fb88aa6e230da8":[0,0,2,28]
+"classc___file_mgr.html#a7ed46a08080b395e231db4496e600c02":[0,0,2,82]
 };
