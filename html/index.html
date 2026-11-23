@@ -77,8 +77,8 @@
                         <legend class="esps-legend">WiFi Status</legend>
                         <table class="esps-table">
                             <tr>
-                                <td width="33%">Connected</td>
-                                <td><span id="w_connected"></span></td>
+                                <td width="33%">State</td>
+                                <td><span id="w_state"></span></td>
                             </tr>
                             <tr>
                                 <td width="33%">Hostname</td>
@@ -89,12 +89,28 @@
                                 <td><span id="w_ssid"></span></td>
                             </tr>
                             <tr>
+                                <td width="33%">BSSID</td>
+                                <td><span id="w_bssid"></span></td>
+                            </tr>
+                            <tr>
+                                <td width="33%">Channel</td>
+                                <td><span id="w_channel"></span></td>
+                            </tr>
+                            <tr>
                                 <td width="33%">IP</td>
                                 <td><span id="w_ip"></span></td>
                             </tr>
                             <tr>
                                 <td width="33%">SubNet</td>
                                 <td><span id="w_subnet"></span></td>
+                            </tr>
+                            <tr>
+                                <td width="33%">Gateway</td>
+                                <td><span id="w_gateway"></span></td>
+                            </tr>
+                            <tr>
+                                <td width="33%">DNS</td>
+                                <td><span id="w_dns"></span></td>
                             </tr>
                             <tr>
                                 <td width="33%">MAC</td>
@@ -493,6 +509,40 @@
                                 <div class="checkbox"><label><input type="checkbox" id="StayInApMode"
                                             title="Enabling this will cause your device to Stay in AP mode when all connections fail.">
                                         Stay in AP Mode</label></div>
+                            </div>
+                        </div>
+                        <!-- Advanced Mode -->
+                        <div class="hidden AdvancedMode">
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-8">
+                                    <div class="checkbox"><label><input type="checkbox" id="roam"
+                                                title="Move to a stronger access point with the same SSID when the signal stays weak. Scans wait until no show data is arriving.">
+                                            Roam to a Stronger AP</label></div>
+                                </div>
+                            </div>
+                            <div class="form-group" id="fg_roamRssi">
+                                <label class="control-label col-sm-2" for="roam_rssi">Weak Signal (dBm)</label>
+                                <div class="col-sm-2">
+                                    <input type="number" class="form-control is-valid" id="roam_rssi" step="1" min="-100"
+                                        max="-30" value="-75"
+                                        title="Below this signal level the connection counts as weak.">
+                                </div>
+                            </div>
+                            <div class="form-group" id="fg_roamTime">
+                                <label class="control-label col-sm-2" for="roam_time">Weak Signal Time (s)</label>
+                                <div class="col-sm-2">
+                                    <input type="number" class="form-control is-valid" id="roam_time" step="1" min="1"
+                                        max="3600" value="15"
+                                        title="How long the signal must stay weak, with no show data arriving, before the device scans for a stronger access point.">
+                                </div>
+                            </div>
+                            <div class="form-group" id="fg_roamDelta">
+                                <label class="control-label col-sm-2" for="roam_delta">Minimum Improvement (dB)</label>
+                                <div class="col-sm-2">
+                                    <input type="number" class="form-control is-valid" id="roam_delta" step="1" min="1"
+                                        max="60" value="10"
+                                        title="Another access point must be stronger than the current one by at least this much before the device moves to it.">
+                                </div>
                             </div>
                         </div>
                     </fieldset>

@@ -1854,6 +1854,10 @@ function ExtractNetworkWiFiConfigFromHtmlPage() {
     wifi.ap_reboot = $('#network #wifi #ap_reboot').prop('checked');
     wifi.ap_timeout = parseInt($('#network #wifi #ap_timeout').val(), 10);
     wifi.StayInApMode = $('#network #wifi #StayInApMode').prop('checked');
+    wifi.roam = $('#network #wifi #roam').prop('checked');
+    wifi.roam_rssi = parseInt($('#network #wifi #roam_rssi').val(), 10);
+    wifi.roam_time = parseInt($('#network #wifi #roam_time').val(), 10);
+    wifi.roam_delta = parseInt($('#network #wifi #roam_delta').val(), 10);
 
     let CurrentRowId = 0;
     wifi.ApCredentials.forEach(ApCredential =>
@@ -2319,13 +2323,17 @@ function ProcessReceivedJsonStatusMessage(JsonStat) {
         quality = 100;
     }
 
-    $('#w_connected').text((true === Wifi.connected) ? "Yes" : "No");
+    $('#w_state').text(Wifi.state);
     $('#w_hostname').text(Wifi.hostname);
     $('#w_rssi').text(rssi);
     $('#w_quality').text(rssiToPercent[quality]);
     $('#w_ssid').text(Wifi.ssid);
+    $('#w_bssid').text(Wifi.bssid);
+    $('#w_channel').text(Wifi.channel);
     $('#w_ip').text(Wifi.ip);
     $('#w_subnet').text(Wifi.subnet);
+    $('#w_gateway').text(Wifi.gateway);
+    $('#w_dns').text(Wifi.dns);
     $('#w_mac').text(Wifi.mac);
 
     if ({}.hasOwnProperty.call(Network, 'eth')) {
