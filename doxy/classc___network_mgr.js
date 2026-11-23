@@ -14,6 +14,7 @@ var classc___network_mgr =
     [ "Poll", "classc___network_mgr.html#a1a7aa80b325ff6d1610ba4ea775724bf", null ],
     [ "SetConfig", "classc___network_mgr.html#a50d97dec317ecb4cc9a308b5e0aadf2d", null ],
     [ "SetEthernetIsConnected", "classc___network_mgr.html#aa9d587432312a58a8d98b5b0a75796fb", null ],
+    [ "SetPrimaryInputIsActive", "classc___network_mgr.html#acebf4b5d9916edd55b889374a272a228", null ],
     [ "SetWiFiEnable", "classc___network_mgr.html#a734bce5d4408855944972ff28b13569a", null ],
     [ "SetWiFiIsConnected", "classc___network_mgr.html#a21de268df9b77ee26f74ae4712537c21", null ],
     [ "UpdateMdns", "classc___network_mgr.html#a4f2bed5aa8b01c9e0471116176e44f2a", null ],

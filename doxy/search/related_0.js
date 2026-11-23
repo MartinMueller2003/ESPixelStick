@@ -27,5 +27,6 @@ var searchData=
   ['fsm_5fwifi_5fstate_5fconnectingusingconfig_24',['fsm_WiFi_state_ConnectingUsingConfig',['../classc___wi_fi_driver.html#a1e1ba3ee931a3727f4f23f3c21671970',1,'c_WiFiDriver']]],
   ['fsm_5fwifi_5fstate_5fconnectingusingdefaults_25',['fsm_WiFi_state_ConnectingUsingDefaults',['../classc___wi_fi_driver.html#a359718344e58e5917bd73b54ae7f8df0',1,'c_WiFiDriver']]],
   ['fsm_5fwifi_5fstate_5fconnectionfailed_26',['fsm_WiFi_state_ConnectionFailed',['../classc___wi_fi_driver.html#a4934d15041ac297c1de56ea5c40c7e0e',1,'c_WiFiDriver']]],
-  ['fsm_5fwifi_5fstate_5fdisabled_27',['fsm_WiFi_state_Disabled',['../classc___wi_fi_driver.html#a9f6c2042f83ad0cf97dc11e35e13910e',1,'c_WiFiDriver']]]
+  ['fsm_5fwifi_5fstate_5fdisabled_27',['fsm_WiFi_state_Disabled',['../classc___wi_fi_driver.html#a9f6c2042f83ad0cf97dc11e35e13910e',1,'c_WiFiDriver']]],
+  ['fsm_5fwifi_5fstate_5froaming_28',['fsm_WiFi_state_Roaming',['../classc___wi_fi_driver.html#af3a30f94242e261fd9877adfc67b9198',1,'c_WiFiDriver']]]
 ];

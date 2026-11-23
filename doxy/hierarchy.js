@@ -86,7 +86,8 @@ var hierarchy =
       [ "fsm_WiFi_state_ConnectingUsingConfig", "classfsm___wi_fi__state___connecting_using_config.html", null ],
       [ "fsm_WiFi_state_ConnectingUsingDefaults", "classfsm___wi_fi__state___connecting_using_defaults.html", null ],
       [ "fsm_WiFi_state_ConnectionFailed", "classfsm___wi_fi__state___connection_failed.html", null ],
-      [ "fsm_WiFi_state_Disabled", "classfsm___wi_fi__state___disabled.html", null ]
+      [ "fsm_WiFi_state_Disabled", "classfsm___wi_fi__state___disabled.html", null ],
+      [ "fsm_WiFi_state_Roaming", "classfsm___wi_fi__state___roaming.html", null ]
     ] ],
     [ "InputTypeXlateMap_t", "struct_input_type_xlate_map__t.html", null ],
     [ "c_InputEffectEngine::MarqueeGroup_t", "structc___input_effect_engine_1_1_marquee_group__t.html", null ],

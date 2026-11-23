@@ -15,6 +15,8 @@ var searchData=
   ['apcredentialsiterator_12',['ApCredentialsIterator',['../classc___ap_credentials.html#a62ee6760f021b7a0d1a9940cade3c890',1,'c_ApCredentials']]],
   ['appendnullpixelcount_13',['AppendNullPixelCount',['../classc___output_pixel.html#aa713d7da0b02c79339403769f04f1398',1,'c_OutputPixel']]],
   ['appendnullpixelcurrentcount_14',['AppendNullPixelCurrentCount',['../classc___output_pixel.html#aeb486aefb0cfdb737b04c86c95d5a19a',1,'c_OutputPixel']]],
-  ['array_15',['Array',['../unionc___output_pixel_1_1_color_offsets__s.html#a8840fcb54d39b02e79b1da48e4ad6800',1,'c_OutputPixel::ColorOffsets_s']]],
-  ['available_16',['Available',['../structc___file_mgr_1_1_sd_info.html#a9ab12fb87eae130ff458830b6dfa1d5b',1,'c_FileMgr::SdInfo']]]
+  ['apscaninprogress_15',['ApScanInProgress',['../classc___wi_fi_driver.html#a9a01e2baf6f0d949c24ff949b8856f7e',1,'c_WiFiDriver']]],
+  ['apscantimer_16',['ApScanTimer',['../classc___wi_fi_driver.html#a8c5933de74e8a5fe5a238eb65ba73214',1,'c_WiFiDriver']]],
+  ['array_17',['Array',['../unionc___output_pixel_1_1_color_offsets__s.html#a8840fcb54d39b02e79b1da48e4ad6800',1,'c_OutputPixel::ColorOffsets_s']]],
+  ['available_18',['Available',['../structc___file_mgr_1_1_sd_info.html#a9ab12fb87eae130ff458830b6dfa1d5b',1,'c_FileMgr::SdInfo']]]
 ];

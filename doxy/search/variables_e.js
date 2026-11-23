@@ -73,10 +73,11 @@ var searchData=
   ['prependnullpixelcurrentcount_70',['PrependNullPixelCurrentCount',['../classc___output_pixel.html#aeac02de7e78d3cd47025f840d487f5ed',1,'c_OutputPixel']]],
   ['previousstate_71',['PreviousState',['../classc___network_mgr.html#ad0481bf9efb052bc76c239c6f6b90c54',1,'c_NetworkMgr']]],
   ['primarydns_72',['primaryDns',['../classc___wi_fi_driver.html#a84dce4da7ef6bf0afd546a8b693340cd',1,'c_WiFiDriver']]],
-  ['processfppdjson_73',['ProcessFPPDJson',['../structc___f_p_p_discovery_1_1_system_debug_stats__t.html#a3d3beb9535d5b4347382fdf6c51505a0',1,'c_FPPDiscovery::SystemDebugStats_t']]],
-  ['processfppjson_74',['ProcessFPPJson',['../structc___f_p_p_discovery_1_1_system_debug_stats__t.html#aab364eaa7edfa41ee14d6fec89eb56f6',1,'c_FPPDiscovery::SystemDebugStats_t']]],
-  ['processingwebrequest_75',['ProcessingWebRequest',['../classc___f_p_p_semaphore.html#a90d800330cdcb2b922923999eb17e651',1,'c_FPPSemaphore']]],
-  ['protocolid_76',['ProtocolId',['../struct_supported_output_protocol__t.html#ae71a1c4c4d2aa2222e733224599dbf41',1,'SupportedOutputProtocol_t']]],
-  ['protocolname_77',['ProtocolName',['../struct_supported_output_protocol__t.html#a2ba05990304fa491f1c489e3e6efdafc',1,'SupportedOutputProtocol_t']]],
-  ['pwifidriver_78',['pWiFiDriver',['../classfsm___wi_fi__state.html#a97a2adc75a27ce7c9feefa0d2e85a5dd',1,'fsm_WiFi_state']]]
+  ['primaryinputisactive_73',['PrimaryInputIsActive',['../classc___wi_fi_driver.html#acf83a7bbc7119eb53c14816f3fbd70b3',1,'c_WiFiDriver']]],
+  ['processfppdjson_74',['ProcessFPPDJson',['../structc___f_p_p_discovery_1_1_system_debug_stats__t.html#a3d3beb9535d5b4347382fdf6c51505a0',1,'c_FPPDiscovery::SystemDebugStats_t']]],
+  ['processfppjson_75',['ProcessFPPJson',['../structc___f_p_p_discovery_1_1_system_debug_stats__t.html#aab364eaa7edfa41ee14d6fec89eb56f6',1,'c_FPPDiscovery::SystemDebugStats_t']]],
+  ['processingwebrequest_76',['ProcessingWebRequest',['../classc___f_p_p_semaphore.html#a90d800330cdcb2b922923999eb17e651',1,'c_FPPSemaphore']]],
+  ['protocolid_77',['ProtocolId',['../struct_supported_output_protocol__t.html#ae71a1c4c4d2aa2222e733224599dbf41',1,'SupportedOutputProtocol_t']]],
+  ['protocolname_78',['ProtocolName',['../struct_supported_output_protocol__t.html#a2ba05990304fa491f1c489e3e6efdafc',1,'SupportedOutputProtocol_t']]],
+  ['pwifidriver_79',['pWiFiDriver',['../classfsm___wi_fi__state.html#a97a2adc75a27ce7c9feefa0d2e85a5dd',1,'fsm_WiFi_state']]]
 ];

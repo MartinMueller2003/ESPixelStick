@@ -11,5 +11,6 @@ var _wi_fi_driver_8cpp =
     [ "fsm_WiFi_state_ConnectingUsingConfig_imp", "_wi_fi_driver_8cpp.html#a5b21ab751694e53e95967288cb2d7390", null ],
     [ "fsm_WiFi_state_ConnectingUsingDefaults_imp", "_wi_fi_driver_8cpp.html#aa92b196e6440a7fe2757e210411cd78f", null ],
     [ "fsm_WiFi_state_ConnectionFailed_imp", "_wi_fi_driver_8cpp.html#ab2e455855bbc631b9760708b4daff170", null ],
-    [ "fsm_WiFi_state_Disabled_imp", "_wi_fi_driver_8cpp.html#a85544a130c0bf148b0841065c6c70ede", null ]
+    [ "fsm_WiFi_state_Disabled_imp", "_wi_fi_driver_8cpp.html#a85544a130c0bf148b0841065c6c70ede", null ],
+    [ "fsm_WiFi_state_Roaming_imp", "_wi_fi_driver_8cpp.html#a627939c93cdf9f5a42eb2ca0cf9167f1", null ]
 ];

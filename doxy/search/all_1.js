@@ -28,8 +28,10 @@ var searchData=
   ['apcredentialsiterator_25',['ApCredentialsIterator',['../classc___ap_credentials.html#a62ee6760f021b7a0d1a9940cade3c890',1,'c_ApCredentials']]],
   ['appendnullpixelcount_26',['AppendNullPixelCount',['../classc___output_pixel.html#aa713d7da0b02c79339403769f04f1398',1,'c_OutputPixel']]],
   ['appendnullpixelcurrentcount_27',['AppendNullPixelCurrentCount',['../classc___output_pixel.html#aeb486aefb0cfdb737b04c86c95d5a19a',1,'c_OutputPixel']]],
-  ['arduinojson_5fdefault_5fnesting_5flimit_28',['ARDUINOJSON_DEFAULT_NESTING_LIMIT',['../_e_s_pixel_stick_8h.html#adb3f9ff6eeacc0a7093b59f9d38a55fc',1,'ESPixelStick.h']]],
-  ['arduinojson_5fuse_5flong_5flong_29',['ARDUINOJSON_USE_LONG_LONG',['../_e_s_pixel_stick_8h.html#ad04364871efb11788ea94d5f5417072c',1,'ESPixelStick.h']]],
-  ['array_30',['Array',['../unionc___output_pixel_1_1_color_offsets__s.html#a8840fcb54d39b02e79b1da48e4ad6800',1,'c_OutputPixel::ColorOffsets_s']]],
-  ['available_31',['Available',['../structc___file_mgr_1_1_sd_info.html#a9ab12fb87eae130ff458830b6dfa1d5b',1,'c_FileMgr::SdInfo']]]
+  ['apscaninprogress_28',['ApScanInProgress',['../classc___wi_fi_driver.html#a9a01e2baf6f0d949c24ff949b8856f7e',1,'c_WiFiDriver']]],
+  ['apscantimer_29',['ApScanTimer',['../classc___wi_fi_driver.html#a8c5933de74e8a5fe5a238eb65ba73214',1,'c_WiFiDriver']]],
+  ['arduinojson_5fdefault_5fnesting_5flimit_30',['ARDUINOJSON_DEFAULT_NESTING_LIMIT',['../_e_s_pixel_stick_8h.html#adb3f9ff6eeacc0a7093b59f9d38a55fc',1,'ESPixelStick.h']]],
+  ['arduinojson_5fuse_5flong_5flong_31',['ARDUINOJSON_USE_LONG_LONG',['../_e_s_pixel_stick_8h.html#ad04364871efb11788ea94d5f5417072c',1,'ESPixelStick.h']]],
+  ['array_32',['Array',['../unionc___output_pixel_1_1_color_offsets__s.html#a8840fcb54d39b02e79b1da48e4ad6800',1,'c_OutputPixel::ColorOffsets_s']]],
+  ['available_33',['Available',['../structc___file_mgr_1_1_sd_info.html#a9ab12fb87eae130ff458830b6dfa1d5b',1,'c_FileMgr::SdInfo']]]
 ];

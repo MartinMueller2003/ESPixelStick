@@ -55,13 +55,14 @@ var searchData=
   ['fsm_5fwifi_5fstate_5fconnectingusingdefaults_5fimp_52',['fsm_WiFi_state_ConnectingUsingDefaults_imp',['../_wi_fi_driver_8cpp.html#aa92b196e6440a7fe2757e210411cd78f',1,'WiFiDriver.cpp']]],
   ['fsm_5fwifi_5fstate_5fconnectionfailed_5fimp_53',['fsm_WiFi_state_ConnectionFailed_imp',['../_wi_fi_driver_8cpp.html#ab2e455855bbc631b9760708b4daff170',1,'WiFiDriver.cpp']]],
   ['fsm_5fwifi_5fstate_5fdisabled_5fimp_54',['fsm_WiFi_state_Disabled_imp',['../_wi_fi_driver_8cpp.html#a85544a130c0bf148b0841065c6c70ede',1,'WiFiDriver.cpp']]],
-  ['fsmtimer_55',['FsmTimer',['../classc___wi_fi_driver.html#ad705c03822010669955380e9607d58bc',1,'c_WiFiDriver']]],
-  ['fsuploadfilehandle_56',['fsUploadFileHandle',['../classc___file_mgr.html#a95ce91ea55ac222562d83f87aca429bb',1,'c_FileMgr']]],
-  ['fsuploadfilename_57',['fsUploadFileName',['../classc___file_mgr.html#a1cb372ace094d52c26f6c6d98e006cbd',1,'c_FileMgr']]],
-  ['fsuploadfilesavedisenabled_58',['fsUploadFileSavedIsEnabled',['../classc___file_mgr.html#ad02883207cdebd5dae72ae7851127d39',1,'c_FileMgr']]],
-  ['fsuploadstarttime_59',['fsUploadStartTime',['../classc___file_mgr.html#aaba83240f519b443944a15cf6fd03963',1,'c_FileMgr']]],
-  ['ftpenabled_60',['FtpEnabled',['../classc___file_mgr.html#a85fbd6a2a2766f0130fdfb9207da777f',1,'c_FileMgr']]],
-  ['ftppassword_61',['FtpPassword',['../classc___file_mgr.html#af671a65c5556bf8a1f3da52191c0f218',1,'c_FileMgr']]],
-  ['ftpusername_62',['FtpUserName',['../classc___file_mgr.html#a62ccdae39fe86250ba3c8b741f0d87ca',1,'c_FileMgr']]],
-  ['func_63',['func',['../structc___input_effect_engine_1_1_effect_descriptor__t.html#aee9e17f4271552c5f15fa0766f5f975b',1,'c_InputEffectEngine::EffectDescriptor_t']]]
+  ['fsm_5fwifi_5fstate_5froaming_5fimp_55',['fsm_WiFi_state_Roaming_imp',['../_wi_fi_driver_8cpp.html#a627939c93cdf9f5a42eb2ca0cf9167f1',1,'WiFiDriver.cpp']]],
+  ['fsmtimer_56',['FsmTimer',['../classc___wi_fi_driver.html#ad705c03822010669955380e9607d58bc',1,'c_WiFiDriver']]],
+  ['fsuploadfilehandle_57',['fsUploadFileHandle',['../classc___file_mgr.html#a95ce91ea55ac222562d83f87aca429bb',1,'c_FileMgr']]],
+  ['fsuploadfilename_58',['fsUploadFileName',['../classc___file_mgr.html#a1cb372ace094d52c26f6c6d98e006cbd',1,'c_FileMgr']]],
+  ['fsuploadfilesavedisenabled_59',['fsUploadFileSavedIsEnabled',['../classc___file_mgr.html#ad02883207cdebd5dae72ae7851127d39',1,'c_FileMgr']]],
+  ['fsuploadstarttime_60',['fsUploadStartTime',['../classc___file_mgr.html#aaba83240f519b443944a15cf6fd03963',1,'c_FileMgr']]],
+  ['ftpenabled_61',['FtpEnabled',['../classc___file_mgr.html#a85fbd6a2a2766f0130fdfb9207da777f',1,'c_FileMgr']]],
+  ['ftppassword_62',['FtpPassword',['../classc___file_mgr.html#af671a65c5556bf8a1f3da52191c0f218',1,'c_FileMgr']]],
+  ['ftpusername_63',['FtpUserName',['../classc___file_mgr.html#a62ccdae39fe86250ba3c8b741f0d87ca',1,'c_FileMgr']]],
+  ['func_64',['func',['../structc___input_effect_engine_1_1_effect_descriptor__t.html#aee9e17f4271552c5f15fa0766f5f975b',1,'c_InputEffectEngine::EffectDescriptor_t']]]
 ];

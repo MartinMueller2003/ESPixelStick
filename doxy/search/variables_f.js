@@ -11,5 +11,14 @@ var searchData=
   ['requiredporttype_8',['RequiredPortType',['../struct_supported_output_protocol__t.html#af4e7613bd69cbc32aa100f8cb0362f65',1,'SupportedOutputProtocol_t']]],
   ['resetwifi_9',['ResetWiFi',['../main_8cpp.html#a71cd754e8f1472f27fc5b805dfcb4251',1,'ResetWiFi:&#160;main.cpp'],['../_e_s_pixel_stick_8h.html#a71cd754e8f1472f27fc5b805dfcb4251',1,'ResetWiFi:&#160;main.cpp']]],
   ['responseaddress_10',['ResponseAddress',['../structc___input_d_d_p_1_1_packet_buffer__t.html#afaabcf7bfdf68f8ffcdadbfb1104ff11',1,'c_InputDDP::PacketBuffer_t']]],
-  ['responseport_11',['ResponsePort',['../structc___input_d_d_p_1_1_packet_buffer__t.html#a0fe17b362993358cd7402373774ab977',1,'c_InputDDP::PacketBuffer_t']]]
+  ['responseport_11',['ResponsePort',['../structc___input_d_d_p_1_1_packet_buffer__t.html#a0fe17b362993358cd7402373774ab977',1,'c_InputDDP::PacketBuffer_t']]],
+  ['roamchecksallowed_12',['RoamChecksAllowed',['../classc___wi_fi_driver.html#a9a372b33c373c05cc72fad88f01ed98d',1,'c_WiFiDriver']]],
+  ['roamchecktimer_13',['RoamCheckTimer',['../classc___wi_fi_driver.html#a4492c8e6b3f3749ba80aec6ea55caf02',1,'c_WiFiDriver']]],
+  ['roamcheckwaitms_14',['RoamCheckWaitMs',['../classc___wi_fi_driver.html#a00849a2ecafcca166cbc504448992f2d',1,'c_WiFiDriver']]],
+  ['roamingenabled_15',['RoamingEnabled',['../classc___wi_fi_driver.html#aa37983f1e2e57286e136100fc97a70fe',1,'c_WiFiDriver']]],
+  ['roamminimprovement_16',['RoamMinImprovement',['../classc___wi_fi_driver.html#a2a7cf6761656e9f9ba0da1639a03cc4d',1,'c_WiFiDriver']]],
+  ['roamrssithreshold_17',['RoamRssiThreshold',['../classc___wi_fi_driver.html#a0d22aa8ce23897c3f42a9b6ee8281589',1,'c_WiFiDriver']]],
+  ['roamtargetbssid_18',['RoamTargetBssid',['../classc___wi_fi_driver.html#a33998e2964523e8af170d843827348ca',1,'c_WiFiDriver']]],
+  ['roamtargetchannel_19',['RoamTargetChannel',['../classc___wi_fi_driver.html#a2ab27ff67fbc07746274f569a94dda75',1,'c_WiFiDriver']]],
+  ['roamweaktime_20',['RoamWeakTime',['../classc___wi_fi_driver.html#a0006753f6a9185d348b362ff282a6dbb',1,'c_WiFiDriver']]]
 ];

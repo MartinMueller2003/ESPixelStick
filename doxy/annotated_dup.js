@@ -68,6 +68,7 @@ var annotated_dup =
     [ "fsm_WiFi_state_ConnectingUsingDefaults", "classfsm___wi_fi__state___connecting_using_defaults.html", "classfsm___wi_fi__state___connecting_using_defaults" ],
     [ "fsm_WiFi_state_ConnectionFailed", "classfsm___wi_fi__state___connection_failed.html", "classfsm___wi_fi__state___connection_failed" ],
     [ "fsm_WiFi_state_Disabled", "classfsm___wi_fi__state___disabled.html", "classfsm___wi_fi__state___disabled" ],
+    [ "fsm_WiFi_state_Roaming", "classfsm___wi_fi__state___roaming.html", "classfsm___wi_fi__state___roaming" ],
     [ "InputTypeXlateMap_t", "struct_input_type_xlate_map__t.html", "struct_input_type_xlate_map__t" ],
     [ "OM_GPIOS_t", "struct_o_m___g_p_i_o_s__t.html", "struct_o_m___g_p_i_o_s__t" ],
     [ "OM_OutputPortDefinition_t", "struct_o_m___output_port_definition__t.html", "struct_o_m___output_port_definition__t" ],

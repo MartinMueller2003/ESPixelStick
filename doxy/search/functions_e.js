@@ -22,5 +22,6 @@ var searchData=
   ['resetgpio_19',['ResetGpio',['../_e_s_pixel_stick_8h.html#a97937ae3377e427d21b29966a14e964a',1,'ESPixelStick.h']]],
   ['resetsdcard_20',['ResetSdCard',['../classc___file_mgr.html#abf9680ad0d546bd42476f6460e387ba0',1,'c_FileMgr']]],
   ['restartblanktimer_21',['RestartBlankTimer',['../classc___input_mgr.html#ac50551f90f209dbaa2b476a20b524b71',1,'c_InputMgr']]],
-  ['rgb2hsv_22',['rgb2hsv',['../classc___input_effect_engine.html#a6751a5a67dd911744b80574029cac95c',1,'c_InputEffectEngine']]]
+  ['retrywithoutpinnedap_22',['RetryWithoutPinnedAp',['../classc___wi_fi_driver.html#ac74cd53b9195f71ff96227b9c81da415',1,'c_WiFiDriver']]],
+  ['rgb2hsv_23',['rgb2hsv',['../classc___input_effect_engine.html#a6751a5a67dd911744b80574029cac95c',1,'c_InputEffectEngine']]]
 ];

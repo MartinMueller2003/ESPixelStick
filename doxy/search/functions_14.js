@@ -55,5 +55,6 @@ var searchData=
   ['_7efsm_5fwifi_5fstate_5fconnectingusingconfig_52',['~fsm_WiFi_state_ConnectingUsingConfig',['../classfsm___wi_fi__state___connecting_using_config.html#afc8329d91217a2e0b74d6a14dfc124a4',1,'fsm_WiFi_state_ConnectingUsingConfig']]],
   ['_7efsm_5fwifi_5fstate_5fconnectingusingdefaults_53',['~fsm_WiFi_state_ConnectingUsingDefaults',['../classfsm___wi_fi__state___connecting_using_defaults.html#a42c99ca15ec1e592d9dae6da8ebf4dc4',1,'fsm_WiFi_state_ConnectingUsingDefaults']]],
   ['_7efsm_5fwifi_5fstate_5fconnectionfailed_54',['~fsm_WiFi_state_ConnectionFailed',['../classfsm___wi_fi__state___connection_failed.html#aae1b69438e7b3f4a3aa04b6c19d34e4a',1,'fsm_WiFi_state_ConnectionFailed']]],
-  ['_7efsm_5fwifi_5fstate_5fdisabled_55',['~fsm_WiFi_state_Disabled',['../classfsm___wi_fi__state___disabled.html#ab8ad91ca0b5a9137f2f6e051ea69adf6',1,'fsm_WiFi_state_Disabled']]]
+  ['_7efsm_5fwifi_5fstate_5fdisabled_55',['~fsm_WiFi_state_Disabled',['../classfsm___wi_fi__state___disabled.html#ab8ad91ca0b5a9137f2f6e051ea69adf6',1,'fsm_WiFi_state_Disabled']]],
+  ['_7efsm_5fwifi_5fstate_5froaming_56',['~fsm_WiFi_state_Roaming',['../classfsm___wi_fi__state___roaming.html#a64bf866a6bf46a0506ddedfd3695af33',1,'fsm_WiFi_state_Roaming']]]
 ];
