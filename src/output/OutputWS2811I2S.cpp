@@ -446,6 +446,9 @@ void c_OutputWS2811I2S::PauseOutput (bool State)
 {
     // DEBUG_START;
 
+    c_OutputWS2811::PauseOutput (State);
+    I2Sdriver->SetOutputState (OutputPortDefinition.PortId, !State);
+
     // DEBUG_V (String ("PortId: ") + String (OutputPortDefinition.PortId));
     // DEBUG_V (String (" New State: ") + String (State));
     // DEBUG_V (String (" Old State: ") + String (IsPaused ()));
@@ -454,8 +457,6 @@ void c_OutputWS2811I2S::PauseOutput (bool State)
         // DEBUG_V ("Currently Paused, Make sure we are ready to start at the beginning of the next frame");
         OutputWS2811I2S_FSM_State = OutputWS2811I2S_FSM_States::_OutputWS2811I2S_FSM_State_Idle;
     }
-    c_OutputWS2811::PauseOutput (State);
-    I2Sdriver->SetOutputState (OutputPortDefinition.PortId, !State);
 
     // DEBUG_END;
 } // PauseOutput
