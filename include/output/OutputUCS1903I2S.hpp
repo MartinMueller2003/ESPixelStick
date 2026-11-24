@@ -50,7 +50,6 @@ private:
     void    CalculateFrameBitSlices ();
     bool    ISR_SetUpNextDataToSend ();
 
-    // The adjustments compensate for rounding errors in the calculations
     c_OutputI2S     *I2Sdriver;
 
     c_OutputI2S::I2S_Item_t DataBitMask;

@@ -47,7 +47,6 @@ public:
     void    SetDefaultDataValue (c_OutputI2S::I2S_Item_t DefaultIntensitySliceData);
 
 private:
-// The adjustments compensate for rounding errors in the calculations
     bool NeedToEnumeratePixels;
 
     struct DataBitTransition_t
