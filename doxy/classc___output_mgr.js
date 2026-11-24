@@ -21,7 +21,7 @@ var classc___output_mgr =
     [ "GetNumPorts", "classc___output_mgr.html#a861cf67886d1b3eccab0efc061e89963", null ],
     [ "GetStatus", "classc___output_mgr.html#a56f81964a988693f278fd65cf43277c6", null ],
     [ "InstantiateNewOutputChannel", "classc___output_mgr.html#a660afde38f78610d503499bf8b7adcd6", null ],
-    [ "ISR_GetBufferAddress", "classc___output_mgr.html#a69daf5bf1409e257fa1164981903c04e", null ],
+    [ "ISR_GetBufferAddress", "classc___output_mgr.html#a99b4520a367303ccd0372d5f9ccf30c1", null ],
     [ "LoadConfig", "classc___output_mgr.html#a18f0345656b0c2795b7c925f6d797761", null ],
     [ "PauseOutputs", "classc___output_mgr.html#aa5fa47aab179e25649aa61acd159586d", null ],
     [ "Poll", "classc___output_mgr.html#afb3a7a9024cae09c4f6c8613a47e4925", null ],

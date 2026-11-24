@@ -45,7 +45,7 @@
 <area shape="poly" id="edge10_Node000010_Node000007" title=" " alt="" coords="1133,196,1150,206,1162,220,1169,235,1174,263,1179,290,1186,303,1198,316,1202,319,1198,323,1194,320,1182,306,1174,292,1169,264,1164,236,1158,223,1146,210,1130,200"/>
 <area shape="rect" id="Node000011" href="$classc___output_mgr.html#a9aa129dd6077ad48f807aaab43f67c52" title="Get the size (in intensities) of the buffer into which the E1.31 handler will stuff data." alt="" coords="1196,280,1409,305"/>
 <area shape="poly" id="edge11_Node000010_Node000011" title=" " alt="" coords="1129,195,1150,206,1166,222,1174,237,1182,252,1198,266,1206,271,1203,275,1194,270,1178,256,1169,240,1161,225,1146,211,1126,200"/>
-<area shape="rect" id="Node000012" href="$classc___output_mgr.html#a69daf5bf1409e257fa1164981903c04e" title="Get the address of the buffer into which the E1.31 handler will stuff data." alt="" coords="1210,141,1396,182"/>
+<area shape="rect" id="Node000012" href="$classc___output_mgr.html#a99b4520a367303ccd0372d5f9ccf30c1" title="Get the address of the buffer into which the E1.31 handler will stuff data." alt="" coords="1210,141,1396,182"/>
 <area shape="poly" id="edge12_Node000010_Node000012" title=" " alt="" coords="1148,174,1193,169,1194,175,1148,179"/>
 <area shape="rect" id="Node000013" href="$classc___output_mgr.html#abe0292b6380f75279c4758c2b2e4e465" title=" " alt="" coords="1200,230,1406,256"/>
 <area shape="poly" id="edge13_Node000010_Node000013" title=" " alt="" coords="1120,195,1233,223,1232,228,1119,200"/>

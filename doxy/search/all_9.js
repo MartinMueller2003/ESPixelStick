@@ -106,7 +106,7 @@ var searchData=
   ['isr_5fframeappenddata_103',['ISR_FrameAppendData',['../classc___output_pixel.html#a6f3f524423d9b503b25cf619718a90bc',1,'c_OutputPixel']]],
   ['isr_5fframedone_104',['ISR_FrameDone',['../classc___output_pixel.html#a58d6608926fe4f7573106d18fe160c10',1,'c_OutputPixel']]],
   ['isr_5fframeprependdata_105',['ISR_FramePrependData',['../classc___output_pixel.html#af000876bf787489b40c162d3c7ad15e1',1,'c_OutputPixel']]],
-  ['isr_5fgetbufferaddress_106',['ISR_GetBufferAddress',['../classc___output_common.html#a8bbaa07dd3901ef702fc8c9e04518428',1,'c_OutputCommon::ISR_GetBufferAddress()'],['../classc___output_mgr.html#a69daf5bf1409e257fa1164981903c04e',1,'c_OutputMgr::ISR_GetBufferAddress()']]],
+  ['isr_5fgetbufferaddress_106',['ISR_GetBufferAddress',['../classc___output_common.html#a8bbaa07dd3901ef702fc8c9e04518428',1,'c_OutputCommon::ISR_GetBufferAddress()'],['../classc___output_mgr.html#a99b4520a367303ccd0372d5f9ccf30c1',1,'c_OutputMgr::ISR_GetBufferAddress()']]],
   ['isr_5fgetnextintensitytosend_107',['ISR_GetNextIntensityToSend',['../classc___output_pixel.html#ae8fd5f89d3ae702cad92fbbba84375cb',1,'c_OutputPixel']]],
   ['isr_5fmoredatatosend_108',['ISR_MoreDataToSend',['../classc___output_pixel.html#a4499781100dcc395a2deef4f96f70170',1,'c_OutputPixel']]],
   ['isr_5fpixelappendnulls_109',['ISR_PixelAppendNulls',['../classc___output_pixel.html#a00fba084a7e15d8622a2fb92e11182c0',1,'c_OutputPixel']]],

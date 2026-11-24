@@ -58,7 +58,7 @@
 <area shape="poly" id="edge23_Node000021_Node000022" title=" " alt="" coords="694,371,731,360,779,338,801,332,803,337,781,343,733,365,695,377"/>
 <area shape="rect" id="Node000023" href="$classc___output_mgr.html#a9aa129dd6077ad48f807aaab43f67c52" title="Get the size (in intensities) of the buffer into which the E1.31 handler will stuff data." alt="" coords="780,353,993,379"/>
 <area shape="poly" id="edge24_Node000021_Node000023" title=" " alt="" coords="724,378,764,374,764,379,724,383"/>
-<area shape="rect" id="Node000024" href="$classc___output_mgr.html#a69daf5bf1409e257fa1164981903c04e" title="Get the address of the buffer into which the E1.31 handler will stuff data." alt="" coords="793,403,980,444"/>
+<area shape="rect" id="Node000024" href="$classc___output_mgr.html#a99b4520a367303ccd0372d5f9ccf30c1" title="Get the address of the buffer into which the E1.31 handler will stuff data." alt="" coords="793,403,980,444"/>
 <area shape="poly" id="edge25_Node000021_Node000024" title=" " alt="" coords="725,397,778,405,777,410,724,402"/>
 <area shape="rect" id="Node000025" href="$classc___output_mgr.html#abe0292b6380f75279c4758c2b2e4e465" title=" " alt="" coords="783,492,990,518"/>
 <area shape="poly" id="edge26_Node000021_Node000025" title=" " alt="" coords="708,398,733,409,748,420,758,431,781,453,837,483,834,488,778,458,754,435,745,424,730,414,706,403"/>
