@@ -407,7 +407,7 @@ bool IRAM_ATTR c_OutputGECEI2S::ISR_SetUpNextDataToSend ()
             INC_GECE_I2S_DEBUG_COUNTERS (SetUpNextDataToSendII);
 
             MoreDataToSend = false;
-            DataPatternMask - 0;
+            DataPatternMask = 0;
 
             StartBit.first.CurrentCount  = 0;
             StartBit.second.CurrentCount = 0;
