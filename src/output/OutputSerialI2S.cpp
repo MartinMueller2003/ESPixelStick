@@ -311,7 +311,7 @@ bool IRAM_ATTR c_OutputSerialI2S::ISR_GetNextDataSlicesToSend (c_OutputI2S::I2S_
             INC_SERIAL_I2S_DEBUG_COUNTERS (GetNextDataSlicesToSendII);
 
             // move to the next bit of data
-            DataPatternMask = DataPatternMask >> 1;
+            DataPatternMask = (DataPatternMask << 1) & 0b11111111111;
             CurrentBitSliceCount = BitSliceCount;
 
             if (0 == DataPatternMask)
@@ -355,8 +355,8 @@ bool IRAM_ATTR c_OutputSerialI2S::ISR_SetUpNextDataToSend ()
         c_OutputSerial::ISR_GetNextIntensityToSend (DataPattern);
 
         // add start and stop bits to the data byte
-        DataPattern = (DataPattern << 2) | 0b00000000011; // add start and stop bits to the data byte
-        DataPatternMask = 0b10000000000; // send 11 bits: 1 Start + 8 data + 2 stop bits
+        DataPattern = ((DataPattern << 1) & ~0x01) | 0b11000000000; // add start and stop bits to the data byte
+        DataPatternMask = 0x1; // send 11 bits: 1 Start + 8 data + 2 stop bits
         CurrentBitSliceCount = BitSliceCount;
     
     } while (false); // do once
