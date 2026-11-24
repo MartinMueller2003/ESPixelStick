@@ -1830,6 +1830,9 @@ void c_OutputMgr::ClearBuffer()
     // DEBUG_START;
 
     memset(ISR_GetBufferAddress(), 0x00, OutputMgr.GetBufferSize());
+    
+    // this will invert any data that is handled with special functions
+    WriteChannelData(0, OutputMgr.GetBufferUsedSize(), OutputMgr.ISR_GetBufferAddress());
 
     // DEBUG_END;
 
