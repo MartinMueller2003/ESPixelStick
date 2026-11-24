@@ -43,7 +43,7 @@ public:
     virtual void         GetConfig (ArduinoJson::JsonObject & jsonConfig);     ///< Get the current config used by the driver
     virtual uint32_t     Poll () = 0;                                        ///< Call from loop(),  renders output data
     #if defined(SUPPORT_RMT)
-    bool     RmtPoll () {return false;}
+    virtual bool         RmtPoll () {return false;}
     #endif // defined(SUPPORT_RMT)
     virtual void         GetDriverName (String & sDriverName) = 0;             ///< get the name for the instantiated driver
     inline  OM_PortId_t  GetOutputPortId ()    { return OutputPortDefinition.PortId; }     ///< return the output channel number
