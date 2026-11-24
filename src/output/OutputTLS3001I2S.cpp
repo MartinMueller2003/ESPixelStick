@@ -367,7 +367,6 @@ void c_OutputTLS3001I2S::PauseOutput (bool State)
     {
         fsm_I2S_state_SendDataIdle_imp.Init();
     }
-    c_OutputTLS3001::PauseOutput (State);
     I2Sdriver->SetOutputState (OutputPortDefinition.PortId, !State);
 
     // DEBUG_END;
