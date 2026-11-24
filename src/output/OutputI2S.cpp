@@ -247,9 +247,9 @@ void c_OutputI2S::RegisterSlotDevice (OutputI2SChannelConfig_t config, I2S_Item_
             break;
         }
 
-        if (nullptr == config.GetNextIntensityBitSlices)
+        if (nullptr == config.StartNewFrame)
         {
-            logcon (F ("Invalid GetNextIntensityBit function pointer"));
+            logcon (F ("Invalid StartNewFrame function pointer"));
             break;
         }
 
@@ -382,8 +382,12 @@ uint32_t c_OutputI2S::GetNumTimeSlicesForTargetTimeNS (uint32_t TargetTimeInNano
     uint32_t Result = 0;
     uint32_t I2S_TickTimeInNS = (uint32_t) (i2sParallel.get_clockNS ());
 
-    // round up
-    Result = (TargetTimeInNanoSec + I2S_TickTimeInNS - 1) / I2S_TickTimeInNS;
+    if( 0 != I2S_TickTimeInNS)
+    {
+        // round up
+        Result = (TargetTimeInNanoSec + I2S_TickTimeInNS - 1) / I2S_TickTimeInNS;
+    }
+
     if (0 == Result) Result = 1;
 
     // DEBUG_V (String ("TargetTimeInNanoSec: ") + String (TargetTimeInNanoSec));
