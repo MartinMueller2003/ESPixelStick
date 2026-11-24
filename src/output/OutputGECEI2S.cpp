@@ -159,6 +159,7 @@ bool c_OutputGECEI2S::SetConfig (ArduinoJson::JsonObject& jsonConfig)
 
     bool response = c_OutputGECE::SetConfig (jsonConfig);
 
+    I2Sdriver->SetGpio (OutputPortDefinition.PortId, OutputPortDefinition.gpios.data);
     // DEBUG_V (String ("DataPin: ") + String (gpio_num_t (OutputPortDefinition.gpios.data) ) );
 
     // DEBUG_END;
