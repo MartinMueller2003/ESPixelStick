@@ -213,7 +213,6 @@ void c_OutputGECEI2S::GetStatus (ArduinoJson::JsonObject& jsonStatus)
     JsonWrite (JsonCounters, "GetNextDataSlicesToSendV",     I2SDebugCounters.GetNextDataSlicesToSendV);
     JsonWrite (JsonCounters, "GetNextDataSlicesToSendVI",    I2SDebugCounters.GetNextDataSlicesToSendVI);
     JsonWrite (JsonCounters, "GetNextDataSlicesToSendVII",   I2SDebugCounters.GetNextDataSlicesToSendVII);
-    JsonWrite (JsonCounters, "GetNextDataSlicesToSendVII",   I2SDebugCounters.GetNextDataSlicesToSendVII);
     JsonWrite (JsonCounters, "GetNextDataSlicesToSendVIII",  I2SDebugCounters.GetNextDataSlicesToSendVIII);
     JsonWrite (JsonCounters, "GetNextDataSlicesToSendIX",    I2SDebugCounters.GetNextDataSlicesToSendIX);
     JsonWrite (JsonCounters, "GetNextDataSlicesToSendX",     I2SDebugCounters.GetNextDataSlicesToSendX);
