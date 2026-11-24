@@ -75,6 +75,14 @@ void IRAM_ATTR c_OutputI2S::ISR_Handler (void * _TransmitDmaBuffer)
     // set the number of slices actually used
     TransmitDmaBuffer->header.length = TransmitDmaBuffer->header.size - numSlices;
 
+    if(0 == TransmitDmaBuffer->header.length)
+    {
+        // hw may not handle an empty buffer very well
+        // fill the buffer with defaults
+        TransmitDmaBuffer->header.length = TransmitDmaBuffer->header.size;
+        memset(&TransmitDmaBuffer->header.buf, DefaultIntensitySliceData, 4);
+    }
+
     // hand the buffer back to the dma engine
     TransmitDmaBuffer->header.eof = true; // cause an end of buffer interrupt
     TransmitDmaBuffer->header.owner = I2sParallelDmaBufferOwnerDMA;
