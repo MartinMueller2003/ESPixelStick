@@ -47,13 +47,14 @@ public:
     void    SetDefaultDataValue (c_OutputI2S::I2S_Item_t DefaultIntensitySliceData);
 
 private:
-    bool NeedToEnumeratePixels;
+    void    CalculateFrameBitSlices ();
+    bool    ISR_SetUpNextDataToSend ();
 
     struct DataBitTransition_t
     {
-        c_OutputI2S::I2S_Item_t DataValue;
         uint32_t DataBitDataValueCount;
         uint32_t CurrentCount;
+        c_OutputI2S::I2S_Item_t DataValue;
     };
 
     struct DataBitCounts_t
@@ -67,18 +68,25 @@ private:
     DataBitCounts_t OneBit;
     DataBitCounts_t CurrentBit;
 
+    enum OutputWS2811I2S_FSM_States
+    {
+        _OutputWS2811I2S_FSM_State_FrameReset,
+        _OutputWS2811I2S_FSM_State_Data,
+        _OutputWS2811I2S_FSM_State_Idle
+    };
+    OutputWS2811I2S_FSM_States volatile OutputWS2811I2S_FSM_State = OutputWS2811I2S_FSM_States::_OutputWS2811I2S_FSM_State_Idle;
+
     uint32_t StartupSliceDelay;
 
-    void    CalculateFrameBitSlices ();
-    bool    ISR_SetUpNextDataToSend ();
-
     c_OutputI2S     *I2Sdriver;
+
+    uint32_t        DataPattern;
+    uint32_t        DataPatternMask;
 
     c_OutputI2S::I2S_Item_t DataBitMask;
     c_OutputI2S::I2S_Item_t DataBit;
 
-    uint32_t        DataPattern;
-    uint32_t        DataPatternMask;
+    bool NeedToEnumeratePixels;
 
     // #define GECE_I2S_DEBUG_COUNTERS
     #ifdef GECE_I2S_DEBUG_COUNTERS
@@ -120,14 +128,6 @@ private:
     #define SET_GECE_I2S_DEBUG_COUNTERS(c, v)
 
     #endif // def GECE_I2S_DEBUG_COUNTERS
-
-    enum OutputWS2811I2S_FSM_States
-    {
-        _OutputWS2811I2S_FSM_State_FrameReset,
-        _OutputWS2811I2S_FSM_State_Data,
-        _OutputWS2811I2S_FSM_State_Idle
-    };
-    OutputWS2811I2S_FSM_States volatile OutputWS2811I2S_FSM_State = OutputWS2811I2S_FSM_States::_OutputWS2811I2S_FSM_State_Idle;
 
 }; // c_OutputGECEI2S
 

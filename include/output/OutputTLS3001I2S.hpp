@@ -67,9 +67,6 @@ protected:
 
     c_OutputI2S     *I2Sdriver;
 
-    c_OutputI2S::I2S_Item_t DataBitMask;
-    c_OutputI2S::I2S_Item_t DataBit;
-
     uint32_t        FrameResetBitCount; // must be 1ms
 
     uint32_t        DataPattern;
@@ -77,15 +74,12 @@ protected:
 
     uint32_t        NumSyncIdleBits;
 
-    union DataAsUint_t
-    {
-        c_OutputI2S::I2S_Item_t DataAsBytes[4];
-        uint32_t AsUint;
-    };
+    c_OutputI2S::I2SDataAsUint_t OneBit;
+    c_OutputI2S::I2SDataAsUint_t ZeroBit;
+    c_OutputI2S::I2SDataAsUint_t IdleBit;
 
-    DataAsUint_t OneBit;
-    DataAsUint_t ZeroBit;
-    DataAsUint_t IdleBit;
+    c_OutputI2S::I2S_Item_t DataBitMask;
+    c_OutputI2S::I2S_Item_t DataBit;
 
     // #define USE_TLS3001I2S_COUNTERS
     #ifdef USE_TLS3001I2S_COUNTERS

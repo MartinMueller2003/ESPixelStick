@@ -49,17 +49,28 @@ public:
 private:
     void    CalculateFrameBitSlices ();
     bool    ISR_SetUpNextDataToSend ();
+    
+    enum OutputGS8208I2S_FSM_States
+    {
+        _OutputGS8208I2S_FSM_State_FrameReset,
+        _OutputGS8208I2S_FSM_State_Data,
+        _OutputGS8208I2S_FSM_State_Idle
+    };
+    OutputGS8208I2S_FSM_States volatile OutputGS8208I2S_FSM_State = OutputGS8208I2S_FSM_States::_OutputGS8208I2S_FSM_State_Idle;
+    
+    c_OutputI2S::I2SDataAsUint_t OneBit;
+    c_OutputI2S::I2SDataAsUint_t ZeroBit;
 
     c_OutputI2S     *I2Sdriver;
-
-    c_OutputI2S::I2S_Item_t DataBitMask;
-    c_OutputI2S::I2S_Item_t DataBit;
 
     uint32_t        FrameResetSliceCount;
     uint32_t        FrameResetRemainingSliceCount;
 
     uint32_t        DataPattern;
     uint32_t        DataPatternMask;
+
+    c_OutputI2S::I2S_Item_t DataBitMask;
+    c_OutputI2S::I2S_Item_t DataBit;
 
     // #define GS8208_I2S_DEBUG_COUNTERS
     #ifdef GS8208_I2S_DEBUG_COUNTERS
@@ -88,23 +99,6 @@ private:
     #else
     #define INC_GS8208_I2S_DEBUG_COUNTER(c)
     #endif // def GS8208_I2S_DEBUG_COUNTERS
-
-    enum OutputGS8208I2S_FSM_States
-    {
-        _OutputGS8208I2S_FSM_State_FrameReset,
-        _OutputGS8208I2S_FSM_State_Data,
-        _OutputGS8208I2S_FSM_State_Idle
-    };
-    OutputGS8208I2S_FSM_States volatile OutputGS8208I2S_FSM_State = OutputGS8208I2S_FSM_States::_OutputGS8208I2S_FSM_State_Idle;
-    
-    union DataAsUint_t
-    {
-        c_OutputI2S::I2S_Item_t DataAsBytes[4];
-        uint32_t AsUint;
-    };
-
-    DataAsUint_t OneBit;
-    DataAsUint_t ZeroBit;
 
 }; // c_OutputGS8208I2S
 

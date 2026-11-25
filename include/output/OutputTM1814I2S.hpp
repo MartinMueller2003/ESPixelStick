@@ -97,14 +97,8 @@ private:
     };
     OutputTM1814I2S_FSM_States volatile OutputTM1814I2S_FSM_State = OutputTM1814I2S_FSM_States::_OutputTM1814I2S_FSM_State_Idle;
     
-    union DataAsUint_t
-    {
-        c_OutputI2S::I2S_Item_t DataAsBytes[4];
-        uint32_t AsUint;
-    };
-
-    DataAsUint_t OneBit;
-    DataAsUint_t ZeroBit;
+    c_OutputI2S::I2SDataAsUint_t OneBit;
+    c_OutputI2S::I2SDataAsUint_t ZeroBit;
 
 }; // c_OutputTM1814I2S
 

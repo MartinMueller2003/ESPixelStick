@@ -28,7 +28,6 @@ static uint32_t SetDefaultDataValueBaseCount = 0;
 #endif // def GECE_I2S_DEBUG_COUNTERS
 
 //----------------------------------------------------------------------------
-// return false if there are no more data slices to send
 static void IRAM_ATTR StartNewFrameBase (void * arg) 
 {
     #ifdef GECE_I2S_DEBUG_COUNTERS

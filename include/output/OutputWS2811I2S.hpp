@@ -96,15 +96,9 @@ private:
         _OutputWS2811I2S_FSM_State_Idle
     };
     OutputWS2811I2S_FSM_States volatile OutputWS2811I2S_FSM_State = OutputWS2811I2S_FSM_States::_OutputWS2811I2S_FSM_State_Idle;
-    
-    union DataAsUint_t
-    {
-        c_OutputI2S::I2S_Item_t DataAsBytes[4];
-        uint32_t AsUint;
-    };
 
-    DataAsUint_t OneBit;
-    DataAsUint_t ZeroBit;
+    c_OutputI2S::I2SDataAsUint_t OneBit;
+    c_OutputI2S::I2SDataAsUint_t ZeroBit;
 
 }; // c_OutputWS2811I2S
 

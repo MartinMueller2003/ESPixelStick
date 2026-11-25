@@ -60,6 +60,12 @@ public:
         alignas (4) I2S_Item_t data[I2S_NumSendBufferItems];
     };
 
+    union I2SDataAsUint_t
+    {
+        c_OutputI2S::I2S_Item_t DataAsBytes[4];
+        uint32_t AsUint;
+    };
+
 private:
     // array of configuration settings
     OutputI2SChannelConfig_t OutputI2SSlotConfigs[I2S_MAX_NUM_PORTS];

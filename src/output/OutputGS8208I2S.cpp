@@ -30,7 +30,6 @@ static uint32_t SetDefaultDataValueBaseCount = 0;
 #endif // def GS8208_I2S_DEBUG_COUNTERS
 
 //----------------------------------------------------------------------------
-// return false if there are no more data slices to send
 static void IRAM_ATTR StartNewFrameBase (void * arg)
 {
     #ifdef GS8208_I2S_DEBUG_COUNTERS
@@ -146,7 +145,7 @@ void c_OutputGS8208I2S::CalculateFrameBitSlices ()
     // DEBUG_V (String ("                   IdleLenNS: ") + String (IdleLenNS));
     
     FrameResetSliceCount = I2Sdriver->GetNumTimeSlicesForTargetTimeNS (InterFrameGapInMicroSec * NanoSecondsInAMicroSecond);
-    FrameResetSliceCount = (FrameResetSliceCount + (sizeof(DataAsUint_t) - 1)) & ~(sizeof(DataAsUint_t) - 1); // round up to the nearest multiple of the data type size
+    FrameResetSliceCount = (FrameResetSliceCount + (sizeof(c_OutputI2S::I2SDataAsUint_t) - 1)) & ~(sizeof(c_OutputI2S::I2SDataAsUint_t) - 1); // round up to the nearest multiple of the data type size
     // DEBUG_V (String ("        FrameResetSliceCount: ") + String (FrameResetSliceCount));
 
     // DEBUG_END;
@@ -309,7 +308,7 @@ bool IRAM_ATTR c_OutputGS8208I2S::ISR_GetNextDataSlicesToSend (c_OutputI2S::I2S_
         {
             INC_GS8208_I2S_DEBUG_COUNTER (FrameReset);
             
-            // Send as many slices as we can to fill the output buffer with the default data value.  The output buffer is always aligned to a DataAsUint_t boundary and the number of slices requested is always a multiple of the DataAsUint_t size.  The FrameResetRemainingSliceCount is also a multiple of the DataAsUint_t size, so we can fill the output buffer with a memset call.
+            // Send as many slices as we can to fill the output buffer with the default data value.  The output buffer is always aligned to a I2SDataAsUint_t boundary and the number of slices requested is always a multiple of the I2SDataAsUint_t size.  The FrameResetRemainingSliceCount is also a multiple of the I2SDataAsUint_t size, so we can fill the output buffer with a memset call.
             uint NumSlicesToSend = min (FrameResetRemainingSliceCount, numSlices);
             memset(pDataToSend, (DefaultIntensitySliceData & DataBitMask), NumSlicesToSend);
             numSlices -= NumSlicesToSend;
@@ -327,7 +326,7 @@ bool IRAM_ATTR c_OutputGS8208I2S::ISR_GetNextDataSlicesToSend (c_OutputI2S::I2S_
             INC_GS8208_I2S_DEBUG_COUNTER (FrameResetII);
 
             // align output to a bit boundary
-            uint NumEntriesToSendToAlignOutputToUint = min (uint(pDataToSend) & (sizeof(DataAsUint_t)-1), numSlices);
+            uint NumEntriesToSendToAlignOutputToUint = min (uint(pDataToSend) & (sizeof(c_OutputI2S::I2SDataAsUint_t)-1), numSlices);
             if(NumEntriesToSendToAlignOutputToUint)
             {
                 INC_GS8208_I2S_DEBUG_COUNTER (FrameResetAlignments);
@@ -337,7 +336,7 @@ bool IRAM_ATTR c_OutputGS8208I2S::ISR_GetNextDataSlicesToSend (c_OutputI2S::I2S_
                 pDataToSend += NumEntriesToSendToAlignOutputToUint;
             } // end if(NumEntriesToSendToAlignOutputToUint)
 
-            // at this point, the output buffer pointer is aligned to a DataAsUint_t boundary.
+            // at this point, the output buffer pointer is aligned to a I2SDataAsUint_t boundary.
 
             INC_GS8208_I2S_DEBUG_COUNTER (FrameResetDone);
 
@@ -350,17 +349,17 @@ bool IRAM_ATTR c_OutputGS8208I2S::ISR_GetNextDataSlicesToSend (c_OutputI2S::I2S_
         {
             INC_GS8208_I2S_DEBUG_COUNTER (DataI);
 
-            uint NumBitsToSend = numSlices / sizeof(DataAsUint_t);
+            uint NumBitsToSend = numSlices / sizeof(c_OutputI2S::I2SDataAsUint_t);
 
             while (NumBitsToSend > 0)
             {
                 INC_GS8208_I2S_DEBUG_COUNTER (DataII);
 
-                * ((DataAsUint_t*) pDataToSend) = (DataPattern & DataBitMask) ? OneBit : ZeroBit;
+                * ((c_OutputI2S::I2SDataAsUint_t*) pDataToSend) = (DataPattern & DataBitMask) ? OneBit : ZeroBit;
 
                 --NumBitsToSend;
-                numSlices -= sizeof(DataAsUint_t);
-                pDataToSend += sizeof(DataAsUint_t);
+                numSlices -= sizeof(c_OutputI2S::I2SDataAsUint_t);
+                pDataToSend += sizeof(c_OutputI2S::I2SDataAsUint_t);
 
                 DataPatternMask = DataPatternMask >> 1;
 

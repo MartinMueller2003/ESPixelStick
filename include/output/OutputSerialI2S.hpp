@@ -53,12 +53,6 @@ private:
 
     c_OutputI2S     *I2Sdriver;
 
-    union DataAsUint_t
-    {
-        c_OutputI2S::I2S_Item_t DataAsBytes[4];
-        uint32_t AsUint;
-    };
-
     c_OutputI2S::I2S_Item_t    DataBitMask;
     c_OutputI2S::I2S_Item_t    DataBit;
 

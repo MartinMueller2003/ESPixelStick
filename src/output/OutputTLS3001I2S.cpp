@@ -29,7 +29,6 @@ static uint32_t SetDefaultDataValueBaseCount = 0;
 #endif // def USE_TLS3001I2S_COUNTERS
 
 //----------------------------------------------------------------------------
-// return false if there are no more data slices to send
 static void IRAM_ATTR StartNewFrameBase (void * arg)
 {
     #ifdef USE_TLS3001I2S_COUNTERS
@@ -224,13 +223,13 @@ void c_OutputTLS3001I2S::CalculateFrameBitSlices ()
 
     NumSyncIdleBits = I2Sdriver->GetNumTimeSlicesForTargetTimeNS (delyNS);
     // DEBUG_V(String("     NumSyncIdleBits: ") + String(NumSyncIdleBits));
-    NumSyncIdleBits = (NumSyncIdleBits + (sizeof(DataAsUint_t) - 1)) / sizeof(DataAsUint_t); // round up to the nearest multiple of the data type size
+    NumSyncIdleBits = (NumSyncIdleBits + (sizeof(c_OutputI2S::I2SDataAsUint_t) - 1)) / sizeof(c_OutputI2S::I2SDataAsUint_t); // round up to the nearest multiple of the data type size
     // DEBUG_V(String("     NumSyncIdleBits: ") + String(NumSyncIdleBits));
 
     // DEBUG_V("SendDataIfg");
     // post frame reset wait time is fixed at 1ms, so we need to calculate the number of slices needed for the post reset time
     uint32_t FrameResetSliceCount = I2Sdriver->GetNumTimeSlicesForTargetTimeNS (1 * NanoSecondsInAMilliSecond);
-    FrameResetBitCount = (FrameResetSliceCount + (sizeof(DataAsUint_t) - 1)) / (sizeof(DataAsUint_t)); // round up to the nearest multiple of the data type size
+    FrameResetBitCount = (FrameResetSliceCount + (sizeof(c_OutputI2S::I2SDataAsUint_t) - 1)) / (sizeof(c_OutputI2S::I2SDataAsUint_t)); // round up to the nearest multiple of the data type size
     // DEBUG_V(String("  FrameResetBitCount: ") + String(FrameResetBitCount));
 
     // DEBUG_END;
@@ -376,7 +375,7 @@ void c_OutputTLS3001I2S::PauseOutput (bool State)
 bool IRAM_ATTR c_OutputTLS3001I2S::ISR_GetNextDataSlicesToSend (c_OutputI2S::I2S_Item_t * pDataToSend, uint32_t & numSlices, c_OutputI2S::I2S_Item_t DefaultIntensitySliceData)
 {
     bool MoreDataToSend = true;
-    while(numSlices > sizeof(c_OutputTLS3001I2S::DataAsUint_t) && MoreDataToSend)
+    while(numSlices > sizeof(c_OutputI2S::I2SDataAsUint_t) && MoreDataToSend)
     {
         switch(CurrentFsmState)
         {
@@ -408,7 +407,7 @@ bool IRAM_ATTR c_OutputTLS3001I2S::ISR_GetNextDataSlicesToSend (c_OutputI2S::I2S
                 break;
             }
         };
-    } // end while(numSlices >= sizeof(c_OutputTLS3001I2S::DataAsUint_t))
+    } // end while(numSlices >= sizeof(c_OutputI2S::I2SDataAsUint_t))
     return MoreDataToSend;
 } // ISR_GetNextIntensityToSend
 
@@ -442,15 +441,15 @@ bool IRAM_ATTR fsm_I2S_state_SendReset::ISR_GetNextBitToSend (c_OutputI2S::I2S_I
 
     // Serial.print('2');
 
-    while(numSlices >= sizeof(c_OutputTLS3001I2S::DataAsUint_t))
+    while(numSlices >= sizeof(c_OutputI2S::I2SDataAsUint_t))
     {
         if(NumberOfOneBitsToSend)
         {
             INCREMENT_TLS3001_FSM_COUNTER(SendReset_GetNextBitToSendII);
 
-            * ((c_OutputTLS3001I2S::DataAsUint_t*) pDataToSend) = Parent->OneBit;
-            numSlices -= sizeof(c_OutputTLS3001I2S::DataAsUint_t);
-            pDataToSend += sizeof(c_OutputTLS3001I2S::DataAsUint_t);
+            * ((c_OutputI2S::I2SDataAsUint_t*) pDataToSend) = Parent->OneBit;
+            numSlices -= sizeof(c_OutputI2S::I2SDataAsUint_t);
+            pDataToSend += sizeof(c_OutputI2S::I2SDataAsUint_t);
             --NumberOfOneBitsToSend;
 
         } // end if(NumberOfOneBitsToSend)
@@ -459,10 +458,10 @@ bool IRAM_ATTR fsm_I2S_state_SendReset::ISR_GetNextBitToSend (c_OutputI2S::I2S_I
         {
             INCREMENT_TLS3001_FSM_COUNTER(SendReset_GetNextBitToSendIII);
 
-            * ((c_OutputTLS3001I2S::DataAsUint_t*) pDataToSend) = (CommandCode & CommandCodeMask) ? Parent->OneBit : Parent->ZeroBit;
+            * ((c_OutputI2S::I2SDataAsUint_t*) pDataToSend) = (CommandCode & CommandCodeMask) ? Parent->OneBit : Parent->ZeroBit;
             CommandCodeMask = CommandCodeMask >> 1;
-            numSlices -= sizeof(c_OutputTLS3001I2S::DataAsUint_t);
-            pDataToSend += sizeof(c_OutputTLS3001I2S::DataAsUint_t);
+            numSlices -= sizeof(c_OutputI2S::I2SDataAsUint_t);
+            pDataToSend += sizeof(c_OutputI2S::I2SDataAsUint_t);
 
         } // end if(CommandCodeMask)
 
@@ -470,11 +469,11 @@ bool IRAM_ATTR fsm_I2S_state_SendReset::ISR_GetNextBitToSend (c_OutputI2S::I2S_I
         {
             INCREMENT_TLS3001_FSM_COUNTER(SendReset_GetNextBitToSendIV);
 
-            * ((c_OutputTLS3001I2S::DataAsUint_t*) pDataToSend) = Parent->IdleBit;
+            * ((c_OutputI2S::I2SDataAsUint_t*) pDataToSend) = Parent->IdleBit;
 
             --NumberOfIdleBitsToSend;
-            numSlices -= sizeof(c_OutputTLS3001I2S::DataAsUint_t);
-            pDataToSend += sizeof(c_OutputTLS3001I2S::DataAsUint_t);
+            numSlices -= sizeof(c_OutputI2S::I2SDataAsUint_t);
+            pDataToSend += sizeof(c_OutputI2S::I2SDataAsUint_t);
 
         } // end if(NumberOfIdleBitsToSend)
 
@@ -485,7 +484,7 @@ bool IRAM_ATTR fsm_I2S_state_SendReset::ISR_GetNextBitToSend (c_OutputI2S::I2S_I
             Parent->fsm_I2S_state_SendSync_imp.Init();
             break;
         }
-    } // end while(numSlices >= sizeof(c_OutputTLS3001I2S::DataAsUint_t))
+    } // end while(numSlices >= sizeof(c_OutputI2S::I2SDataAsUint_t))
 
     return MoreDataToSend;
 
@@ -518,15 +517,15 @@ bool IRAM_ATTR fsm_I2S_state_SendSync::ISR_GetNextBitToSend (c_OutputI2S::I2S_It
 
     INCREMENT_TLS3001_FSM_COUNTER(SendSync_GetNextBitToSend);
 
-    while(numSlices >= sizeof(c_OutputTLS3001I2S::DataAsUint_t))
+    while(numSlices >= sizeof(c_OutputI2S::I2SDataAsUint_t))
     {
         if(NumberOfOneBitsToSend)
         {
             INCREMENT_TLS3001_FSM_COUNTER(SendSync_GetNextBitToSendIII);
 
-            * ((c_OutputTLS3001I2S::DataAsUint_t*) pDataToSend) = Parent->OneBit;
-            numSlices -= sizeof(c_OutputTLS3001I2S::DataAsUint_t);
-            pDataToSend += sizeof(c_OutputTLS3001I2S::DataAsUint_t);
+            * ((c_OutputI2S::I2SDataAsUint_t*) pDataToSend) = Parent->OneBit;
+            numSlices -= sizeof(c_OutputI2S::I2SDataAsUint_t);
+            pDataToSend += sizeof(c_OutputI2S::I2SDataAsUint_t);
             --NumberOfOneBitsToSend;
 
         } // end if(NumberOfOneBitsToSend)
@@ -535,10 +534,10 @@ bool IRAM_ATTR fsm_I2S_state_SendSync::ISR_GetNextBitToSend (c_OutputI2S::I2S_It
         {
             INCREMENT_TLS3001_FSM_COUNTER(SendSync_GetNextBitToSendIV);
 
-            * ((c_OutputTLS3001I2S::DataAsUint_t*) pDataToSend) = (CommandCode & CommandCodeMask) ? Parent->OneBit : Parent->ZeroBit;
+            * ((c_OutputI2S::I2SDataAsUint_t*) pDataToSend) = (CommandCode & CommandCodeMask) ? Parent->OneBit : Parent->ZeroBit;
             CommandCodeMask = CommandCodeMask >> 1;
-            numSlices -= sizeof(c_OutputTLS3001I2S::DataAsUint_t);
-            pDataToSend += sizeof(c_OutputTLS3001I2S::DataAsUint_t);
+            numSlices -= sizeof(c_OutputI2S::I2SDataAsUint_t);
+            pDataToSend += sizeof(c_OutputI2S::I2SDataAsUint_t);
 
         } // end if(CommandCodeMask)
 
@@ -546,9 +545,9 @@ bool IRAM_ATTR fsm_I2S_state_SendSync::ISR_GetNextBitToSend (c_OutputI2S::I2S_It
         {
             INCREMENT_TLS3001_FSM_COUNTER(SendSync_GetNextBitToSendV);
 
-            * ((c_OutputTLS3001I2S::DataAsUint_t*) pDataToSend) = Parent->ZeroBit;
-            numSlices -= sizeof(c_OutputTLS3001I2S::DataAsUint_t);
-            pDataToSend += sizeof(c_OutputTLS3001I2S::DataAsUint_t);
+            * ((c_OutputI2S::I2SDataAsUint_t*) pDataToSend) = Parent->ZeroBit;
+            numSlices -= sizeof(c_OutputI2S::I2SDataAsUint_t);
+            pDataToSend += sizeof(c_OutputI2S::I2SDataAsUint_t);
             --NumberOfZeroBitsToSend;
 
         } // end if(NumberOfZeroBitsToSend)
@@ -557,11 +556,11 @@ bool IRAM_ATTR fsm_I2S_state_SendSync::ISR_GetNextBitToSend (c_OutputI2S::I2S_It
         {
             INCREMENT_TLS3001_FSM_COUNTER(SendSync_GetNextBitToSendVI);
 
-            * ((c_OutputTLS3001I2S::DataAsUint_t*) pDataToSend) = Parent->IdleBit;
+            * ((c_OutputI2S::I2SDataAsUint_t*) pDataToSend) = Parent->IdleBit;
 
             --NumberOfIdleBitsToSend;
-            numSlices -= sizeof(c_OutputTLS3001I2S::DataAsUint_t);
-            pDataToSend += sizeof(c_OutputTLS3001I2S::DataAsUint_t);
+            numSlices -= sizeof(c_OutputI2S::I2SDataAsUint_t);
+            pDataToSend += sizeof(c_OutputI2S::I2SDataAsUint_t);
 
         } // end if(NumberOfIdleBitsToSend)
 
@@ -572,7 +571,7 @@ bool IRAM_ATTR fsm_I2S_state_SendSync::ISR_GetNextBitToSend (c_OutputI2S::I2S_It
             Parent->fsm_I2S_state_SendDataStart_imp.Init();
             break;
         }
-    } // end while(numSlices >= sizeof(c_OutputTLS3001I2S::DataAsUint_t))
+    } // end while(numSlices >= sizeof(c_OutputI2S::I2SDataAsUint_t))
 
     return MoreDataToSend;
 } // fsm_I2S_state_SendSync
@@ -604,15 +603,15 @@ bool IRAM_ATTR fsm_I2S_state_SendDataStart::ISR_GetNextBitToSend (c_OutputI2S::I
     INCREMENT_TLS3001_FSM_COUNTER(SendDataStart_GetNextBitToSend);
     // Serial.print('4');
 
-    while(numSlices >= sizeof(c_OutputTLS3001I2S::DataAsUint_t))
+    while(numSlices >= sizeof(c_OutputI2S::I2SDataAsUint_t))
     {
         if(NumberOfOneBitsToSend)
         {
             INCREMENT_TLS3001_FSM_COUNTER(SendDataStart_GetNextBitToSendIII);
 
-            * ((c_OutputTLS3001I2S::DataAsUint_t*) pDataToSend) = Parent->OneBit;
-            numSlices -= sizeof(c_OutputTLS3001I2S::DataAsUint_t);
-            pDataToSend += sizeof(c_OutputTLS3001I2S::DataAsUint_t);
+            * ((c_OutputI2S::I2SDataAsUint_t*) pDataToSend) = Parent->OneBit;
+            numSlices -= sizeof(c_OutputI2S::I2SDataAsUint_t);
+            pDataToSend += sizeof(c_OutputI2S::I2SDataAsUint_t);
             --NumberOfOneBitsToSend;
 
         } // end if(NumberOfOneBitsToSend)
@@ -621,10 +620,10 @@ bool IRAM_ATTR fsm_I2S_state_SendDataStart::ISR_GetNextBitToSend (c_OutputI2S::I
         {
             INCREMENT_TLS3001_FSM_COUNTER(SendDataStart_GetNextBitToSendIV);
 
-            * ((c_OutputTLS3001I2S::DataAsUint_t*) pDataToSend) = (CommandCode & CommandCodeMask) ? Parent->OneBit : Parent->ZeroBit;
+            * ((c_OutputI2S::I2SDataAsUint_t*) pDataToSend) = (CommandCode & CommandCodeMask) ? Parent->OneBit : Parent->ZeroBit;
             CommandCodeMask = CommandCodeMask >> 1;
-            numSlices -= sizeof(c_OutputTLS3001I2S::DataAsUint_t);
-            pDataToSend += sizeof(c_OutputTLS3001I2S::DataAsUint_t);
+            numSlices -= sizeof(c_OutputI2S::I2SDataAsUint_t);
+            pDataToSend += sizeof(c_OutputI2S::I2SDataAsUint_t);
 
         } // end if(CommandCodeMask)
 
@@ -635,7 +634,7 @@ bool IRAM_ATTR fsm_I2S_state_SendDataStart::ISR_GetNextBitToSend (c_OutputI2S::I
             Parent->fsm_I2S_state_SendData_imp.Init();
             break;
         }
-    } // end while(numSlices >= sizeof(c_OutputTLS3001I2S::DataAsUint_t))
+    } // end while(numSlices >= sizeof(c_OutputI2S::I2SDataAsUint_t))
 
     return MoreDataToSend;
 } // fsm_I2S_state_SendDataStart
@@ -663,16 +662,16 @@ bool IRAM_ATTR fsm_I2S_state_SendData::ISR_GetNextBitToSend (c_OutputI2S::I2S_It
     bool MoreDataToSend = true;
     // Serial.print('5');
 
-    while(numSlices >= sizeof(c_OutputTLS3001I2S::DataAsUint_t) && MoreDataToSend)
+    while(numSlices >= sizeof(c_OutputI2S::I2SDataAsUint_t) && MoreDataToSend)
     {
         // send 13 bits of data (1 leading zero + 12 data bits)
         if(DataPatternMask)
         {
             INCREMENT_TLS3001_FSM_COUNTER(SendData_GetNextBitToSendII);
 
-            * ((c_OutputTLS3001I2S::DataAsUint_t*) pDataToSend) = (DataPattern & DataPatternMask) ? Parent->OneBit : Parent->ZeroBit;
-            numSlices -= sizeof(c_OutputTLS3001I2S::DataAsUint_t);
-            pDataToSend += sizeof(c_OutputTLS3001I2S::DataAsUint_t);
+            * ((c_OutputI2S::I2SDataAsUint_t*) pDataToSend) = (DataPattern & DataPatternMask) ? Parent->OneBit : Parent->ZeroBit;
+            numSlices -= sizeof(c_OutputI2S::I2SDataAsUint_t);
+            pDataToSend += sizeof(c_OutputI2S::I2SDataAsUint_t);
 
             DataPatternMask = DataPatternMask >> 1;
     
@@ -692,9 +691,9 @@ bool IRAM_ATTR fsm_I2S_state_SendData::ISR_GetNextBitToSend (c_OutputI2S::I2S_It
             INCREMENT_TLS3001_FSM_COUNTER(SendData_GetNextBitToSendIII);
 
             --NumPostDataIdleBitsToSend;
-            * ((c_OutputTLS3001I2S::DataAsUint_t*) pDataToSend) = Parent->IdleBit;
-            numSlices -= sizeof(c_OutputTLS3001I2S::DataAsUint_t);
-            pDataToSend += sizeof(c_OutputTLS3001I2S::DataAsUint_t);
+            * ((c_OutputI2S::I2SDataAsUint_t*) pDataToSend) = Parent->IdleBit;
+            numSlices -= sizeof(c_OutputI2S::I2SDataAsUint_t);
+            pDataToSend += sizeof(c_OutputI2S::I2SDataAsUint_t);
 
         } // end if(NumPostDataIdleBitsToSend)
 
@@ -705,7 +704,7 @@ bool IRAM_ATTR fsm_I2S_state_SendData::ISR_GetNextBitToSend (c_OutputI2S::I2S_It
             Parent->fsm_I2S_state_SendDataIdle_imp.Init();
             break;
         }
-    } // end while(numSlices >= sizeof(c_OutputTLS3001I2S::DataAsUint_t))
+    } // end while(numSlices >= sizeof(c_OutputI2S::I2SDataAsUint_t))
 
     return MoreDataToSend;
 } // fsm_I2S_state_SendData
