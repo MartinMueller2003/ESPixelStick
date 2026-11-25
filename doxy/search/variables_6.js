@@ -60,9 +60,11 @@ var searchData=
   ['fsuploadfilehandle_57',['fsUploadFileHandle',['../classc___file_mgr.html#a95ce91ea55ac222562d83f87aca429bb',1,'c_FileMgr']]],
   ['fsuploadfilename_58',['fsUploadFileName',['../classc___file_mgr.html#a1cb372ace094d52c26f6c6d98e006cbd',1,'c_FileMgr']]],
   ['fsuploadfilesavedisenabled_59',['fsUploadFileSavedIsEnabled',['../classc___file_mgr.html#ad02883207cdebd5dae72ae7851127d39',1,'c_FileMgr']]],
-  ['fsuploadstarttime_60',['fsUploadStartTime',['../classc___file_mgr.html#aaba83240f519b443944a15cf6fd03963',1,'c_FileMgr']]],
-  ['ftpenabled_61',['FtpEnabled',['../classc___file_mgr.html#a85fbd6a2a2766f0130fdfb9207da777f',1,'c_FileMgr']]],
-  ['ftppassword_62',['FtpPassword',['../classc___file_mgr.html#af671a65c5556bf8a1f3da52191c0f218',1,'c_FileMgr']]],
-  ['ftpusername_63',['FtpUserName',['../classc___file_mgr.html#a62ccdae39fe86250ba3c8b741f0d87ca',1,'c_FileMgr']]],
-  ['func_64',['func',['../structc___input_effect_engine_1_1_effect_descriptor__t.html#aee9e17f4271552c5f15fa0766f5f975b',1,'c_InputEffectEngine::EffectDescriptor_t']]]
+  ['fsuploadlastprogressms_60',['fsUploadLastProgressMS',['../classc___file_mgr.html#a9ef3c444d6fba209dd9e010c92f598c2',1,'c_FileMgr']]],
+  ['fsuploadstarttime_61',['fsUploadStartTime',['../classc___file_mgr.html#aaba83240f519b443944a15cf6fd03963',1,'c_FileMgr']]],
+  ['fsuploadtempname_62',['fsUploadTempName',['../classc___file_mgr.html#ae7d4dae4f0c99fdea9a3d3c24c8e10f8',1,'c_FileMgr']]],
+  ['ftpenabled_63',['FtpEnabled',['../classc___file_mgr.html#a85fbd6a2a2766f0130fdfb9207da777f',1,'c_FileMgr']]],
+  ['ftppassword_64',['FtpPassword',['../classc___file_mgr.html#af671a65c5556bf8a1f3da52191c0f218',1,'c_FileMgr']]],
+  ['ftpusername_65',['FtpUserName',['../classc___file_mgr.html#a62ccdae39fe86250ba3c8b741f0d87ca',1,'c_FileMgr']]],
+  ['func_66',['func',['../structc___input_effect_engine_1_1_effect_descriptor__t.html#aee9e17f4271552c5f15fa0766f5f975b',1,'c_InputEffectEngine::EffectDescriptor_t']]]
 ];

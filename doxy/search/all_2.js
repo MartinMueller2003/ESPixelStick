@@ -23,5 +23,6 @@ var searchData=
   ['buildfseqlist_20',['BuildFseqList',['../classc___file_mgr.html#a8b9e4f29a70fd6c831f07349a9c32ab0',1,'c_FileMgr']]],
   ['buildfseqresponse_21',['BuildFseqResponse',['../classc___f_p_p_discovery.html#aebf914d165d32003ef1c96b38ba2be51',1,'c_FPPDiscovery']]],
   ['buildingnewconfig_22',['BuildingNewConfig',['../classc___output_mgr.html#a7b94e1a3bb3211dea24dbaf74caf6bcf',1,'c_OutputMgr']]],
-  ['bytestocopy_23',['BytesToCopy',['../structc___input_artnet_1_1_universe__t.html#a37dc91e016762fafd1ffbb268b0571bb',1,'c_InputArtnet::Universe_t::BytesToCopy'],['../structc___input_e131_1_1_universe__t.html#ab82ad93b0e7bf9563277de295efee6f7',1,'c_InputE131::Universe_t::BytesToCopy']]]
+  ['bytessincesync_23',['BytesSinceSync',['../structc___file_mgr_1_1_file_list_entry__t.html#a5b28d572ed8575c49fd8272a6bcff97a',1,'c_FileMgr::FileListEntry_t']]],
+  ['bytestocopy_24',['BytesToCopy',['../structc___input_artnet_1_1_universe__t.html#a37dc91e016762fafd1ffbb268b0571bb',1,'c_InputArtnet::Universe_t::BytesToCopy'],['../structc___input_e131_1_1_universe__t.html#ab82ad93b0e7bf9563277de295efee6f7',1,'c_InputE131::Universe_t::BytesToCopy']]]
 ];

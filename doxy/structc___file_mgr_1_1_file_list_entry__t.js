@@ -1,6 +1,7 @@
 var structc___file_mgr_1_1_file_list_entry__t =
 [
     [ "buffer", "structc___file_mgr_1_1_file_list_entry__t.html#a92292e1f9f9971dbb3a254dc51b8c02a", null ],
+    [ "BytesSinceSync", "structc___file_mgr_1_1_file_list_entry__t.html#a5b28d572ed8575c49fd8272a6bcff97a", null ],
     [ "DataBuffer", "structc___file_mgr_1_1_file_list_entry__t.html#ab088423d58792a3fb57c80276f1ebc9d", null ],
     [ "entryId", "structc___file_mgr_1_1_file_list_entry__t.html#a888f7c203e6b411d5e15b512694a4fa9", null ],
     [ "Filename", "structc___file_mgr_1_1_file_list_entry__t.html#a3893ab03d3a42402df8b892ae89f13f5", null ],

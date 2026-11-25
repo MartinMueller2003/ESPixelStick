@@ -9,5 +9,6 @@ var searchData=
   ['updategammatable_6',['updateGammaTable',['../classc___output_pixel.html#ae85f097b7467cb4aeb13a6dce4902127',1,'c_OutputPixel']]],
   ['updateisinprogress_7',['UpdateIsInProgress',['../class_e_f_update.html#a85d676640a316f0129c5275e0514bbbc',1,'EFUpdate']]],
   ['updatemdns_8',['UpdateMdns',['../classc___network_mgr.html#a4f2bed5aa8b01c9e0471116176e44f2a',1,'c_NetworkMgr']]],
-  ['usablefreeheap_9',['UsableFreeHeap',['../_web_mgr_8cpp.html#a5775605350ec389403a2917991fd5a09',1,'WebMgr.cpp']]]
+  ['uploadconnectionclosed_9',['UploadConnectionClosed',['../classc___f_p_p_discovery.html#a937ae444c660fb6cea7a0a3dbf84da7b',1,'c_FPPDiscovery']]],
+  ['usablefreeheap_10',['UsableFreeHeap',['../_web_mgr_8cpp.html#a5775605350ec389403a2917991fd5a09',1,'WebMgr.cpp']]]
 ];

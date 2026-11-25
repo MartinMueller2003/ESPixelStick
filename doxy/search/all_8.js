@@ -4,7 +4,7 @@ var searchData=
   ['hadisco_1',['hadisco',['../classc___input_m_q_t_t.html#a3b4f3d40501abd955b5d0426b30a2962',1,'c_InputMQTT']]],
   ['handle_2',['handle',['../structc___file_mgr_1_1_file_list_entry__t.html#a3c89703d5d76227e4ce9cc4c341cdc39',1,'c_FileMgr::FileListEntry_t']]],
   ['handlefileupload_3',['handleFileUpload',['../classc___file_mgr.html#a7fc07abded89ba2dc2fb88aa6e230da8',1,'c_FileMgr']]],
-  ['handlefileuploadnewfile_4',['handleFileUploadNewFile',['../classc___file_mgr.html#aad3d5c934b264ab5e66c5616c43fa060',1,'c_FileMgr']]],
+  ['handlefileuploadnewfile_4',['handleFileUploadNewFile',['../classc___file_mgr.html#ae06236ac237fd18aad98b1d477033c80',1,'c_FileMgr']]],
   ['haprefix_5',['haprefix',['../classc___input_m_q_t_t.html#ae9c0a6c7df1d45d36b4916601bbd98dc',1,'c_InputMQTT']]],
   ['hardwaretype_6',['hardwareType',['../union_f_p_p_ping_packet.html#a24fa1013a093e912dc237d0553d2ca40',1,'FPPPingPacket::hardwareType'],['../fseq_8h.html#a92edcd8d762f1324bad6c284b0f54d8b',1,'hardwareType:&#160;fseq.h']]],
   ['hasallleds_7',['hasAllLeds',['../structc___input_effect_engine_1_1_effect_descriptor__t.html#a9f66e8d42af4ec4c76462eb38a1a0b77',1,'c_InputEffectEngine::EffectDescriptor_t']]],

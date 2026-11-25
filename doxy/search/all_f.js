@@ -129,5 +129,6 @@ var searchData=
   ['protocolname_126',['ProtocolName',['../struct_supported_output_protocol__t.html#a2ba05990304fa491f1c489e3e6efdafc',1,'SupportedOutputProtocol_t']]],
   ['publishha_127',['publishHA',['../classc___input_m_q_t_t.html#a47969701bda3653feea63fc0628d4071',1,'c_InputMQTT']]],
   ['publishstate_128',['publishState',['../classc___input_m_q_t_t.html#a6e727c3962db77ad1015167dc6b0497a',1,'c_InputMQTT']]],
-  ['pwifidriver_129',['pWiFiDriver',['../classfsm___wi_fi__state.html#a97a2adc75a27ce7c9feefa0d2e85a5dd',1,'fsm_WiFi_state']]]
+  ['puploadrequest_129',['pUploadRequest',['../classc___f_p_p_discovery.html#ac4a02c6b5fd6725c875a8a4afa5763ea',1,'c_FPPDiscovery']]],
+  ['pwifidriver_130',['pWiFiDriver',['../classfsm___wi_fi__state.html#a97a2adc75a27ce7c9feefa0d2e85a5dd',1,'fsm_WiFi_state']]]
 ];

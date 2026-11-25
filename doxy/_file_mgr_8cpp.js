@@ -5,5 +5,7 @@ var _file_mgr_8cpp =
     [ "DISABLE_CS_PIN", "_file_mgr_8cpp.html#a836a589af4e48c1a2c48f1e8367c4103", null ],
     [ "FileMgr", "_file_mgr_8cpp.html#a30bcd8170c0e3eadfec3d60c98b46770", null ],
     [ "sd", "_file_mgr_8cpp.html#a6385eecb021ea6dc1e9b5597cfe94b85", null ],
+    [ "UploadSyncIntervalBytes", "_file_mgr_8cpp.html#a5e5ad6e6a96f989b5846aa23136ba151", null ],
+    [ "UploadTempSuffix", "_file_mgr_8cpp.html#a73f17af6dfb6e75fe5c406de3ed57016", null ],
     [ "XlateFileMode", "_file_mgr_8cpp.html#a14032fd789ea87efdd8324cd3d489cc6", null ]
 ];
