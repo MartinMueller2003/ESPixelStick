@@ -119,7 +119,7 @@ void c_OutputTLS3001I2S::Begin ()
     OutputI2SConfig.GetNextIntensityBitSlices = GetDataSlicesToSendBase;
     OutputI2SConfig.SetDefaultDataValue       = SetDefaultDataValueBase;
     OutputI2SConfig.IdleLevelIsHigh           = true; // idle is low
-    OutputI2SConfig.IsActive                  = false; // do not output data
+    OutputI2SConfig.IsEnabled                  = false; // do not output data
 
     I2Sdriver->RegisterSlotDevice (OutputI2SConfig, DataBit, DataBitMask);
 
@@ -149,7 +149,7 @@ bool c_OutputTLS3001I2S::SetConfig (ArduinoJson::JsonObject& jsonConfig)
     OutputI2SConfig.GetNextIntensityBitSlices = GetDataSlicesToSendBase;
     OutputI2SConfig.SetDefaultDataValue       = SetDefaultDataValueBase;
     OutputI2SConfig.IdleLevelIsHigh           = true; // idle is low
-    OutputI2SConfig.IsActive                  = false; // do not output data
+    OutputI2SConfig.IsEnabled                  = false; // do not output data
 
     // DEBUG_V();    
 

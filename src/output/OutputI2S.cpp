@@ -57,10 +57,16 @@ void IRAM_ATTR c_OutputI2S::ISR_Handler (void * _TransmitDmaBuffer)
     TransmitDmaBuffer->header.offset = 0; // Always start at the begining of the buffer
     
     uint32_t numSlices = TransmitDmaBuffer->header.size;
-    if (pCurrentPort->IsActive)
+
+    if (pCurrentPort->IsEnabled)
     {
         // fill in the data
-        if (false == pCurrentPort->GetNextIntensityBitSlices (pCurrentPort->arg, (I2S_Item_t *) (TransmitDmaBuffer->header.buf), numSlices, DefaultIntensitySliceData))
+        pCurrentPort->IsRunning = true;
+        bool MoreDataToSend = pCurrentPort->GetNextIntensityBitSlices (pCurrentPort->arg, (I2S_Item_t *) (TransmitDmaBuffer->header.buf), numSlices, DefaultIntensitySliceData);
+        pCurrentPort->IsRunning = false;
+
+        // do we have more data to send for this port?
+        if (false == MoreDataToSend)
         {
             // port does not have more intensity bit slices, move to the next port
             ISR_MoveToNextPort ();
@@ -104,10 +110,12 @@ void IRAM_ATTR c_OutputI2S::ISR_MoveToNextPort ()
         }
 
         // did we find a port to output?
-        if (pCurrentPort->IsActive)
+        if (pCurrentPort->IsEnabled)
         {
             // output this port
+            pCurrentPort->IsRunning = true;
             pCurrentPort->StartNewFrame (pCurrentPort->arg);
+            pCurrentPort->IsRunning = false;
             break;
         }
         // try the next port
@@ -128,7 +136,8 @@ c_OutputI2S::c_OutputI2S ()
         CurrentChannel.GetNextIntensityBitSlices = nullptr;
         CurrentChannel.StartNewFrame = nullptr;
         CurrentChannel.IdleLevelIsHigh = false;
-        CurrentChannel.IsActive = false;
+        CurrentChannel.IsEnabled = false;
+        CurrentChannel.IsRunning = false;
     }
 
     uint BufferId = 0;
@@ -311,7 +320,12 @@ void c_OutputI2S::RemoveSlotDevice (uint32_t I2SChannelId)
         auto & currentConfig = OutputI2SSlotConfigs[I2SChannelId];
 
         // must be first
-        currentConfig.IsActive = false;
+        currentConfig.IsEnabled = false;
+
+        // wait for any current operation to complete. 
+        // There is no other exit since a stuck ISR / this loop, MUST cause a WDT expiration.
+        while(true == currentConfig.IsRunning) {delayMicroseconds(100);}
+
         currentConfig.arg = nullptr;
         currentConfig.GetNextIntensityBitSlices = nullptr;
         currentConfig.StartNewFrame = nullptr;
@@ -369,7 +383,7 @@ void c_OutputI2S::SetOutputState (uint32_t I2SChannelId, bool NewState)
 
     // DEBUG_V (String ("I2SChannelId: ") + String (I2SChannelId));
     // DEBUG_V (String ("    NewState: ") + String (NewState));
-    OutputI2SSlotConfigs[I2SChannelId].IsActive = NewState;
+    OutputI2SSlotConfigs[I2SChannelId].IsEnabled = NewState;
 
     // DEBUG_END;
 } // SetOutputState

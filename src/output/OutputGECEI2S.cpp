@@ -112,7 +112,7 @@ void c_OutputGECEI2S::Begin ()
     OutputI2SConfig.GetNextIntensityBitSlices = GetDataSlicesToSendBase;
     OutputI2SConfig.SetDefaultDataValue       = SetDefaultDataValueBase;
     OutputI2SConfig.IdleLevelIsHigh           = false; // idle is low
-    OutputI2SConfig.IsActive                  = false; // do not output data
+    OutputI2SConfig.IsEnabled                  = false; // do not output data
 
     I2Sdriver->RegisterSlotDevice (OutputI2SConfig, DataBit, DataBitMask);
 

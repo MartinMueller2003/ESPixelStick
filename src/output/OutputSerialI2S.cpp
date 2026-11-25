@@ -115,7 +115,7 @@ void c_OutputSerialI2S::Begin ()
     OutputI2SConfig.GetNextIntensityBitSlices = GetDataSlicesToSendBase;
     OutputI2SConfig.SetDefaultDataValue       = SetDefaultDataValueBase;
     OutputI2SConfig.IdleLevelIsHigh           = true; // idle is low
-    OutputI2SConfig.IsActive                  = false; // do not output data
+    OutputI2SConfig.IsEnabled                  = false; // do not output data
 
     I2Sdriver->RegisterSlotDevice (OutputI2SConfig, DataBit, DataBitMask);
 
@@ -155,7 +155,6 @@ bool c_OutputSerialI2S::SetConfig (ArduinoJson::JsonObject& jsonConfig)
 
     bool response = c_OutputSerial::SetConfig (jsonConfig);
     // DEBUG_V (String ("DataPin: ") + String (DataPin));
-    PauseOutput (true);
 
     // update the output GPIO
     I2Sdriver->SetGpio (OutputPortDefinition.PortId, OutputPortDefinition.gpios.data);

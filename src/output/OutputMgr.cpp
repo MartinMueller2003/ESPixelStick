@@ -303,10 +303,6 @@ c_OutputMgr::c_OutputMgr ()
         CurrentOutput.OutputDriverInUse = false;
     }
 
-    #ifdef SUPPORT_I2S
-    OutputI2S.Begin();
-    #endif // def SUPPORT_I2S
-
 } // c_OutputMgr
 
 //-----------------------------------------------------------------------------
@@ -333,6 +329,10 @@ void c_OutputMgr::Begin ()
 {
     // DEBUG_START;
     // DEBUG_V(String("Current CPU ID: ") + String(xPortGetCoreID()));
+
+    #ifdef SUPPORT_I2S
+    OutputI2S.Begin();
+    #endif // def SUPPORT_I2S
 
     // IsBooting = false;
     // FileMgr.DeleteConfigFile(ConfigFileName);
