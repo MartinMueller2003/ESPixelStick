@@ -322,6 +322,9 @@ void c_OutputI2S::RemoveSlotDevice (uint32_t I2SChannelId)
         // must be first
         currentConfig.IsEnabled = false;
 
+        // delay 1 buffer time to give the current ISR time to swap channels
+        delayMicroseconds(390);
+
         // wait for any current operation to complete. 
         // There is no other exit since a stuck ISR / this loop, MUST cause a WDT expiration.
         while(true == currentConfig.IsRunning) {delayMicroseconds(100);}

@@ -42,9 +42,9 @@ public:
         bool        (*GetNextIntensityBitSlices) (void * arg, I2S_Item_t * data, uint32_t & numSlices, I2S_Item_t DefaultIntensitySliceData) = nullptr;
         void        (*StartNewFrame) (void*arg) = nullptr;
         void        (*SetDefaultDataValue) (void*arg, I2S_Item_t DefaultIntensitySliceData) = nullptr;
-        bool        IsEnabled;
+        volatile bool IsEnabled;
         bool        IdleLevelIsHigh;
-        bool        IsRunning; // set true when processing data in the ISR
+        volatile bool IsRunning; // set true when processing data in the ISR
     };
 
     // must be a multiple of 32 bits (aka 4 bytes)
@@ -64,6 +64,12 @@ public:
     {
         c_OutputI2S::I2S_Item_t DataAsBytes[4];
         uint32_t AsUint;
+    };
+
+    union I2SDataAsUint64_t
+    {
+        c_OutputI2S::I2S_Item_t DataAsBytes[8];
+        uint64_t AsUint;
     };
 
 private:
