@@ -767,6 +767,7 @@ void c_WebMgr::CreateAdminInfoFile ()
 
     JsonWrite(jsonAdmin, CN_version, ConstConfig.Version);
     JsonWrite(jsonAdmin, "built", ConstConfig.BuildDate);
+    JsonWrite(jsonAdmin, "commit", ConstConfig.BuildCommit);
     JsonWrite(jsonAdmin, "realflashsize", String (ESP.getFlashChipSize ()));
     JsonWrite(jsonAdmin, "BoardName", String(BOARD_NAME));
 #ifdef ARDUINO_ARCH_ESP8266

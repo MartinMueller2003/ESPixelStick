@@ -89,6 +89,11 @@ ConstConfig_t ConstConfig =
     "4.x-dev",
 #endif // ESPS_VERSION,
     __DATE__ " - " __TIME__,
+#ifdef ESPS_BUILD_COMMIT
+    STRING(ESPS_BUILD_COMMIT),
+#else
+    "",
+#endif // ESPS_BUILD_COMMIT
     "/config.json",
     1
 };
@@ -194,7 +199,13 @@ void setup()
 
     // Dump version and build information
     LOG_PORT.println ();
-    logcon (String(CN_ESPixelStick) + " v" + ConstConfig.Version + " (" + ConstConfig.BuildDate + ") on " + BOARD_NAME);
+    String Banner = String(CN_ESPixelStick) + " v" + ConstConfig.Version + " (" + ConstConfig.BuildDate;
+    if (0 != ConstConfig.BuildCommit[0])
+    {
+        Banner += String(", commit ") + ConstConfig.BuildCommit;
+    }
+    Banner += String(") on ") + BOARD_NAME;
+    logcon (Banner);
 #ifdef ARDUINO_ARCH_ESP8266
     logcon (ESP.getFullVersion ());
 #else

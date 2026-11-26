@@ -2290,6 +2290,7 @@ function ProcessReceivedJsonAdminMessage(data)
 
     $('#version').text(AdminInfo.version);
     $('#built').text(AdminInfo.built);
+    $('#commit').text(AdminInfo.commit);
     $('#arch').text(AdminInfo.arch);
     $('#usedflashsize').text(AdminInfo.usedflashsize);
     $('#realflashsize').text(AdminInfo.realflashsize);
