@@ -183,8 +183,6 @@ void c_OutputSerialI2S::SetOutputBufferSize (uint32_t NumChannelsAvailable)
         PauseOutput (true);
     }
 
-    ISR_StartNewDataFrame ();
-
     // DEBUG_END;
 
 } // SetBufferSize
