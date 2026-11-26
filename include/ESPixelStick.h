@@ -144,8 +144,8 @@ bool setFromJSON (T& OutValue, JsonObject & Json, N Name)
     }
     else
     {
+        // Only the field name: the record can hold credentials and must not reach the log.
         DEBUG_V(String("Could not find field '") + Name + "' in the json record");
-        PrettyPrint (Json, Name);
     }
 
     return HasBeenModified;
@@ -167,8 +167,8 @@ bool setFromJSON (char (&OutValue)[S], JsonObject & Json, N Name)
     }
     else
     {
+        // Only the field name: the record can hold credentials and must not reach the log.
         DEBUG_V(String("Could not find field '") + Name + "' in the json record");
-        PrettyPrint (Json, Name);
     }
 
     return HasBeenModified;
@@ -190,8 +190,8 @@ bool setFromJSON (T& OutValue, JsonVariant & Json, N Name)
     }
     else
     {
+        // Only the field name: the record can hold credentials and must not reach the log.
         DEBUG_V(String("Could not find field '") + Name + "' in the json record");
-        PrettyPrint (Json, Name);
     }
 
     return HasBeenModified;
