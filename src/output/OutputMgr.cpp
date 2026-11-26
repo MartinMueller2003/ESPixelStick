@@ -1837,11 +1837,19 @@ void c_OutputMgr::ReadChannelData(uint32_t StartChannelId, uint32_t ChannelCount
 void c_OutputMgr::ClearBuffer()
 {
     // DEBUG_START;
-
-    memset(ISR_GetBufferAddress(), 0x00, OutputMgr.GetBufferSize());
+    byte TempBuffer [128];
+    memset(TempBuffer, 0x00, sizeof(TempBuffer));
     
-    // this will invert any data that is handled with special functions
-    WriteChannelData(0, OutputMgr.GetBufferUsedSize(), OutputMgr.ISR_GetBufferAddress());
+    uint32_t OutputBufferOffset = 0;
+    uint RemainingOutputBufferBytes = OutputMgr.GetBufferUsedSize();
+
+    while(RemainingOutputBufferBytes)
+    {
+        uint NumBytesToClear = min(RemainingOutputBufferBytes, sizeof(TempBuffer));
+        WriteChannelData(OutputBufferOffset, NumBytesToClear, TempBuffer);
+        OutputBufferOffset += NumBytesToClear;
+        RemainingOutputBufferBytes -= NumBytesToClear;
+    };
 
     // DEBUG_END;
 
