@@ -150,7 +150,7 @@ void c_OutputUCS1903I2S::CalculateFrameBitSlices ()
     // DEBUG_V (String ("                   IdleLenNS: ") + String (IdleLenNS));
     
     FrameResetSliceCount = I2Sdriver->GetNumTimeSlicesForTargetTimeNS (InterFrameGapInMicroSec * NanoSecondsInAMicroSecond);
-    FrameResetSliceCount = (FrameResetSliceCount + (sizeof(c_OutputI2S::I2SDataAsUint_t) - 1)) & ~(sizeof(c_OutputI2S::I2SDataAsUint_t) - 1); // round up to the nearest multiple of the data type size
+    FrameResetSliceCount = (FrameResetSliceCount + (sizeof(c_OutputI2S::I2SDataAsUint64_t) - 1)) & ~(sizeof(c_OutputI2S::I2SDataAsUint64_t) - 1); // round up to the nearest multiple of the data type size
     // DEBUG_V (String ("        FrameResetSliceCount: ") + String (FrameResetSliceCount));
 
     // DEBUG_END;
@@ -321,7 +321,7 @@ bool IRAM_ATTR c_OutputUCS1903I2S::ISR_GetNextDataSlicesToSend (c_OutputI2S::I2S
         {
             INC_UCS1903_I2S_DEBUG_COUNTER (FrameReset);
             
-            // Send as many slices as we can to fill the output buffer with the default data value.  The output buffer is always aligned to a I2SDataAsUint_t boundary and the number of slices requested is always a multiple of the I2SDataAsUint_t size.  The FrameResetRemainingSliceCount is also a multiple of the I2SDataAsUint_t size, so we can fill the output buffer with a memset call.
+            // Send as many slices as we can to fill the output buffer with the default data value.  The output buffer is always aligned to a I2SDataAsUint64_t boundary and the number of slices requested is always a multiple of the I2SDataAsUint64_t size.  The FrameResetRemainingSliceCount is also a multiple of the I2SDataAsUint64_t size, so we can fill the output buffer with a memset call.
             uint NumSlicesToSend = min (FrameResetRemainingSliceCount, numSlices);
             memset(pDataToSend, (DefaultIntensitySliceData & DataBitMask), NumSlicesToSend);
             numSlices -= NumSlicesToSend;
@@ -339,7 +339,7 @@ bool IRAM_ATTR c_OutputUCS1903I2S::ISR_GetNextDataSlicesToSend (c_OutputI2S::I2S
             INC_UCS1903_I2S_DEBUG_COUNTER (FrameResetII);
 
             // align output to a bit boundary
-            uint NumEntriesToSendToAlignOutputToUint = min (uint(pDataToSend) & (sizeof(c_OutputI2S::I2SDataAsUint_t)-1), numSlices);
+            uint NumEntriesToSendToAlignOutputToUint = min (uint(pDataToSend) & (sizeof(c_OutputI2S::I2SDataAsUint64_t)-1), numSlices);
             if(NumEntriesToSendToAlignOutputToUint)
             {
                 INC_UCS1903_I2S_DEBUG_COUNTER (FrameResetAlignments);
@@ -349,7 +349,7 @@ bool IRAM_ATTR c_OutputUCS1903I2S::ISR_GetNextDataSlicesToSend (c_OutputI2S::I2S
                 pDataToSend += NumEntriesToSendToAlignOutputToUint;
             } // end if(NumEntriesToSendToAlignOutputToUint)
 
-            // at this point, the output buffer pointer is aligned to a I2SDataAsUint_t boundary.
+            // at this point, the output buffer pointer is aligned to a I2SDataAsUint64_t boundary.
 
             INC_UCS1903_I2S_DEBUG_COUNTER (FrameResetDone);
 
@@ -362,17 +362,17 @@ bool IRAM_ATTR c_OutputUCS1903I2S::ISR_GetNextDataSlicesToSend (c_OutputI2S::I2S
         {
             INC_UCS1903_I2S_DEBUG_COUNTER (DataI);
 
-            uint NumBitsToSend = numSlices / sizeof(c_OutputI2S::I2SDataAsUint_t);
+            uint NumBitsToSend = numSlices / sizeof(c_OutputI2S::I2SDataAsUint64_t);
 
             while (NumBitsToSend > 0)
             {
                 INC_UCS1903_I2S_DEBUG_COUNTER (DataII);
 
-                * ((c_OutputI2S::I2SDataAsUint_t*) pDataToSend) = (DataPattern & DataPatternMask) ? OneBit : ZeroBit;
+                * ((c_OutputI2S::I2SDataAsUint64_t*) pDataToSend) = (DataPattern & DataPatternMask) ? OneBit : ZeroBit;
 
                 --NumBitsToSend;
-                numSlices -= sizeof(c_OutputI2S::I2SDataAsUint_t);
-                pDataToSend += sizeof(c_OutputI2S::I2SDataAsUint_t);
+                numSlices -= sizeof(c_OutputI2S::I2SDataAsUint64_t);
+                pDataToSend += sizeof(c_OutputI2S::I2SDataAsUint64_t);
 
                 DataPatternMask = DataPatternMask >> 1;
 

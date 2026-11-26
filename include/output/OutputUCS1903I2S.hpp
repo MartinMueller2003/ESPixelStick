@@ -97,8 +97,8 @@ private:
     };
     OutputUCS1903I2S_FSM_States volatile OutputUCS1903I2S_FSM_State = OutputUCS1903I2S_FSM_States::_OutputUCS1903I2S_FSM_State_Idle;
 
-    c_OutputI2S::I2SDataAsUint_t OneBit;
-    c_OutputI2S::I2SDataAsUint_t ZeroBit;
+    c_OutputI2S::I2SDataAsUint64_t OneBit;
+    c_OutputI2S::I2SDataAsUint64_t ZeroBit;
 
 }; // c_OutputUCS1903I2S
 
