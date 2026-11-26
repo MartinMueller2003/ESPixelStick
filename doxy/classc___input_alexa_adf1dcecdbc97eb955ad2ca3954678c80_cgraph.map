@@ -1,44 +1,40 @@
 <map id="c_InputAlexa::onMessage" name="c_InputAlexa::onMessage">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,400,175,426"/>
-<area shape="rect" id="Node000002" href="$classc___output_mgr.html#a7471954d6a26b6894c4066a424d8aec8" title=" " alt="" coords="244,112,410,138"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="99,398,149,328,221,236,301,147,305,150,225,240,154,331,103,401"/>
-<area shape="rect" id="Node000007" href="$_safer_string_conversion_8hpp.html#abaa5f3baa5ae9ae6df677674285ab8da" title=" " alt="" coords="740,273,921,299"/>
-<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="119,397,182,370,270,336,372,304,479,280,538,273,585,273,692,280,725,280,724,285,692,285,585,279,539,278,479,285,374,309,272,341,184,375,121,402"/>
-<area shape="rect" id="Node000008" href="$classc___input_effect_engine.html#acf078d65ad2078ad5f32afe6867284a2" title="Set a new config in the driver." alt="" coords="259,392,395,433"/>
-<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="175,410,243,410,243,416,175,416"/>
-<area shape="rect" id="Node000019" href="$classc___input_common.html#a1649cd7444c3219b37fd8627754e2e56" title=" " alt="" coords="223,458,431,498"/>
-<area shape="poly" id="edge21_Node000001_Node000019" title=" " alt="" coords="140,424,237,451,235,456,139,429"/>
-<area shape="rect" id="Node000020" href="$classc___input_mgr.html#a8a195063dcc63c1fd8de7c14ab3bf0a2" title=" " alt="" coords="238,523,416,564"/>
-<area shape="poly" id="edge22_Node000001_Node000020" title=" " alt="" coords="108,424,157,465,224,508,238,515,236,519,221,512,154,469,104,428"/>
-<area shape="rect" id="Node000003" href="$classc___output_mgr.html#abc896c708fce43b559a42ba4e67c9976" title="Get the size (in intensities) of the buffer into which the E1.31 handler will stuff data." alt="" coords="494,5,677,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="347,109,404,75,478,40,497,33,499,38,480,45,407,79,350,114"/>
-<area shape="rect" id="Node000004" href="$classc___output_mgr.html#a9aa129dd6077ad48f807aaab43f67c52" title="Get the size (in intensities) of the buffer into which the E1.31 handler will stuff data." alt="" coords="479,55,692,80"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="388,109,509,82,510,87,389,114"/>
-<area shape="rect" id="Node000005" href="$classc___output_mgr.html#a99b4520a367303ccd0372d5f9ccf30c1" title="Get the address of the buffer into which the E1.31 handler will stuff data." alt="" coords="492,104,679,145"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="411,122,477,122,477,128,411,128"/>
-<area shape="rect" id="Node000006" href="$classc___output_mgr.html#abe0292b6380f75279c4758c2b2e4e465" title=" " alt="" coords="482,193,689,219"/>
-<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="371,136,529,186,527,191,370,141"/>
-<area shape="poly" id="edge6_Node000006_Node000006" title=" " alt="" coords="545,195,537,185,542,175,559,169,586,167,616,169,631,177,629,181,615,175,586,172,560,174,546,179,543,184,549,191"/>
-<area shape="rect" id="Node000009" href="$classc___input_effect_engine.html#a711dc7de895ef3f4b0b599ac2d6eaa9c" title="Get the current config used by the driver." alt="" coords="518,294,654,334"/>
-<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="372,389,478,345,502,337,504,342,480,350,374,394"/>
-<area shape="rect" id="Node000010" href="$classc___input_effect_engine.html#a69e94e80d206e30387cd73d257a19605" title=" " alt="" coords="518,359,654,400"/>
-<area shape="poly" id="edge11_Node000008_Node000010" title=" " alt="" coords="395,401,502,388,502,393,396,407"/>
-<area shape="rect" id="Node000011" href="$classc___input_effect_engine.html#a008c4deb4332e0e98966544e6da6958d" title=" " alt="" coords="518,424,654,465"/>
-<area shape="poly" id="edge12_Node000008_Node000011" title=" " alt="" coords="396,419,502,432,502,437,395,424"/>
-<area shape="rect" id="Node000012" href="$classc___input_effect_engine.html#a80cd28e720963e39357b96dc2e516291" title=" " alt="" coords="518,490,654,530"/>
-<area shape="poly" id="edge13_Node000008_Node000012" title=" " alt="" coords="397,429,432,444,456,459,480,474,504,484,502,489,478,479,454,464,430,449,395,434"/>
-<area shape="rect" id="Node000014" href="$_e_s_pixel_stick_8h.html#a8295d2ec53bab395bfc5811cfd78ca4d" title=" " alt="" coords="533,555,638,580"/>
-<area shape="poly" id="edge15_Node000008_Node000014" title=" " alt="" coords="397,424,433,444,444,456,451,469,457,494,463,518,470,529,481,540,499,551,519,558,517,563,496,556,477,544,466,532,458,520,452,495,446,471,440,460,429,448,394,428"/>
-<area shape="rect" id="Node000015" href="$classc___input_effect_engine.html#abcbf05e7ca16985fa97382121a08867b" title=" " alt="" coords="512,604,659,645"/>
-<area shape="poly" id="edge16_Node000008_Node000015" title=" " alt="" coords="396,422,416,431,433,444,447,463,455,482,457,519,460,556,467,573,481,591,500,604,496,609,477,595,463,576,455,557,452,520,449,483,443,466,429,448,413,436,394,427"/>
-<area shape="poly" id="edge10_Node000009_Node000007" title=" " alt="" coords="654,304,724,296,725,301,655,309"/>
-<area shape="rect" id="Node000013" href="$class_fast_timer.html#a775ab52aa49e9a1f7092eefcbdbd673e" title="&lt; Start the module" alt="" coords="757,497,904,523"/>
-<area shape="poly" id="edge14_Node000012_Node000013" title=" " alt="" coords="654,508,741,508,741,513,654,513"/>
-<area shape="rect" id="Node000016" href="$classc___input_effect_engine.html#a80416202be606d8a4c68312aecb69c1c" title=" " alt="" coords="762,547,899,588"/>
-<area shape="poly" id="edge17_Node000015_Node000016" title=" " alt="" coords="659,605,746,584,748,590,660,610"/>
-<area shape="rect" id="Node000017" href="$classc___input_effect_engine.html#a8fa707bf9c7e9c79bfeae6d98adfc30c" title=" " alt="" coords="969,634,1105,674"/>
-<area shape="poly" id="edge18_Node000015_Node000017" title=" " alt="" coords="660,627,953,646,953,651,659,632"/>
-<area shape="rect" id="Node000018" href="$classc___input_effect_engine.html#a3628411bc599079aa0e45dd3df1682fc" title=" " alt="" coords="762,662,899,702"/>
-<area shape="poly" id="edge19_Node000015_Node000018" title=" " alt="" coords="660,639,748,660,746,665,659,645"/>
-<area shape="poly" id="edge20_Node000018_Node000017" title=" " alt="" coords="899,670,953,663,954,668,899,676"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,285,175,311"/>
+<area shape="rect" id="Node000002" href="$classc___output_mgr.html#a7471954d6a26b6894c4066a424d8aec8" title=" " alt="" coords="244,79,410,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="95,284,113,251,140,207,177,161,221,121,245,108,248,113,224,126,181,165,145,210,117,254,100,286"/>
+<area shape="rect" id="Node000005" href="$_safer_string_conversion_8hpp.html#abaa5f3baa5ae9ae6df677674285ab8da" title=" " alt="" coords="740,159,921,184"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="119,282,182,255,270,222,372,189,479,165,538,158,585,159,692,165,725,165,724,171,692,170,585,164,539,163,479,170,374,194,272,227,184,260,121,287"/>
+<area shape="rect" id="Node000006" href="$classc___input_effect_engine.html#acf078d65ad2078ad5f32afe6867284a2" title="Set a new config in the driver." alt="" coords="259,278,395,318"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="175,296,243,296,243,301,175,301"/>
+<area shape="rect" id="Node000017" href="$classc___input_common.html#a1649cd7444c3219b37fd8627754e2e56" title=" " alt="" coords="223,343,431,384"/>
+<area shape="poly" id="edge19_Node000001_Node000017" title=" " alt="" coords="140,309,237,336,235,341,139,314"/>
+<area shape="rect" id="Node000018" href="$classc___input_mgr.html#a8a195063dcc63c1fd8de7c14ab3bf0a2" title=" " alt="" coords="238,408,416,449"/>
+<area shape="poly" id="edge20_Node000001_Node000018" title=" " alt="" coords="108,310,157,350,224,393,238,400,236,405,221,398,154,355,104,314"/>
+<area shape="rect" id="Node000003" href="$classc___output_mgr.html#a9aa129dd6077ad48f807aaab43f67c52" title="Get the size (in intensities) of the buffer into which the E1.31 handler will stuff data." alt="" coords="479,5,692,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="365,76,478,40,506,32,507,38,480,45,366,81"/>
+<area shape="rect" id="Node000004" href="$classc___output_mgr.html#abe0292b6380f75279c4758c2b2e4e465" title=" " alt="" coords="482,79,689,104"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="411,89,467,89,467,94,411,94"/>
+<area shape="poly" id="edge4_Node000004_Node000004" title=" " alt="" coords="545,80,537,70,542,60,559,54,586,52,616,55,631,62,629,67,615,60,586,57,560,59,546,64,543,69,549,77"/>
+<area shape="rect" id="Node000007" href="$classc___input_effect_engine.html#a711dc7de895ef3f4b0b599ac2d6eaa9c" title="Get the current config used by the driver." alt="" coords="518,179,654,220"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="372,275,478,230,502,222,504,227,480,235,374,280"/>
+<area shape="rect" id="Node000008" href="$classc___input_effect_engine.html#a69e94e80d206e30387cd73d257a19605" title=" " alt="" coords="518,244,654,285"/>
+<area shape="poly" id="edge9_Node000006_Node000008" title=" " alt="" coords="395,287,502,273,502,278,396,292"/>
+<area shape="rect" id="Node000009" href="$classc___input_effect_engine.html#a008c4deb4332e0e98966544e6da6958d" title=" " alt="" coords="518,310,654,350"/>
+<area shape="poly" id="edge10_Node000006_Node000009" title=" " alt="" coords="396,304,502,317,502,323,395,309"/>
+<area shape="rect" id="Node000010" href="$classc___input_effect_engine.html#a80cd28e720963e39357b96dc2e516291" title=" " alt="" coords="518,375,654,416"/>
+<area shape="poly" id="edge11_Node000006_Node000010" title=" " alt="" coords="397,315,432,329,456,345,480,360,504,370,502,375,478,365,454,349,430,334,395,320"/>
+<area shape="rect" id="Node000012" href="$_e_s_pixel_stick_8h.html#a8295d2ec53bab395bfc5811cfd78ca4d" title=" " alt="" coords="533,440,638,466"/>
+<area shape="poly" id="edge13_Node000006_Node000012" title=" " alt="" coords="397,309,433,329,444,342,451,354,457,379,463,403,470,415,481,425,499,436,519,444,517,449,496,441,477,430,466,418,458,405,452,381,446,356,440,345,429,334,394,314"/>
+<area shape="rect" id="Node000013" href="$classc___input_effect_engine.html#abcbf05e7ca16985fa97382121a08867b" title=" " alt="" coords="512,490,659,530"/>
+<area shape="poly" id="edge14_Node000006_Node000013" title=" " alt="" coords="396,307,416,317,433,330,447,348,455,368,457,405,460,441,467,459,481,476,500,490,496,494,477,480,463,461,455,442,452,405,449,369,443,351,429,333,413,321,394,312"/>
+<area shape="poly" id="edge8_Node000007_Node000005" title=" " alt="" coords="654,189,724,181,725,186,655,194"/>
+<area shape="rect" id="Node000011" href="$class_fast_timer.html#a775ab52aa49e9a1f7092eefcbdbd673e" title="&lt; Start the module" alt="" coords="757,383,904,408"/>
+<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="654,393,741,393,741,398,654,398"/>
+<area shape="rect" id="Node000014" href="$classc___input_effect_engine.html#a80416202be606d8a4c68312aecb69c1c" title=" " alt="" coords="762,432,899,473"/>
+<area shape="poly" id="edge15_Node000013_Node000014" title=" " alt="" coords="659,490,746,470,748,475,660,496"/>
+<area shape="rect" id="Node000015" href="$classc___input_effect_engine.html#a8fa707bf9c7e9c79bfeae6d98adfc30c" title=" " alt="" coords="969,519,1105,560"/>
+<area shape="poly" id="edge16_Node000013_Node000015" title=" " alt="" coords="660,512,953,531,953,537,659,518"/>
+<area shape="rect" id="Node000016" href="$classc___input_effect_engine.html#a3628411bc599079aa0e45dd3df1682fc" title=" " alt="" coords="762,547,899,588"/>
+<area shape="poly" id="edge17_Node000013_Node000016" title=" " alt="" coords="660,525,748,545,746,551,659,530"/>
+<area shape="poly" id="edge18_Node000016_Node000015" title=" " alt="" coords="899,556,953,548,954,553,899,561"/>
 </map>

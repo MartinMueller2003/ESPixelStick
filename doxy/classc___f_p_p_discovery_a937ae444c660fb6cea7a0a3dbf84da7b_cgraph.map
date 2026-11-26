@@ -1,53 +1,50 @@
 <map id="c_FPPDiscovery::UploadConnectionClosed" name="c_FPPDiscovery::UploadConnectionClosed">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,303,236,343"/>
-<area shape="rect" id="Node000002" href="$classc___file_mgr.html#ad2545a2e9a8e22194d4bf3e712528645" title=" " alt="" coords="284,235,477,261"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="185,299,283,270,308,263,310,268,284,275,187,305"/>
-<area shape="rect" id="Node000017" href="$classc___output_mgr.html#a7471954d6a26b6894c4066a424d8aec8" title=" " alt="" coords="297,285,464,310"/>
-<area shape="poly" id="edge22_Node000001_Node000017" title=" " alt="" coords="236,309,281,305,282,310,236,314"/>
-<area shape="rect" id="Node000021" href="$classc___output_mgr.html#aa5fa47aab179e25649aa61acd159586d" title=" " alt="" coords="288,334,473,360"/>
-<area shape="poly" id="edge28_Node000001_Node000021" title=" " alt="" coords="236,331,272,334,272,340,236,336"/>
-<area shape="rect" id="Node000022" href="$classc___input_mgr.html#a8a195063dcc63c1fd8de7c14ab3bf0a2" title=" " alt="" coords="291,384,470,425"/>
-<area shape="poly" id="edge29_Node000001_Node000022" title=" " alt="" coords="189,341,299,376,298,381,187,346"/>
-<area shape="rect" id="Node000003" href="$classc___file_mgr.html#a98e34d829e7d324400091213a4416bf9" title=" " alt="" coords="554,95,709,121"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="397,233,452,192,524,147,575,125,577,129,526,152,455,196,400,237"/>
-<area shape="rect" id="Node000008" href="$classc___file_mgr.html#a3008d14fd822eaf0f4077de2c85d63a1" title=" " alt="" coords="552,235,711,261"/>
-<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="477,246,537,246,537,251,477,251"/>
-<area shape="rect" id="Node000004" href="$classc___file_mgr.html#a5744b69d4ab94abb4a8839fa295153db" title=" " alt="" coords="795,31,964,71"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="690,92,780,71,781,76,691,97"/>
-<area shape="rect" id="Node000005" href="$classc___output_mgr.html#a99b4520a367303ccd0372d5f9ccf30c1" title="Get the address of the buffer into which the E1.31 handler will stuff data." alt="" coords="786,145,973,186"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="691,119,774,139,773,144,690,124"/>
-<area shape="rect" id="Node000006" href="$classc___file_mgr.html#a56a37e82a8da77e0ab8fb293779111ca" title=" " alt="" coords="1271,247,1400,273"/>
-<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="709,105,834,111,904,118,973,131,1049,154,1105,179,1160,206,1234,234,1258,241,1256,246,1232,239,1158,211,1103,184,1047,159,972,136,903,124,833,116,709,110"/>
-<area shape="rect" id="Node000007" href="$classc___file_mgr.html#a7a43a2cccd3db13e5a6678a2cc087096" title=" " alt="" coords="1262,198,1409,224"/>
-<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="648,93,706,52,744,32,786,16,837,5,879,3,973,16,1036,27,1084,40,1130,58,1186,87,1223,110,1258,136,1313,185,1309,189,1254,141,1220,115,1184,92,1128,63,1082,45,1034,33,972,22,879,9,838,11,787,21,747,37,708,57,651,97"/>
-<area shape="poly" id="edge20_Node000008_Node000006" title=" " alt="" coords="711,247,1256,256,1256,262,711,252"/>
-<area shape="poly" id="edge21_Node000008_Node000007" title=" " alt="" coords="711,241,1247,213,1247,218,712,247"/>
-<area shape="rect" id="Node000009" href="$classc___file_mgr.html#a8b9e4f29a70fd6c831f07349a9c32ab0" title=" " alt="" coords="1021,323,1185,349"/>
-<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="713,256,740,270,757,290,764,312,771,331,788,347,820,361,854,370,889,374,924,374,992,365,1049,351,1050,357,993,371,925,379,889,379,853,375,818,366,785,352,766,334,759,313,752,293,737,274,710,261"/>
-<area shape="rect" id="Node000016" href="$classc___file_mgr.html#ade8a802526fefdce66be04cab5339668" title=" " alt="" coords="792,311,967,337"/>
-<area shape="poly" id="edge18_Node000008_Node000016" title=" " alt="" coords="700,259,739,270,787,290,825,303,823,308,785,295,737,275,699,264"/>
-<area shape="poly" id="edge15_Node000009_Node000006" title=" " alt="" coords="1133,320,1232,282,1256,275,1257,280,1234,287,1135,325"/>
-<area shape="poly" id="edge17_Node000009_Node000007" title=" " alt="" coords="1115,321,1164,277,1196,253,1232,233,1247,226,1249,231,1234,237,1199,258,1167,281,1119,325"/>
-<area shape="rect" id="Node000010" href="$classc___file_mgr.html#aba69a5c788220655c30b1acdded70fbb" title=" " alt="" coords="1242,297,1429,322"/>
-<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="1185,324,1226,319,1227,325,1186,329"/>
-<area shape="rect" id="Node000012" href="$classc___file_mgr.html#a1baff36dda7c5f8949cdac8945e4ee93" title=" " alt="" coords="1233,346,1438,372"/>
-<area shape="poly" id="edge11_Node000009_Node000012" title=" " alt="" coords="1186,342,1218,345,1217,350,1185,347"/>
-<area shape="rect" id="Node000014" href="$main_8cpp.html#ace03924f16faf7e0c24590ede39ae2f2" title=" " alt="" coords="1296,395,1375,421"/>
-<area shape="poly" id="edge14_Node000009_Node000014" title=" " alt="" coords="1138,347,1234,382,1281,394,1280,399,1232,387,1136,352"/>
-<area shape="rect" id="Node000015" href="$classc___file_mgr.html#a9d269a5325ae97f480a9c8e7671c862e" title=" " alt="" coords="1242,445,1429,470"/>
-<area shape="poly" id="edge16_Node000009_Node000015" title=" " alt="" coords="1119,347,1168,389,1200,412,1234,431,1248,437,1246,442,1232,436,1197,416,1164,393,1116,351"/>
-<area shape="rect" id="Node000011" href="$classc___file_mgr.html#a44931172f6751a91e801c191d9e60fe7" title=" " alt="" coords="1486,285,1655,310"/>
-<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="1430,302,1471,300,1471,305,1430,307"/>
-<area shape="rect" id="Node000013" href="$classc___file_mgr.html#a91d8ba978954c06f5448afb5c75f34b4" title=" " alt="" coords="1487,358,1654,384"/>
-<area shape="poly" id="edge12_Node000012_Node000013" title=" " alt="" coords="1439,362,1471,363,1471,369,1439,367"/>
-<area shape="poly" id="edge13_Node000013_Node000013" title=" " alt="" coords="1532,359,1524,349,1529,340,1544,334,1571,331,1599,334,1614,341,1611,346,1598,339,1570,337,1546,339,1532,344,1529,349,1536,356"/>
-<area shape="poly" id="edge19_Node000016_Node000009" title=" " alt="" coords="967,326,1005,328,1005,334,967,332"/>
-<area shape="poly" id="edge25_Node000017_Node000005" title=" " alt="" coords="453,282,476,271,490,259,499,246,508,233,524,221,584,195,648,178,712,168,771,163,771,168,713,173,649,183,586,200,526,225,512,237,503,249,494,263,478,276,455,287"/>
-<area shape="rect" id="Node000018" href="$classc___output_mgr.html#abc896c708fce43b559a42ba4e67c9976" title="Get the size (in intensities) of the buffer into which the E1.31 handler will stuff data." alt="" coords="540,285,723,310"/>
-<area shape="poly" id="edge23_Node000017_Node000018" title=" " alt="" coords="464,295,525,295,525,300,464,300"/>
-<area shape="rect" id="Node000019" href="$classc___output_mgr.html#a9aa129dd6077ad48f807aaab43f67c52" title="Get the size (in intensities) of the buffer into which the E1.31 handler will stuff data." alt="" coords="525,334,738,360"/>
-<area shape="poly" id="edge24_Node000017_Node000019" title=" " alt="" coords="450,308,548,328,547,333,449,314"/>
-<area shape="rect" id="Node000020" href="$classc___output_mgr.html#abe0292b6380f75279c4758c2b2e4e465" title=" " alt="" coords="528,407,735,433"/>
-<area shape="poly" id="edge26_Node000017_Node000020" title=" " alt="" coords="455,309,478,319,494,332,504,344,513,357,527,370,579,399,577,404,523,374,509,361,499,348,490,335,476,324,453,313"/>
-<area shape="poly" id="edge27_Node000020_Node000020" title=" " alt="" coords="591,409,583,399,588,389,604,383,632,381,662,384,678,391,675,396,661,389,632,386,605,388,591,393,588,398,595,405"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,253,236,294"/>
+<area shape="rect" id="Node000002" href="$classc___file_mgr.html#ad2545a2e9a8e22194d4bf3e712528645" title=" " alt="" coords="284,186,477,212"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="185,250,283,220,308,214,310,219,284,226,187,255"/>
+<area shape="rect" id="Node000017" href="$classc___output_mgr.html#a7471954d6a26b6894c4066a424d8aec8" title=" " alt="" coords="297,236,464,261"/>
+<area shape="poly" id="edge22_Node000001_Node000017" title=" " alt="" coords="236,260,281,255,282,261,236,265"/>
+<area shape="rect" id="Node000020" href="$classc___output_mgr.html#aa5fa47aab179e25649aa61acd159586d" title=" " alt="" coords="288,285,473,310"/>
+<area shape="poly" id="edge26_Node000001_Node000020" title=" " alt="" coords="236,282,272,285,272,290,236,287"/>
+<area shape="rect" id="Node000021" href="$classc___input_mgr.html#a8a195063dcc63c1fd8de7c14ab3bf0a2" title=" " alt="" coords="291,335,470,375"/>
+<area shape="poly" id="edge27_Node000001_Node000021" title=" " alt="" coords="189,292,299,327,298,332,187,297"/>
+<area shape="rect" id="Node000003" href="$classc___file_mgr.html#a98e34d829e7d324400091213a4416bf9" title=" " alt="" coords="1014,85,1168,110"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="454,183,525,171,782,134,998,106,998,111,782,139,525,176,455,188"/>
+<area shape="rect" id="Node000008" href="$classc___file_mgr.html#a3008d14fd822eaf0f4077de2c85d63a1" title=" " alt="" coords="552,186,711,212"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="477,196,537,196,537,202,477,202"/>
+<area shape="rect" id="Node000004" href="$classc___file_mgr.html#a5744b69d4ab94abb4a8839fa295153db" title=" " alt="" coords="1240,5,1408,46"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="1134,82,1240,49,1242,54,1136,87"/>
+<area shape="rect" id="Node000005" href="$classc___output_mgr.html#a99b4520a367303ccd0372d5f9ccf30c1" title="Get the address of the buffer into which the E1.31 handler will stuff data." alt="" coords="1230,71,1417,111"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="1168,93,1215,91,1215,97,1168,98"/>
+<area shape="rect" id="Node000006" href="$classc___file_mgr.html#a56a37e82a8da77e0ab8fb293779111ca" title=" " alt="" coords="1259,185,1388,210"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="1112,109,1161,140,1222,171,1245,179,1243,184,1220,176,1158,145,1109,113"/>
+<area shape="rect" id="Node000007" href="$classc___file_mgr.html#a7a43a2cccd3db13e5a6678a2cc087096" title=" " alt="" coords="1250,136,1397,161"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="1154,109,1247,129,1246,134,1153,114"/>
+<area shape="poly" id="edge20_Node000008_Node000006" title=" " alt="" coords="711,196,1244,195,1244,200,711,202"/>
+<area shape="poly" id="edge21_Node000008_Node000007" title=" " alt="" coords="711,186,786,178,1030,160,1235,149,1235,155,1030,165,787,183,712,191"/>
+<area shape="rect" id="Node000009" href="$classc___file_mgr.html#a8b9e4f29a70fd6c831f07349a9c32ab0" title=" " alt="" coords="1009,261,1173,286"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="712,209,740,221,755,234,764,249,772,262,788,273,845,290,906,296,965,294,1017,287,1018,292,965,299,906,301,844,295,785,277,769,266,759,252,751,238,737,225,710,214"/>
+<area shape="rect" id="Node000016" href="$classc___file_mgr.html#ade8a802526fefdce66be04cab5339668" title=" " alt="" coords="786,237,961,262"/>
+<area shape="poly" id="edge18_Node000008_Node000016" title=" " alt="" coords="697,210,795,231,794,236,696,215"/>
+<area shape="poly" id="edge15_Node000009_Node000006" title=" " alt="" coords="1121,258,1220,219,1244,212,1245,217,1222,224,1123,263"/>
+<area shape="poly" id="edge17_Node000009_Node000007" title=" " alt="" coords="1103,258,1152,215,1184,190,1220,170,1235,164,1237,169,1222,175,1187,195,1155,219,1107,262"/>
+<area shape="rect" id="Node000010" href="$classc___file_mgr.html#aba69a5c788220655c30b1acdded70fbb" title=" " alt="" coords="1230,382,1417,408"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="1107,285,1156,326,1188,349,1222,369,1236,374,1234,379,1220,373,1185,354,1152,331,1104,289"/>
+<area shape="rect" id="Node000012" href="$classc___file_mgr.html#a1baff36dda7c5f8949cdac8945e4ee93" title=" " alt="" coords="1221,234,1426,260"/>
+<area shape="poly" id="edge11_Node000009_Node000012" title=" " alt="" coords="1173,262,1205,258,1206,263,1174,267"/>
+<area shape="rect" id="Node000014" href="$main_8cpp.html#ace03924f16faf7e0c24590ede39ae2f2" title=" " alt="" coords="1284,284,1363,309"/>
+<area shape="poly" id="edge14_Node000009_Node000014" title=" " alt="" coords="1174,279,1269,288,1269,294,1173,284"/>
+<area shape="rect" id="Node000015" href="$classc___file_mgr.html#a9d269a5325ae97f480a9c8e7671c862e" title=" " alt="" coords="1230,333,1417,358"/>
+<area shape="poly" id="edge16_Node000009_Node000015" title=" " alt="" coords="1126,285,1222,319,1246,326,1245,331,1220,324,1124,290"/>
+<area shape="rect" id="Node000011" href="$classc___file_mgr.html#a44931172f6751a91e801c191d9e60fe7" title=" " alt="" coords="1474,382,1643,408"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="1418,392,1459,392,1459,398,1418,398"/>
+<area shape="rect" id="Node000013" href="$classc___file_mgr.html#a91d8ba978954c06f5448afb5c75f34b4" title=" " alt="" coords="1475,234,1642,260"/>
+<area shape="poly" id="edge12_Node000012_Node000013" title=" " alt="" coords="1427,244,1459,244,1459,250,1427,250"/>
+<area shape="poly" id="edge13_Node000013_Node000013" title=" " alt="" coords="1520,235,1512,226,1517,216,1532,210,1559,208,1587,210,1602,217,1599,222,1586,215,1558,213,1534,215,1520,220,1517,225,1524,232"/>
+<area shape="poly" id="edge19_Node000016_Node000009" title=" " alt="" coords="961,257,994,260,993,266,961,262"/>
+<area shape="rect" id="Node000018" href="$classc___output_mgr.html#a9aa129dd6077ad48f807aaab43f67c52" title="Get the size (in intensities) of the buffer into which the E1.31 handler will stuff data." alt="" coords="525,236,738,261"/>
+<area shape="poly" id="edge23_Node000017_Node000018" title=" " alt="" coords="464,246,509,246,509,251,464,251"/>
+<area shape="rect" id="Node000019" href="$classc___output_mgr.html#abe0292b6380f75279c4758c2b2e4e465" title=" " alt="" coords="528,309,735,334"/>
+<area shape="poly" id="edge24_Node000017_Node000019" title=" " alt="" coords="438,259,478,270,577,301,575,306,476,275,437,264"/>
+<area shape="poly" id="edge25_Node000019_Node000019" title=" " alt="" coords="592,310,584,300,589,290,605,284,632,282,662,285,677,292,674,297,660,290,632,287,606,290,592,294,589,300,596,307"/>
 </map>
