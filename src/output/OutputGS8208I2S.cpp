@@ -355,7 +355,7 @@ bool IRAM_ATTR c_OutputGS8208I2S::ISR_GetNextDataSlicesToSend (c_OutputI2S::I2S_
             {
                 INC_GS8208_I2S_DEBUG_COUNTER (DataII);
 
-                * ((c_OutputI2S::I2SDataAsUint_t*) pDataToSend) = (DataPattern & DataBitMask) ? OneBit : ZeroBit;
+                * ((c_OutputI2S::I2SDataAsUint_t*) pDataToSend) = (DataPattern & DataPatternMask) ? OneBit : ZeroBit;
 
                 --NumBitsToSend;
                 numSlices -= sizeof(c_OutputI2S::I2SDataAsUint_t);

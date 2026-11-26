@@ -86,7 +86,7 @@ void IRAM_ATTR c_OutputI2S::ISR_Handler (void * _TransmitDmaBuffer)
         // hw may not handle an empty buffer very well
         // fill the buffer with defaults
         TransmitDmaBuffer->header.length = TransmitDmaBuffer->header.size;
-        memset(&TransmitDmaBuffer->header.buf, DefaultIntensitySliceData, 4);
+        memset(TransmitDmaBuffer->data, DefaultIntensitySliceData, sizeof(TransmitDmaBuffer->data));
     }
 
     // hand the buffer back to the dma engine
@@ -157,7 +157,7 @@ c_OutputI2S::c_OutputI2S ()
         CurrentDmaBuffer.header.owner = I2sParallelDmaBufferOwnerDMA;
 
         // clear the data space
-        memset (CurrentDmaBuffer.data, 0xff, CurrentDmaBuffer.header.size);
+        memset (CurrentDmaBuffer.data, 0x00, sizeof(CurrentDmaBuffer.data));
 
         // next buffer ID
         ++BufferId;

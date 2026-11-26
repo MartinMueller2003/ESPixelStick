@@ -360,7 +360,7 @@ bool IRAM_ATTR c_OutputUCS8903I2S::ISR_GetNextDataSlicesToSend (c_OutputI2S::I2S
             {
                 INC_UCS8903_I2S_DEBUG_COUNTER (DataII);
 
-                * ((c_OutputI2S::I2SDataAsUint_t*) pDataToSend) = (DataPattern & DataBitMask) ? OneBit : ZeroBit;
+                * ((c_OutputI2S::I2SDataAsUint_t*) pDataToSend) = (DataPattern & DataPatternMask) ? OneBit : ZeroBit;
 
                 --NumBitsToSend;
                 numSlices -= sizeof(c_OutputI2S::I2SDataAsUint_t);
