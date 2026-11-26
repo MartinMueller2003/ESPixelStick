@@ -68,14 +68,6 @@ private:
     DataBitCounts_t OneBit;
     DataBitCounts_t CurrentBit;
 
-    enum OutputWS2811I2S_FSM_States
-    {
-        _OutputWS2811I2S_FSM_State_FrameReset,
-        _OutputWS2811I2S_FSM_State_Data,
-        _OutputWS2811I2S_FSM_State_Idle
-    };
-    OutputWS2811I2S_FSM_States volatile OutputWS2811I2S_FSM_State = OutputWS2811I2S_FSM_States::_OutputWS2811I2S_FSM_State_Idle;
-
     uint32_t StartupSliceDelay;
 
     c_OutputI2S     *I2Sdriver;
