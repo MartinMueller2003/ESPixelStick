@@ -12,10 +12,10 @@
 <area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="188,244,244,250,243,255,188,249"/>
 <area shape="rect" id="Node000012" href="$_e_s_pixel_stick_8h.html#a8295d2ec53bab395bfc5811cfd78ca4d" title=" " alt="" coords="282,300,387,326"/>
 <area shape="poly" id="edge12_Node000001_Node000012" title=" " alt="" coords="148,254,236,286,267,295,266,300,235,291,146,259"/>
-<area shape="rect" id="Node000014" href="$classfsm___play_list__state.html#afcdf6ed9ab34115007f66289857962e5" title=" " alt="" coords="268,350,401,390"/>
-<area shape="poly" id="edge14_Node000001_Node000014" title=" " alt="" coords="122,254,173,295,237,336,254,344,252,349,234,341,170,299,119,258"/>
-<area shape="rect" id="Node000015" href="$class_fast_timer.html#a775ab52aa49e9a1f7092eefcbdbd673e" title="&lt; Start the module" alt="" coords="261,415,408,440"/>
-<area shape="poly" id="edge15_Node000001_Node000015" title=" " alt="" coords="111,255,131,287,160,326,195,366,237,400,248,406,245,411,234,404,192,370,155,330,127,290,107,257"/>
+<area shape="rect" id="Node000013" href="$classfsm___play_list__state.html#afcdf6ed9ab34115007f66289857962e5" title=" " alt="" coords="268,350,401,390"/>
+<area shape="poly" id="edge13_Node000001_Node000013" title=" " alt="" coords="122,254,173,295,237,336,254,344,252,349,234,341,170,299,119,258"/>
+<area shape="rect" id="Node000014" href="$class_fast_timer.html#a775ab52aa49e9a1f7092eefcbdbd673e" title="&lt; Start the module" alt="" coords="261,415,408,440"/>
+<area shape="poly" id="edge14_Node000001_Node000014" title=" " alt="" coords="111,255,131,287,160,326,195,366,237,400,248,406,245,411,234,404,192,370,155,330,127,290,107,257"/>
 <area shape="rect" id="Node000003" href="$class_fast_timer.html#a405ba0c8e0b6b111326da0e5588342b1" title=" " alt="" coords="504,5,644,31"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="434,16,489,16,489,21,434,21"/>
 <area shape="rect" id="Node000006" href="$classc___input_f_p_p_remote_play_item.html#a6e0e0d5ded2fbb53fc654fe43afcd207" title=" " alt="" coords="481,120,667,161"/>
@@ -27,6 +27,4 @@
 <area shape="poly" id="edge10_Node000008_Node000010" title=" " alt="" coords="410,261,494,261,494,266,410,266"/>
 <area shape="rect" id="Node000011" href="$classc___file_mgr.html#a7a43a2cccd3db13e5a6678a2cc087096" title=" " alt="" coords="501,300,647,326"/>
 <area shape="poly" id="edge11_Node000008_Node000011" title=" " alt="" coords="401,274,494,294,493,299,400,280"/>
-<area shape="rect" id="Node000013" href="$_web_mgr_8cpp.html#a47bc5f5aa91e940e6cfc297466285595" title=" " alt="" coords="533,349,615,375"/>
-<area shape="poly" id="edge13_Node000012_Node000013" title=" " alt="" coords="388,321,518,348,517,353,387,326"/>
 </map>

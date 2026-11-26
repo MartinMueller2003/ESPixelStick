@@ -21,9 +21,9 @@
 <area shape="rect" id="Node000023" href="$classc___ap_credentials.html#ae6b44fd090841dd48ae0527f1a1e8a76" title=" " alt="" coords="202,642,380,668"/>
 <area shape="poly" id="edge29_Node000001_Node000023" title=" " alt="" coords="82,495,121,560,152,597,189,629,197,633,194,638,186,633,148,601,117,563,78,497"/>
 <area shape="rect" id="Node000025" href="$_e_s_pixel_stick_8h.html#a8295d2ec53bab395bfc5811cfd78ca4d" title=" " alt="" coords="490,693,595,718"/>
-<area shape="poly" id="edge33_Node000001_Node000025" title=" " alt="" coords="79,495,91,533,112,584,144,637,165,659,189,678,223,696,259,708,335,721,410,722,474,716,474,721,410,727,335,726,258,713,221,700,186,683,161,663,140,640,107,587,86,535,74,497"/>
-<area shape="rect" id="Node000027" href="$class_fast_timer.html#a775ab52aa49e9a1f7092eefcbdbd673e" title="&lt; Start the module" alt="" coords="217,744,364,769"/>
-<area shape="poly" id="edge34_Node000001_Node000027" title=" " alt="" coords="79,496,89,539,110,600,142,666,164,696,189,722,207,734,204,739,186,726,160,699,138,669,105,602,84,541,74,497"/>
+<area shape="poly" id="edge32_Node000001_Node000025" title=" " alt="" coords="79,495,91,533,112,584,144,637,165,659,189,678,223,696,259,708,335,721,410,722,474,716,474,721,410,727,335,726,258,713,221,700,186,683,161,663,140,640,107,587,86,535,74,497"/>
+<area shape="rect" id="Node000026" href="$class_fast_timer.html#a775ab52aa49e9a1f7092eefcbdbd673e" title="&lt; Start the module" alt="" coords="217,744,364,769"/>
+<area shape="poly" id="edge33_Node000001_Node000026" title=" " alt="" coords="79,496,89,539,110,600,142,666,164,696,189,722,207,734,204,739,186,726,160,699,138,669,105,602,84,541,74,497"/>
 <area shape="rect" id="Node000003" href="$classc___file_mgr.html#a8b9e4f29a70fd6c831f07349a9c32ab0" title=" " alt="" coords="690,206,855,232"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="358,218,442,230,542,234,642,230,674,227,675,233,642,235,542,240,442,235,357,223"/>
 <area shape="rect" id="Node000009" href="$classc___file_mgr.html#a56a37e82a8da77e0ab8fb293779111ca" title=" " alt="" coords="941,70,1070,96"/>
@@ -58,6 +58,4 @@
 <area shape="rect" id="Node000024" href="$classc___ap_credentials.html#a8ce43e55561489e4c8798c0e70376c0d" title=" " alt="" coords="443,628,641,669"/>
 <area shape="poly" id="edge30_Node000023_Node000024" title=" " alt="" coords="380,650,428,649,428,654,381,655"/>
 <area shape="poly" id="edge31_Node000023_Node000025" title=" " alt="" coords="359,666,475,689,474,695,358,671"/>
-<area shape="rect" id="Node000026" href="$_web_mgr_8cpp.html#a47bc5f5aa91e940e6cfc297466285595" title=" " alt="" coords="731,693,814,718"/>
-<area shape="poly" id="edge32_Node000025_Node000026" title=" " alt="" coords="595,703,716,703,716,708,595,708"/>
 </map>
