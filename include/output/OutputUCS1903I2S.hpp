@@ -52,14 +52,17 @@ private:
 
     c_OutputI2S     *I2Sdriver;
 
-    c_OutputI2S::I2S_Item_t DataBitMask;
-    c_OutputI2S::I2S_Item_t DataBit;
-
     uint32_t        FrameResetSliceCount;
     uint32_t        FrameResetRemainingSliceCount;
 
     uint32_t        DataPattern;
     uint32_t        DataPatternMask;
+
+    c_OutputI2S::I2SDataAsUint64_t OneBit;
+    c_OutputI2S::I2SDataAsUint64_t ZeroBit;
+
+    c_OutputI2S::I2S_Item_t DataBitMask;
+    c_OutputI2S::I2S_Item_t DataBit;
 
     // #define UCS1903_I2S_DEBUG_COUNTERS
     #ifdef UCS1903_I2S_DEBUG_COUNTERS
@@ -96,9 +99,6 @@ private:
         _OutputUCS1903I2S_FSM_State_Idle
     };
     OutputUCS1903I2S_FSM_States volatile OutputUCS1903I2S_FSM_State = OutputUCS1903I2S_FSM_States::_OutputUCS1903I2S_FSM_State_Idle;
-
-    c_OutputI2S::I2SDataAsUint64_t OneBit;
-    c_OutputI2S::I2SDataAsUint64_t ZeroBit;
 
 }; // c_OutputUCS1903I2S
 

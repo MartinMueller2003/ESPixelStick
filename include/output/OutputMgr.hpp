@@ -74,7 +74,6 @@ public:
     void      WriteChannelData  (uint32_t StartChannelId, uint32_t ChannelCount, uint8_t * pData);
     void      ReadChannelData   (uint32_t StartChannelId, uint32_t ChannelCount, uint8_t *pTargetData);
     void      ClearBuffer       ();
-    void      TaskPoll          ();
     void      RelayUpdate       (uint8_t RelayId, String & NewValue, String & Response);
     void      ClearStatistics   (void);
     uint8_t   GetNumPorts       () {return NumOutputPorts;}

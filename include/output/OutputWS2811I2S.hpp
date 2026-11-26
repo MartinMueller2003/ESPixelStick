@@ -52,14 +52,17 @@ private:
 
     c_OutputI2S     *I2Sdriver;
 
-    c_OutputI2S::I2S_Item_t DataBitMask;
-    c_OutputI2S::I2S_Item_t DataBit;
-
     uint32_t        FrameResetSliceCount;
     uint32_t        FrameResetRemainingSliceCount;
 
     uint32_t        DataPattern;
     uint32_t        DataPatternMask;
+
+    c_OutputI2S::I2SDataAsUint_t OneBit;
+    c_OutputI2S::I2SDataAsUint_t ZeroBit;
+
+    c_OutputI2S::I2S_Item_t DataBitMask;
+    c_OutputI2S::I2S_Item_t DataBit;
 
     // #define WS2811_I2S_DEBUG_COUNTERS
     #ifdef WS2811_I2S_DEBUG_COUNTERS
@@ -96,9 +99,6 @@ private:
         _OutputWS2811I2S_FSM_State_Idle
     };
     OutputWS2811I2S_FSM_States volatile OutputWS2811I2S_FSM_State = OutputWS2811I2S_FSM_States::_OutputWS2811I2S_FSM_State_Idle;
-
-    c_OutputI2S::I2SDataAsUint_t OneBit;
-    c_OutputI2S::I2SDataAsUint_t ZeroBit;
 
 }; // c_OutputWS2811I2S
 
