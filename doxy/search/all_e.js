@@ -41,7 +41,7 @@ var searchData=
   ['outputapa102_2ehpp_38',['OutputAPA102.hpp',['../_output_a_p_a102_8hpp.html',1,'']]],
   ['outputapa102spi_2ecpp_39',['OutputAPA102Spi.cpp',['../_output_a_p_a102_spi_8cpp.html',1,'']]],
   ['outputapa102spi_2ehpp_40',['OutputAPA102Spi.hpp',['../_output_a_p_a102_spi_8hpp.html',1,'']]],
-  ['outputbuffer_41',['OutputBuffer',['../_output_mgr_8cpp.html#ad89e9ed015ab4c14e1a762fbde86d39c',1,'OutputMgr.cpp']]],
+  ['outputbuffer_41',['OutputBuffer',['../_output_mgr_8cpp.html#ae5b374079ede8c0e89e8c8ae7a121023',1,'OutputMgr.cpp']]],
   ['outputbufferdatasize_42',['OutputBufferDataSize',['../struct_driver_info__t.html#a951ffa9bf51eec581bd0e5a98fd1c8d0',1,'DriverInfo_t']]],
   ['outputbufferendoffset_43',['OutputBufferEndOffset',['../struct_driver_info__t.html#ab8395b6f33a4765625c34e0aa522884f',1,'DriverInfo_t']]],
   ['outputbuffersize_44',['OutputBufferSize',['../classc___output_common.html#a6c6a0c4679e3059f945887fe7eac30aa',1,'c_OutputCommon']]],

@@ -5,8 +5,8 @@ var _output_mgr_8cpp =
     [ "DriverInfo_t", "struct_driver_info__t.html", "struct_driver_info__t" ],
     [ "AllocatePort", "_output_mgr_8cpp.html#aaf82107f89db52969b0ccb0fcff646f2", null ],
     [ "CLASS_TYPE_NO_NAME", "_output_mgr_8cpp.html#a136c90426710255bfb9c84315de747b6", null ],
-    [ "OutputBuffer", "_output_mgr_8cpp.html#ad89e9ed015ab4c14e1a762fbde86d39c", null ],
+    [ "OutputBuffer", "_output_mgr_8cpp.html#ae5b374079ede8c0e89e8c8ae7a121023", null ],
     [ "OutputMgr", "_output_mgr_8cpp.html#af6b50c745df05adfe6f502280127db1f", null ],
-    [ "pOutputChannelDrivers", "_output_mgr_8cpp.html#a51001349ecf5080d706f65c4cc81e1f4", null ],
+    [ "pOutputChannelDrivers", "_output_mgr_8cpp.html#a39a3484a28f1d03dc209a39f890f291e", null ],
     [ "SupportedOutputProtocolList", "_output_mgr_8cpp.html#ab0dd6515a18a339a11253af8696e3edb", null ]
 ];
