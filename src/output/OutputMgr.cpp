@@ -251,6 +251,10 @@ struct alignas(32) DriverInfo_t
 static DriverInfo_t DRAM_ATTR * pOutputChannelDrivers  = nullptr;;
 
 static uint8_t DRAM_ATTR OutputBuffer[OM_MAX_NUM_CHANNELS];
+// A file upload uses this buffer as its buffer in front of the SD card, in whole sectors (FileMgr): it has to
+// hold the largest SD write buffer.
+static_assert (0 == (MAX_SD_BUFFER_SIZE % SD_BLOCK_SIZE), "MAX_SD_BUFFER_SIZE must be a whole number of SD sectors");
+static_assert (sizeof (OutputBuffer) >= MAX_SD_BUFFER_SIZE, "The output buffer must be able to hold the largest SD write buffer");
 
 //-----------------------------------------------------------------------------
 // Methods
