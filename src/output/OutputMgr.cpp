@@ -25,10 +25,6 @@
 #include "FileMgr.hpp"
 #include <TimeLib.h>
 
-#ifdef ARDUINO_ARCH_ESP32
-#include "esp_heap_caps.h"
-#endif // def ARDUINO_ARCH_ESP32
-
 //-----------------------------------------------------------------------------
 // bring in driver definitions
 #include "output/OutputDisabled.hpp"
@@ -248,7 +244,7 @@ struct alignas(32) DriverInfo_t
     bool            OutputDriverInUse;
 };
 
-static DriverInfo_t DRAM_ATTR * pOutputChannelDrivers  = nullptr;;
+static DriverInfo_t DRAM_ATTR * pOutputChannelDrivers  = nullptr;
 
 static uint8_t DRAM_ATTR OutputBuffer[OM_MAX_NUM_CHANNELS];
 // A file upload uses this buffer as its buffer in front of the SD card, in whole sectors (FileMgr): it has to
