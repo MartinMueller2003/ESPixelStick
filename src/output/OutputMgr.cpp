@@ -25,6 +25,10 @@
 #include "FileMgr.hpp"
 #include <TimeLib.h>
 
+#ifdef ARDUINO_ARCH_ESP32
+#include "esp_heap_caps.h"
+#endif // def ARDUINO_ARCH_ESP32
+
 //-----------------------------------------------------------------------------
 // bring in driver definitions
 #include "output/OutputDisabled.hpp"
@@ -244,9 +248,9 @@ struct alignas(32) DriverInfo_t
     bool            OutputDriverInUse;
 };
 
-static DriverInfo_t * pOutputChannelDrivers  = nullptr;;
+static DriverInfo_t DRAM_ATTR * pOutputChannelDrivers  = nullptr;;
 
-static uint8_t OutputBuffer[OM_MAX_NUM_CHANNELS];
+static uint8_t DRAM_ATTR OutputBuffer[OM_MAX_NUM_CHANNELS];
 
 //-----------------------------------------------------------------------------
 // Methods
@@ -258,7 +262,6 @@ c_OutputMgr::c_OutputMgr ()
 
     // clear the input data buffer
     pOutputBuffer = OutputBuffer;
-    // pOutputBuffer = (uint8_t*)malloc(GetBufferSize() + 1);
     memset (pOutputBuffer, 0, GetBufferSize());
 
     uint32_t SizeOfProtocolEntry = uint32_t(&SupportedOutputProtocolList[1]) - uint32_t(&SupportedOutputProtocolList[0]);
@@ -282,7 +285,13 @@ c_OutputMgr::c_OutputMgr ()
     uint32_t StartOfDriverArray = uint32_t(&pOutputChannelDrivers[0]);
     uint32_t EndOfDriverArray = uint32_t(&pOutputChannelDrivers[NumOutputPorts]);
     uint32_t SizeOfDriverArray = EndOfDriverArray - StartOfDriverArray;
+
+    #ifdef ARDUINO_ARCH_ESP32
+    byte * raw_mem = (uint8_t*)heap_caps_malloc(SizeOfDriverArray, MALLOC_CAP_INTERNAL | MALLOC_CAP_8BIT);
+    #else
     byte * raw_mem = (byte*)malloc(SizeOfDriverArray);
+    #endif // def ARDUINO_ARCH_ESP32
+
     pOutputChannelDrivers = static_cast<DriverInfo_t*>((void*)raw_mem);
     memset((void*)pOutputChannelDrivers, 0x00, SizeOfDriverArray);
 
