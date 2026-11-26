@@ -377,7 +377,8 @@ void c_WiFiDriver::ProcessApScanResults ()
                 continue;
             }
 
-            Line  = F ("Found AP ");
+            bool IsCurrentAp = ((nullptr != CurrentBssid) && (0 == memcmp (CurrentBssid, WiFi.BSSID (index), sizeof (BestBssid))));
+            Line  = (IsCurrentAp) ? F ("Current AP ") : F ("Found AP ");
             Line += WiFi.BSSIDstr (index);
             Line += F (" on channel ");
             Line += WiFi.channel (index);
@@ -385,7 +386,7 @@ void c_WiFiDriver::ProcessApScanResults ()
             Line += WiFi.RSSI (index);
             logcon (Line);
 
-            if ((nullptr != CurrentBssid) && (0 == memcmp (CurrentBssid, WiFi.BSSID (index), sizeof (BestBssid))))
+            if (IsCurrentAp)
             {
                 // compare the candidates against the scan reading of the current AP
                 CurrentRssi = WiFi.RSSI (index);
@@ -455,6 +456,9 @@ void c_WiFiDriver::ProcessApScanResults ()
         }
 
         // Initial connection. The ESP32 SDK picks the AP itself, so only the ESP8266 gets here.
+        // The station timeout starts now: the scan took its own time (up to WIFI_AP_SCAN_TIMEOUT_MS)
+        // and the AP has not been asked for anything yet.
+        FsmTimer.StartTimer (MilliSecondsInASecond * sta_timeout, false);
         if (FoundAp)
         {
             logcon (String (F ("Connecting to AP ")) + BestBssidStr);
