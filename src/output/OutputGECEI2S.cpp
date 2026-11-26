@@ -122,7 +122,6 @@ void c_OutputGECEI2S::Begin ()
 
     HasBeenInitialized = true;
 
-    // Start output
     // DEBUG_END;
 
 } // Begin
@@ -393,6 +392,7 @@ bool IRAM_ATTR c_OutputGECEI2S::ISR_SetUpNextDataToSend ()
         {
             INC_GECE_I2S_DEBUG_COUNTERS (SetUpNextDataToSendI);
 
+            // this functionality does not care about the instensity values and may be sending data from other channels
             if (63 == GetGecePixelId ())
             {
                 NeedToEnumeratePixels = false;
