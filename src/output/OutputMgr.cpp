@@ -62,23 +62,23 @@
 #include "input/InputMgr.hpp"
 
 #ifdef SUPPORT_I2S
-    #define CLASS_TYPE_NAME (n)      n ## I2S
-    #define AddToProtocolClassList (name) \
+    #define CLASS_TYPE_NAME(n)      n ## I2S
+    #define AddToProtocolClassList(name) \
             c_ ## name ## I2S ClassList_ ## name;
 #elif defined (SUPPORT_RMT)
-    #define CLASS_TYPE_NAME (n)      n ## Rmt
-    #define AddToProtocolClassList (name) \
+    #define CLASS_TYPE_NAME(n)      n ## Rmt
+    #define AddToProtocolClassList(name) \
             c_ ## name ## Rmt ClassList_ ## name;
 #elif defined (SUPPORT_UART)
-    #define CLASS_TYPE_NAME (n)      n ## Uart
-    #define AddToProtocolClassList (name) \
+    #define CLASS_TYPE_NAME(n)      n ## Uart
+    #define AddToProtocolClassList(name) \
             c_ ## name ## Uart ClassList_ ## name;
 #else
     #error "No Output Driver has been selected. Update Platform IO to select an output driver"
 #endif
-    #define CLASS_TYPE_NO_NAME (n)   n
+    #define CLASS_TYPE_NO_NAME(n)   n
 
-#define AllocatePort (ClassType, Output, OutputType) \
+#define AllocatePort(ClassType, Output, OutputType) \
 { \
     new (&Output.OutputDriver) ClassType (Output.PortDefinition, OutputType); \
     Output.OutputDriverInUse = true; \
