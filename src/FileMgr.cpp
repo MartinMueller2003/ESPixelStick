@@ -71,6 +71,9 @@ void ftp_callback(FtpOperation ftpOperation, uint32_t freeSpace, uint32_t totalS
 
         case FTP_DISCONNECT:
         {
+            // A rebuild requested by this session runs now, while the inputs are still paused for the
+            // session and the data connection is gone, rather than a second later with the show running.
+            FileMgr.ServePendingFseqListRebuild (true);
             InputMgr.SetOperationalState(true);
             LOG_PORT.println(F("FTP: Disconnected!"));
             break;
@@ -342,13 +345,21 @@ void c_FileMgr::Poll()
     }
 #endif // def SUPPORT_FTP
 
-    if ((0 != FseqListRebuildRequestMs) && ((millis () - FseqListRebuildRequestMs) >= FseqListRebuildDelayMs))
+    ServePendingFseqListRebuild (false);
+    // xDEBUG_END;
+ } // Poll
+
+//-----------------------------------------------------------------------------
+void c_FileMgr::ServePendingFseqListRebuild (bool Now)
+{
+    // not while an HTTP upload is in flight: that path rebuilds the list itself when it is done
+    if ((0 != FseqListRebuildRequestMs) && (INVALID_FILE_HANDLE == fsUploadFileHandle) &&
+        (Now || ((millis () - FseqListRebuildRequestMs) >= FseqListRebuildDelayMs)))
     {
         FseqListRebuildRequestMs = 0;
         BuildFseqList(false);
     }
-    // xDEBUG_END;
- } // Poll
+} // ServePendingFseqListRebuild
 
 //-----------------------------------------------------------------------------
 bool c_FileMgr::SetConfig (JsonObject & json)

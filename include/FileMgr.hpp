@@ -60,6 +60,7 @@ public:
     void    Begin     ();
     void    Poll      ();
     void    RequestFseqListRebuild () { FseqListRebuildRequestMs = millis () | 1; }   ///< rebuild from Poll() a second from now, outside the caller's context
+    void    ServePendingFseqListRebuild (bool Now);  ///< run a requested rebuild once its delay has passed, or at once when Now
     void    GetConfig (JsonObject& json);
     bool    SetConfig (JsonObject& json);
     void    GetStatus (JsonObject& json);
