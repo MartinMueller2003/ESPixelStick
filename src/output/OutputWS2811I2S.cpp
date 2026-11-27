@@ -133,22 +133,6 @@ void c_OutputWS2811I2S::CalculateFrameBitSlices ()
 {
     // DEBUG_START;
 
-    uint32_t MinFrameLenNS = 25 * NanoSecondsInAMilliSecond;
-    uint32_t FrameDurationInNS = ActualFrameDurationMicroSec * NanoSecondsInAMicroSecond;
-    // DEBUG_V (String (" ActualFrameDurationMicroSec: ") + String (ActualFrameDurationMicroSec));
-    // DEBUG_V (String ("           FrameDurationInNS: ") + String (FrameDurationInNS));
-    // DEBUG_V (String ("     InterFrameGapInMicroSec: ") + String (InterFrameGapInMicroSec));
-
-    uint32_t InterFrameGapInNS = InterFrameGapInMicroSec * NanoSecondsInAMicroSecond;
-    // DEBUG_V (String ("           InterFrameGapInNS: ") + String (InterFrameGapInNS));
-
-    FrameDurationInNS += InterFrameGapInNS;
-    // DEBUG_V (String ("       new FrameDurationInNS: ") + String (FrameDurationInNS));
-    // DEBUG_V (String ("               MinFrameLenNS: ") + String (MinFrameLenNS));
-    
-    // uint32_t IdleLenNS = (MinFrameLenNS > FrameDurationInNS) ? MinFrameLenNS - FrameDurationInNS : 2 *NanoSecondsInAMicroSecond; 
-    // DEBUG_V (String ("                   IdleLenNS: ") + String (IdleLenNS));
-    
     FrameResetSliceCount = I2Sdriver->GetNumTimeSlicesForTargetTimeNS (InterFrameGapInMicroSec * NanoSecondsInAMicroSecond);
     FrameResetSliceCount = (FrameResetSliceCount + (sizeof(c_OutputI2S::I2SDataAsUint_t) - 1)) & ~(sizeof(c_OutputI2S::I2SDataAsUint_t) - 1); // round up to the nearest multiple of the data type size
     // DEBUG_V (String ("        FrameResetSliceCount: ") + String (FrameResetSliceCount));
