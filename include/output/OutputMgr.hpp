@@ -77,6 +77,7 @@ public:
     uint32_t  GetBufferTailSize () { return (UsedBufferSize < GetBufferSize ()) ? GetBufferSize () - UsedBufferSize : 0; } ///< bytes at the end of the buffer that no configured output uses
     uint8_t * ReserveBufferTail (uint32_t Size); ///< lend the last Size bytes of the buffer to a file upload while the outputs keep running; nullptr when they are in use
     void      ReleaseBufferTail ();              ///< the upload is done with the end of the buffer
+    bool      IsBufferTailReserved () { return 0 != ReservedTailSize; } ///< an upload holds the end of the buffer right now
     void      TaskPoll          ();
     void      RelayUpdate       (uint8_t RelayId, String & NewValue, String & Response);
     void      ClearStatistics   (void);
@@ -188,6 +189,9 @@ private:
     uint8_t    *pOutputBuffer = nullptr;
     uint32_t   UsedBufferSize = 0;
     uint32_t   ReservedTailSize = 0; ///< bytes at the end of the buffer lent to a file upload; ClearBuffer() leaves them alone
+#ifdef ARDUINO_ARCH_ESP32
+    portMUX_TYPE BufferTailMux = portMUX_INITIALIZER_UNLOCKED; ///< ClearBuffer() and ReserveBufferTail() run on different tasks
+#endif // def ARDUINO_ARCH_ESP32
 
     #ifndef DEFAULT_CONSOLE_TX_GPIO
     #define DEFAULT_CONSOLE_TX_GPIO gpio_num_t::GPIO_NUM_1

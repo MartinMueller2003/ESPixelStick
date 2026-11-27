@@ -1000,8 +1000,9 @@ void c_FPPDiscovery::ProcessFile (
         if (final && InputFPPRemote && InputFPPRemote->IsPlayingFile (String (UploadFileName)))
         {
             // the copy being played is about to be replaced: close it before the rename; the new one starts on the
-            // master's next SYNC
-            StopPlaying ();
+            // master's next SYNC. The input's own StopPlaying, not this class's wrapper: the wrapper only acts
+            // in FPP remote mode, and a locally configured sequence has the file open just the same.
+            InputFPPRemote->StopPlaying ();
         }
 
         // DEBUG_V("Write the file block");

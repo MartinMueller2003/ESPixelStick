@@ -1838,8 +1838,15 @@ void c_OutputMgr::ClearBuffer()
 {
     // DEBUG_START;
 
-    // the end of the buffer may be lent to a file upload: see ReserveBufferTail()
+    // the end of the buffer may be lent to a file upload: see ReserveBufferTail(). On the ESP32 the hand-over
+    // happens on another task, so the size is read and the clear done under the same lock.
+#ifdef ARDUINO_ARCH_ESP32
+    portENTER_CRITICAL(&BufferTailMux);
+#endif // def ARDUINO_ARCH_ESP32
     memset(ISR_GetBufferAddress(), 0x00, GetBufferSize() - ReservedTailSize);
+#ifdef ARDUINO_ARCH_ESP32
+    portEXIT_CRITICAL(&BufferTailMux);
+#endif // def ARDUINO_ARCH_ESP32
 
     // this will invert any data that is handled with special functions
     WriteChannelData(0, OutputMgr.GetBufferUsedSize(), OutputMgr.ISR_GetBufferAddress());
@@ -1857,11 +1864,17 @@ uint8_t * c_OutputMgr::ReserveBufferTail (uint32_t Size)
     // DEBUG_START;
     uint8_t * Response = nullptr;
 
+#ifdef ARDUINO_ARCH_ESP32
+    portENTER_CRITICAL(&BufferTailMux);
+#endif // def ARDUINO_ARCH_ESP32
     if ((0 == ReservedTailSize) && (0 != Size) && (Size <= GetBufferTailSize ()))
     {
         ReservedTailSize = Size;
         Response = ISR_GetBufferAddress () + GetBufferSize () - Size;
     }
+#ifdef ARDUINO_ARCH_ESP32
+    portEXIT_CRITICAL(&BufferTailMux);
+#endif // def ARDUINO_ARCH_ESP32
 
     // DEBUG_END;
     return Response;

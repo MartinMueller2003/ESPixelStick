@@ -1255,17 +1255,17 @@ void c_FileMgr::DeleteSdFile (const String & FileName)
 #ifdef SIMULATE_SD
     String NewFilename = String(CN_slashsdslash) + FileName;
     DeleteFlashFile(NewFilename);
+    BuildFseqList(false);
 #else
     LockSd();
     bool Removed = ESP_SD.remove (FileName);
     UnLockSd();
-    if (!Removed)
+    // nothing deleted (the file was not there) means nothing to rebuild
+    if (Removed)
     {
-        // nothing was deleted (the file was not there), so nothing to rebuild
-        return;
+        BuildFseqList(false);
     }
 #endif // def SIMULATE_SD
-    BuildFseqList(false);
 
     // DEBUG_END;
 
@@ -1834,6 +1834,17 @@ uint64_t c_FileMgr::WriteSdFileBuf (const FileId& FileHandle, byte* FileData, ui
         }
         else // buffered mode
         {
+            // A keep-playing upload lives behind the configured channels. If the output configuration grew
+            // under it, the next chunk would land on pixels and pixel data would overwrite file bytes: stop
+            // here, at the first chunk, not at the next flush.
+            if (FileList[FileListIndex].IsOutputBufferTail &&
+                (OutputMgr.GetBufferTailSize () < FileList[FileListIndex].buffer.size))
+            {
+                logcon (F ("WriteSdFileBuf:ERROR:The output configuration changed during the upload"));
+                NumBytesWrittenToDestBuffer = 0;
+                break;
+            }
+
             // Fill the buffer and write it only when it is full, so that every write to the card is one whole,
             // sector aligned buffer. A call with no data writes whatever is pending (the end of an upload).
             uint8_t * pSource   = FileData;
@@ -2502,8 +2513,20 @@ void c_FileMgr::ResumeOutputsAfterUpload ()
 uint32_t c_FileMgr::UploadBufferTailSize ()
 {
     uint32_t TailSize = min (uint32_t (OutputMgr.GetBufferTailSize () & ~(SD_BLOCK_SIZE - 1)), uint32_t (UPLOAD_TAIL_MAX_BYTES));
-    if ((TailSize < UploadKeepPlayingMinBytes) || (ESP.getFreeHeap () < UploadKeepPlayingMinHeap))
+    // on the ESP32 the sum of the free pools says little about what one allocation can get: use the largest block
+#ifdef ARDUINO_ARCH_ESP32
+    uint32_t FreeHeap = ESP.getMaxAllocHeap ();
+#else
+    uint32_t FreeHeap = ESP.getFreeHeap ();
+#endif // def ARDUINO_ARCH_ESP32
+    if ((TailSize < UploadKeepPlayingMinBytes) || (FreeHeap < UploadKeepPlayingMinHeap))
     {
+        TailSize = 0;
+    }
+    else if (OutputMgr.IsBufferTailReserved ())
+    {
+        // an earlier upload still holds the tail: this one gets the whole buffer the old way
+        logcon (F ("Upload while another upload holds the output buffer tail. Stopping the outputs for it."));
         TailSize = 0;
     }
     return TailSize;
