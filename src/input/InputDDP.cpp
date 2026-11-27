@@ -168,6 +168,13 @@ void c_InputDDP::ProcessReceivedUdpPacket(AsyncUDPPacket ReceivedPacket)
         stats.packetsReceived++;
         stats.bytesReceived += ReceivedPacket.length ();
 
+        if (ReceivedPacket.length () < sizeof (DDP_Header_t))
+        {
+            stats.errors++;
+            lastError = String (F ("Packet shorter than a DDP header: ")) + String (ReceivedPacket.length ()) + F (" bytes");
+            break;
+        }
+
         if ((packet.header.flags1 & DDP_FLAGS1_VERMASK) != DDP_FLAGS1_VER1)
         {
             stats.errors++;
@@ -179,7 +186,7 @@ void c_InputDDP::ProcessReceivedUdpPacket(AsyncUDPPacket ReceivedPacket)
         // need to fast track data
         if (true == IsData(packet.header.flags1))
         {
-            ProcessReceivedData (packet);
+            ProcessReceivedData (packet, ReceivedPacket.length ());
             break;
         }
 
@@ -193,7 +200,9 @@ void c_InputDDP::ProcessReceivedUdpPacket(AsyncUDPPacket ReceivedPacket)
 
         PacketBuffer.ResponseAddress = ReceivedPacket.remoteIP ();
         PacketBuffer.ResponsePort = ReceivedPacket.remotePort ();
-        memcpy ((void*)&PacketBuffer.Packet, ReceivedPacket.data (), sizeof (PacketBuffer.Packet));
+        // a query is a bare header: copy what arrived, no more
+        PacketBuffer.PacketLength = min (uint32_t (ReceivedPacket.length ()), uint32_t (sizeof (PacketBuffer.Packet)));
+        memcpy ((void*)&PacketBuffer.Packet, ReceivedPacket.data (), PacketBuffer.PacketLength);
         PacketBuffer.PacketBufferStatus = PacketBufferStatus_t::BufferIsFilled;
 
     } while (false);
@@ -225,7 +234,7 @@ void c_InputDDP::Process ()
 
         if (true == IsData(PacketBuffer.Packet.header.flags1))
         {
-            ProcessReceivedData (PacketBuffer.Packet);
+            ProcessReceivedData (PacketBuffer.Packet, PacketBuffer.PacketLength);
             PacketBuffer.PacketBufferStatus = PacketBufferStatus_t::BufferIsAvailable;
             break;
         }
@@ -248,7 +257,7 @@ void c_InputDDP::Process ()
 } // Process
 
 //-----------------------------------------------------------------------------
-void c_InputDDP::ProcessReceivedData (DDP_packet_t & Packet)
+void c_InputDDP::ProcessReceivedData (DDP_packet_t & Packet, uint32_t PacketLength)
 {
     // DEBUG_START;
 
@@ -286,6 +295,16 @@ void c_InputDDP::ProcessReceivedData (DDP_packet_t & Packet)
         // DEBUG_V (String (" AdjPacketDataLength: ") + String (AdjPacketDataLength));
 
         byte* Data = (IsTime(header.flags1)) ? &((DDP_TimeCode_packet_t&)Packet).data[0] : &Packet.data[0];
+
+        // the header's length may claim more than the wire delivered
+        uint32_t DataOffset    = uint32_t (Data - (byte*)&Packet);
+        uint32_t DataAvailable = (PacketLength > DataOffset) ? (PacketLength - DataOffset) : 0;
+        if (AdjPacketDataLength > DataAvailable)
+        {
+            lastError = String (F ("Packet shorter than its data length. Using ")) + String (DataAvailable) + F (" of ") + String (AdjPacketDataLength) + F (" bytes");
+            stats.errors++;
+            AdjPacketDataLength = DataAvailable;
+        }
         // DEBUG_V (String ("                Data: 0x") + String (uint32_t (Data), HEX));
         // DEBUG_V (String ("   InputBufferOffset: ") + String (InputBufferOffset));
         OutputMgr.WriteChannelData(InputBufferOffset, AdjPacketDataLength, &Data[0]);

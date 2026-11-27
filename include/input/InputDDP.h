@@ -104,7 +104,7 @@ private:
 
     // Packet parser callback
     void ProcessReceivedUdpPacket (AsyncUDPPacket _packet);
-    void ProcessReceivedData  (DDP_packet_t & Packet);
+    void ProcessReceivedData  (DDP_packet_t & Packet, uint32_t PacketLength);
     void ProcessReceivedQuery ();
 
     enum PacketBufferStatus_t
@@ -117,6 +117,7 @@ private:
     struct PacketBuffer_t
     {
         PacketBufferStatus_t PacketBufferStatus = PacketBufferStatus_t::BufferIsAvailable;
+        uint32_t             PacketLength = 0;    ///< bytes of Packet that came off the wire
         DDP_packet_t Packet;
         IPAddress ResponseAddress;
         uint16_t  ResponsePort;
