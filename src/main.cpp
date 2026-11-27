@@ -155,10 +155,20 @@ extern "C" void app_main()
 #ifdef ARDUINO_ARCH_ESP32
 void esp_alloc_failed_hook_callback(size_t requested_size, uint32_t caps, const char *function_name)
 {
-    // size_t free = heap_caps_get_largest_free_block(MALLOC_CAP_INTERNAL | MALLOC_CAP_8BIT);
-    size_t free = heap_caps_get_largest_free_block(caps);
-    LOG_PORT.printf("%s was called but failed to allocate %d bytes with 0x%x capabilities. Free = %d \n", function_name, requested_size,caps, free);
-
+    // This runs inside the allocator, in whatever task asked for the memory, with no heap to spare.
+    // It must not allocate: Print::printf takes a heap buffer for a line longer than 64 characters,
+    // that allocation fails here as well, the hook is called again, and the task overflows its
+    // stack (the wifi and tcpip tasks have small ones). A fixed buffer and a reentry guard keep it flat.
+    static bool InHook = false;
+    if (!InHook)
+    {
+        InHook = true;
+        char Line[128];
+        snprintf(Line, sizeof(Line), "%s failed to allocate %u bytes (caps 0x%x), largest free block %u\n",
+                 function_name, unsigned(requested_size), unsigned(caps), unsigned(heap_caps_get_largest_free_block(caps)));
+        LOG_PORT.write(Line);
+        InHook = false;
+    }
 } // esp_alloc_failed_hook_callback
 #endif // def ARDUINO_ARCH_ESP32
 
