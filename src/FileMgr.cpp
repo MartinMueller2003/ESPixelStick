@@ -55,6 +55,8 @@ static const uint32_t UploadSyncIntervalBytes = 64 * 1024;
 FtpServer   ftpSrv;
 
 //-----------------------------------------------------------------------------
+static const uint32_t FseqListRebuildDelayMs = 1000;   ///< how long Poll() waits after an FTP change before rebuilding the list
+
 void ftp_callback(FtpOperation ftpOperation, uint32_t freeSpace, uint32_t totalSpace)
 {
     FeedWDT();
@@ -76,7 +78,10 @@ void ftp_callback(FtpOperation ftpOperation, uint32_t freeSpace, uint32_t totalS
 
         case FTP_FREE_SPACE_CHANGE:
         {
-            FileMgr.BuildFseqList(false);
+            // Not here: this runs inside the library's transfer handling while the data connection
+            // and its buffers are still alive, and the rebuild's file open then runs out of heap on
+            // an ESP8266. Poll() does it a second from now, when the transfer has been torn down.
+            FileMgr.RequestFseqListRebuild();
             LOG_PORT.println (F ("FTP: Free space change. Rebuilding FSEQ file list"));
             break;
         }
@@ -336,6 +341,12 @@ void c_FileMgr::Poll()
         ftpSrv.handleFTP();
     }
 #endif // def SUPPORT_FTP
+
+    if ((0 != FseqListRebuildRequestMs) && ((millis () - FseqListRebuildRequestMs) >= FseqListRebuildDelayMs))
+    {
+        FseqListRebuildRequestMs = 0;
+        BuildFseqList(false);
+    }
     // xDEBUG_END;
  } // Poll
 
