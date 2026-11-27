@@ -18,6 +18,7 @@
 */
 
 #include <Arduino.h>
+#include <atomic>
 
 // Core
 #include "ESPixelStick.h"
@@ -159,11 +160,11 @@ void esp_alloc_failed_hook_callback(size_t requested_size, uint32_t caps, const 
     // It must not allocate: Print::printf takes a heap buffer for a line longer than 64 characters,
     // that allocation fails here as well, the hook is called again, and the task overflows its
     // stack (the wifi and tcpip tasks have small ones). A fixed buffer and a reentry guard keep it flat.
-    static bool InHook = false;
-    if (!InHook)
+    static std::atomic<bool> InHook (false);
+    if (!InHook.exchange (true))
     {
-        InHook = true;
         char Line[128];
+        Line[0] = 0;
         snprintf(Line, sizeof(Line), "%s failed to allocate %u bytes (caps 0x%x), largest free block %u\n",
                  function_name, unsigned(requested_size), unsigned(caps), unsigned(heap_caps_get_largest_free_block(caps)));
         LOG_PORT.write(Line);
