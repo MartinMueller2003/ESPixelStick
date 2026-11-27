@@ -1,6 +1,5 @@
 var NAVTREEINDEX15 =
 {
-"functions.html":[0,3,0],
 "functions.html":[0,3,0,0],
 "functions_a.html":[0,3,0,1],
 "functions_b.html":[0,3,0,2],
@@ -249,5 +248,6 @@ var NAVTREEINDEX15 =
 "struct_input_type_xlate_map__t.html#abb9708f4a5eec8343c96e6a8e5594a53":[0,0,69,0],
 "struct_o_m___g_p_i_o_s__t.html":[0,0,70],
 "struct_o_m___g_p_i_o_s__t.html#a473a240ef1d04c9752b2884de8f69da6":[0,0,70,1],
-"struct_o_m___g_p_i_o_s__t.html#a635722d802d2c3968b08a933b2c86fb2":[0,0,70,0]
+"struct_o_m___g_p_i_o_s__t.html#a635722d802d2c3968b08a933b2c86fb2":[0,0,70,0],
+"struct_o_m___g_p_i_o_s__t.html#ae0d4aaff83a9a0f98ad983a57fd5f7ad":[0,0,70,2]
 };

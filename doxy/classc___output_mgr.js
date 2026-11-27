@@ -33,7 +33,6 @@ var classc___output_mgr =
     [ "SetConfig", "classc___output_mgr.html#a63b3162a5ec5fe39859401b4b817b892", null ],
     [ "SetPortDefnitionDefaults", "classc___output_mgr.html#a82324ece57adefe7c2a344cd765c59e5", null ],
     [ "SetSerialUart", "classc___output_mgr.html#a943339390f6e515338978cef94a029f3", null ],
-    [ "TaskPoll", "classc___output_mgr.html#a325b2eb8b6b86b602e2efb8f50297435", null ],
     [ "UpdateDisplayBufferReferences", "classc___output_mgr.html#a2af1d94181e97f732be0b66be3b944dd", null ],
     [ "WriteChannelData", "classc___output_mgr.html#abe0292b6380f75279c4758c2b2e4e465", null ],
     [ "BuildingNewConfig", "classc___output_mgr.html#a7b94e1a3bb3211dea24dbaf74caf6bcf", null ],

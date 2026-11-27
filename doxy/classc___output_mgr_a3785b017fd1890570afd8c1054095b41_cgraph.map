@@ -1,5 +1,11 @@
 <map id="c_OutputMgr::c_OutputMgr" name="c_OutputMgr::c_OutputMgr">
-<area shape="rect" id="Node000001" title="&lt; Start up the driver and put it into a safe mode" alt="" coords="5,5,183,31"/>
+<area shape="rect" id="Node000001" title="&lt; Start up the driver and put it into a safe mode" alt="" coords="5,31,183,56"/>
 <area shape="rect" id="Node000002" href="$classc___output_mgr.html#abc896c708fce43b559a42ba4e67c9976" title="Get the size (in intensities) of the buffer into which the E1.31 handler will stuff data." alt="" coords="231,5,413,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="183,16,215,16,215,21,183,21"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="183,31,215,27,215,33,183,36"/>
+<area shape="rect" id="Node000003" href="$main_8cpp.html#a23252221d60de2259fe00859f716c72e" title=" " alt="" coords="267,55,377,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="183,50,252,57,251,63,183,55"/>
+<area shape="rect" id="Node000004" href="$classc___output_mgr.html#aa5fa47aab179e25649aa61acd159586d" title=" " alt="" coords="461,25,646,51"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="377,58,445,49,446,54,378,63"/>
+<area shape="rect" id="Node000005" href="$classc___input_mgr.html#a8a195063dcc63c1fd8de7c14ab3bf0a2" title=" " alt="" coords="464,75,643,116"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="378,71,449,80,448,85,377,77"/>
 </map>
