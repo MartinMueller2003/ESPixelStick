@@ -286,23 +286,30 @@ void c_InputDDP::ProcessReceivedData (DDP_packet_t & Packet, uint32_t PacketLeng
         // DEBUG_V (String ("RemainingBufferSpace: ") + String (RemainingBufferSpace));
 
         uint32_t AdjPacketDataLength = packetDataLength;
+        bool     ErrorCounted = false;
         if (RemainingBufferSpace < packetDataLength)
         {
             AdjPacketDataLength = RemainingBufferSpace;
             lastError = String("Too much data received. Discarding ") + String(packetDataLength - RemainingBufferSpace) + (" bytes of data");
             stats.errors++;
+            ErrorCounted = true;
         }
         // DEBUG_V (String (" AdjPacketDataLength: ") + String (AdjPacketDataLength));
 
         byte* Data = (IsTime(header.flags1)) ? &((DDP_TimeCode_packet_t&)Packet).data[0] : &Packet.data[0];
 
-        // the header's length may claim more than the wire delivered
+        // the header's length may claim more than the wire delivered, and a datagram longer than the
+        // structure must not be read past the structure either
         uint32_t DataOffset    = uint32_t (Data - (byte*)&Packet);
-        uint32_t DataAvailable = (PacketLength > DataOffset) ? (PacketLength - DataOffset) : 0;
+        uint32_t DataAvailable = min (PacketLength, uint32_t (sizeof (Packet)));
+        DataAvailable          = (DataAvailable > DataOffset) ? (DataAvailable - DataOffset) : 0;
         if (AdjPacketDataLength > DataAvailable)
         {
             lastError = String (F ("Packet shorter than its data length. Using ")) + String (DataAvailable) + F (" of ") + String (AdjPacketDataLength) + F (" bytes");
-            stats.errors++;
+            if (!ErrorCounted)
+            {
+                stats.errors++;
+            }
             AdjPacketDataLength = DataAvailable;
         }
         // DEBUG_V (String ("                Data: 0x") + String (uint32_t (Data), HEX));
