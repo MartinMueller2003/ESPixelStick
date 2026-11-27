@@ -670,7 +670,8 @@ void loop()
             // resets once the SDK runs again. The WiFi teardown the SDK does on the way raises a disconnect
             // event, and that can wake the loop before the reset. Nothing may run from here on: the WiFi
             // driver would answer the lost connection with a reconnect into an interface the SDK has
-            // already freed and fault in netif_set_down (#28).
+            // already freed and fault in netif_set_down (seen at the end of an OTA update and of a reboot
+            // from the UI; the fork's issue jkriegshauser/ESPixelStick#28).
             while (true)
             {
                 FeedWDT ();
@@ -704,6 +705,8 @@ bool RebootInProgress()
 
 void RequestReboot(String & Reason, uint32_t LoopDelay, bool SkipDisable /* = false */)
 {
+    // a count of zero is the idle value for loop(): the soonest a reboot can happen is the next pass
+    LoopDelay = max (LoopDelay, uint32_t (1));
     if (RebootInProgress ())
     {
         // A reboot is already on its way. Keep the first reason and its countdown so that the log and the
