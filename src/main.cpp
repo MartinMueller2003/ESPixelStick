@@ -665,6 +665,19 @@ void loop()
             // loop() is in delay() corrupts the SDK timer list and the restart ends in an exception instead.
             LOG_PORT.flush ();
             ESP.restart ();
+#ifdef ARDUINO_ARCH_ESP8266
+            // On the ESP8266, ESP.restart() is system_restart() plus a suspend of this loop, and the chip
+            // resets once the SDK runs again. The WiFi teardown the SDK does on the way raises a disconnect
+            // event, and that can wake the loop before the reset. Nothing may run from here on: the WiFi
+            // driver would answer the lost connection with a reconnect into an interface the SDK has
+            // already freed and fault in netif_set_down (seen at the end of an OTA update and of a reboot
+            // from the UI; the fork's issue jkriegshauser/ESPixelStick#28).
+            while (true)
+            {
+                FeedWDT ();
+                esp_suspend ();
+            }
+#endif // def ARDUINO_ARCH_ESP8266
         }
     }
 
@@ -692,9 +705,27 @@ bool RebootInProgress()
 
 void RequestReboot(String & Reason, uint32_t LoopDelay, bool SkipDisable /* = false */)
 {
-    GlobalRebootReason = Reason;
-    BOOT_TRACE ((String (F ("reboot requested: ")) + Reason).c_str ());
-    RebootCount = LoopDelay;
+    // a count of zero is the idle value for loop(): the soonest a reboot can happen is the next pass
+    LoopDelay = max (LoopDelay, uint32_t (1));
+    if (RebootInProgress ())
+    {
+        // A reboot is already on its way. Keep the first reason and its countdown so that the log and the
+        // boot trace name the cause, not whatever noticed the shutdown afterwards (the WiFi driver reports
+        // the connection it loses while the board goes down), and so that the restart is not pushed out
+        // again. A request that wants the restart sooner still gets that.
+        BOOT_TRACE ((String (F ("reboot already pending, kept first reason, ignored: ")) + Reason).c_str ());
+        if (LoopDelay < RebootCount)
+        {
+            RebootCount = LoopDelay;
+        }
+    }
+    else
+    {
+        GlobalRebootReason = Reason;
+        BOOT_TRACE ((String (F ("reboot requested: ")) + Reason).c_str ());
+        RebootCount = LoopDelay;
+    }
+
     if(!SkipDisable)
     {
         InputMgr.SetOperationalState(false);
