@@ -95,6 +95,7 @@ struct __attribute__((packed)) ConstConfig_t
     const char key[32];
     const char Version[32];
     const char BuildDate[32];
+    const char BuildCommit[16];   ///< commit the image was built from (8 hex digits, -dirty when the tree had changes), empty when the build did not know
     const char ConfigFileName[32];
     const uint8_t CurrentConfigVersion;
 };
