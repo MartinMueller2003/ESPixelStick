@@ -59,6 +59,8 @@ public:
 
     void    Begin     ();
     void    Poll      ();
+    void    RequestFseqListRebuild () { FseqListRebuildRequestMs = millis () | 1; }   ///< rebuild from Poll() a second from now, outside the caller's context
+    void    ServePendingFseqListRebuild (bool Now);  ///< run a requested rebuild once its delay has passed, or at once when Now
     void    GetConfig (JsonObject& json);
     bool    SetConfig (JsonObject& json);
     void    GetStatus (JsonObject& json);
@@ -186,6 +188,7 @@ private:
     bool     fsUploadFileSavedIsEnabled = false;
     uint32_t fsUploadStartTime;
     uint32_t fsUploadLastProgressMS = 0;
+    uint32_t FseqListRebuildRequestMs = 0;   ///< millis() of the last rebuild request, 0 when none is pending
     char     FtpUserName[65] = "esps";
     char     FtpPassword[65] = "esps";
     char     WelcomeString[65] = "ESPS V4 FTP";
